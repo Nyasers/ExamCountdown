@@ -7,7 +7,7 @@ app.use(compression());
 app.use('/', (req, res) => {
     res.charset = 'utf-8';
     res.writeHead(200);
-    res.end(fetchHTML(0));
+    res.end(await fetchHTML(0));
 });
 app.use('/src/:file', src);
 
