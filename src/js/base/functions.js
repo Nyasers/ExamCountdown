@@ -66,7 +66,7 @@ function setFuture(exams, breakon = undefined) {
       var item = exams[i];
       items.push("<li>" + item.getText() + "</li>");
       if (typeof breakon == "string"
-          && item.title.includes(breakon))
+        && item.title.includes(breakon))
         break;
     }
     $("ol#future").html(items.join(""));

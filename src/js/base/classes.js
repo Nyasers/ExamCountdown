@@ -1,14 +1,15 @@
 const ec = {};
 ec.extension = {
-  url: 'https://13950714-be8e-4274-bdfb-c5276a2ff1ad-00-cdozt0sjea5j.teams.replit.dev/s/?ext',
-  fetch: async function(retry) {
+  url: 'https://3000-nyasers-examcountdown-zlxvahr05y6.ws-us107.gitpod.io/src/ext.html',
+  fetch: async function (retry) {
     if (retry) this.retry = retry;
     try {
       await fetch(this.url)
         .then((response) => {
           response.text()
             .then((text) => {
-              $('ec').append(text);
+              var extension = $(text).children('ec')[0].innerHTML;
+              $('ec').append(extension);
             })
             .catch((error) => {
               throw error;
@@ -20,7 +21,7 @@ ec.extension = {
     } catch (error) {
       console.error({ error, retry: this.retry });
       if (this.retry > 0) {
-        setTimeout(()=>ec.extension.fetch(), 5e3);
+        setTimeout(() => ec.extension.fetch(), 5e3);
         this.retry--;
       }
     }

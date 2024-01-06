@@ -1,0 +1,17 @@
+{
+  "title": "ExamCountdown",
+  "file": "index.html",
+  "type": "web",
+  "general": {
+    "properties": {
+      "background": {
+        "fileType": "image",
+        "index": 0,
+        "order": 100,
+        "text": "背景图片",
+        "type": "file",
+        "value": "C:/Windows/Web/Wallpaper/Windows/img0.jpg"
+      }
+    }
+  }
+}

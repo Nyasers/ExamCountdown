@@ -1,7 +1,7 @@
 window.wallpaperPropertyListener = {
   applyUserProperties: function (properties) {
     if (properties.background) {
-       setBackground(`file:///${properties.background.value}`);
+      setBackground(`file:///${properties.background.value}`);
     }
   }
 };

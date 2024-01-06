@@ -1,8 +1,9 @@
 import express from 'express';
+import compression from "compression";
+import { src } from './src/index.mjs';
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+app.use(compression());
+app.use('/src/:file', src);
 
-app.listen();
+app.listen(process.env.PORT || '3000');

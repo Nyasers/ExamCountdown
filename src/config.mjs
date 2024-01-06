@@ -1,28 +1,34 @@
 export const groups = {
   basejs: [
-    '//js/using/jquery-3.7.1.js',
-    '//js/using/gsap-3.12.2.js',
-    '//js/base/loader.js',
-    '//js/base/classes.js',
-    '//js/base/functions.js',
-    '//js/base/property.js',
-    '//js/base/main.js',
-    '//js/version.js',
+    './src/js/using/jquery-3.7.1.js',
+    './src/js/using/gsap-3.12.2.js',
+    './src/js/base/loader.js',
+    './src/js/base/classes.js',
+    './src/js/base/functions.js',
+    './src/js/base/property.js',
+    './src/js/base/main.js',
+    './src/js/version.js',
   ],
   basecss: [
-    '//css/base/main.css',
-    '//css/base/text.css',
-    '//css/base/clock.css'
+    './src/css/base/main.css',
+    './src/css/base/text.css',
+    './src/css/base/clock.css'
   ],
-  extjs: [
-    '//js/extension/update.js',
-    '//js/extension/update.msg.js',
-    '//js/extension/exams.js',
-    '//js/extension/hitokoto.js',
-    '//js/extension/main.js',
-    '//js/version.js',
+  extensionjs: [
+    './src/js/extension/update.js',
+    './src/js/extension/update.msg.js',
+    './src/js/extension/exams.js',
+    './src/js/extension/hitokoto.js',
+    './src/js/extension/main.js',
+    './src/js/version.js',
   ],
-  extcss: [
-    '//css/extension/hitokoto.css',
+  extensioncss: [
+    './src/css/extension/hitokoto.css',
+  ],
+  projectjson: [
+    './src/json/project.json',
+  ],
+  updatecmd: [
+    './src/cmd/update.cmd',
   ],
 };
