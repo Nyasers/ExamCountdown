@@ -2,7 +2,7 @@ import JSZip from "jszip";
 import { fetchGroup } from './concat.mjs';
 import { minifyJS, minifyCSS, minifyJSON } from './minify.mjs';
 
-async function minifyCode(code, type) {
+export async function minifyCode(code, type) {
     switch (type) {
         case 'js':
             code = await minifyJS(code);
@@ -20,7 +20,7 @@ async function minifyCode(code, type) {
     return code;
 }
 
-async function fetchFile(file) {
+export async function fetchFile(file) {
     var args = file.split('.');
     var name, type, minify, content;
     if (args.length == 2) {
@@ -51,7 +51,7 @@ async function fetchFile(file) {
     return content;
 }
 
-async function fetchHTML(code) {
+export async function fetchHTML(code) {
     if (code == 0) {
         return `<!DOCTYPE html><html><ec><style>${await fetchFile('base.min.css')}</style><script>${await fetchFile('base.min.js')}</script></ec></html>`;
     } else if (code == 1) {
@@ -61,7 +61,7 @@ async function fetchHTML(code) {
     }
 }
 
-async function fetchProject() {
+export async function fetchProject() {
     var files = {
         html: await fetchHTML(0),
         json: await fetchFile('project.min.json'),
