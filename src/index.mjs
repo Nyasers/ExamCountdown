@@ -1,5 +1,6 @@
 import JSZip from "jszip";
-import { fetchGroup } from './concat.mjs';
+import fs from 'fs/promises';
+import { fetchFile as concatFile, fetchGroup } from './concat.mjs';
 import { minifyJS, minifyCSS, minifyJSON } from './minify.mjs';
 
 export async function minifyCode(code, type) {
@@ -101,6 +102,9 @@ export async function src(req, res) {
             var time = new Date().toJSON();
             res.setHeader("Content-Disposition", `filename=ExamCountdown_${time.slice(0, time.indexOf("T"))}.zip`);
             res.write(await fetchProject());
+        } else if (file == 'default.jpg') {
+            res.type('image/jpeg');
+            res.write(await fs.readFile('./src/jpg/default.jpg'));
         } else {
             res.type('text/plain');
             res.write(await fetchFile(file));
