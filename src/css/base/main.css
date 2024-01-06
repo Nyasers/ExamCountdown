@@ -1,0 +1,38 @@
+@charset "utf-8";
+
+html,
+body {
+  padding: 0px;
+  font-family: Tahoma, Geneva, sans-serif;
+  -webkit-text-size-adjust: none;
+  background-size: cover;
+  /* background-color: #ccc; */
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#wrap {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0px;
+  top: 0px;
+  width: 1000px;
+  height: auto;
+  text-align: center;
+}
+
+#container {
+  position: absolute;
+  left: 0px;
+  top: 150px;
+  width: 1000px;
+  height: 320px;
+  background-repeat: no-repeat;
+}
+
+ul#main {
+  list-style: none;
+}
+

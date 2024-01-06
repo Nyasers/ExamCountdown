@@ -1,0 +1,1 @@
+ec.update.msg = "下载后将压缩包解压至 D 盘根目录并覆盖所有文件。<br>[2024-01-01] 新增 update.cmd，今后运行 D:\\Wallpaper\\projects\\defaultprojects\\ExamCountdown\\update.cmd 即可一键更新 (适用性尚未测试 (笑))。";

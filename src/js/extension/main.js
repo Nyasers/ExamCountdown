@@ -1,0 +1,6 @@
+if (ec.extension) delete ec.extension;
+if (location.origin == "file://") {
+  setTimeout(() => {
+    if (ec.update.check()) ec.update.notice();
+  }, 1e3);
+}
