@@ -1,5 +1,5 @@
 ec.update = {};
-ec.update.href = "https://ecp.nyaser.tk/download";
+ec.update.href = "https://ec.nyaser.tk/src/zip";
 ec.update.check = () => {
   if (typeof ec.version == "undefined") return Infinity;
   else if (typeof ec.update.version == "undefined") return false;

@@ -1,6 +1,6 @@
 const ec = {};
 ec.extension = {
-  url: 'https://3000-nyasers-examcountdown-zlxvahr05y6.ws-us107.gitpod.io/src/ext.html',
+  url: 'https://ec.nyaser.tk/src/ext.html',
   fetch: async function (retry) {
     if (retry) this.retry = retry;
     try {

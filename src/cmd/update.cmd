@@ -1,1 +1,1 @@
-powershell "cd -d %~dp0..\..\..\..\..;$file='$temp$.zip';$url='https://3000-nyasers-examcountdown-zlxvahr05y6.ws-us107.gitpod.io/src/zip';Invoke-WebRequest -Uri $url -OutFile $file;Expand-Archive -Path $file -DestinationPath . -Force;Remove-Item $file"||pause
+powershell "cd -d %~dp0..\..\..\..\..;$file='$temp$.zip';$url='https://ec.nyaser.tk/src/zip';Invoke-WebRequest -Uri $url -OutFile $file;Expand-Archive -Path $file -DestinationPath . -Force;Remove-Item $file"||pause
