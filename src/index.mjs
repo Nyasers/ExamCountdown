@@ -53,18 +53,20 @@ export async function fetchFile(file) {
 }
 
 export async function fetchHTML(code) {
-    if (code == 0) {
-        return `<!DOCTYPE html><html><ec><style>${await fetchFile('base.min.css')}</style><script>${await fetchFile('base.min.js')}</script></ec></html>`;
-    } else if (code == 1) {
-        return `<extension><ec><style>${await fetchFile('extension.min.css')}</style><script>${await fetchFile('extension.min.js')}</script></ec></extension>`;
+    if (code == 0) { // index
+        return `<!DOCTYPE html><ec><style>${await fetchFile('base.min.css')}</style><script>${await fetchFile('base.min.js')}</script></ec>`;
+    } else if (code == 1) { // extension
+        return `<!DOCTYPE html><ec><extension><style>${await fetchFile('extension.min.css')}</style><script>${await fetchFile('extension.min.js')}</script></extension></ec>`;
+    } else if (code == 2) { // local
+        return `<!DOCTYPE html><ec><style>${await fetchFile('base.min.css')}${await fetchFile('extension.min.css')}</style><script>${await fetchFile('base.min.js')}${await fetchFile('extension.min.js')}</script></ec>`;
     } else {
         throw 'not found';
     }
 }
 
-export async function fetchProject() {
+export async function fetchProject(local = false) {
     var files = {
-        html: await fetchHTML(0),
+        html: local ? await fetchHTML(2) : await fetchHTML(0),
         json: await fetchFile('project.min.json'),
         cmd: await fetchFile('update.cmd'),
     }, result;
@@ -102,6 +104,11 @@ export async function src(req, res) {
             var time = new Date().toJSON();
             res.setHeader("Content-Disposition", `filename=ExamCountdown_${time.slice(0, time.indexOf("T"))}.zip`);
             res.write(await fetchProject());
+        } else if (file == 'local_zip') {
+            res.type('application/zip');
+            var time = new Date().toJSON();
+            res.setHeader("Content-Disposition", `filename=ExamCountdown_${time.slice(0, time.indexOf("T"))}.local.zip`);
+            res.write(await fetchProject(true));
         } else if (file == 'default.jpg') {
             res.type('image/jpeg');
             res.write(await fs.readFile('./src/jpg/default.jpg'));
