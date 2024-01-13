@@ -8,7 +8,7 @@ ec.extension = {
         .then((response) => {
           response.text()
             .then((text) => {
-              var extension = $(text).children('extension'); console.log($(text));
+              var extension = $($(text)[0]).children('extension'); console.log($($(text)[0]));
               $('ec').append(extension.children('style'), extension.children('script'));
             })
             .catch((error) => {
