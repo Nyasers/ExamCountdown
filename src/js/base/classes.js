@@ -1,6 +1,6 @@
 const ec = {};
 ec.extension = {
-  url: 'https://ec.nyaser.tk/s/ext',
+  url: 'https://ec.nyaser.tk/ext',
   fetch: async function (retry) {
     if (retry) this.retry = retry;
     try {
