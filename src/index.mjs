@@ -46,6 +46,8 @@ export async function fetchFile(file) {
         } else {
             throw 'not found';
         }
+    } else if (type == 'jpg' && name == 'default') {
+        content = await fs.readFile('./src/jpg/default.jpg');
     } else {
         throw 'not found';
     }

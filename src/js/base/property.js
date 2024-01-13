@@ -6,4 +6,4 @@ window.wallpaperPropertyListener = {
   }
 };
 
-if (location.protocol !== 'file:') setBackground("src/default.jpg");
+if (location.protocol !== 'file:') setBackground("default.jpg");
