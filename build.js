@@ -4,4 +4,6 @@ import fs from 'fs';
 if (fs.existsSync('./dist')) fs.rmdirSync('./dist', { recursive: true, force: true });
 fs.mkdirSync('./dist');
 
-fs.writeFileSync('./dist/index.html', await fetchFile('index.html'));
+var files = ['index.html', 'extension.html'];
+
+files.forEach(async (fileName) => fs.writeFileSync('./dist/' + fileName, await fetchFile(fileName)));
