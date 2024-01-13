@@ -7,5 +7,6 @@ fs.mkdirSync('./dist');
 var files = ['index.html', 'extension.html', 'default.jpg'];
 
 files.forEach(async (fileName) => fs.writeFileSync('./dist/' + fileName, await fetchFile(fileName)));
+fs.copyFileSync('./_redirects', './dist/_redirects');
 fs.writeFileSync('./dist/ExamCountdown.zip', await fetchProject(0));
 console.log('Done');
