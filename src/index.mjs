@@ -2,6 +2,7 @@ import JSZip from "jszip";
 import fs from 'fs/promises';
 import { fetchFile as concatFile, fetchGroup } from './concat.mjs';
 import { minifyJS, minifyCSS, minifyJSON } from './minify.mjs';
+import { truncate } from "fs";
 
 export async function minifyCode(code, type) {
     switch (type) {
@@ -48,6 +49,18 @@ export async function fetchFile(file) {
         }
     } else if (type == 'jpg' && name == 'default') {
         content = await fs.readFile('./src/jpg/default.jpg');
+    } else if (type == 'zip') {
+        switch (name) {
+            case 'update':
+                content = await fetchProject(false, true);
+                break;
+            case 'local':
+                content = await fetchProject(true, false);
+                break;
+            default:
+                content = await fetchProject(false, false);
+                break;
+        }
     } else {
         throw 'not found';
     }
@@ -66,7 +79,7 @@ export async function fetchHTML(code) {
     }
 }
 
-export async function fetchProject(local = false) {
+export async function fetchProject(local = false, root = false) {
     var files = {
         html: local ? await fetchHTML(2) : await fetchHTML(0),
         json: await fetchFile('project.min.json'),
@@ -74,11 +87,11 @@ export async function fetchProject(local = false) {
     }, result;
     try {
         var zip = new JSZip();
-        zip.folder(`Wallpaper/projects/defaultprojects/ExamCountdown`)
+        var folder = zip.folder(`Wallpaper/projects/defaultprojects/ExamCountdown`)
             .file("index.html", files.html)
             .file("project.json", files.json)
             .file("update.cmd", files.cmd);
-        result = await zip.generateAsync({
+        result = await (root ? folder : zip).generateAsync({
             type: "nodebuffer",
             compression: "deflate",
             compressionOptions: { level: 9 },
