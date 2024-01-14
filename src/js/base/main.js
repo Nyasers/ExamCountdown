@@ -47,5 +47,5 @@ $().ready(() => {
   ec.exam.build('高考');
   interval = setInterval(heartbeat, 1e2);
 
-  ec.extension.fetch(6);
+  if (ec.extension) ec.extension.fetch(6);
 });
