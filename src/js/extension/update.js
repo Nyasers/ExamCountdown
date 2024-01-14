@@ -7,7 +7,7 @@ ec.update.check = () => {
   else return (new Date().getTime() - ec.update.version.getTime()) / 8.64e7;
 };
 ec.update.notice = () => {
-  let content = `Nyaser：本地文件有更新：(${ec.version ? ec.version.toLocaleString('zh-cn') : undefined
+  let content = `Nyaser: 更新可用 (${ec.version ? ec.version.toLocaleString('zh-cn') : undefined
     } -> ${ec.update.version ? ec.update.version.toLocaleString('zh-cn') : undefined
     })<br>${ec.update.msg}`;
   $("body").append(`<center><big><big>${content}</big></big></center>`);
