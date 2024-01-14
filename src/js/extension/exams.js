@@ -59,8 +59,8 @@ ec.exam.json.push(
   {
     title: "体语学考",
     time: {
-      start: "$YYYY/01/06"// 09:00",
-      // end: "$YYYY/01/06 17:00",
+      start: "$YYYY/01/06 08:30",
+      end: "$YYYY/01/06 10:45",
     },
   },
   {
@@ -69,7 +69,6 @@ ec.exam.json.push(
       start: "$YYYY/08/26 09:00",
       end: "$YYYY/08/28 17:45",
     },
-    top: true,
   },
   {
     title: "泉州二检",
@@ -77,6 +76,7 @@ ec.exam.json.push(
       start: "$YYYY/01/18 09:00",
       end: "$YYYY/01/20 17:45",
     },
+    top: true,
   },
   {
     title: "泉州三检",
