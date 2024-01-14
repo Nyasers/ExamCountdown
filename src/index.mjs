@@ -41,8 +41,8 @@ export async function fetchFile(file) {
         if (minify) content = await minifyCode(content, type);
     } else if (type == 'html') {
         if (name == 'index') {
-            content = await fetchHTML(0);
-        } else if (['ext', 'extension'].includes(name)) {
+            content = await fetchHTML(2);
+        } else if ( 'extension' == name) {
             content = await fetchHTML(1);
         } else {
             throw 'not found';
