@@ -1,6 +1,6 @@
 export const groups = {
   basejs: [
-    './src/js/using/jquery-3.7.1.js',
+    './node_modules/jquery/dist/jquery.js',
     './src/js/using/gsap-3.12.2.js',
     './src/js/base/loader.js',
     './src/js/base/classes.js',
