@@ -1,5 +1,5 @@
 ec.exam.json.push(
-  {
+  /*{
     title: "国庆假期",
     time: {
       start: "2023/09/29 11:35",
@@ -69,7 +69,7 @@ ec.exam.json.push(
       start: "$YYYY/08/26 09:00",
       end: "$YYYY/08/28 17:45",
     },
-  },
+  },*/
   {
     title: "泉州二检",
     time: {
