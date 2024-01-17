@@ -3,6 +3,7 @@ import fs from 'fs/promises';
 import { fetchFile as concatFile, fetchGroup } from './concat.mjs';
 import { minifyJS, minifyCSS, minifyJSON } from './minify.mjs';
 import { truncate } from "fs";
+import { validateHeaderName } from "http";
 
 export async function minifyCode(code, type) {
     switch (type) {
@@ -42,8 +43,10 @@ export async function fetchFile(file) {
     } else if (type == 'html') {
         if (name == 'index') {
             content = await fetchHTML(2);
-        } else if ( 'extension' == name) {
+        } else if ('extension' == name) {
             content = await fetchHTML(1);
+        } else if ('base' == name) {
+            content = await fetchHTML(0);
         } else {
             throw 'not found';
         }
