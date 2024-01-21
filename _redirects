@@ -1,11 +1,6 @@
 /b /base
-/e /ext
-/ext /extension
-/z /zip
-/zip /ExamCountdown.zip
-/u /update
-/update /update.zip
-/c /cmd
-/cmd /update.cmd
-/j /json
-/json /project.json
+/e /extension
+/z /ExamCountdown.zip
+/u /update.zip
+/c /update.cmd
+/j /project.json
