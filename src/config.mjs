@@ -1,7 +1,7 @@
 export const groups = {
     basejs: [
         './node_modules/jquery/dist/jquery.js',
-        './src/js/using/gsap-3.12.4.js',
+        './node_modules/gsap/dist/gsap.js',
         './src/js/base/loader.js',
         './src/js/base/classes.js',
         './src/js/base/functions.js',
@@ -27,7 +27,7 @@ export const groups = {
     ],
     localjs: [
         './node_modules/jquery/dist/jquery.js',
-        './src/js/using/gsap-3.12.4.js',
+        './node_modules/gsap/dist/gsap.js',
         './src/js/base/loader.js',
         './src/js/base/classes.js',
         './src/js/base/functions.js',
