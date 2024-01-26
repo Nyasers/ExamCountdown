@@ -2,9 +2,10 @@ ec.exam.json.push(
   {
     title: "春节假期",
     time: {
-      start: "2024/2/5",
-      end: "2024/2/15",
+      start: "2024/2/4 15:45",
+      end: "2024/2/15 10:00",
     },
+    top: true,
   },
   /*{
     title: "国庆假期",

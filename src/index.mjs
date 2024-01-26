@@ -35,9 +35,9 @@ export async function fetchFile(file) {
         type = args[2];
         minify = true;
     } else {
-        throw 'not found';
+        throw file + 'not found';
     }
-    if (['js', 'css', 'json', 'cmd'].includes(type)) {
+    if (['js', 'css', 'json'].includes(type)) {
         content = await fetchGroup(name + type);
         if (minify) content = await minifyCode(content, type);
     } else if (type == 'html') {
@@ -48,7 +48,7 @@ export async function fetchFile(file) {
         } else if ('base' == name) {
             content = await fetchHTML(0);
         } else {
-            throw 'not found';
+            throw file + 'not found';
         }
     } else if (type == 'jpg' && name == 'default') {
         content = await fs.readFile('./src/jpg/default.jpg');
@@ -64,8 +64,11 @@ export async function fetchFile(file) {
                 content = await fetchProject(false, false);
                 break;
         }
+    } else if (name == 'update') {
+        var file1 = './src/cmd/update.' + type;
+        content = concatFile(file1);
     } else {
-        throw 'not found';
+        throw file + 'not found';
     }
     return content;
 }
