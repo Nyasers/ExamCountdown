@@ -89,8 +89,8 @@ ec.exam.json.push(
   {
     title: "泉州三检",
     time: {
-      start: "$YYYY/03/06 09:00",
-      end: "$YYYY/03/08 17:45",
+      start: "$YYYY/02/29 09:00",
+      end: "$YYYY/03/02 17:45",
     },
   },
   {
