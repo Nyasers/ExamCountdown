@@ -37,7 +37,7 @@ export async function fetchFile(file) {
     } else {
         throw file + 'not found';
     }
-    if (['js', 'css', 'json'].includes(type)) {
+    if (['js', 'css'].includes(type)) {
         content = await fetchGroup(name + type);
         if (minify) content = await minifyCode(content, type);
     } else if (type == 'html') {
@@ -50,8 +50,10 @@ export async function fetchFile(file) {
         } else {
             throw file + 'not found';
         }
-    } else if (type == 'jpg' && name == 'default') {
-        content = await fs.readFile('./src/jpg/default.jpg');
+    } else if (type == 'json') {
+        content = await concatFile(`./src/json/${name}.json`);
+    } else if (type == 'jpg') {
+        content = await fs.readFile(`./src/jpg/${name}.jpg`);
     } else if (type == 'zip') {
         switch (name) {
             case 'update':

@@ -37,10 +37,4 @@ export const groups = {
         './src/js/extension/hitokoto.js',
         './src/js/extension/main.js',
     ],
-    projectjson: [
-        './src/json/project.json',
-    ],
-    updatecmd: [
-        './src/cmd/update.cmd',
-    ],
 };
