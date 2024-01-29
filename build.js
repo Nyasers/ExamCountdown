@@ -10,7 +10,6 @@ webpack(config,
     }
 );
 
-
 async function minifyJS(code) {
     var opitions = {
         format: {

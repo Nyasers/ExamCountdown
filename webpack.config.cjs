@@ -19,76 +19,78 @@ const commonPostcssLoader = {
   }
 }
 
-module.exports =
-{
-  entry: {
-    base: './src/base/index.js',
-    extension: './src/extension/index.js',
-  },
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          //'style-loader',
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          commonPostcssLoader
-        ],
-      }
-    ],
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      'VERSION': '"2024/01/28"',
-    }),
-    new webpack.ProvidePlugin({
-      '$': 'jquery',
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].css'
-    }),
-    new CopyPlugin({
-      patterns: [
-        { from: './src/cmd/' },
-        { from: './src/pages/' },
-        { from: './src/jpg/default.jpg' }
+module.exports = [
+  {
+    name: 'step1',
+    entry: {
+      base: './src/base/index.js',
+      extension: './src/extension/index.js',
+    },
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: '[name].js'
+    },
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: [
+            //'style-loader',
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            commonPostcssLoader
+          ],
+        }
       ],
-    }),
-    new CleanWebpackPlugin()
-  ],
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          ecma: 2016,
-          compress: {
-            passes: 3,
-            unsafe: true,
-            unsafe_arrows: true,
-            unsafe_regexp: true,
-            unsafe_comps: true,
-            unsafe_Function: true,
-            unsafe_math: true,
-            unsafe_proto: true,
-          },
-          mangle: {
-            reserved: ['ec'],
-          },
-          module: true,
-          format: {
-            comments: false,
-          },
-          toplevel: true,
-          nameCache: ncache,
-        },
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        'VERSION': '"2024/01/28"',
       }),
-      new CssMinimizerWebpackPlugin()
+      new webpack.ProvidePlugin({
+        '$': 'jquery',
+      }),
+      new MiniCssExtractPlugin({
+        filename: '[name].css'
+      }),
+      new CopyPlugin({
+        patterns: [
+          { from: './src/cmd/' },
+          { from: './src/pages/' },
+          { from: './src/jpg/default.jpg' }
+        ],
+      }),
+      new CleanWebpackPlugin()
     ],
-  },
-};
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            ecma: 2016,
+            compress: {
+              passes: 3,
+              unsafe: true,
+              unsafe_arrows: true,
+              unsafe_regexp: true,
+              unsafe_comps: true,
+              unsafe_Function: true,
+              unsafe_math: true,
+              unsafe_proto: true,
+            },
+            mangle: {
+              reserved: ['ec'],
+            },
+            module: true,
+            format: {
+              comments: false,
+            },
+            toplevel: true,
+            nameCache: ncache,
+          },
+        }),
+        new CssMinimizerWebpackPlugin()
+      ],
+    },
+  }
+];
