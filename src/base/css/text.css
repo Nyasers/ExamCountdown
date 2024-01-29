@@ -1,0 +1,20 @@
+.text {
+  position: absolute;
+  text-align: left;
+  line-height: 50px;
+  font-size: 28px;
+  padding-left: 10px;
+}
+
+li#current {
+  top: 130px;
+  left: 20px;
+  width: auto;
+}
+
+ol#future {
+  top: 350px;
+  left: 20px;
+  width: auto;
+  list-style: cjk-ideographic inside;
+}
