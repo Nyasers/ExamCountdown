@@ -1,0 +1,1 @@
+import './hitokoto.css';

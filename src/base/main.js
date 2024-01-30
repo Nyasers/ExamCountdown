@@ -3,7 +3,6 @@ import { TweenMax, Bounce, Power1, Power4 } from 'gsap';
 import exam from './exam.js';
 import wrap from './loader.js';
 import Property from './property.js';
-import './css/index.css';
 
 function heartbeat() {
   if (ec.hitokoto) ec.hitokoto.heartbeat();

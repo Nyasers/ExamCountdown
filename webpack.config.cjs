@@ -6,6 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
 
+const VERSION = '"2024/01/28"';
 var ncache;
 
 const commonPostcssLoader = {
@@ -19,78 +20,154 @@ const commonPostcssLoader = {
   }
 }
 
-module.exports = [
-  {
-    name: 'step1',
-    entry: {
-      base: './src/base/index.js',
-      extension: './src/extension/index.js',
-    },
-    output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: '[name].js'
-    },
-    module: {
-      rules: [
-        {
-          test: /\.css$/,
-          use: [
-            //'style-loader',
-            MiniCssExtractPlugin.loader,
-            'css-loader',
-            commonPostcssLoader
-          ],
-        }
-      ],
-    },
-    plugins: [
-      new webpack.DefinePlugin({
-        'VERSION': '"2024/01/28"',
-      }),
-      new webpack.ProvidePlugin({
-        '$': 'jquery',
-      }),
-      new MiniCssExtractPlugin({
-        filename: '[name].css'
-      }),
-      new CopyPlugin({
-        patterns: [
-          { from: './src/cmd/' },
-          { from: './src/pages/' },
-          { from: './src/jpg/default.jpg' }
+module.exports.config1 =
+{
+  name: 'step1',
+  entry: {
+    base: './src/base/css/index.js',
+    extension: './src/extension/css/index.js',
+  },
+  output: {
+    path: path.resolve(__dirname, 'cache'),
+    filename: '[name].js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          commonPostcssLoader,
         ],
-      }),
-      new CleanWebpackPlugin()
+      }
     ],
-    optimization: {
-      minimize: true,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            ecma: 2016,
-            compress: {
-              passes: 3,
-              unsafe: true,
-              unsafe_arrows: true,
-              unsafe_regexp: true,
-              unsafe_comps: true,
-              unsafe_Function: true,
-              unsafe_math: true,
-              unsafe_proto: true,
-            },
-            mangle: {
-              reserved: ['ec'],
-            },
-            module: true,
-            format: {
-              comments: false,
-            },
-            toplevel: true,
-            nameCache: ncache,
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css'
+    }),
+    new CleanWebpackPlugin()
+  ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerWebpackPlugin()
+    ],
+  },
+};
+module.exports.config2 = {
+  name: 'step2',
+  entry: {
+    base: './src/base/index.js',
+    extension: './src/extension/index.js',
+  },
+  output: {
+    path: path.resolve(__dirname, 'cache'),
+    filename: '[name].js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+        ],
+      }
+    ],
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'VERSION': VERSION,
+    }),
+    new webpack.ProvidePlugin({
+      //'$': 'jquery',
+    }),
+  ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          ecma: 2016,
+          compress: {
+            passes: 3,
+            unsafe: true,
+            unsafe_arrows: true,
+            unsafe_regexp: true,
+            unsafe_comps: true,
+            unsafe_Function: true,
+            unsafe_math: true,
+            unsafe_proto: true,
           },
-        }),
-        new CssMinimizerWebpackPlugin()
-      ],
-    },
-  }
-];
+          mangle: {
+            reserved: ['$', 'ec'],
+          },
+          module: true,
+          format: {
+            comments: false,
+          },
+          toplevel: true,
+          nameCache: ncache,
+        },
+      })
+    ],
+  },
+};
+module.exports.config3 = {
+  name: 'step3',
+  entry: './src/extension/index.js',
+  output: {
+    path: path.resolve(__dirname, 'cache'),
+    filename: 'extension.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+        ],
+      }
+    ],
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      "ec": "window.ec",
+      'VERSION': VERSION,
+    }),
+  ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          ecma: 2016,
+          compress: {
+            passes: 3,
+            unsafe: true,
+            unsafe_arrows: true,
+            unsafe_regexp: true,
+            unsafe_comps: true,
+            unsafe_Function: true,
+            unsafe_math: true,
+            unsafe_proto: true,
+          },
+          mangle: {
+            reserved: ['ec'],
+          },
+          module: true,
+          format: {
+            comments: false,
+          },
+          toplevel: true,
+          nameCache: ncache,
+        },
+      })
+    ],
+  },
+};
+
+module.exports = [this.config1, this.config2/*, this.config3/**/];
