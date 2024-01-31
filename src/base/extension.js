@@ -6,9 +6,6 @@ export default {
     fetch: async function (retry) {
         if (retry) this.retry = retry;
         $.getScript(this.url)
-            .done(function (e) {
-                alert(e.length);
-            })
             .fail(function (msg) {
                 console.warn(`Retry: ${!!this.retry} (${this.retry})`);
                 if (this.retry > 0) {
