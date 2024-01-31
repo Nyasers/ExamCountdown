@@ -1,7 +1,13 @@
-import fs, { truncate } from 'fs';
-import { minify, minify_sync } from 'terser';
+import fs from 'fs';
+import path from 'path';
+import { dirname } from "node:path"
+import { fileURLToPath } from "node:url"
+import { minify } from 'terser';
 import webpack from 'webpack';
 import config from './webpack.config.cjs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 function MinifyJSON(code) {
     return JSON.stringify(JSON.parse(code));
@@ -33,12 +39,12 @@ async function packHTML(jsfile, tag = null) {
 
 (async function () {
     webpack(config, async () => {
-        fs.rmSync('./cache', { recursive: true });
+        fs.rmSync(__dirname + '/cache', { recursive: true });
         ['base', 'extension'].forEach(
             async (name) => {
                 fs.writeFileSync(
-                    `./dist/${name}.html`,
-                    await packHTML(`./dist/${name}.js`, name)
+                    `${__dirname}/dist/${name}.html`,
+                    await packHTML(`${__dirname}/dist/${name}.js`, name)
                 );
             }
         );
