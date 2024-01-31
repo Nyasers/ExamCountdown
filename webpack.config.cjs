@@ -6,7 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
 
-const VERSION = '"2024/01/31"';
+const VERSION = '"2024/02/01"';
 var ncache;
 
 const commonPostcssLoader = {

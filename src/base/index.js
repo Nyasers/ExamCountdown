@@ -11,6 +11,4 @@ main();
 ec.extension = extension;
 ec.extension.fetch(6);
 
-let version = new Date(VERSION);
-if (typeof ec.update == "undefined") ec.version = version;
-else ec.update.version = version;
+ec.version = new Date(VERSION);
