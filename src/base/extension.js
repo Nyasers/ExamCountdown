@@ -2,8 +2,9 @@ import $ from 'jquery';
 //const { $, ec } = window;
 
 export default {
-    url: 'https://ec.nyaser.tk/ej',
+    url: location.protocol=='file:' ? 'https://ec.nyaser.tk/ej' : location.origin+'/ej',
     fetch: async function (retry) {
+        alert(this.url);
         if (retry) this.retry = retry;
         $.getScript(this.url)
             .fail(function (msg) {
