@@ -3,7 +3,7 @@ import exam from './exam.js';
 import wrap from './loader.js';
 import Property from './property.js';
 
-const { $, ec } = window;
+//const { $, ec } = window;
 
 function heartbeat() {
   if (ec.hitokoto) ec.hitokoto.heartbeat();

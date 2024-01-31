@@ -1,4 +1,4 @@
-const { $ } = window;
+//const { $ } = window;
 
 function buildExam(json) {
     if (typeof json.time.start === typeof undefined) return null;
