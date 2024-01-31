@@ -2,11 +2,13 @@ import $ from 'jquery';
 //const { $, ec } = window;
 
 export default {
-    url: location.protocol=='file:' ? 'https://ec.nyaser.tk/ej' : location.origin+'/ej',
+    url: (location.protocol == 'file:' ? 'https://ec.nyaser.tk' : location.origin) + '/ej',
     fetch: async function (retry) {
-        alert(this.url);
         if (retry) this.retry = retry;
         $.getScript(this.url)
+            .done(function (e) {
+                alert(e);
+            })
             .fail(function (msg) {
                 console.warn(`Retry: ${!!this.retry} (${this.retry})`);
                 if (this.retry > 0) {
