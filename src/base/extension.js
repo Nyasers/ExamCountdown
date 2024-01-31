@@ -1,7 +1,7 @@
 const { $, ec } = window;
 
 export default {
-    url: 'https://ec.nyaser.tk/j',
+    url: 'https://ec.nyaser.tk/ej',
     fetch: async function (retry) {
         if (retry) this.retry = retry;
         $.getScript(this.url)

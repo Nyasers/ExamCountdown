@@ -38,20 +38,45 @@ async function packHTML(jsfile, tag = null) {
     return output;
 }
 
-async function packZip(files) {
-    const archive = archiver('zip',{zlib:{level:9}});
+async function packZip(files, destination) {
+    const archive = archiver('zip', { zlib: { level: 9 } });
+    const filename = path.resolve(__dirname, 'dist', destination);
+    const output = fs.createWriteStream(filename);
+    archive.pipe(output);
+
+    files.forEach((file) => {
+        const filename1 = path.resolve(__dirname, 'dist', file.filename);
+        archive.file(filename1, file.data);
+    })
+
+    await archive.finalize();
 }
 
-(async function () {
-    webpack(config, async () => {
-        fs.rmSync(__dirname + '/cache', { recursive: true });
-        ['base', 'extension'].forEach(
-            async (name) => {
-                fs.writeFileSync(
-                    `${__dirname}/dist/${name}.html`,
-                    await packHTML(`${__dirname}/dist/${name}.js`, name)
-                );
-            }
-        );
-    });
-})()
+async function createPackages() {
+    const pathto = '/Wallpaper/projects/defaultprojects/ExamCountdown';
+    const install = [
+        { filename: 'base.html', data: { name: path.resolve(pathto, 'index.html') } },
+        { filename: 'project.json', data: { name: path.resolve(pathto, 'project.json') } },
+        { filename: 'update.cmd', data: { name: path.resolve(pathto, 'update.cmd') } },
+    ];
+    const update = [
+        { filename: 'base.html', data: { name: 'index.html' } },
+        { filename: 'project.json', data: { name: 'project.json' } },
+        { filename: 'update.cmd', data: { name: 'update.cmd' } },
+    ];
+    packZip(install, 'ExamCountdown.zip');
+    packZip(update, 'update.zip');
+}
+
+webpack(config, async () => {
+    fs.rmSync(__dirname + '/cache', { recursive: true });
+    ['base', 'index', 'extension'].forEach(
+        async (name) => {
+            fs.writeFileSync(
+                `${__dirname}/dist/${name}.html`,
+                await packHTML(`${__dirname}/dist/${name}.js`, name)
+            );
+            if (name == 'base') createPackages();
+        }
+    );
+});

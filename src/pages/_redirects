@@ -1,7 +1,4 @@
-/b /base
-/e /extension.js
-/z /ExamCountdown.zip
-/u /update.zip
 /p /update.ps1
-/c /update.cmd
-/j /project.json
+/e /extension
+/ej /extension.js
+/zip /ExamCountdown.zip

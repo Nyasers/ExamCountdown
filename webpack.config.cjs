@@ -63,6 +63,7 @@ module.exports = [
     dependencies: ['step1'],
     entry: {
       base: './src/base/index.js',
+      index: './src/index.js',
       extension: './src/extension/index.js',
     },
     output: {
@@ -87,9 +88,9 @@ module.exports = [
       new CopyPlugin({
         patterns: [
           { from: './src/cmd/' },
-          { from: './src/pages/' },
-          { from: './src/jpg/' },
           { from: './src/json/' },
+          { from: './src/jpg/' },
+          { from: './src/pages/' },
         ]
       }),
       new CleanWebpackPlugin(),
