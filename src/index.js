@@ -7,6 +7,9 @@ import '../cache/extension.css';
 
 window.$ = $;
 window.ec = {};
+
+const { $, ec } = window;
+
 ec.exams.json.push(exams);
 ec.exams.build();
 
