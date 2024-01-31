@@ -3,6 +3,7 @@ import path from 'path';
 import { dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { minify } from 'terser';
+import archiver from 'archiver';
 import webpack from 'webpack';
 import config from './webpack.config.cjs';
 
@@ -35,6 +36,10 @@ async function packHTML(jsfile, tag = null) {
     if (tag !== null) output += `</${tag}>`;
     output += "</ec>";
     return output;
+}
+
+async function packZip(files) {
+    const archive = archiver('zip',{zlib:{level:9}});
 }
 
 (async function () {
