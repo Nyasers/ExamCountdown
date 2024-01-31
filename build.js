@@ -55,12 +55,12 @@ async function packZip(files, destination) {
 async function createPackages() {
     const pathto = '/Wallpaper/projects/defaultprojects/ExamCountdown';
     const install = [
-        { filename: 'base.html', data: { name: path.resolve(pathto, 'index.html') } },
+        { filename: 'index.html', data: { name: path.resolve(pathto, 'index.html') } },
         { filename: 'project.json', data: { name: path.resolve(pathto, 'project.json') } },
         { filename: 'update.cmd', data: { name: path.resolve(pathto, 'update.cmd') } },
     ];
     const update = [
-        { filename: 'base.html', data: { name: 'index.html' } },
+        { filename: 'index.html', data: { name: 'index.html' } },
         { filename: 'project.json', data: { name: 'project.json' } },
         { filename: 'update.cmd', data: { name: 'update.cmd' } },
     ];
@@ -70,13 +70,13 @@ async function createPackages() {
 
 webpack(config, async () => {
     fs.rmSync(__dirname + '/cache', { recursive: true });
-    ['base', 'index', 'extension'].forEach(
+    ['index', 'extension'].forEach(
         async (name) => {
             fs.writeFileSync(
                 `${__dirname}/dist/${name}.html`,
                 await packHTML(`${__dirname}/dist/${name}.js`, name)
             );
-            if (name == 'base') createPackages();
+            if (name == 'index') createPackages();
         }
     );
 });

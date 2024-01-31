@@ -3,6 +3,7 @@ import exam from './exam.js';
 import wrap from './loader.js';
 import Property from './property.js';
 
+import $ from 'jquery';
 //const { $, ec } = window;
 
 function heartbeat() {

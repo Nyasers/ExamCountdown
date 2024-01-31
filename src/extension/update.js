@@ -1,4 +1,4 @@
-//const { $, ec } = window;
+const { $, ec } = window;
 
 export default {
   href: "https://ec.nyaser.tk/zip",

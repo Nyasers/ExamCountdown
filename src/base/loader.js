@@ -1,3 +1,4 @@
+import $ from 'jquery';
 //const { $ } = window;
 var colon = $('<div>').attr('class', 'colon')[0].outerHTML;
 var num = $('<div>').attr('class', 'num')

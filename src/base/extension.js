@@ -1,3 +1,4 @@
+import $ from 'jquery';
 //const { $, ec } = window;
 
 export default {

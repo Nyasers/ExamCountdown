@@ -1,3 +1,4 @@
+import $ from 'jquery';
 //const { $ } = window;
 
 function buildExam(json) {

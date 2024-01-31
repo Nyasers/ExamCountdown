@@ -25,7 +25,7 @@ module.exports = [
     name: 'step1',
     mode: 'production',
     entry: {
-      base: './src/base/css/index.js',
+      index: './src/base/css/index.js',
       extension: './src/extension/css/index.js',
     },
     output: {
@@ -62,8 +62,8 @@ module.exports = [
     mode: 'production',
     dependencies: ['step1'],
     entry: {
-      base: './src/base/index.js',
-      index: './src/index.js',
+      index: './src/base/index.js',
+      //index: './src/index.js',
       extension: './src/extension/index.js',
     },
     output: {

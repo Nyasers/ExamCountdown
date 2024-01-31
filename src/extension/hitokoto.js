@@ -1,4 +1,4 @@
-//const { $ } = window;
+const { $, ec } = window;
 
 export default {
   api: {
