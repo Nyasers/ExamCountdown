@@ -52,7 +52,13 @@ async function packZip(files, destination) {
     await archive.finalize();
 }
 
-async function createPackages() {
+async function postMake() {
+    const json = path.resolve('./dist/project.json');
+    fs.readFile(json, 'utf-8', (err, data) => {
+        if (err) throw err;
+        const minified = MinifyJSON(data);
+        fs.writeFileSync(json, minified, 'utf-8');
+    });
     const pathto = '/Wallpaper/projects/defaultprojects/ExamCountdown';
     const install = [
         { filename: 'index.html', data: { name: path.resolve(pathto, 'index.html') } },
@@ -76,7 +82,7 @@ webpack(config, async () => {
                 `${__dirname}/dist/${name}.html`,
                 await packHTML(`${__dirname}/dist/${name}.js`, name)
             );
-            if (name == 'index') createPackages();
+            if (name == 'index') postMake();
         }
     );
 });
