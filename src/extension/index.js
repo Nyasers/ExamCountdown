@@ -3,7 +3,7 @@ import hitokoto from "./hitokoto.js";
 import update from './update.js'
 import '../../cache/extension.css';
 
-const { $, ec } = window;
+// const { $, ec } = window;
 
 if (ec.extension) delete ec.extension;
 
@@ -14,9 +14,7 @@ $("ul#main").append($('<li class="hitokoto"></li>'));
 ec.hitokoto = hitokoto;
 
 ec.update = update;
-let version = new Date(VERSION);
-if (typeof ec.update == "undefined") ec.version = version;
-else ec.update.version = version;
+ec.update.version = new Date(VERSION);
 
 setTimeout(() => {
   if (ec.update && ec.update.check()) ec.update.notice();

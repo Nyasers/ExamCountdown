@@ -7,7 +7,7 @@ export default {
         if (retry) this.retry = retry;
         $.getScript(this.url)
             .done(function (e) {
-                alert(e);
+                alert(e.length);
             })
             .fail(function (msg) {
                 console.warn(`Retry: ${!!this.retry} (${this.retry})`);
