@@ -23,6 +23,7 @@ const commonPostcssLoader = {
 module.exports = [
   {
     name: 'step1',
+    mode: 'production',
     entry: {
       base: './src/base/css/index.js',
       extension: './src/extension/css/index.js',
@@ -58,6 +59,7 @@ module.exports = [
   },
   {
     name: 'step2',
+    mode: 'production',
     dependencies: ['step1'],
     entry: {
       base: './src/base/index.js',

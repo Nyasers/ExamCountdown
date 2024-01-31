@@ -5,7 +5,9 @@ import '../../cache/base.css';
 
 window.$ = $;
 window.ec = {};
+
 main();
+
 ec.extension = extension;
 ec.extension.fetch(6);
 

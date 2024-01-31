@@ -1,3 +1,5 @@
+const { $ } = window
+
 export default {
   api: {
     url: "https://v1.hitokoto.cn/",

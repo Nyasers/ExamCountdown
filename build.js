@@ -34,12 +34,13 @@ async function packHTML(jsfile, tag = null) {
 (async function () {
     webpack(config, async () => {
         fs.rmSync('./cache', { recursive: true });
-        ['base'].forEach(
-            async (name) =>
+        ['base', 'extension'].forEach(
+            async (name) => {
                 fs.writeFileSync(
                     `./dist/${name}.html`,
-                    await packHTML(`./dist/${name}.js`)
-                )
+                    await packHTML(`./dist/${name}.js`, name)
+                );
+            }
         );
     });
 })()

@@ -1,8 +1,9 @@
-import $ from 'jquery';
 import { TweenMax, Bounce, Power1, Power4 } from 'gsap';
 import exam from './exam.js';
 import wrap from './loader.js';
 import Property from './property.js';
+
+const { $, ec } = window;
 
 function heartbeat() {
   if (ec.hitokoto) ec.hitokoto.heartbeat();

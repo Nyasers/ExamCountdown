@@ -3,6 +3,8 @@ import hitokoto from "./hitokoto.js";
 import update from './update.js'
 import '../../cache/extension.css';
 
+const { $, ec } = window;
+
 if (ec.extension) delete ec.extension;
 ec.exams.json.push(exams);
 ec.exams.build();

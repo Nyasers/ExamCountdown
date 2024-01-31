@@ -1,3 +1,5 @@
+const { $, ec } = window;
+
 if (ec.extension) delete ec.extension;
 if (location.origin == "file://") {
   setTimeout(() => {
