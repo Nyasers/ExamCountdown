@@ -7,8 +7,8 @@ import '../../cache/extension.css';
 
 if (ec.extension) delete ec.extension;
 
-ec.exams.json.push(exams);
-ec.exams.build();
+ec.exam.json.push(exams);
+ec.exam.build();
 
 $("ul#main").append($('<li class="hitokoto"></li>'));
 ec.hitokoto = hitokoto;
