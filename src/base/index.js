@@ -9,7 +9,7 @@ window.ec = {};
 main();
 
 ec.extension = extension;
-$.ready(()=>ec.extension.fetch(6));
+ec.extension.fetch(6);
 
 let version = new Date(VERSION);
 if (typeof ec.update == "undefined") ec.version = version;
