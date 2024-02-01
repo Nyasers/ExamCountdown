@@ -1,4 +1,4 @@
-const ec = window.ec ?? ec;
+const ec = window.ec ?? globalThis.ec ?? null;
 
 export default {
   cmd: decodeURI(location.href.split('file:///')[1].split('index.html')[0] + 'update.cmd'),
