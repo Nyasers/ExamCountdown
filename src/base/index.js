@@ -3,8 +3,8 @@ import main from './main.js';
 import extension from './extension.js';
 import '../../cache/index.css';
 
-window.$ = $;
-window.ec = {};
+globalThis.$ = $;
+globalThis.ec = {};
 
 main();
 
