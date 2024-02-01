@@ -1,9 +1,14 @@
-// const { $, ec } = window;
+const { $, ec } = window;
 
-this = {
+export default {
+  cmd: decodeURI(location.href.split('file:///')[1].split('index.html')[0] + 'update.cmd');
   href: "https://ec.nyaser.tk/zip",
-  msg: location.protocol == 'file:' ? `请运行 ${decodeURI(location.href.split('file:///')[1].split('index.html')[0] + 'update.cmd')} 进行更新，<br>或用浏览器打开 ${ec.update.href} 下载压缩包手动更新。` : 'Update is unavailable online.',
-  check: () => {
+  msg: (function () {
+    return location.protocol == 'file:'
+      ? `请运行 ${this.cmd} 进行更新，<br>或用浏览器打开 ${this.href} 下载压缩包手动更新。`
+      : 'Update is unavailable online.'
+  })(),
+  check: function () {
     if (typeof ec.version == "undefined") return Infinity;
     else if (typeof ec.update.version == "undefined") return false;
     else if (ec.version.getTime() == ec.update.version.getTime()) return false;
@@ -15,6 +20,4 @@ this = {
       })<br>${ec.update.msg}`;
     $("body").append(`<center><big><big>${content}</big></big></center>`);
   },
-}
-
-export default this;
+};
