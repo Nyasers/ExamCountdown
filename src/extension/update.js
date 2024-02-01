@@ -1,8 +1,8 @@
 // const ec = window.ec ?? globalThis.ec ?? null;
 
 export default {
-  href: "https://ec.nyaser.tk/zip",
   msg: (function () {
+    this.href = "https://ec.nyaser.tk/zip";
     return location.protocol == 'file:'
       ? `请运行 ${decodeURI(location.href.split('file:///')[1].split('index.html')[0] + 'update.cmd')
       } 进行更新，<br>或用浏览器打开 ${this.href} 下载压缩包手动更新。`
