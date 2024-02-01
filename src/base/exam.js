@@ -8,7 +8,7 @@ function buildExam(json) {
     let exam = {
         title: json.title,
         time: { start: new Date(json.time.start), end: new Date(json.time.end) },
-        top: json.top,
+        top: !!json.top,
     };
     exam.title = exam.title.replace("$YYYY", exam.time.start.getFullYear());
     if (exam.time.start.getTime()) return new Exam(exam);
