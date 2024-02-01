@@ -25,7 +25,7 @@ async function packHTML(jsfile, tag = null) {
             comments: false,
         },
         mangle: {
-            reserved: ['$', "ec"],
+            reserved: ["ec"],
         },
         module: true,
         toplevel: true,
