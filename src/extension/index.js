@@ -5,7 +5,7 @@ import '../../cache/extension.css';
 
 if ('undefined' == typeof globalThis.ec) globalThis.ec = ec;
 
-if (ec.extension) delete ec.extension;
+if ('undefined' != typeof ec.extension) delete ec.extension;
 else throw new Error('Duplicate Runs Not Allowed.');
 
 exams.forEach((exam) => ec.exam.json.push(exam));
