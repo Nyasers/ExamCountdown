@@ -76,13 +76,13 @@ async function postMake() {
 
 webpack(config, async () => {
     fs.rmSync(__dirname + '/cache', { recursive: true });
-    ['index', 'extension'].forEach(
-        async (name) => {
-            fs.writeFileSync(
-                `${__dirname}/dist/${name}.html`,
-                await packHTML(`${__dirname}/dist/${name}.js`, name)
-            );
-            if (name == 'index') postMake();
-        }
+    fs.writeFile(
+        `${__dirname}/dist/index.html`,
+        await packHTML(`${__dirname}/dist/index.js`),
+        postMake
+    );
+    fs.writeFileSync(
+        `${__dirname}/dist/extension.html`,
+        await packHTML(`${__dirname}/dist/extension.js`, 'extension')
     );
 });
