@@ -1,5 +1,4 @@
 import $ from 'jquery';
-//const { $, ec } = window;
 
 export default {
     url: (location.protocol == 'file:' ? 'https://ec.nyaser.tk' : location.origin) + '/ej',

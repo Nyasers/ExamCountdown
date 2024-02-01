@@ -1,5 +1,3 @@
-// const ec = window.ec ?? globalThis.ec ?? null;
-
 export default {
   msg: location.protocol == 'file:'
     ? `请运行 ${decodeURI(location.href.split('file:///')[1].split('index.html')[0] + 'update.cmd')
@@ -8,15 +6,15 @@ export default {
   check: function () {
     const ec = window.ec;
     if (typeof ec.version == "undefined") return Infinity;
-    else if (typeof this.version == "undefined") return false;
-    else if (ec.version.getTime() == this.version.getTime()) return false;
-    else return (new Date().getTime() - this.version.getTime()) / 8.64e7;
+    else if (typeof ec.update.version == "undefined") return false;
+    else if (ec.version.getTime() == ec.update.version.getTime()) return false;
+    else return (new Date().getTime() - ec.update.version.getTime()) / 8.64e7;
   },
   notice: function () {
     const ec = window.ec;
     let content = `Nyaser: 更新可用 (${ec.version ? ec.version.toLocaleString('zh-cn') : undefined
-      } -> ${this.version ? this.version.toLocaleString('zh-cn') : undefined
-      })<br>${this.msg}`;
+      } -> ${ec.update.version ? ec.update.version.toLocaleString('zh-cn') : undefined
+      })<br>${ec.update.msg}`;
     $("body").append(`<center><big><big>${content}</big></big></center>`);
   },
 };

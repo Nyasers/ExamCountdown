@@ -1,10 +1,8 @@
-import { TweenMax, Bounce, Power1, Power4 } from 'gsap';
+import $ from 'jquery';
+import gsap, { Bounce, Power1, Power4 } from 'gsap';
 import exam from './exam.js';
 import wrap from './loader.js';
-import Property from './property.js';
-
-import $ from 'jquery';
-//const { $, ec } = window;
+import property from './property.js';
 
 function heartbeat() {
   if (ec.hitokoto) ec.hitokoto.heartbeat();
@@ -69,22 +67,22 @@ function setCounter(mc, i) {
   mc.childNodes[1].innerHTML = mc.childNodes[2].innerHTML =
     mc.childNodes[0].innerHTML;
   mc.childNodes[0].innerHTML = mc.childNodes[3].innerHTML = `<span>${i}</span>`;
-  TweenMax.fromTo(
+  gsap.fromTo(
     mc.childNodes[0],
     { alpha: 0 },
     { duration: 0.3, alpha: 1, ease: Power4.easeIn }
   );
-  TweenMax.fromTo(
+  gsap.fromTo(
     mc.childNodes[1],
     { rotationX: 0 },
     { duration: 0.3, rotationX: -90, ease: Power1.easeIn }
   );
-  TweenMax.fromTo(
+  gsap.fromTo(
     mc.childNodes[2],
     { alpha: 1 },
     { duration: 0.6, alpha: 0, ease: Bounce.easeOut, delay: 0.3 }
   );
-  TweenMax.fromTo(
+  gsap.fromTo(
     mc.childNodes[3],
     { rotationX: 90 },
     {
@@ -101,7 +99,7 @@ export default () => {
     cw = 1920,
     ch = 1080;
 
-  Property();
+  property();
 
   $("body").width(`${cw}px`);
   $("body").height(`${ch}px`);
@@ -127,11 +125,11 @@ export default () => {
 
   window.onresize();
 
-  TweenMax.set(".upper", {
+  gsap.set(".upper", {
     rotationX: 0.01,
     transformOrigin: "50% 100%",
   });
-  TweenMax.set(".lower", {
+  gsap.set(".lower", {
     rotationX: 0.01,
     transformOrigin: "50% 0%",
   });

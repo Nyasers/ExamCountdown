@@ -9,6 +9,6 @@ window.ec = {};
 main();
 
 ec.extension = extension;
-ec.extension.fetch(6);
-
 ec.version = new Date(VERSION);
+
+setTimeout(() => ec.extension.fetch(6));

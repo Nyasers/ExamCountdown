@@ -1,5 +1,4 @@
 import $ from 'jquery';
-//const { $ } = window;
 
 function buildExam(json) {
     if (typeof json.time.start === typeof undefined) return null;
@@ -70,21 +69,21 @@ export default {
     array: [],
     breakon: null,
     sort: function () {
-        this.array.sort((a, b) => {
+        ec.exam.array.sort((a, b) => {
             return a.time.start - b.time.start;
         });
     },
     build: function (breakon = null) {
-        this.array = [];
-        for (i = 0; i < this.json.length; i++) {
-            var exam = buildExam(this.json[i]);
-            if (exam) this.array.push(exam);
+        ec.exam.array = [];
+        for (i = 0; i < ec.exam.json.length; i++) {
+            var exam = buildExam(ec.exam.json[i]);
+            if (exam) ec.exam.array.push(exam);
         }
-        this.sort();
-        if (breakon || (breakon = this.breakon)) {
-            this.breakon = breakon;
-            var endex = this.array.findLastIndex((exam) => exam.title.includes(breakon));
-            if (endex) this.array.splice(endex + 1);
-        } else this.breakon = null;
+        ec.exam.sort();
+        if (breakon || (breakon = ec.exam.breakon)) {
+            ec.exam.breakon = breakon;
+            var endex = ec.exam.array.findLastIndex((exam) => exam.title.includes(breakon));
+            if (endex) ec.exam.array.splice(endex + 1);
+        } else ec.exam.breakon = null;
     },
 };

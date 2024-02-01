@@ -1,4 +1,4 @@
-const { $, ec } = window;
+const { $, ec } = globalThis;
 
 export default {
   api: {
@@ -29,12 +29,12 @@ export default {
   set: function (data) {
     console.log(data);
     if (data) {
-      if (!(type = this.type[data.type])) {
-        this.set({
+      if (!(type = ec.hitokoto.type[data.type])) {
+        ec.hitokoto.set({
           type: "x",
           from: "Nyaser",
           hitokoto: "加载失败，稍后重试。",
-          ttl: this.timeout.retry,
+          ttl: ec.hitokoto.timeout.retry,
         });
         return;
       }
@@ -50,47 +50,47 @@ export default {
       } else author = null;
       if (data.type === "e")
         author += ` => [UID${data.creator_uid}] ${data.creator}`;
-      var ttl = data.ttl ?? this.timeout.refresh;
-      this.expiration = new Date().getTime() + ttl;
+      var ttl = data.ttl ?? ec.hitokoto.timeout.refresh;
+      ec.hitokoto.expiration = new Date().getTime() + ttl;
       $("li.hitokoto").html(
         `[一言·<type class='hitokoto'>${type}</type>·<ttl class='hitokoto'></ttl>] <sentence class='hitokoto'>${data.hitokoto}</sentence><author class='hitokoto'>${author}</author>`
       );
       $("ttl.hitokoto").html(
         `<a class='hitokoto' href='javascript:void(0);' onClick='ec.hitokoto.change();'>${(
-          (this.expiration - new Date().getTime()) /
+          (ec.hitokoto.expiration - new Date().getTime()) /
           1e3
         ).toFixed(0)}</a>`
       );
-    } else this.get();
+    } else ec.hitokoto.get();
   },
   get: function () {
-    this.set({
+    ec.hitokoto.set({
       type: "x",
       from: "Nyaser",
       hitokoto: "加载中，请稍候。",
-      ttl: this.timeout.request,
+      ttl: ec.hitokoto.timeout.request,
     });
     var request;
     if (request != null) request.abort();
-    var url = this.api.url + "?" + this.api.args;
-    for (let key of Object.keys(this.type)) url += `&c=${key}`;
+    var url = ec.hitokoto.api.url + "?" + ec.hitokoto.api.args;
+    for (let key of Object.keys(ec.hitokoto.type)) url += `&c=${key}`;
     request = $.getJSON(url)
-      .then((d) => this.set(d))
-      .fail((e, t) => this.set({ e: e, t: t }));
+      .then((d) => ec.hitokoto.set(d))
+      .fail((e, t) => ec.hitokoto.set({ e: e, t: t }));
   },
   change: function () {
-    console.log((timeout = this.expiration - new Date().getTime()));
-    return (this.expiration =
+    console.log((timeout = ec.hitokoto.expiration - new Date().getTime()));
+    return (ec.hitokoto.expiration =
       new Date().getTime() +
       (timeout > 3000
         ? timeout == Infinity
-          ? this.timeout.refresh
+          ? ec.hitokoto.timeout.refresh
           : 3000
         : Infinity));
   },
   heartbeat: function () {
-    var hitokoto_ttl = (this.expiration - new Date().getTime()) / 1e3;
-    if (hitokoto_ttl < 0) this.get();
+    var hitokoto_ttl = (ec.hitokoto.expiration - new Date().getTime()) / 1e3;
+    if (hitokoto_ttl < 0) ec.hitokoto.get();
     hitokoto_ttl = hitokoto_ttl.toFixed(0);
     if ($("ttl.hitokoto").text() != `${hitokoto_ttl}`)
       if ($("ttl.hitokoto a").html())

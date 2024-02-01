@@ -3,7 +3,6 @@ import hitokoto from "./hitokoto.js";
 import update from './update.js'
 import '../../cache/extension.css';
 
-// const { $, ec } = window;
 if ('undefined' == typeof window.ec) window.ec = ec;
 
 if (ec.extension) delete ec.extension;
