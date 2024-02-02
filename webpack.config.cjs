@@ -7,7 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
 
 const VERSION = '"2024/02/02"';
-var nameCache;
+var nameCache = {};
 exports.terserOptions = {
   ecma: 2016,
   compress: {
@@ -85,7 +85,6 @@ module.exports = [
     dependencies: ['step1'],
     entry: {
       index: './src/base/index.js',
-      //index: './src/index.js',
       extension: './src/extension/index.js',
     },
     output: {
