@@ -1,14 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import { dirname } from "node:path"
-import { fileURLToPath } from "node:url"
 import { minify } from 'terser';
 import archiver from 'archiver';
 import webpack from 'webpack';
 import config from './webpack.config.cjs';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 function MinifyJSON(code) {
     return JSON.stringify(JSON.parse(code));
@@ -19,19 +14,8 @@ async function packHTML(jsfile, tag = null) {
     output += "<ec>";
     if (tag !== null) output += `<${tag}>`;
     output += "<script>";
-    var opitions = {
-        format: {
-            ecma: 2016,
-            comments: false,
-        },
-        mangle: {
-            reserved: ["ec"],
-        },
-        module: true,
-        toplevel: true,
-    };
     var js = fs.readFileSync(jsfile, 'utf-8');
-    output += (await minify(js, opitions)).code;
+    output += (await minify(js, config.terserOptions)).code;
     output += "</script>";
     if (tag !== null) output += `</${tag}>`;
     output += "</ec>";
@@ -40,12 +24,12 @@ async function packHTML(jsfile, tag = null) {
 
 async function packZip(files, destination) {
     const archive = archiver('zip', { zlib: { level: 9 } });
-    const filename = path.resolve(__dirname, 'dist', destination);
+    const filename = path.resolve('dist', destination);
     const output = fs.createWriteStream(filename);
     archive.pipe(output);
 
     files.forEach((file) => {
-        const filename1 = path.resolve(__dirname, 'dist', file.filename);
+        const filename1 = path.resolve('dist', file.filename);
         archive.file(filename1, file.data);
     })
 
@@ -53,7 +37,7 @@ async function packZip(files, destination) {
 }
 
 async function postMake() {
-    const json = path.resolve('./dist/project.json');
+    const json = path.resolve('dist/project.json');
     fs.readFile(json, 'utf-8', (err, data) => {
         if (err) throw err;
         const minified = MinifyJSON(data);
@@ -75,14 +59,14 @@ async function postMake() {
 }
 
 webpack(config, async () => {
-    fs.rmSync(__dirname + '/cache', { recursive: true });
+    fs.rmSync(path.resolve('cache'), { recursive: true });
     fs.writeFile(
-        `${__dirname}/dist/index.html`,
-        await packHTML(`${__dirname}/dist/index.js`),
+        path.resolve('dist/index.html'),
+        await packHTML(path.resolve('dist/index.js')),
         postMake
     );
     fs.writeFileSync(
-        `${__dirname}/dist/extension.html`,
-        await packHTML(`${__dirname}/dist/extension.js`, 'extension')
+        path.resolve('dist/extension.html'),
+        await packHTML(path.resolve('dist/extension.js'), 'extension')
     );
 });

@@ -7,7 +7,29 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
 
 const VERSION = '"2024/02/02"';
-var ncache;
+var nameCache;
+exports.terserOptions = {
+  ecma: 2016,
+  compress: {
+    passes: 3,
+    unsafe: true,
+    unsafe_arrows: true,
+    unsafe_regexp: true,
+    unsafe_comps: true,
+    unsafe_Function: true,
+    unsafe_math: true,
+    unsafe_proto: true,
+  },
+  mangle: {
+    reserved: ['ec'],
+  },
+  module: true,
+  format: {
+    comments: false,
+  },
+  toplevel: true,
+  nameCache: nameCache,
+};
 
 const commonPostcssLoader = {
   loader: 'postcss-loader',
@@ -99,28 +121,7 @@ module.exports = [
       minimize: true,
       minimizer: [
         new TerserPlugin({
-          terserOptions: {
-            ecma: 2016,
-            compress: {
-              passes: 3,
-              unsafe: true,
-              unsafe_arrows: true,
-              unsafe_regexp: true,
-              unsafe_comps: true,
-              unsafe_Function: true,
-              unsafe_math: true,
-              unsafe_proto: true,
-            },
-            mangle: {
-              reserved: ['ec'],
-            },
-            module: true,
-            format: {
-              comments: false,
-            },
-            toplevel: true,
-            nameCache: ncache,
-          },
+          terserOptions: this.terserOptions,
         })
       ],
     },
