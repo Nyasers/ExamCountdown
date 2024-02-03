@@ -15,7 +15,8 @@ async function packHTML(jsfile, tag = null) {
     if (tag !== null) output += `<${tag}>`;
     output += "<script>";
     var js = fs.readFileSync(jsfile, 'utf-8');
-    output += (await minify(js, config.terserOptions)).code;
+    var result = await minify(js, config.terserOptions);
+    output += result.code;
     output += "</script>";
     if (tag !== null) output += `</${tag}>`;
     output += "</ec>";
@@ -23,7 +24,7 @@ async function packHTML(jsfile, tag = null) {
 }
 
 async function packZip(files, destination) {
-    const archive = archiver('zip', { zlib: { level: 9 } });
+    const archive = archiver('zip', { zlib: { level: 9, memLevel: 9 } });
     const filename = path.resolve('dist', destination);
     const output = fs.createWriteStream(filename);
     archive.pipe(output);
