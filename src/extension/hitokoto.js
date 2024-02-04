@@ -78,7 +78,7 @@ export default {
       .fail((e, t) => ec.hitokoto.set({ e: e, t: t }));
   },
   change: function () {
-    // console.log((timeout = ec.hitokoto.expiration - new Date().getTime()));
+    var timeout = ec.hitokoto.expiration - new Date().getTime();
     return (ec.hitokoto.expiration =
       new Date().getTime() +
       (timeout > 3000
