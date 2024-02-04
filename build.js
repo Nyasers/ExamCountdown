@@ -3,7 +3,8 @@ import path from 'path';
 import { minify } from 'terser';
 import archiver from 'archiver';
 import webpack from 'webpack';
-import config from './webpack.config.cjs';
+import webpackConfig from './webpack.config.cjs';
+import terserConfig from './terser.config.js';
 
 function MinifyJSON(code) {
     return JSON.stringify(JSON.parse(code));
@@ -15,8 +16,9 @@ async function packHTML(jsfile, tag = null) {
     if (tag !== null) output += `<${tag}>`;
     output += "<script>";
     var js = fs.readFileSync(jsfile, 'utf-8');
-    var result = await minify(js, config.terserOptions);
+    var result = await minify(js, terserConfig);
     output += result.code;
+    fs.writeFileSync(jsfile, result.code)
     output += "</script>";
     if (tag !== null) output += `</${tag}>`;
     output += "</ec>";
@@ -59,15 +61,29 @@ async function postMake() {
     packZip(update, 'update.zip');
 }
 
-webpack(config, async () => {
+webpack(webpackConfig, async () => {
+    var license = '';
+    fs.readdirSync(path.resolve('dist')).filter(n => n.endsWith('.LICENSE.txt'))
+        .forEach(n => {
+            if (license != '') license += '\r\n';
+            license += fs.readFileSync(path.resolve('dist', n), 'utf-8');
+            fs.rmSync(path.resolve('dist', n));
+        });
+    if (license != '') fs.writeFileSync(path.resolve('dist', 'license.txt'), license, 'utf-8');
+    fs.readdirSync(path.resolve('cache')).filter(n => n.endsWith('.css'))
+        .forEach(n =>
+            fs.cpSync(path.resolve('cache', n), path.resolve('dist', n))
+        );
     fs.rmSync(path.resolve('cache'), { recursive: true });
     fs.writeFile(
         path.resolve('dist/index.html'),
         await packHTML(path.resolve('dist/index.js')),
+        'utf-8',
         postMake
     );
     fs.writeFileSync(
         path.resolve('dist/extension.html'),
-        await packHTML(path.resolve('dist/extension.js'), 'extension')
+        await packHTML(path.resolve('dist/extension.js'), 'extension'),
+        'utf-8'
     );
 });
