@@ -41,11 +41,6 @@ async function packZip(files, destination) {
 
 async function postMake() {
     const json = path.resolve('dist/project.json');
-    fs.readFile(json, 'utf-8', (err, data) => {
-        if (err) throw err;
-        const minified = MinifyJSON(data);
-        fs.writeFileSync(json, minified, 'utf-8');
-    });
     const pathto = '/Wallpaper/projects/defaultprojects/ExamCountdown';
     const install = [
         { filename: 'index.html', data: { name: path.resolve(pathto, 'index.html') } },
@@ -59,9 +54,15 @@ async function postMake() {
     ];
     packZip(install, 'ExamCountdown.zip');
     packZip(update, 'update.zip');
+    fs.readFile(json, 'utf-8', (err, data) => {
+        if (err) throw err;
+        const minified = MinifyJSON(data);
+        fs.writeFileSync(json, minified, 'utf-8');
+    });
 }
 
 webpack(webpackConfig, async () => {
+    // merge license
     var license = '';
     fs.readdirSync(path.resolve('dist')).filter(n => n.endsWith('.LICENSE.txt'))
         .forEach(n => {
@@ -70,17 +71,23 @@ webpack(webpackConfig, async () => {
             fs.rmSync(path.resolve('dist', n));
         });
     if (license != '') fs.writeFileSync(path.resolve('dist', 'license.txt'), license, 'utf-8');
+
+    // Move css files
     fs.readdirSync(path.resolve('cache')).filter(n => n.endsWith('.css'))
         .forEach(n =>
             fs.cpSync(path.resolve('cache', n), path.resolve('dist', n))
         );
     fs.rmSync(path.resolve('cache'), { recursive: true });
+
+    // Index
     fs.writeFile(
         path.resolve('dist/index.html'),
         await packHTML(path.resolve('dist/index.js')),
         'utf-8',
         postMake
     );
+
+    // For old versions
     fs.writeFileSync(
         path.resolve('dist/extension.html'),
         await packHTML(path.resolve('dist/extension.js'), 'extension'),

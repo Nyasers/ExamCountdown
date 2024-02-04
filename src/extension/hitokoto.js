@@ -79,13 +79,8 @@ export default {
   },
   change: function () {
     var timeout = ec.hitokoto.expiration - new Date().getTime();
-    return (ec.hitokoto.expiration =
-      new Date().getTime() +
-      (timeout > 3000
-        ? timeout == Infinity
-          ? ec.hitokoto.timeout.refresh
-          : 3000
-        : Infinity));
+    ec.hitokoto.expiration = new Date().getTime()
+      + (timeout > 3000 ? timeout == Infinity ? ec.hitokoto.timeout.refresh : 3000 : Infinity);
   },
   heartbeat: function () {
     var hitokoto_ttl = (ec.hitokoto.expiration - new Date().getTime()) / 1e3;
