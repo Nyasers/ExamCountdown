@@ -1,5 +1,6 @@
 function setBackground(url) {
   if (document.body)
+    document.body.style.backgroundColor = 'none',
     document.body.style.backgroundImage = `url('${url}')`;
   else
     console.warn(`Body is ${typeof document.body}`);
