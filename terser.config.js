@@ -19,6 +19,6 @@ export default {
         unsafe_proto: true,
         unsafe_math: true,
         unsafe_methods: true,
-        // unsafe_undefined: true,
+        unsafe_undefined: true,
     },
 };

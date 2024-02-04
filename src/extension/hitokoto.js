@@ -27,7 +27,7 @@ export default {
     x: "提示",
   },
   set: function (data) {
-    console.log(data);
+    if (data.type != 'x') console.log(data);
     if (data) {
       if (!(type = ec.hitokoto.type[data.type])) {
         ec.hitokoto.set({
@@ -57,8 +57,7 @@ export default {
       );
       $("ttl.hitokoto").html(
         `<a class='hitokoto' href='javascript:void(0);' onClick='ec.hitokoto.change();'>${(
-          (ec.hitokoto.expiration - new Date().getTime()) /
-          1e3
+          (ec.hitokoto.expiration - new Date().getTime()) / 1e3
         ).toFixed(0)}</a>`
       );
     } else ec.hitokoto.get();
@@ -79,7 +78,7 @@ export default {
       .fail((e, t) => ec.hitokoto.set({ e: e, t: t }));
   },
   change: function () {
-    console.log((timeout = ec.hitokoto.expiration - new Date().getTime()));
+    // console.log((timeout = ec.hitokoto.expiration - new Date().getTime()));
     return (ec.hitokoto.expiration =
       new Date().getTime() +
       (timeout > 3000

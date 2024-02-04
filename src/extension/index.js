@@ -3,6 +3,8 @@ import hitokoto from "./hitokoto.js";
 import update from './update.js'
 import '../../cache/extension.css';
 
+// For old versions
+if ('undefined' == typeof globalThis.$) globalThis.$ = $;
 if ('undefined' == typeof globalThis.ec) globalThis.ec = ec;
 
 if ('undefined' != typeof ec.extension) delete ec.extension;
