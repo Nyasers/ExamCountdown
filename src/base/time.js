@@ -10,10 +10,12 @@ function getTime(iframe) {
     var time = new Date(undefined);
     try {
         var idocument = iframe[0].contentDocument;
-        if (idocument == null) throw `Blocked a frame with origin "${location.origin}" from accessing a cross-origin frame.`;
+        if (idocument == null) {
+            globalThis.Time = () => newDate;
+            throw `Blocked a frame with origin "${location.origin}" from accessing a cross-origin frame.`;
+        }
         var timeStr = $('#dd', idocument).text() + 'T' + $('#clock', idocument).text();
         time = new Date(timeStr);
-        if (!time.valueOf()) throw typeof idocument;
     } catch (e) { console.error(e) }
     return !!time.valueOf() ? time : new Date;
 }
