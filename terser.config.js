@@ -14,7 +14,7 @@ export default {
         // booleans_as_integers: true,
         unsafe: true,
         unsafe_arrows: true,
-        // unsafe_regexp: true,
+        unsafe_regexp: true,
         unsafe_comps: true,
         unsafe_proto: true,
         unsafe_math: true,

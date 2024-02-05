@@ -5,14 +5,16 @@ const iframe = $('<iframe>').attr('src', url);
 $('body').append(iframe);
 
 function getTime(iframe) {
-    var idocument = iframe[0].contentDocument;
-    var timeStr = $(idocument).find('#dd').text() + 'T' + $(idocument).find('#clock').text();
-    var time = new Date(timeStr);
-    return time;
+    var time = new Date(undefined);
+    try {
+        var idocument = iframe[0].contentDocument;
+        var timeStr = $('#dd', idocument).text() + 'T' + $('#clock', idocument).text();
+        time = new Date(timeStr);
+    } finally { }
+    return !!time.valueOf() ? time : new Date;
 }
 
 globalThis.Time = function () {
     var time = getTime(iframe);
-    // console.log(!!time.valueOf());
-    return !!time.valueOf() ? time : Time();
+    return time;
 }
