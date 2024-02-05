@@ -10,5 +10,6 @@ function getTimeStr(selector) {
 }
 
 export default function () {
+    $('body').append(iframe);
     return getTimeStr(iframe);
 }
