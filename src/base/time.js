@@ -6,8 +6,8 @@ $('body').append(iframe);
 globalThis.iframe = iframe;
 
 function getTimeStr(iframe) {
-    globalThis.idocument = iframe[0].contentDocument;
-    return $(idocument).find('#dd').textContent + 'T' + $(idocument).find('#clock').textContent;
+    var idocument = iframe[0].contentDocument;
+    return $(idocument).find('#dd').text() + 'T' + $(idocument).find('#clock').text();
 }
 
 export default function () {
