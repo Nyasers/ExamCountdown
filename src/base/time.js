@@ -4,9 +4,9 @@ const url = 'https://time.is/?c=d3Y-3m-3dXtH2i2s.MXfmtXc2Xo480Xz1Xa1Xb51ea29.4e4
 const meta = $('<meta>').attr('name', 'referrer').attr('content', 'never');
 const iframe = $('<iframe>').attr('src', url).attr('rel', 'noreferrer').attr('hidden', '');
 $('head').append(meta);
-$('body').append(iframe);
+$(()=>$('body').append(iframe));
 
-function getTime(iframe) {
+function getTime() {
     var time = new Date(undefined);
     try {
         var idocument = iframe[0].contentDocument;
@@ -20,6 +20,4 @@ function getTime(iframe) {
     return !!time.valueOf() ? time : new Date;
 }
 
-globalThis.Time = function () {
-    return getTime(iframe);
-}
+globalThis.Time = getTime;
