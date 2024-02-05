@@ -8,5 +8,6 @@ function getTimeStr(tag) {
 
 export default function () {
     const iframe = $('<iframe>').attr('src', url);
-    console.log(getTimeStr(iframe));
+    console.log(iframe);
+    return getTimeStr(iframe);
 }
