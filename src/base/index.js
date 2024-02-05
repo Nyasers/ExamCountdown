@@ -10,7 +10,7 @@ globalThis.ec = {};
 
 // Init
 main();
-time();
+setTimeout(time);
 
 // Set version
 ec.version = new Date(VERSION);
