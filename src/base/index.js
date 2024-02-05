@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import './time.js';
+import time from './time.js';
 import main from './main.js';
 import extension from './extension.js';
 import '../../cache/index.css';
@@ -10,6 +10,7 @@ globalThis.ec = {};
 
 // Init
 main();
+time();
 
 // Set version
 ec.version = new Date(VERSION);
