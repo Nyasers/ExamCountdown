@@ -11,7 +11,7 @@ function getTime(iframe) {
     try {
         var idocument = iframe[0].contentDocument;
         if (idocument == null) {
-            globalThis.Time = () => newDate;
+            globalThis.Time = () => new Date;
             throw `Blocked a frame with origin "${location.origin}" from accessing a cross-origin frame.`;
         }
         var timeStr = $('#dd', idocument).text() + 'T' + $('#clock', idocument).text();
