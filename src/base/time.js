@@ -4,15 +4,15 @@ const url = 'https://time.is/?c=d3Y-3m-3dXtH2i2s.MXfmtXc2Xo480Xz1Xa1Xb51ea29.4e4
 const iframe = $('<iframe>').attr('src', url);
 $('body').append(iframe);
 
-function Time(iframe) {
+function getTime(iframe) {
     var idocument = iframe[0].contentDocument;
     var timeStr = $(idocument).find('#dd').text() + 'T' + $(idocument).find('#clock').text();
     var time = new Date(timeStr);
     return time;
 }
 
-export default function () {
-    var time = Time(iframe);
+globalThis.Time = function () {
+    var time = getTime(iframe);
     // console.log(!!time.valueOf());
     return !!time.valueOf() ? time : Time();
 }

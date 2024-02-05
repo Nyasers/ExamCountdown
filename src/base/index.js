@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import './time.js';
 import main from './main.js';
 import extension from './extension.js';
 import '../../cache/index.css';
@@ -16,7 +17,3 @@ ec.version = new Date(VERSION);
 // Fetch extension
 ec.extension = extension;
 setTimeout(() => ec.extension.fetch(6));
-
-// Try something new
-import Time from './time.js';
-globalThis.Time = Time;
