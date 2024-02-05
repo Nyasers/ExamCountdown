@@ -21,6 +21,5 @@ function getTime(iframe) {
 }
 
 globalThis.Time = function () {
-    var time = getTime(iframe);
-    return time;
+    return getTime(iframe);
 }
