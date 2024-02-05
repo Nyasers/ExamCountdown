@@ -6,6 +6,7 @@ import '../../cache/extension.css';
 // For old versions
 if ('undefined' == typeof globalThis.$) globalThis.$ = $;
 if ('undefined' == typeof globalThis.ec) globalThis.ec = ec;
+if ('undefined' == typeof globalThis.Time) globalThis.Time = () => new Date;
 
 // Avoid duplicate runs
 if ('undefined' != typeof ec.extension) delete ec.extension;

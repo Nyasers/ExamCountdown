@@ -8,7 +8,7 @@ export default {
     if (typeof ec.version == "undefined") return Infinity;
     else if (typeof ec.update.version == "undefined") return false;
     else if (ec.version.getTime() == ec.update.version.getTime()) return false;
-    else return (new Date().getTime() - ec.update.version.getTime()) / 8.64e7;
+    else return (Time().getTime() - ec.update.version.getTime()) / 8.64e7;
   },
   notice: function () {
     const ec = globalThis.ec;

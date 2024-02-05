@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import './time.js';
 import main from './main.js';
 import extension from './extension.js';
 import '../../cache/index.css';
