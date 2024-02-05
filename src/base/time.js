@@ -5,7 +5,7 @@ const iframe = $('<iframe>').attr('src', url);
 $('body').append(iframe);
 globalThis.iframe = iframe;
 
-function time(iframe) {
+function Time(iframe) {
     var idocument = iframe[0].contentDocument;
     var timeStr = $(idocument).find('#dd').text() + 'T' + $(idocument).find('#clock').text();
     var time = new Date(timeStr);
@@ -13,7 +13,7 @@ function time(iframe) {
 }
 
 export default function () {
-    var time = time(iframe);
+    var time = Time(iframe);
     console.log(!!time.valueOf());
     return !!time.valueOf() ? time : new Date();
 }
