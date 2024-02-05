@@ -4,8 +4,9 @@ const url = 'https://time.is/?c=d3Y-3m-3dXtH2i2s.MXfmtXc2Xo480Xz1Xa1Xb51ea29.4e4
 const iframe = $('<iframe>').attr('src', url);
 globalThis.iframe = iframe;
 
-function getTimeStr(tag) {
-    return $(tag).contents().find('#dd').textContent + 'T' + $(tag).contents().find('#clock').textContent;
+function getTimeStr(selector) {
+    var document = $(selector)[0].contentDocument;
+    return $(document).find('#dd').textContent + 'T' + $(document).find('#clock').textContent;
 }
 
 export default function () {
