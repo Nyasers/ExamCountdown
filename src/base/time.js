@@ -10,7 +10,7 @@ function getTime(iframe) {
         var idocument = iframe[0].contentDocument;
         var timeStr = $('#dd', idocument).text() + 'T' + $('#clock', idocument).text();
         time = new Date(timeStr);
-    } finally { }
+    } catch (e) { console.error(e) }
     return !!time.valueOf() ? time : new Date;
 }
 
