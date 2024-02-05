@@ -13,7 +13,7 @@ function getTime(iframe) {
         if (idocument == null) throw `Blocked a frame with origin "${location.origin}" from accessing a cross-origin frame.`;
         var timeStr = $('#dd', idocument).text() + 'T' + $('#clock', idocument).text();
         time = new Date(timeStr);
-        if (!time.valueOf()) throw { iframe, idocument, timeStr, time };
+        if (!time.valueOf()) throw typeof idocument;
     } catch (e) { console.error(e) }
     return !!time.valueOf() ? time : new Date;
 }
