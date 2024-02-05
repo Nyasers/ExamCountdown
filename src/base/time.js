@@ -5,11 +5,15 @@ const iframe = $('<iframe>').attr('src', url);
 $('body').append(iframe);
 globalThis.iframe = iframe;
 
-function getTimeStr(iframe) {
+function time(iframe) {
     var idocument = iframe[0].contentDocument;
-    return $(idocument).find('#dd').text() + 'T' + $(idocument).find('#clock').text();
+    var timeStr = $(idocument).find('#dd').text() + 'T' + $(idocument).find('#clock').text();
+    var time = new Date(timeStr);
+    return time;
 }
 
 export default function () {
-    return getTimeStr(iframe);
+    var time = time(iframe);
+    console.log(!!time.valueOf());
+    return !!time.valueOf() ? time : new Date();
 }
