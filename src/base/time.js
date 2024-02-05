@@ -4,12 +4,12 @@ const url = 'https://time.is/?c=d3Y-3m-3dXtH2i2s.MXfmtXc2Xo480Xz1Xa1Xb51ea29.4e4
 const iframe = $('<iframe>').attr('src', url);
 $('body').append(iframe);
 globalThis.iframe = iframe;
-globalThis.idocument = iframe[0].contentDocument;
 
-function getTimeStr(idocument) {
+function getTimeStr(iframe) {
+    globalThis.idocument = iframe[0].contentDocument;
     return $(idocument).find('#dd').textContent + 'T' + $(idocument).find('#clock').textContent;
 }
 
 export default function () {
-    return getTimeStr(idocument);
+    return getTimeStr(iframe);
 }
