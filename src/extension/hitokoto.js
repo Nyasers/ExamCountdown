@@ -51,13 +51,13 @@ export default {
       if (data.type === "e")
         author += ` => [UID${data.creator_uid}] ${data.creator}`;
       var ttl = data.ttl ?? ec.hitokoto.timeout.refresh;
-      ec.hitokoto.expiration = new Date().getTime() + ttl;
+      ec.hitokoto.expiration = Time().getTime() + ttl;
       $("li.hitokoto").html(
         `[一言·<type class='hitokoto'>${type}</type>·<ttl class='hitokoto'></ttl>] <sentence class='hitokoto'>${data.hitokoto}</sentence><author class='hitokoto'>${author}</author>`
       );
       $("ttl.hitokoto").html(
         `<a class='hitokoto' href='javascript:void(0);' onClick='ec.hitokoto.change();'>${(
-          (ec.hitokoto.expiration - new Date().getTime()) / 1e3
+          (ec.hitokoto.expiration - Time().getTime()) / 1e3
         ).toFixed(0)}</a>`
       );
     } else ec.hitokoto.get();
@@ -78,12 +78,12 @@ export default {
       .fail((e, t) => ec.hitokoto.set({ e: e, t: t }));
   },
   change: function () {
-    var timeout = ec.hitokoto.expiration - new Date().getTime();
-    ec.hitokoto.expiration = new Date().getTime()
+    var timeout = ec.hitokoto.expiration - Time().getTime();
+    ec.hitokoto.expiration = Time().getTime()
       + (timeout > 3000 ? timeout == Infinity ? ec.hitokoto.timeout.refresh : 3000 : Infinity);
   },
   heartbeat: function () {
-    var hitokoto_ttl = (ec.hitokoto.expiration - new Date().getTime()) / 1e3;
+    var hitokoto_ttl = (ec.hitokoto.expiration - Time().getTime()) / 1e3;
     if (hitokoto_ttl < 0) ec.hitokoto.get();
     hitokoto_ttl = hitokoto_ttl.toFixed(0);
     if ($("ttl.hitokoto").text() != `${hitokoto_ttl}`)

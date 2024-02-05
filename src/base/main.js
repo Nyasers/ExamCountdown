@@ -8,10 +8,10 @@ function heartbeat() {
   if (ec.hitokoto) ec.hitokoto.heartbeat();
 
   if (ec.exam.array[0]) {
-    if (ec.exam.array[0].time.start - new Date() < 0)
+    if (ec.exam.array[0].time.start - Time() < 0)
       if (
         ec.exam.array[0].time.end.getTime() &&
-        ec.exam.array[0].time.end - new Date() > 0
+        ec.exam.array[0].time.end - Time() > 0
       );
       else {
         ec.exam.array.splice(0, 1);

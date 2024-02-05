@@ -16,8 +16,8 @@ function buildExam(json) {
 }
 
 function autoYear(time) {
-    let year = new Date().getFullYear();
-    if (new Date() > new Date(time.end.replace("$YYYY", year))) year++;
+    let year = Time().getFullYear();
+    if (Time() > new Date(time.end.replace("$YYYY", year))) year++;
     time.start = time.start.replace("$YYYY", year);
     time.end = time.end.replace("$YYYY", year);
     return time;
@@ -27,11 +27,11 @@ export class Exam {
     constructor(json) {
         Object.assign(this, json);
         this.getTime = function () {
-            var t = this.time.start - new Date();
+            var t = this.time.start - Time();
             if (t < 0) {
                 t = 0;
                 if (this.time.end.getTime()) {
-                    t = new Date() - this.time.end;
+                    t = Time() - this.time.end;
                     if (t > 0) t = 0;
                 }
             }
