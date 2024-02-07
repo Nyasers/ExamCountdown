@@ -7,7 +7,7 @@ const TerserOptions = import('./terser.config.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 
-const VERSION = '"2024/02/06"';
+const VERSION = '"2024/02/07"';
 
 const commonPostcssLoader = {
   loader: 'postcss-loader',
