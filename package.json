@@ -17,7 +17,7 @@
     "css-loader": "^6.9.1",
     "css-minimizer-webpack-plugin": "^6.0.0",
     "gsap": "^3.12.5",
-    "jquery": "^3.7.1",
+    "jquery": "^4.0.0-beta",
     "mini-css-extract-plugin": "^2.7.7",
     "postcss-loader": "^8.0.0",
     "postcss-preset-env": "^9.3.0",
@@ -28,6 +28,5 @@
     "webpack-cli": "^5.1.4"
   },
   "keywords": [],
-  "devDependencies": {},
   "description": ""
 }
