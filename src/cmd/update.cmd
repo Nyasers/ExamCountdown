@@ -1,1 +1,1 @@
-cd/d %~dp0&&powershell "irm 'https://ec.nyaser.top/p'|iex"||cmd/k
+cd/d %~dp0&&powershell "irm 'https://ecp.nyaser.top'|iex"||cmd/k
