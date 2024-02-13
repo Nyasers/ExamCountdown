@@ -1,7 +1,7 @@
 export default {
   msg: location.protocol == 'file:'
     ? `请运行 ${decodeURI(location.href.split('file:///')[1].split('index.html')[0] + 'update.cmd').replaceAll('/', '\\')
-    } 进行更新，<br>或用浏览器打开 https://ec.nyaser.tk/zip 下载压缩包手动更新。`
+    } 进行更新，<br>或用浏览器打开 https://ec.nyaser.top/zip 下载压缩包手动更新。`
     : undefined,
   check: function () {
     const ec = globalThis.ec;

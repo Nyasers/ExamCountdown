@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 export default {
-    url: (location.protocol == 'file:' ? 'https://ec.nyaser.tk' : location.origin) + '/ej',
+    url: (location.protocol == 'file:' ? 'https://ec.nyaser.top' : location.origin) + '/ej',
     fetch: async function (retry) {
         if (retry) ec.extension.retry = retry;
         $.getScript(ec.extension.url)
