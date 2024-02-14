@@ -53,17 +53,17 @@ async function postMake() {
         { filename: 'project.json', data: { name: 'project.json' } },
         { filename: 'update.cmd', data: { name: 'update.cmd' } },
     ];
-    packZip(install, 'ExamCountdown.zip');
-    packZip(update, 'update.zip');
     fs.readFile(json, 'utf-8', (err, data) => {
         if (err) throw err;
         const minified = MinifyJSON(data);
         fs.writeFileSync(json, minified, 'utf-8');
+        packZip(install, 'ExamCountdown.zip');
+        packZip(update, 'update.zip');
     });
 }
 
 webpack(webpackConfig, async () => {
-    // merge license
+    // Merge license
     var license = '';
     fs.readdirSync(path.resolve('dist')).filter(n => n.endsWith('.LICENSE.txt'))
         .forEach(n => {
