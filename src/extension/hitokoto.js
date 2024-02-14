@@ -73,6 +73,7 @@ export default {
     if (request != null) request.abort();
     var url = ec.hitokoto.api.url + "?" + ec.hitokoto.api.args;
     for (let key of Object.keys(ec.hitokoto.type)) url += `&c=${key}`;
+    url += `&_=${Time().getTime()}`;
     request = $.getJSON(url)
       .then((d) => ec.hitokoto.set(d))
       .fail((e, t) => ec.hitokoto.set({ e: e, t: t }));

@@ -3,7 +3,7 @@ function setBackground(url) {
     document.body.style.backgroundColor = 'none',
     document.body.style.backgroundImage = `url('${url}')`;
   else
-    console.warn(`Body is ${typeof document.body}`);
+    console.error(`Body is ${typeof document.body}`);
 }
 
 export default function () {
