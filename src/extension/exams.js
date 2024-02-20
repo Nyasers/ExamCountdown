@@ -89,8 +89,8 @@ export default [
   {
     title: "泉州三检",
     time: {
-      start: "$YYYY/03/05 09:00",
-      end: "$YYYY/03/07 17:45",
+      start: "$YYYY/03/03 09:00",
+      end: "$YYYY/03/05 17:30",
     },
     top: true,
   },
