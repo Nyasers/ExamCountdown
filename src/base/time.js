@@ -10,6 +10,7 @@ globalThis.Time = () => new Date;
 export default function () {
     $('body').append(iframe);
     globalThis.Time = getTime;
+    globalThis.TimeNew = getTimeNew;
 }
 
 function getTime() {
@@ -25,4 +26,9 @@ function getTime() {
         time = new Date(timeStr);
     } catch (e) { console.error(e) }
     return !!time.valueOf() ? time : new Date;
+}
+
+async function getTimeNew() {
+    let resp = (await (await fetch(`https://time.is/t1/?zh.0.10.0.0p.480.43d.${(new Date).valueOf()}.`)).text()).split('\n');
+    console.log(resp);
 }
