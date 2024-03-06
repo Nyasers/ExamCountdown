@@ -86,26 +86,26 @@ export default [
     },
     top: true,
   },*/
-  {
+  /*{
     title: "泉州三检",
     time: {
       start: "$YYYY/03/03 09:00",
       end: "$YYYY/03/05 17:30",
     },
     top: true,
-  },
+  },*/
   {
     title: "泉州四检",
     time: {
       start: "$YYYY/04/06 09:00",
-      end: "$YYYY/04/08 17:45",
+      end: "$YYYY/04/08 17:30",
     },
   },
   {
     title: "泉州五检",
     time: {
       start: "$YYYY/05/06 09:00",
-      end: "$YYYY/05/08 17:45",
+      end: "$YYYY/05/08 17:30",
     },
   }
 ];
