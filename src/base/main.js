@@ -141,7 +141,15 @@ export default () => {
       start: "$YYYY/06/07 09:00",
       end: "$YYYY/06/10 16:30",
     },
-    top: true,
+    // top: true,
+  },
+  {
+    title: '福建中考',
+    time: {
+      start: '$YYYY/06/25 08:30',
+      end: '$YYYY/06/27 11:55'
+    },
+    // top: true,
   });
   ec.exam.build('高考');
 

@@ -83,7 +83,10 @@ export default {
         if (breakon || (breakon = ec.exam.breakon)) {
             ec.exam.breakon = breakon;
             var endex = ec.exam.array.findLastIndex((exam) => exam.title.includes(breakon));
-            if (endex) ec.exam.array.splice(endex + 1);
+            if (endex) {
+                ec.exam.array[endex].top = true;
+                ec.exam.array.splice(endex + 1);
+            }
         } else ec.exam.breakon = null;
     },
 };
