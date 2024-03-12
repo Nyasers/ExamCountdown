@@ -80,9 +80,9 @@ export default {
             if (exam) ec.exam.array.push(exam);
         }
         ec.exam.sort();
-        if (breakon || (breakon = ec.exam.breakon)) {
+        if (breakon != null || (breakon = ec.exam.breakon) != null) {
             ec.exam.breakon = breakon;
-            var endex = ec.exam.array.findLastIndex((exam) => exam.title.includes(breakon));
+            var endex = ec.exam.array.findLastIndex((exam) => exam.title.includes(ec.exam.breakon));
             if (endex) {
                 ec.exam.array[endex].top = true;
                 ec.exam.array.splice(endex + 1);
