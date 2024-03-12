@@ -13,8 +13,10 @@ if ('undefined' != typeof ec.extension) delete ec.extension;
 else throw new Error('Duplicate Runs Not Allowed.');
 
 // Import extended countdowns
-exams.forEach((exam) => ec.exam.json.push(exam));
-ec.exam.build();
+if (breakon == '高考') {
+  exams.forEach((exam) => ec.exam.json.push(exam));
+  ec.exam.build();
+}
 
 // Init hitokoto
 $("ul#main").append($('<li class="hitokoto"></li>'));
