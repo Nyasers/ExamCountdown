@@ -13,7 +13,7 @@ if ('undefined' != typeof ec.extension) delete ec.extension;
 else throw new Error('Duplicate Runs Not Allowed.');
 
 // Import extended countdowns
-if (breakon == '高考') {
+if (ec.exam.breakon == '高考') {
   exams.forEach((exam) => ec.exam.json.push(exam));
   ec.exam.build();
 }
