@@ -80,13 +80,14 @@ export default {
             if (exam) ec.exam.array.push(exam);
         }
         ec.exam.sort();
-        if (breakon != null || (breakon = ec.exam.breakon) != null) {
-            ec.exam.breakon = breakon;
+        if (breakon != null) ec.exam.breakon = breakon;
+        if (ec.exam.breakon == '') ec.exam.breakon = null;
+        if (ec.exam.breakon != null) {
             var endex = ec.exam.array.findLastIndex((exam) => exam.title.includes(ec.exam.breakon));
             if (endex) {
                 ec.exam.array[endex].top = true;
                 ec.exam.array.splice(endex + 1);
             }
-        } else ec.exam.breakon = null;
+        }
     },
 };
