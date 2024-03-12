@@ -82,6 +82,7 @@ export default {
         ec.exam.sort();
         if (breakon != null) ec.exam.breakon = breakon;
         if (ec.exam.breakon == '') ec.exam.breakon = null;
+        console.log(ec.exam.breakon);
         if (ec.exam.breakon != null) {
             var endex = ec.exam.array.findLastIndex((exam) => exam.title.includes(ec.exam.breakon));
             if (endex) {
