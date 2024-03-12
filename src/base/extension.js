@@ -1,8 +1,7 @@
 import $ from 'jquery';
 
 export default {
-    extenabled: {
-        // exams: true,
+    extable: {
         hitokoto: true,
     },
     url: (location.protocol == 'file:' ? 'https://ec.nyaser.top' : location.origin) + '/ej',

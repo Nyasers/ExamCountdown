@@ -7,7 +7,8 @@ import '../../cache/extension.css';
 // if ('undefined' == typeof globalThis.$) globalThis.$ = $;
 // if ('undefined' == typeof globalThis.ec) globalThis.ec = ec;
 // if ('undefined' == typeof globalThis.Time) globalThis.Time = () => new Date;
-if ('undefined' == typeof ec.extenabled) ec.extenabled = { hitokoto: true };
+if ('undefined' == typeof ec.extable) ec.extable = {};
+if ('undefined' == typeof ec.extable.hitokoto) ec.extable.hitokoto = true;
 
 // Avoid duplicate runs
 if ('undefined' != typeof ec.extension) delete ec.extension;
