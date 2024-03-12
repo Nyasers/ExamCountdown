@@ -5,7 +5,9 @@ import wrap from './loader.js';
 import property from './property.js';
 
 function heartbeat() {
-  if (ec.extenabled.hotokoto && void 0 != ec.hitokoto) ec.hitokoto.heartbeat();
+  if (ec.hitokoto)
+    if (ec.extenabled.hitokoto) ec.hitokoto.heartbeat();
+    else if ($("li#hitokoto").html() != '') $("li#hitokoto").html('');
 
   if (ec.exam.array[0]) {
     if (ec.exam.array[0].time.start - Time() < 0)

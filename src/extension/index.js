@@ -20,10 +20,9 @@ if (ec.exam.breakon == '高考') {
 }
 
 // Init hitokoto
-if (ec.extenabled.hitokoto) {
-  $("ul#main").append($('<li class="hitokoto"></li>'));
-  ec.hitokoto = hitokoto;
-}
+$("ul#main").append($('<li class="hitokoto"></li>'));
+ec.hitokoto = hitokoto;
+
 // Init update
 ec.update = update;
 ec.update.version = new Date(VERSION);

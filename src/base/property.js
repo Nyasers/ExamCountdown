@@ -17,7 +17,7 @@ export default function () {
         ec.exam.build(properties.breakon.value);
       }
       if (properties.hitokoto) {
-        ec.extenbled.hitokoto = properties.hitokoto.value;
+        ec.extenabled.hitokoto = properties.hitokoto.value;
       }
     }
   };
