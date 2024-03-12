@@ -1,25 +1,59 @@
 {
-  "title": "ExamCountdown",
-  "file": "index.html",
-  "type": "web",
-  "general": {
-    "properties": {
-      "background": {
-        "fileType": "image",
-        "index": 0,
-        "order": 100,
-        "text": "背景图片",
-        "type": "file",
-        "value": "C:/Windows/Web/Wallpaper/Windows/img0.jpg"
-      },
-			"shsee" : 
+	"file" : "index.html",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"background" : 
+			{
+				"fileType" : "image",
+				"index" : 0,
+				"order" : 100,
+				"text" : "背景图片",
+				"type" : "file",
+				"value" : "C:/Windows/Web/Wallpaper/Windows/img0.jpg"
+			},
+			"breakon" : 
 			{
 				"index" : 1,
+				"options" : 
+				[
+					{
+						"label" : "高考",
+						"value" : "高考"
+					},
+					{
+						"label" : "中考",
+						"value" : "中考"
+					},
+					{
+						"label" : "会考",
+						"value" : "会考"
+					}
+				],
 				"order" : 101,
-				"text" : "中考",
+				"text" : "截止考试",
+				"type" : "combo",
+				"value" : "高考"
+			},
+			"hitokoto" : 
+			{
+				"index" : 2,
+				"order" : 102,
+				"text" : "一言拓展",
 				"type" : "bool",
-				"value" : false
+				"value" : true
+			},
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0 0 0"
 			}
-    }
-  }
+		}
+	},
+	"title" : "ExamCountdown",
+	"type" : "web",
+	"version" : 0
 }

@@ -13,12 +13,11 @@ export default function () {
       if (properties.background) {
         setBackground(`file:///${properties.background.value}`);
       }
-      if (properties.shsee) {
-        if (properties.shsee.value == true) {
-          ec.exam.build('中考');
-        } else {
-          ec.exam.build('高考');
-        }
+      if (properties.breakon) {
+        ec.exam.build(properties.breakon.value);
+      }
+      if (properties.hitokoto) {
+        ec.extenbled.hitokoto = properties.hitokoto.value;
       }
     }
   };

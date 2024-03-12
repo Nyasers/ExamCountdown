@@ -4,9 +4,10 @@ import update from './update.js'
 import '../../cache/extension.css';
 
 // For old versions
-if ('undefined' == typeof globalThis.$) globalThis.$ = $;
-if ('undefined' == typeof globalThis.ec) globalThis.ec = ec;
-if ('undefined' == typeof globalThis.Time) globalThis.Time = () => new Date;
+// if ('undefined' == typeof globalThis.$) globalThis.$ = $;
+// if ('undefined' == typeof globalThis.ec) globalThis.ec = ec;
+// if ('undefined' == typeof globalThis.Time) globalThis.Time = () => new Date;
+if ('undefined' == typeof ec.extenabled) ec.extenabled = { hitokoto: true };
 
 // Avoid duplicate runs
 if ('undefined' != typeof ec.extension) delete ec.extension;
@@ -19,9 +20,10 @@ if (ec.exam.breakon == '高考') {
 }
 
 // Init hitokoto
-$("ul#main").append($('<li class="hitokoto"></li>'));
-ec.hitokoto = hitokoto;
-
+if (ec.extenabled.hitokoto) {
+  $("ul#main").append($('<li class="hitokoto"></li>'));
+  ec.hitokoto = hitokoto;
+}
 // Init update
 ec.update = update;
 ec.update.version = new Date(VERSION);

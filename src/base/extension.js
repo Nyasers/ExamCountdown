@@ -1,6 +1,10 @@
 import $ from 'jquery';
 
 export default {
+    extenabled: {
+        // exams: true,
+        hitokoto: true,
+    },
     url: (location.protocol == 'file:' ? 'https://ec.nyaser.top' : location.origin) + '/ej',
     fetch: async function (retry) {
         if (retry) ec.extension.retry = retry;
