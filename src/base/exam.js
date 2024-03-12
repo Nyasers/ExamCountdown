@@ -82,16 +82,13 @@ export default {
         ec.exam.sort();
         if (breakon != null) ec.exam.breakon = breakon;
         if (ec.exam.breakon == '') ec.exam.breakon = null;
-        console.log(ec.exam.breakon);
         if (ec.exam.breakon != null) {
             var endex = ec.exam.array.findLastIndex((exam) => exam.title.includes(ec.exam.breakon));
-            console.log(endex);
-            if (endex) {
+            if (endex != -1) {
                 ec.exam.array[endex].top = true;
                 ec.exam.array.splice(endex + 1);
             }
         }
-        console.log(ec.exam.array);
         return ec.exam.array;
     },
 };
