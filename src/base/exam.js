@@ -89,5 +89,6 @@ export default {
                 ec.exam.array.splice(endex + 1);
             }
         }
+        return ec.exam.array;
     },
 };
