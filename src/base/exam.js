@@ -85,11 +85,13 @@ export default {
         console.log(ec.exam.breakon);
         if (ec.exam.breakon != null) {
             var endex = ec.exam.array.findLastIndex((exam) => exam.title.includes(ec.exam.breakon));
+            console.log(endex);
             if (endex) {
                 ec.exam.array[endex].top = true;
                 ec.exam.array.splice(endex + 1);
             }
         }
+        console.log(ec.exam.array);
         return ec.exam.array;
     },
 };

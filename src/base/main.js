@@ -149,8 +149,7 @@ export default () => {
       end: '$YYYY/06/27 11:55'
     }
   });
-  console.log(ec.exam.build('高考'));
-  console.log(ec.exam.breakon);
+  ec.exam.build('高考');
 
   interval = setInterval(heartbeat, 1e2);
 }
