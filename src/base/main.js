@@ -101,6 +101,8 @@ export default () => {
     cw = 1920,
     ch = 1080;
 
+  // Init Properties for Wallpaper Engine
+  ec.extable = {};
   property();
 
   $("body").width(`${cw}px`);
