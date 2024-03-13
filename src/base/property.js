@@ -21,5 +21,5 @@ export default function () {
       }
     }
   };
-  if (location.protocol !== 'file:') setBackground("default.jpg");
+  if (location.protocol !== 'file:') setBackground("default.webp");
 }

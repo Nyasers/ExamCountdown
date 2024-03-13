@@ -88,7 +88,7 @@ module.exports = [
         patterns: [
           { from: './src/cmd/' },
           { from: './src/json/' },
-          { from: './src/jpg/' },
+          { from: './src/webp/' },
           { from: './src/pages/' },
         ]
       }),
