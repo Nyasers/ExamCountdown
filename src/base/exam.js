@@ -79,7 +79,7 @@ export class Exam {
     }
 }
 
-const exam = {
+export default {
     json: [],
     array: [],
     default: ({
@@ -132,5 +132,3 @@ const exam = {
         return ec.exam.array;
     },
 };
-
-export default exam;
