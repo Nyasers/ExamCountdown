@@ -45,6 +45,7 @@ function setCurrent(exam, prefix = false) {
 }
 
 function setFuture(exams, breakon = undefined) {
+  var html = '';
   if (exams.length > 0) {
     var items = [];
     for (i = 0; i < exams.length; i++) {
@@ -54,7 +55,10 @@ function setFuture(exams, breakon = undefined) {
         && item.title.includes(breakon))
         break;
     }
-    $("ol#future").html(items.join(""));
+    html = items.join('');
+  }
+  if ($("ol#future").html() != html) {
+    $("ol#future").html(html);
   }
 }
 
@@ -146,13 +150,13 @@ export default () => {
       end: "$YYYY/06/10 16:30",
     }
   },
-  {
-    title: '福建中考',
-    time: {
-      start: '$YYYY/06/25 08:30',
-      end: '$YYYY/06/27 11:55'
-    }
-  });
+    {
+      title: '福建中考',
+      time: {
+        start: '$YYYY/06/25 08:30',
+        end: '$YYYY/06/27 11:55'
+      }
+    });
   ec.exam.build('高考');
 
   interval = setInterval(heartbeat, 1e2);
