@@ -142,31 +142,9 @@ export default () => {
     transformOrigin: "50% 0%",
   });
 
+  // Init exam
   ec.exam = exam;
-  // Todo: move this into 'ec.exam.default'
-  ec.exam.json.push(
-    {
-      title: "福建高考",
-      time: {
-        start: "$YYYY/06/07 09:00",
-        end: "$YYYY/06/10 16:30",
-      }
-    },
-    {
-      title: '福建中考',
-      time: {
-        start: '$YYYY/06/25 08:30',
-        end: '$YYYY/06/27 11:55'
-      }
-    },
-    {
-      title: '福建会考',
-      time: {
-        start: '$YYYY/06/27 15:00',
-        end: '$YYYY/06/27 17:45'
-      }
-    }
-  );
+  ec.exam.json.push(ec.exam.default);
   ec.exam.build('高考');
 
   interval = setInterval(heartbeat, 1e2);

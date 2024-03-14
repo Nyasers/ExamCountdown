@@ -1,5 +1,20 @@
 import $ from 'jquery';
 
+function sortExamArray(array) {
+    return array.sort((a, b) => {
+        return a.time.start - b.time.start;
+    })
+}
+
+function buildExamArray(json) {
+    var array = [];
+    for (i = 0; i < json.length; i++) {
+        var exam = buildExam(json[i]);
+        if (exam) array.push(exam);
+    }
+    return sortExamArray(array);
+}
+
 function buildExam(json) {
     if (typeof json.time.start === typeof undefined) return null;
     if (typeof json.time.end === typeof undefined)
@@ -64,25 +79,46 @@ export class Exam {
     }
 }
 
-export default {
+const exam = {
     json: [],
     array: [],
+    default: ({
+        title: "福建高考",
+        time: {
+            start: "$YYYY/06/07 09:00",
+            end: "$YYYY/06/10 16:30",
+        }
+    },
+    {
+        title: '福建中考',
+        time: {
+            start: '$YYYY/06/25 08:30',
+            end: '$YYYY/06/27 11:55'
+        }
+    },
+    {
+        title: '福建会考',
+        time: {
+            start: '$YYYY/06/27 15:00',
+            end: '$YYYY/06/27 17:45'
+        }
+    }),
+    extension: {
+        enabled: true,
+        json: []
+    },
     breakon: null,
     finalonly: false,
-    sort: function () {
-        ec.exam.array.sort((a, b) => {
-            return a.time.start - b.time.start;
-        });
-    },
     build: function (breakon = null) {
-        ec.exam.array = [];
-        for (i = 0; i < ec.exam.json.length; i++) {
-            var exam = buildExam(ec.exam.json[i]);
-            if (exam) ec.exam.array.push(exam);
-        }
-        ec.exam.sort();
-        if (breakon != null) ec.exam.breakon = breakon;
-        if (ec.exam.breakon == '') ec.exam.breakon = null;
+        ec.exam.json = ec.exam.default;
+        if (ec.exam.extension.enabled)
+            ec.exam.extension.json.forEach(exam => ec.exam.json.push(exam));
+        ec.exam.array = buildExamArray(ec.exam.json);
+
+        if (breakon != null)
+            ec.exam.breakon = breakon;
+        if (ec.exam.breakon == '')
+            ec.exam.breakon = null;
         if (ec.exam.breakon != null) {
             var endex = ec.exam.array.findLastIndex((exam) => exam.title.includes(ec.exam.breakon));
             if (endex != -1) {
@@ -90,9 +126,11 @@ export default {
                 ec.exam.array.splice(endex + 1);
             }
         }
-        if (ec.exam.finalonly) {
+
+        if (ec.exam.finalonly)
             ec.exam.array.splice(0, ec.exam.array.length - 1);
-        }
         return ec.exam.array;
     },
 };
+
+exam.default.array = buildExamArray(ec.exam.default.json);
