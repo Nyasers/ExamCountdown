@@ -14,6 +14,8 @@ if ('undefined' == typeof ec.extable.hitokoto) ec.extable.hitokoto = true;
 if ('undefined' != typeof ec.extension) delete ec.extension;
 else throw new Error('Duplicate Runs Not Allowed.');
 
+// Todo: move this into 'ec.exam.extension'
+// Further Todo: support custom extension exams
 // Import extended countdowns
 if (ec.exam.breakon == '高考') {
   exams.forEach((exam) => ec.exam.json.push(exam));
