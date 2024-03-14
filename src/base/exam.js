@@ -133,4 +133,4 @@ const exam = {
     },
 };
 
-exam.default.array = buildExamArray(ec.exam.default.json);
+export default exam;
