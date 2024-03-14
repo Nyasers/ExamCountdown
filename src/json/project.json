@@ -36,10 +36,18 @@
 				"type" : "combo",
 				"value" : "高考"
 			},
-			"hitokoto" : 
+			"finalonly" : 
 			{
 				"index" : 2,
 				"order" : 102,
+				"text" : "只看截止",
+				"type" : "bool",
+				"value" : false
+			},
+			"hitokoto" : 
+			{
+				"index" : 3,
+				"order" : 103,
 				"text" : "一言拓展",
 				"type" : "bool",
 				"value" : true

@@ -16,6 +16,10 @@ export default function () {
       if (properties.breakon) {
         ec.exam.build(properties.breakon.value);
       }
+      if (properties.finalonly) {
+        ec.exam.finalonly = properties.finalonly.value;
+        ec.exam.build();
+      }
       if (properties.hitokoto) {
         ec.extable.hitokoto = properties.hitokoto.value;
       }

@@ -68,6 +68,7 @@ export default {
     json: [],
     array: [],
     breakon: null,
+    finalonly: false,
     sort: function () {
         ec.exam.array.sort((a, b) => {
             return a.time.start - b.time.start;
@@ -88,6 +89,9 @@ export default {
                 ec.exam.array[endex].top = true;
                 ec.exam.array.splice(endex + 1);
             }
+        }
+        if (ec.exam.finalonly) {
+            ec.exam.array.splice(0, ec.exam.array.length - 1);
         }
         return ec.exam.array;
     },
