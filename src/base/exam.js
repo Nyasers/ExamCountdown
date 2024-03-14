@@ -82,7 +82,7 @@ export class Exam {
 export default {
     json: [],
     array: [],
-    default: ({
+    default: [{
         title: "福建高考",
         time: {
             start: "$YYYY/06/07 09:00",
@@ -102,7 +102,7 @@ export default {
             start: '$YYYY/06/27 15:00',
             end: '$YYYY/06/27 17:45'
         }
-    }),
+    }],
     extension: {
         enabled: true,
         json: []
