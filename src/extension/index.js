@@ -16,7 +16,7 @@ else throw new Error('Duplicate Runs Not Allowed.');
 
 // Todo: support custom extension exams
 // Import extended countdowns
-exams.forEach((exam) => ec.exam.extension.push(exam));
+exams.forEach((exam) => ec.exam.extension.json.push(exam));
 ec.exam.build();
 
 // Init hitokoto
