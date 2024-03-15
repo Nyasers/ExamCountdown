@@ -110,7 +110,7 @@ export default {
     breakon: null,
     finalonly: false,
     build: function (breakon = null) {
-        ec.exam.json = ec.exam.default;
+        ec.exam.json = Array.from(ec.exam.default);
         if (ec.exam.extension.enabled)
             ec.exam.extension.json.forEach(exam => ec.exam.json.push(exam));
         ec.exam.array = buildExamArray(ec.exam.json);
