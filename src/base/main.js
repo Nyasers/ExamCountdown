@@ -5,9 +5,17 @@ import wrap from './loader.js';
 import property from './property.js';
 
 function heartbeat() {
-  if (ec.hitokoto)
-    if (ec.extable.hitokoto) ec.hitokoto.heartbeat();
-    else /*if ($("li#hitokoto").html() != '')*/ $("li#hitokoto").html('');
+  if ("undefined" != typeof ec.hitokoto) {
+    if (ec.extable.hitokoto == true) {
+      if ($("li.hitokoto").html() == '') {
+        ec.hitokoto.get();
+      } else {
+        ec.hitokoto.heartbeat();
+      }
+    } else if ($("li.hitokoto").html() != '') {
+      $("li.hitokoto").html('');
+    }
+  }
 
   if (ec.exam.array[0]) {
     if (ec.exam.array[0].time.start - Time() < 0)

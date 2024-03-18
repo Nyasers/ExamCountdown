@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npx webpack",
     "build": "node build.js && ls -l dist",
-    "deploy": "rm -rf dist node_modules && npm i && npm run build"
+    "deploy": "rm -rf dist node_modules && npm i && npm run build",
+    "server": "node build.js & node server.js"
   },
   "author": "Nyaser",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^6.9.1",
     "css-minimizer-webpack-plugin": "^6.0.0",
+    "express": "^4.18.3",
     "gsap": "^3.12.5",
     "jquery": "^4.0.0-beta",
     "mini-css-extract-plugin": "^2.7.7",

@@ -74,6 +74,7 @@ export default {
     var url = ec.hitokoto.api.url + "?" + ec.hitokoto.api.args;
     for (let key of Object.keys(ec.hitokoto.type)) url += `&c=${key}`;
     url += `&_=${Time().getTime()}`;
+    // todo: solve cors
     request = $.getJSON(url)
       .then((d) => ec.hitokoto.set(d))
       .fail((e, t) => ec.hitokoto.set({ e: e, t: t }));
