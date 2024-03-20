@@ -8,13 +8,13 @@ export default {
     fetch: async function (retry) {
         if (retry) ec.extension.retry = retry;
         $.getScript(ec.extension.url)
-            .fail(function (msg) {
+            .fail(function () {
                 console.warn(`Retry: ${!!ec.extension.retry} (${ec.extension.retry})`);
                 if (ec.extension.retry > 0) {
                     setTimeout(() => ec.extension.fetch(), 5e3);
                     ec.extension.retry--;
                 }
-                throw msg;
+                return;
             });
     },
     retry: 0,
