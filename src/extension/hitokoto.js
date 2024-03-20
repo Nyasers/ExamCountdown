@@ -6,6 +6,7 @@ export default {
     args: "max_length=256",
   },
   expiration: 0,
+  qps: 2,
   lastquery: 0,
   timeout: {
     retry: 6e4,
@@ -77,7 +78,7 @@ export default {
     var queryTime = Time().getTime();;
     url += `&_=${queryTime}`;
     var duration = queryTime - ec.hitokoto.lastquery;
-    if (duration > 1000) {
+    if (duration > 1000 / ec.hitokoto.qps) {
       ec.hitokoto.lastquery = queryTime;
       request = $.getJSON(url)
         .then((d) => ec.hitokoto.set(d))
