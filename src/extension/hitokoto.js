@@ -28,9 +28,9 @@ export default {
     // l: '抖机灵',
     x: "提示",
   },
-  set: function (data) {
-    if (data.type != 'x') console.log(data);
+  set: function (data = false) {
     if (data) {
+      if (data.type != 'x') console.log(data);
       if (!(type = ec.hitokoto.type[data.type])) {
         ec.hitokoto.set({
           type: "x",
@@ -82,9 +82,15 @@ export default {
       ec.hitokoto.lastquery = queryTime;
       request = $.getJSON(url)
         .then((d) => ec.hitokoto.set(d))
-        .fail((e) => ec.hitokoto.set(e));
+        .fail(ec.hitokoto.set);
     } else {
-      throw new Error(`Hitokoto: QPS Limitation! (${duration})`);
+      // throw new Error(`Hitokoto: QPS Limitation! (${duration})`);
+      ec.hitokoto.set({
+        type: "x",
+        from: "Nyaser",
+        hitokoto: "请求过快，稍后再试。",
+        expiration: ec.hitokoto.timeout.retry,
+      });
     }
   },
   change: function () {
