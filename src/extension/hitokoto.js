@@ -6,6 +6,7 @@ export default {
     args: "max_length=256",
   },
   expiration: 0,
+  lastquery: 0,
   timeout: {
     retry: 6e4,
     request: 3e4,
@@ -74,10 +75,14 @@ export default {
     var url = ec.hitokoto.api.url + "?" + ec.hitokoto.api.args;
     for (let key of Object.keys(ec.hitokoto.type)) url += `&c=${key}`;
     url += `&_=${Time().getTime()}`;
-    // todo: solve cors
-    request = $.getJSON(url)
-      .then((d) => ec.hitokoto.set(d))
-      .fail((e, t) => ec.hitokoto.set({ e: e, t: t }));
+    var duration = Time() - ec.hitokoto.lastquery;
+    if (duration > 1000) {
+      request = $.getJSON(url)
+        .then((d) => ec.hitokoto.set(d))
+        .fail((e, t) => ec.hitokoto.set({ e: e, t: t }));
+    } else {
+      throw new Error(`Hitokoto: QPS Limitation! (${duration})`);
+    }
   },
   change: function () {
     var timeout = ec.hitokoto.expiration - Time().getTime();
