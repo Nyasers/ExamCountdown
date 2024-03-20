@@ -74,12 +74,14 @@ export default {
     if (request != null) request.abort();
     var url = ec.hitokoto.api.url + "?" + ec.hitokoto.api.args;
     for (let key of Object.keys(ec.hitokoto.type)) url += `&c=${key}`;
-    url += `&_=${Time().getTime()}`;
-    var duration = Time() - ec.hitokoto.lastquery;
+    var queryTime = Time().getTime();;
+    url += `&_=${queryTime}`;
+    var duration = queryTime - ec.hitokoto.lastquery;
     if (duration > 1000) {
+      ec.hitokoto.lastquery = queryTime;
       request = $.getJSON(url)
         .then((d) => ec.hitokoto.set(d))
-        .fail((e, t) => ec.hitokoto.set({ e: e, t: t }));
+        .fail(ec.hitokoto.set);
     } else {
       throw new Error(`Hitokoto: QPS Limitation! (${duration})`);
     }
