@@ -89,7 +89,7 @@ export default {
         type: "x",
         from: "Nyaser",
         hitokoto: "请求过快，稍后再试。",
-        expiration: ec.hitokoto.timeout.retry,
+        ttl: ec.hitokoto.timeout.retry,
       });
     }
   },
