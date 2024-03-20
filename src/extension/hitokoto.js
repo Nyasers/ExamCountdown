@@ -6,7 +6,7 @@ export default {
     args: "max_length=256",
   },
   expiration: 0,
-  qps: 2,
+  qps: 1,
   lastquery: 0,
   timeout: {
     retry: 6e4,
