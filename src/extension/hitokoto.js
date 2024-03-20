@@ -81,7 +81,7 @@ export default {
       ec.hitokoto.lastquery = queryTime;
       request = $.getJSON(url)
         .then((d) => ec.hitokoto.set(d))
-        .fail(ec.hitokoto.set);
+        .fail((e) => ec.hitokoto.set(e));
     } else {
       throw new Error(`Hitokoto: QPS Limitation! (${duration})`);
     }
