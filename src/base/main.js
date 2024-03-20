@@ -25,7 +25,6 @@ function heartbeat() {
       );
       else {
         ec.exam.array.splice(0, 1);
-        ec.exam.sort();
         return;
       }
   } else location.reload();
