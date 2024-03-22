@@ -43,14 +43,15 @@ export default {
       }
       let from = data.from;
       let from_who = data.from_who;
+      var author;
       if (from || from_who) {
-        let author = " -> ";
+        author = " -> ";
         if (from_who) {
           author += from_who;
           if (from) author += " -> ";
         }
         author += from ?? "";
-      } else author = null;
+      } else author = '';
       if (data.type === "e")
         author += ` => [UID${data.creator_uid}] ${data.creator}`;
       var ttl = data.ttl ?? this.timeout.refresh;
