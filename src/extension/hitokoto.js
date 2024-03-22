@@ -41,10 +41,10 @@ export default {
         });
         return;
       }
-      from = data.from;
-      from_who = data.from_who;
+      let from = data.from;
+      let from_who = data.from_who;
       if (from || from_who) {
-        author = " -> ";
+        let author = " -> ";
         if (from_who) {
           author += from_who;
           if (from) author += " -> ";
