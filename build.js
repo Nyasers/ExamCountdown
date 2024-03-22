@@ -10,18 +10,14 @@ function MinifyJSON(code) {
     return JSON.stringify(JSON.parse(code));
 }
 
-async function packHTML(jsfile, tag = null) {
+async function packHTML(jsfile) {
     var output = "<!doctype html><noscript><strong>We're sorry but ExamCountdown doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>";
-    output += "<ec>";
-    if (tag !== null) output += `<${tag}>`;
-    output += "<script>";
+    output += "<ec><script>";
     var js = fs.readFileSync(jsfile, 'utf-8');
     var result = await minify(js, terserConfig);
     output += result.code;
     fs.writeFileSync(jsfile, result.code)
-    output += "</script>";
-    if (tag !== null) output += `</${tag}>`;
-    output += "</ec>";
+    output += "</script></ec>";
     return output;
 }
 
@@ -86,12 +82,5 @@ webpack(webpackConfig, async () => {
         await packHTML(path.resolve('dist/index.js')),
         'utf-8',
         postMake
-    );
-
-    // For old versions
-    fs.writeFileSync(
-        path.resolve('dist/extension.html'),
-        await packHTML(path.resolve('dist/extension.js'), 'extension'),
-        'utf-8'
     );
 });
