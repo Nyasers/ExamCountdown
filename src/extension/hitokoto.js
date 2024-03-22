@@ -32,7 +32,7 @@ export default {
     if (data && 'undefined' != typeof data.type) {
       if (data.type != 'x') console.log(data);
       let type = this.type[data.type];
-      if('undefined' != typeof type) {
+      if('undefined' == typeof type) {
         this.set({
           type: "x",
           from: "Nyaser",
