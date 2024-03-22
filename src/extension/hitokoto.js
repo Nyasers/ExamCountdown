@@ -1,4 +1,4 @@
-const { $, ec } = globalThis;
+const { $ } = globalThis;
 
 export default {
   api: {
@@ -43,7 +43,7 @@ export default {
       }
       let from = data.from;
       let from_who = data.from_who;
-      var author;
+      let author = '';
       if (from || from_who) {
         author = " -> ";
         if (from_who) {
@@ -51,10 +51,10 @@ export default {
           if (from) author += " -> ";
         }
         author += from ?? "";
-      } else author = '';
+      }
       if (data.type === "e")
         author += ` => [UID${data.creator_uid}] ${data.creator}`;
-      var ttl = data.ttl ?? this.timeout.refresh;
+      let ttl = data.ttl ?? this.timeout.refresh;
       this.expiration = Time().getTime() + ttl;
       $("li.hitokoto").html(
         `[一言·<type class='hitokoto'>${type}</type>·<ttl class='hitokoto'></ttl>] <sentence class='hitokoto'>${data.hitokoto}</sentence><author class='hitokoto'>${author}</author>`
@@ -75,12 +75,12 @@ export default {
     });
     var request;
     if (request != null) request.abort();
-    var url = this.api.url + "?" + this.api.args;
+    let url = this.api.url + "?" + this.api.args;
     let types = this.type; delete types.x;
     for (let key of Object.keys(types)) url += `&c=${key}`;
-    var queryTime = Time().getTime();
+    let queryTime = Time().getTime();
     url += `&_=${queryTime}`;
-    var duration = queryTime - this.lastquery;
+    let duration = queryTime - this.lastquery;
     if (duration > 1000 / this.qps) {
       this.lastquery = queryTime;
       request = $.getJSON(url)
@@ -97,12 +97,12 @@ export default {
     }
   },
   change: function () {
-    var timeout = this.expiration - Time().getTime();
+    let timeout = this.expiration - Time().getTime();
     this.expiration = Time().getTime()
       + (timeout > 3000 ? timeout == Infinity ? this.timeout.refresh : 3000 : Infinity);
   },
   heartbeat: function () {
-    var hitokoto_ttl = (this.expiration - Time().getTime()) / 1e3;
+    let hitokoto_ttl = (this.expiration - Time().getTime()) / 1e3;
     if (hitokoto_ttl < 0) this.get();
     hitokoto_ttl = hitokoto_ttl.toFixed(0);
     if ($("ttl.hitokoto").text() != `${hitokoto_ttl}`)
