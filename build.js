@@ -11,7 +11,7 @@ function MinifyJSON(code) {
 }
 
 async function packHTML(jsfile, tag = null) {
-    var output = "<!doctype html>";
+    var output = "<!doctype html><noscript><strong>We're sorry but ExamCountdown doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>";
     output += "<ec>";
     if (tag !== null) output += `<${tag}>`;
     output += "<script>";

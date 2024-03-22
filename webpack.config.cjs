@@ -1,3 +1,7 @@
+/**
+ * @type {import('webpack').Configuration}
+ */
+
 const webpack = require('webpack');
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
