@@ -113,7 +113,9 @@ export default () => {
     ch = 1080;
 
   // Init Properties for Wallpaper Engine
-  ec.extable = {};
+  ec.extable = {
+    hitokoto: true
+  };
   property();
 
   $("body").width(`${cw}px`);
