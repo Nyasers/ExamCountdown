@@ -103,7 +103,7 @@ export default {
             end: '$YYYY/06/27 17:45'
         }
     }],
-    extension: {
+    extra: {
         enabled: true,
         fetch: async function (url = '/eej') {
             $.getJSON(url).done(function (data) {
