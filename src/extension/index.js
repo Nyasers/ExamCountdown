@@ -7,7 +7,7 @@ if ('undefined' == typeof ec.extable) ec.extable = {};
 if ('undefined' == typeof ec.extable.hitokoto) ec.extable.hitokoto = true;
 
 // Avoid duplicate runs
-if ('undefined' != typeof ec.extension.main) delete ec.extension.main;
+if ('undefined' != typeof ec.extension) delete ec.extension;
 else throw new Error('Duplicate Runs Not Allowed.');
 
 // Init update
