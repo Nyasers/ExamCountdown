@@ -30,5 +30,8 @@
     "webpack-cli": "^5.1.4"
   },
   "keywords": [],
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^4.17.21"
+  }
 }
