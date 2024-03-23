@@ -5,6 +5,7 @@ import archiver from 'archiver';
 import webpack from 'webpack';
 import webpackConfig from './webpack.config.cjs';
 import terserConfig from './terser.config.js';
+import exams from './src/extension/exams.js';
 
 function MinifyJSON(code) {
     return JSON.stringify(JSON.parse(code));
@@ -81,5 +82,12 @@ webpack(webpackConfig, async () => {
         await packHTML(path.resolve('dist/index.js')),
         'utf-8',
         postMake
+    );
+
+    // Extra Exams
+    fs.writeFileSync(
+        path.resolve('dist/extraexams.json'),
+        JSON.stringify(exams),
+        'utf-8'
     );
 });

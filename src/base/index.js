@@ -15,6 +15,6 @@ setTimeout(time);
 // Set version
 ec.version = new Date(VERSION);
 
-// Fetch extension
+// Fetch extensions
 ec.extension = extension;
-setTimeout(() => ec.extension.fetch(6));
+setTimeout(ec.extension.fetch);

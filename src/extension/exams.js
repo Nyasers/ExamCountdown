@@ -1,4 +1,3 @@
-// Todo: make this a single json
 export default [
   /*{
     title: "春节假期",
@@ -117,5 +116,5 @@ export default [
       start: "2024/05/05 09:00",
       end: "2024/05/07 17:30",
     }
-  }
+  },
 ];
