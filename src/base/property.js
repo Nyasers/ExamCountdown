@@ -28,5 +28,5 @@ export default function () {
       }
     }
   };
-  if (location.protocol !== 'file:') setBackground("default.webp"), setTimeout(() => ec.exam.extra.fetch());
+  if (location.protocol !== 'file:') setTimeout(() => ec.exam.extra.fetch(), setBackground("default.webp"));
 }
