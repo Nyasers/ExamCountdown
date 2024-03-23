@@ -37,8 +37,7 @@ async function packZip(files, destination) {
 
 async function postMake() {
     const json = path.resolve('dist/project.json');
-    const pathto = '/wallpaper_engine/projects/myprojects/ExamCountdown';
-    //const pathto = '/Wallpaper/projects/defaultprojects/ExamCountdown';
+    const pathto = '/SteamLibrary/steamapps/common/wallpaper_engine/projects/myprojects/ExamCountdown';
     const install = [
         { filename: 'index.html', data: { name: path.resolve(pathto, 'index.html') } },
         { filename: 'project.json', data: { name: path.resolve(pathto, 'project.json') } },
