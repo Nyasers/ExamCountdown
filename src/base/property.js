@@ -1,9 +1,10 @@
-function setBackground(url) {
-  if (document.body)
-    document.body.style.backgroundColor = 'none',
-      document.body.style.backgroundImage = `url('${url}')`;
-  else
-    console.error(`Body is ${typeof document.body}`);
+function setBackground(url = "default.webp") {
+  if ('undefined' != typeof document.body) {
+    document.body.style.backgroundColor = 'none';
+    document.body.style.backgroundImage = `url('${url}')`;
+  } else {
+    console.error(`Body is undefined.`);
+  }
 }
 
 export default function () {
@@ -28,5 +29,5 @@ export default function () {
       }
     }
   };
-  if (location.protocol !== 'file:') setTimeout(() => ec.exam.extra.fetch()), setTimeout(() => setBackground("default.webp"), 1e3);
+  if (location.protocol !== 'file:') setTimeout(() => ec.exam.extra.fetch()), setTimeout(setBackground, 1e3);
 }
