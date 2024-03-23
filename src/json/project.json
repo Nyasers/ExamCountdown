@@ -37,7 +37,7 @@
 				"order": 105,
 				"text": "extraexams.json",
 				"type": "textinput",
-				"value": "https://ec.nyaser.top/eej"
+				"value": "https://ec.nyaser.top/extraexams.json"
 			},
 			"finalonly": {
 				"index": 2,
