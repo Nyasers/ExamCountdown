@@ -7,13 +7,8 @@ const iframe = $('<iframe>').attr('src', url).attr('rel', 'noreferrer').attr('hi
 $('head').append(meta);
 globalThis.Time = () => new Date;
 export default function () {
-    if (location.protocol == 'file:') {
-        $('body').append(iframe);
-        globalThis.Time = getTime;
-    }
-    else {
-        globalThis.Time = () => new Date;
-    }
+    $('body').append(iframe);
+    globalThis.Time = getTime;
     globalThis.TimeNew = getTimeNew;
 }
 

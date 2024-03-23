@@ -10,7 +10,7 @@ globalThis.ec = {};
 
 // Init
 main();
-setTimeout(time);
+if (location.protocol == 'file:') setTimeout(time);
 
 // Set version
 ec.version = new Date(VERSION);
