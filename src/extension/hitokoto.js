@@ -1,4 +1,4 @@
-const { $ } = globalec.hitokoto;
+const { $ } = globalThis;
 
 export default {
   api: {
