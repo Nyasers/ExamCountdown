@@ -1,4 +1,4 @@
-var exams = [
+export default [
   /*{
     title: "春节假期",
     time: {
@@ -116,7 +116,5 @@ var exams = [
       start: "2024/05/05 09:00",
       end: "2024/05/07 17:30",
     }
-  }
+  },
 ];
-
-export default JSON.stringify(exams);

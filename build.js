@@ -86,8 +86,8 @@ webpack(webpackConfig, async () => {
 
     // Extra Exams
     fs.writeFileSync(
-        path.resolve('dist/extended_exams.json'),
-        exams,
+        path.resolve('dist/extra_exams.json'),
+        JSON.stringify(exams),
         'utf-8'
     );
 });
