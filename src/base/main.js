@@ -122,7 +122,7 @@ export default () => {
   $("body").height(`${ch}px`);
   $('ec').append(wrap);
 
-  window.onresize = () => {
+  (window.onresize = () => {
     let w = window.innerWidth,
       h = window.innerHeight;
     let r = w / cw < h / ch ? w / cw : h / ch;
@@ -132,15 +132,7 @@ export default () => {
     $("body")[0].style.marginTop = -(ch - r * ch) / 2 + (h - r * ch) / 2 + "px";
     $("body")[0].style.marginBottom = -(h > ch ? h : ch - r * ch) + "px";
     $("body")[0].style.marginRight = -(w > cw ? w : cw - r * cw) + "px";
-  };
-
-  window.onunload = () => {
-    if (interval) {
-      clearInterval(interval);
-    }
-  };
-
-  window.onresize();
+  })();
 
   gsap.set(".upper", {
     rotationX: 0.01,
