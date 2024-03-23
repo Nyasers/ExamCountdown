@@ -5,27 +5,26 @@ export default {
         hitokoto: true,
     },
     origin: location.protocol == 'file:' ? 'https://ec.nyaser.top' : location.origin,
-    retry: {
-        main: 6,
-        exams: 6,
-        cooldown: 1e4,
-    },
-    fetch: {
-        main: async function (retry) {
-            if (retry) ec.extension.retry.main = retry;
-            $.getScript(ec.extension.origin + '/ej')
+    cooldown: 1e4,
+    main: {
+        retry: 6,
+        fetch: async function (retry = ec.extension.main.retry, url = ec.extension.origin + '/ej') {
+            ec.extension.main.retry = retry;
+            $.getScript(url)
                 .fail(function () {
-                    console.warn(`Retry: ${!!ec.extension.retry.main} (${ec.extension.retry.main})`);
-                    if (ec.extension.retry.main > 0) {
-                        setTimeout(() => ec.extension.fetch(), ec.extension.retry.cooldown);
-                        ec.extension.retry.main--;
+                    console.warn(`Retry: ${!!ec.extension.main.retry} (${ec.extension.main.retry})`);
+                    if (ec.extension.main.retry > 0) {
+                        setTimeout(ec.extension.main.fetch, ec.extension.cooldown);
+                        ec.extension.main.retry--;
                     }
-                    return;
                 });
         },
-        exams: async function (retry) {
-            if (retry) ec.extension.retry.exams = retry;
-            $.getJSON(ec.extension.origin + '/eej')
+    },
+    exams: {
+        retry: 6,
+        fetch: async function (retry = ec.extension.exams.retry, url = ec.extension.origin + '/eej') {
+            ec.extension.exams.retry = retry;
+            $.getJSON(url)
                 .done(function (data) {
                     try {
                         ec.exam.extension.json = JSON.parse(data);
@@ -34,12 +33,11 @@ export default {
                     }
                 })
                 .fail(function () {
-                    console.warn(`Retry: ${!!ec.extension.retry.exams} (${ec.extension.retry.exams})`);
-                    if (ec.extension.retry.exams > 0) {
-                        setTimeout(() => ec.extension.fetchExams(), ec.extension.retry.cooldown);
-                        ec.extension.retry.exams--;
+                    console.warn(`Retry: ${!!ec.extension.exams.retry} (${ec.extension.exams.retry})`);
+                    if (ec.extension.exams.retry > 0) {
+                        setTimeout(ec.extension.exams.fetch, ec.extension.cooldown);
+                        ec.extension.exams.retry--;
                     }
-                    return;
                 });
         },
     }
