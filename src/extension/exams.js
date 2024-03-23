@@ -1,5 +1,4 @@
-// Todo: make this a single json
-export default [
+var exams = [
   /*{
     title: "春节假期",
     time: {
@@ -119,3 +118,5 @@ export default [
     }
   }
 ];
+
+export default JSON.stringify(exams);
