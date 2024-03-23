@@ -1,4 +1,4 @@
-const { $ } = globalThis;
+const { $ } = globalec.hitokoto;
 
 export default {
   api: {
@@ -31,13 +31,13 @@ export default {
   set: function (data = false) {
     if (data && 'undefined' != typeof data.type) {
       if (data.type != 'x') console.log(data);
-      let type = this.type[data.type];
+      let type = ec.hitokoto.type[data.type];
       if('undefined' == typeof type) {
-        this.set({
+        ec.hitokoto.set({
           type: "x",
           from: "Nyaser",
           hitokoto: "加载失败，稍后重试。",
-          ttl: this.timeout.retry,
+          ttl: ec.hitokoto.timeout.retry,
         });
         return;
       }
@@ -54,56 +54,56 @@ export default {
       }
       if (data.type === "e")
         author += ` => [UID${data.creator_uid}] ${data.creator}`;
-      let ttl = data.ttl ?? this.timeout.refresh;
-      this.expiration = Time().getTime() + ttl;
+      let ttl = data.ttl ?? ec.hitokoto.timeout.refresh;
+      ec.hitokoto.expiration = Time().getTime() + ttl;
       $("li.hitokoto").html(
         `[一言·<type class='hitokoto'>${type}</type>·<ttl class='hitokoto'></ttl>] <sentence class='hitokoto'>${data.hitokoto}</sentence><author class='hitokoto'>${author}</author>`
       );
       $("ttl.hitokoto").html(
         `<a class='hitokoto' href='javascript:void(0);' onClick='ec.hitokoto.change();'>${(
-          (this.expiration - Time().getTime()) / 1e3
+          (ec.hitokoto.expiration - Time().getTime()) / 1e3
         ).toFixed(0)}</a>`
       );
-    } else this.get();
+    } else ec.hitokoto.get();
   },
   get: function () {
-    this.set({
+    ec.hitokoto.set({
       type: "x",
       from: "Nyaser",
       hitokoto: "加载中，请稍候。",
-      ttl: this.timeout.request,
+      ttl: ec.hitokoto.timeout.request,
     });
     var request;
     if (request != null) request.abort();
-    let url = this.api.url + "?" + this.api.args;
-    let types = this.type; delete types.x;
+    let url = ec.hitokoto.api.url + "?" + ec.hitokoto.api.args;
+    let types = ec.hitokoto.type; delete types.x;
     for (let key of Object.keys(types)) url += `&c=${key}`;
     let queryTime = Time().getTime();
     url += `&_=${queryTime}`;
-    let duration = queryTime - this.lastquery;
-    if (duration > 1000 / this.qps) {
-      this.lastquery = queryTime;
+    let duration = queryTime - ec.hitokoto.lastquery;
+    if (duration > 1000 / ec.hitokoto.qps) {
+      ec.hitokoto.lastquery = queryTime;
       request = $.getJSON(url)
-        .then((d) => this.set(d))
-        .fail(this.set);
+        .then((d) => ec.hitokoto.set(d))
+        .fail(ec.hitokoto.set);
     } else {
       // throw new Error(`Hitokoto: QPS Limitation! (${duration})`);
-      this.set({
+      ec.hitokoto.set({
         type: "x",
         from: "Nyaser",
         hitokoto: "请求过快，稍后再试。",
-        ttl: this.timeout.retry,
+        ttl: ec.hitokoto.timeout.retry,
       });
     }
   },
   change: function () {
-    let timeout = this.expiration - Time().getTime();
-    this.expiration = Time().getTime()
-      + (timeout > 3000 ? timeout == Infinity ? this.timeout.refresh : 3000 : Infinity);
+    let timeout = ec.hitokoto.expiration - Time().getTime();
+    ec.hitokoto.expiration = Time().getTime()
+      + (timeout > 3000 ? timeout == Infinity ? ec.hitokoto.timeout.refresh : 3000 : Infinity);
   },
   heartbeat: function () {
-    let hitokoto_ttl = (this.expiration - Time().getTime()) / 1e3;
-    if (hitokoto_ttl < 0) this.get();
+    let hitokoto_ttl = (ec.hitokoto.expiration - Time().getTime()) / 1e3;
+    if (hitokoto_ttl < 0) ec.hitokoto.get();
     hitokoto_ttl = hitokoto_ttl.toFixed(0);
     if ($("ttl.hitokoto").text() != `${hitokoto_ttl}`)
       if ($("ttl.hitokoto a").html())
