@@ -27,7 +27,7 @@ export default {
             $.getJSON(url)
                 .done(function (data) {
                     try {
-                        ec.exam.extension.json = JSON.parse(data);
+                        ec.exam.extension.json = data;
                     } catch (e) {
                         console.error(e);
                     }
