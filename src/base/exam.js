@@ -105,14 +105,24 @@ export default {
     }],
     extension: {
         enabled: true,
+        fetch: async function (url = '/eej') {
+            $.getJSON(url).done(function (data) {
+                try {
+                    ec.exam.extra.json = data;
+                    ec.exam.build();
+                } catch (e) {
+                    console.error(e);
+                }
+            });
+        },
         json: []
     },
     breakon: null,
     finalonly: false,
     build: function (breakon = null) {
         ec.exam.json = Array.from(ec.exam.default);
-        if (ec.exam.extension.enabled)
-            ec.exam.extension.json.forEach(exam => ec.exam.json.push(exam));
+        if (ec.exam.extra.enabled)
+            ec.exam.extra.json.forEach(exam => ec.exam.json.push(exam));
         ec.exam.array = buildExamArray(ec.exam.json);
 
         if (breakon != null)

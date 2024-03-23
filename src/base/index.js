@@ -18,4 +18,3 @@ ec.version = new Date(VERSION);
 // Fetch extensions
 ec.extension = extension;
 setTimeout(ec.extension.main.fetch);
-setTimeout(ec.extension.exams.fetch);

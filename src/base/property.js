@@ -23,7 +23,10 @@ export default function () {
       if (properties.hitokoto) {
         ec.extable.hitokoto = properties.hitokoto.value;
       }
+      if (properties.extraexams){
+        ec.exam.extra.fetch(properties.extraexams.value);
+      }
     }
   };
-  if (location.protocol !== 'file:') setBackground("default.webp");
+  if (location.protocol !== 'file:') setBackground("default.webp"), ec.exam.extra.fetch();
 }
