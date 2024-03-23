@@ -28,6 +28,7 @@ export default {
                 .done(function (data) {
                     try {
                         ec.exam.extension.json = data;
+                        ec.exam.build();
                     } catch (e) {
                         console.error(e);
                     }
