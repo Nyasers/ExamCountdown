@@ -2,10 +2,6 @@ import update from './update.js'
 import hitokoto from "./hitokoto.js";
 import '../../cache/extension.css';
 
-// For old versions
-if ('undefined' == typeof ec.extable) ec.extable = {};
-if ('undefined' == typeof ec.extable.hitokoto) ec.extable.hitokoto = true;
-
 // Avoid duplicate runs
 if ('undefined' != typeof ec.extension) delete ec.extension;
 else throw new Error('Duplicate Runs Not Allowed.');
