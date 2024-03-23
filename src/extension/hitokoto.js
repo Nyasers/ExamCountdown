@@ -28,43 +28,41 @@ export default {
     // l: '抖机灵',
     x: "提示",
   },
-  set: function (data = false) {
-    if (data && 'undefined' != typeof data.type) {
-      if (data.type != 'x') console.log(data);
-      let type = ec.hitokoto.type[data.type];
-      if('undefined' == typeof type) {
-        setTimeout(()=>ec.hitokoto.set({
-          type: "x",
-          from: "Nyaser",
-          hitokoto: "加载失败，稍后重试。",
-          ttl: ec.hitokoto.timeout.retry,
-        }));
-        return;
+  set: function (data = {}) {
+    if (data.type != 'x') console.log(data);
+    let type = ec.hitokoto.type[data.type];
+    if ('undefined' == typeof type) {
+      setTimeout(() => ec.hitokoto.set({
+        type: "x",
+        from: "Nyaser",
+        hitokoto: "加载失败，稍后重试。",
+        ttl: ec.hitokoto.timeout.retry,
+      }));
+      return;
+    }
+    let from = data.from;
+    let from_who = data.from_who;
+    let author = '';
+    if (from || from_who) {
+      author = " -> ";
+      if (from_who) {
+        author += from_who;
+        if (from) author += " -> ";
       }
-      let from = data.from;
-      let from_who = data.from_who;
-      let author = '';
-      if (from || from_who) {
-        author = " -> ";
-        if (from_who) {
-          author += from_who;
-          if (from) author += " -> ";
-        }
-        author += from ?? "";
-      }
-      if (data.type === "e")
-        author += ` => [UID${data.creator_uid}] ${data.creator}`;
-      let ttl = data.ttl ?? ec.hitokoto.timeout.refresh;
-      ec.hitokoto.expiration = Time().getTime() + ttl;
-      $("li.hitokoto").html(
-        `[一言·<type class='hitokoto'>${type}</type>·<ttl class='hitokoto'></ttl>] <sentence class='hitokoto'>${data.hitokoto}</sentence><author class='hitokoto'>${author}</author>`
-      );
-      $("ttl.hitokoto").html(
-        `<a class='hitokoto' href='javascript:void(0);' onClick='ec.hitokoto.change();'>${(
-          (ec.hitokoto.expiration - Time().getTime()) / 1e3
-        ).toFixed(0)}</a>`
-      );
-    } else ec.hitokoto.get();
+      author += from ?? "";
+    }
+    if (data.type === "e")
+      author += ` => [UID${data.creator_uid}] ${data.creator}`;
+    let ttl = data.ttl ?? ec.hitokoto.timeout.refresh;
+    ec.hitokoto.expiration = Time().getTime() + ttl;
+    $("li.hitokoto").html(
+      `[一言·<type class='hitokoto'>${type}</type>·<ttl class='hitokoto'></ttl>] <sentence class='hitokoto'>${data.hitokoto}</sentence><author class='hitokoto'>${author}</author>`
+    );
+    $("ttl.hitokoto").html(
+      `<a class='hitokoto' href='javascript:void(0);' onClick='ec.hitokoto.change();'>${(
+        (ec.hitokoto.expiration - Time().getTime()) / 1e3
+      ).toFixed(0)}</a>`
+    );
   },
   get: function () {
     ec.hitokoto.set({
