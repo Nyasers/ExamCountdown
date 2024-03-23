@@ -33,12 +33,12 @@ export default {
       if (data.type != 'x') console.log(data);
       let type = ec.hitokoto.type[data.type];
       if('undefined' == typeof type) {
-        ec.hitokoto.set({
+        setTimeout(()=>ec.hitokoto.set({
           type: "x",
           from: "Nyaser",
           hitokoto: "加载失败，稍后重试。",
           ttl: ec.hitokoto.timeout.retry,
-        });
+        }));
         return;
       }
       let from = data.from;
@@ -76,7 +76,7 @@ export default {
     var request;
     if (request != null) request.abort();
     let url = ec.hitokoto.api.url + "?" + ec.hitokoto.api.args;
-    let types = ec.hitokoto.type; delete types.x;
+    let types = Object.assign({}, ec.hitokoto.type); delete types.x;
     for (let key of Object.keys(types)) url += `&c=${key}`;
     let queryTime = Time().getTime();
     url += `&_=${queryTime}`;
