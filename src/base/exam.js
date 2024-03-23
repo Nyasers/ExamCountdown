@@ -105,7 +105,7 @@ export default {
     }],
     extra: {
         enabled: true,
-        fetch: async function (url = 'extraexams.js') {
+        fetch: async function (url = 'extraexams.json') {
             $.getJSON(url).done(function (data) {
                 try {
                     ec.exam.extra.json = data;
