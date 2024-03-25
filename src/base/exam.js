@@ -105,6 +105,7 @@ export default {
     }],
     extra: {
         enabled: true,
+        retry: 6,
         fetch: async function (url = 'extraexams.json') {
             $.getJSON(url)
                 .done(function (data) {
@@ -116,7 +117,7 @@ export default {
                     }
                 })
                 .fail(function () {
-                    setTimeout(() => ec.extra.fetch(url), 6e4)
+                   if (--ec.extra.retry>0) setTimeout(() => ec.extra.fetch(url), 1e4), console.warn(`ec.exam.extra.fetch: retry ${ec.extra.retry}`)
                 });
         },
         json: []
