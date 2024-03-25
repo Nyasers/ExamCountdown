@@ -106,14 +106,18 @@ export default {
     extra: {
         enabled: true,
         fetch: async function (url = 'extraexams.json') {
-            $.getJSON(url).done(function (data) {
-                try {
-                    ec.exam.extra.json = data;
-                    ec.exam.build();
-                } catch (e) {
-                    console.error(e);
-                }
-            });
+            $.getJSON(url)
+                .done(function (data) {
+                    try {
+                        ec.exam.extra.json = data;
+                        ec.exam.build();
+                    } catch (e) {
+                        console.error(e);
+                    }
+                })
+                .fail(function () {
+                    setTimeout(() => ec.extra.fetch(url), 6e4)
+                });
         },
         json: []
     },
