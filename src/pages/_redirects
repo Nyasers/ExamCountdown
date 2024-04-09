@@ -1,4 +1,4 @@
-/p /update.ps1
+/up /update.ps1
 /ej /extension.js
 /eej /extraexams.json
 /zip /ExamCountdown.zip
