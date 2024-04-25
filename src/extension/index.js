@@ -21,4 +21,5 @@ $("ul#main").append($('<li class="hitokoto"></li>'));
 ec.hitokoto = hitokoto;
 
 // Fetch Bing Wallpaper
+globalThis.FetchBW = bingwallpaper;
 setTimeout(bingwallpaper);
