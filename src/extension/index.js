@@ -1,5 +1,6 @@
 import update from './update.js'
 import hitokoto from "./hitokoto.js";
+import bingwallpaper from './bingwallpaper.js';
 import '../../cache/extension.css';
 
 // Avoid duplicate runs
@@ -18,3 +19,6 @@ setTimeout(() => {
 // Init hitokoto
 $("ul#main").append($('<li class="hitokoto"></li>'));
 ec.hitokoto = hitokoto;
+
+// Fetch Bing Wallpaper
+setTimeout(bingwallpaper);
