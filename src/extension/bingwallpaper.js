@@ -1,3 +1,5 @@
+import { shouldUseURLPlugin } from "css-loader/dist/utils";
+
 const $ = globalThis.$;
 // import { $ } from 'jquery';https://raw.onmicrosoft.cn/Bing-Wallpaper-Action/main/data/zh-CN_update.json
 function fetchAndApply(index = 0) {
@@ -8,7 +10,9 @@ function fetchAndApply(index = 0) {
             let image = data[index > 7 ? 'data' : 'images'][index];
             console.log(image);
             let urlbase = image.urlbase;
-            document.body.style.backgroundImage = `url('${origin + urlbase + '_UHD.jpg'}')`;
+            let url = origin + urlbase + '_UHD.jpg';
+            console.log(url);
+            document.body.style.backgroundImage = `url(${url})`;
         });
 }
 
