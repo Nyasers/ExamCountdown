@@ -5,7 +5,9 @@ function fetchAndApply(index = 0) {
         .then((data) => {
             console.log(data);
             let origin = 'https://cn.bing.com';
-            let urlbase = data[index > 7 ? 'data' : 'images'][index].urlbase;
+            let image = data[index > 7 ? 'data' : 'images'][index];
+            console.log(image);
+            let urlbase = image.urlbase;
             document.body.style.backgroundImage = `url('${origin + urlbase + '_UHD.jpg'}')`;
         });
 }
