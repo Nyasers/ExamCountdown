@@ -85,7 +85,6 @@ export default {
         .then((d) => ec.hitokoto.set(d))
         .fail(ec.hitokoto.set);
     } else {
-      // throw new Error(`Hitokoto: QPS Limitation! (${duration})`);
       ec.hitokoto.set({
         type: "x",
         from: "Nyaser",
