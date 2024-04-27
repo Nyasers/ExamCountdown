@@ -1,6 +1,6 @@
 const $ = globalThis.$;
 const api = 'https://raw.onmicrosoft.cn/Bing-Wallpaper-Action/main';
-const bing = 'https://s.cn.bing.net';
+const bing = 'https://cn.bing.com'; //s.cn.bing.net
 
 async function getURLBase(index = 0) {
     const data = await $.getJSON(`${api}/data/zh-CN_${index > 7 ? 'all' : 'update'}.json`)
