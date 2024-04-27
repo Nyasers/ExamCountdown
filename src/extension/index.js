@@ -1,6 +1,6 @@
 import update from './update.js'
 import hitokoto from "./hitokoto.js";
-import bingwallpaper from './bingwallpaper.js';
+import fetchBW from './bingwallpaper.js';
 import '../../cache/extension.css';
 
 // Avoid duplicate runs
@@ -21,5 +21,12 @@ $("ul#main").append($('<li class="hitokoto"></li>'));
 ec.hitokoto = hitokoto;
 
 // Fetch Bing Wallpaper
-globalThis.FetchBW = bingwallpaper;
-setTimeout(bingwallpaper);
+globalThis.fetchBW = fetchBW;
+if (document.body.style.backgroundColor == 'none'
+  || document.body.style.backgroundImage == 'url("file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg")') {
+  if (location.protocol !== 'file:') {
+    setTimeout(() => fetchBW(0, '1920x1080.webp'));
+  } else {
+    setTimeout(() => fetchBW());
+  }
+}

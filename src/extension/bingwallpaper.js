@@ -1,17 +1,16 @@
 const $ = globalThis.$;
+const api = 'https://raw.onmicrosoft.cn/Bing-Wallpaper-Action/main';
+const bing = 'https://s.cn.bing.net';
 
-function fetchAndApply(index = 0) {
-    $.getJSON(`https://raw.onmicrosoft.cn/Bing-Wallpaper-Action/main/data/zh-CN_${index > 7 ? 'all' : 'update'}.json`)
-        .then((data) => {
-            console.log(data);
-            let origin = 'https://s.cn.bing.net';
-            let image = data[index > 7 ? 'data' : 'images'][index];
-            console.log(image);
-            let urlbase = image.urlbase;
-            let url = origin + urlbase + '_UHD.jpg';
-            console.log(url);
-            document.body.style.backgroundImage = `url(${url})`;
-        });
+async function getURLBase(index = 0) {
+    const data = await $.getJSON(`${api}/data/zh-CN_${index > 7 ? 'all' : 'update'}.json`)
+    let image = data[index > 7 ? 'data' : 'images'][index];
+    return bing + image.urlbase;
 }
 
-export default fetchAndApply;
+async function fetchBW(index = 0, ext = 'UHD.jpg') {
+    const url = `${await getURLBase(index)}_${ext}`;
+    document.body.style.backgroundImage = `url(${url})`;
+}
+
+export default fetchBW;
