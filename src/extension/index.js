@@ -22,11 +22,9 @@ ec.hitokoto = hitokoto;
 
 // Fetch Bing Wallpaper
 globalThis.fetchBW = fetchBW;
-if (document.body.style.backgroundColor == 'none'
+if (location.protocol !== 'file:') {
+  setTimeout(() => fetchBW(0, '1920x1080.webp'));
+} else if (document.body.style.backgroundColor != 'none'
   || document.body.style.backgroundImage == 'url("file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg")') {
-  if (location.protocol !== 'file:') {
-    setTimeout(() => fetchBW(0, '1920x1080.webp'));
-  } else {
-    setTimeout(() => fetchBW());
-  }
+  setTimeout(() => fetchBW());
 }
