@@ -58,7 +58,7 @@ async function postMake() {
     });
 }
 
-webpack(webpackConfig, async () => {
+async function postBuild () {
     // Merge license
     var license = '';
     fs.readdirSync(path.resolve('dist')).filter(n => n.endsWith('.LICENSE.txt'))
@@ -90,4 +90,6 @@ webpack(webpackConfig, async () => {
         JSON.stringify(exams),
         'utf-8'
     );
-});
+}
+
+webpack(webpackConfig, postBuild);

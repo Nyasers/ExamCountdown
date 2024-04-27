@@ -64,6 +64,7 @@ module.exports = [
   {
     name: 'step2',
     mode: 'production',
+    //mode: 'development',
     dependencies: ['step1'],
     entry: {
       index: './src/base/index.js',
@@ -92,7 +93,6 @@ module.exports = [
         patterns: [
           { from: './src/cmd/' },
           { from: './src/json/' },
-          { from: './src/webp/' },
           { from: './src/pages/' },
         ]
       }),
