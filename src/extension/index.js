@@ -24,7 +24,7 @@ ec.hitokoto = hitokoto;
 globalThis.fetchBW = fetchBW;
 if (location.protocol !== 'file:') {
   setTimeout(() => fetchBW(0, '1920x1080.webp'));
-} else if (document.body.style.backgroundColor != 'none'
+} else if (document.body.style.backgroundImage == ''
   || document.body.style.backgroundImage == 'url("file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg")') {
   setTimeout(() => fetchBW());
 }
