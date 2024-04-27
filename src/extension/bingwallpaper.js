@@ -10,7 +10,10 @@ async function getURLBase(index = 0) {
 
 async function fetchBW(index = 0, ext = 'UHD.jpg') {
     const url = `${await getURLBase(index)}_${ext}`;
-    document.body.style.backgroundImage = `url(${url})`;
+    const image = new Image();
+    image.onload = () =>
+        document.body.style.backgroundImage = `url(${url})`;
+    image.src = url;
 }
 
 export default fetchBW;
