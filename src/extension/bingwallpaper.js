@@ -4,10 +4,10 @@ const bing = 'https://cn.bing.com'; //s.cn.bing.net
 
 async function getURLBase(index = 0) {
     const data = await $.getJSON(`${api}/data/zh-CN_${index > 7 ? 'all' : 'update'}.json`)
-    console.log(index, data);
-    if (index >= data.length)
-        throw new Error(`Trying to get the ${index + 1} from ${data.length} elements.`);
-    let image = data[index > 7 ? 'data' : 'images'][index];
+    const images = data[index > 7 ? 'data' : 'images'];
+    if (index >= images.length)
+        throw new Error(`Trying to get the ${index + 1} from ${images.length} elements.`);
+    let image = images[index];
     return bing + image.urlbase;
 }
 
