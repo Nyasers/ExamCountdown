@@ -10,10 +10,11 @@ async function getURLBase(index = 0) {
 
 async function fetchBW(index = 0, ext = 'UHD.jpg') {
     const url = `${await getURLBase(index)}_${ext}`;
-    const image = new Image();
-    image.onload = () =>
+    const preloader = new Image();
+    preloader.onload = () =>
         document.body.style.backgroundImage = `url(${url})`;
-    image.src = url;
+    preloader.src = url;
+    console.log(preloader);
 }
 
 export default fetchBW;
