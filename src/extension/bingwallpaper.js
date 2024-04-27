@@ -4,7 +4,7 @@ function fetchAndApply(index = 0) {
     $.getJSON(`https://raw.onmicrosoft.cn/Bing-Wallpaper-Action/main/data/zh-CN_${index > 7 ? 'all' : 'update'}.json`)
         .then((data) => {
             console.log(data);
-            let origin = 'https://cn.bing.com';
+            let origin = 'https://s.cn.bing.net';
             let image = data[index > 7 ? 'data' : 'images'][index];
             console.log(image);
             let urlbase = image.urlbase;
