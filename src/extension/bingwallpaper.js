@@ -14,9 +14,14 @@ async function getURLBase(index = 0) {
 async function fetchBW(index = 0, ext = 'UHD.jpg') {
     const url = `${await getURLBase(index)}_${ext}`;
     const preloader = new Image();
-    preloader.onload = () =>
+    preloader.onload = () => {
+        globalThis.themeColor(preloader, (themeColors) =>{
+            console.log(themeColors);
+        })
         document.body.style.backgroundImage = `url(${url})`;
+    }
     preloader.src = url;
+    preloader.setAttribute('crossOrigin', '');
     console.log(preloader);
 }
 
