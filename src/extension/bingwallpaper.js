@@ -18,8 +18,10 @@ async function fetchBW(index = 0, ext = 'UHD.jpg') {
         globalThis.themeColor(preloader, (themeColors) => {
             console.log(themeColors);
             const color = globalThis.invertColor(themeColors[0]);
+            const theme = globalThis.invertColor(color);
             console.log(color);
-            globalThis.$('.hitokoto').attr('color', color);
+            document.body.style.backgroundColor = theme;
+            // globalThis.$('.hitokoto').attr('color', color);
         })
         document.body.style.backgroundImage = `url(${url})`;
     }
