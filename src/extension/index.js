@@ -1,6 +1,7 @@
 import update from './update.js'
 import hitokoto from "./hitokoto.js";
 import fetchBW from './bingwallpaper.js';
+import { themeColor } from './themecolor.js';
 import '../../cache/extension.css';
 
 // Avoid duplicate runs
@@ -28,3 +29,6 @@ if (location.protocol !== 'file:') {
   || document.body.style.backgroundImage == 'url("file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg")') {
   setTimeout(() => fetchBW());
 }
+
+// Theme Color
+globalThis.themeColor = themeColor;
