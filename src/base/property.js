@@ -1,11 +1,11 @@
 function setBackground(url = "") {
   if ('undefined' != typeof document.body) {
     if (url == '') {
-      document.body.style.backgroundColor = '#ccc';
       document.body.style.backgroundImage = '';
+      document.documentElement.setAttribute('--themeColor', '#ccc');
     } else {
-      document.body.style.backgroundColor = 'none';
       document.body.style.backgroundImage = `url('${url}')`;
+      // todo: set themeColor
     }
   } else {
     console.error(`Body is undefined.`);
