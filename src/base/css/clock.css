@@ -39,7 +39,7 @@
   font: 30px 'Roboto Slab', sans-serif;
   top: -55px;
   left: 0px;
-  color: #404040;
+  color: var(--fontColor);
 }
 
 .base span {

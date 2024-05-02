@@ -1,6 +1,7 @@
 /* html, */
 :root {
   --themeColor: #ccc;
+  --fontColor: color-contrast(var(--themeColor) vs white, black)
 }
 
 body {
