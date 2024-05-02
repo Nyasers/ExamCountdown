@@ -10,7 +10,7 @@ li.hitokoto {
 }
 
 .hitokoto {
-  color: #000;
+  color: color-contrast(var(--themeColor) vs white, black);
   font-size: 26px;
   text-decoration: none;
 }

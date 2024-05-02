@@ -1,10 +1,14 @@
 /* html, */
+:root {
+  --themeColor: #ccc;
+}
+
 body {
   padding: 0px;
   font-family: Tahoma, Geneva, sans-serif;
   -webkit-text-size-adjust: none;
   background-size: cover;
-  background-color: #ccc;
+  background-color: var(--themeColor);
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: center;
