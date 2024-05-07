@@ -12,7 +12,7 @@ async function getURLBase(index = 0) {
 }
 
 async function fetchBW(index = 0, ext = 'UHD.jpg') {
-    const url = `${await getURLBase(index)}_${ext}`;
+    const url = `${await getURLBase(index)}_${ext}&_=${new Date().getTime()}`;
     const preloader = new Image();
     preloader.onload = () => {
         globalThis.themeColor(preloader, (themeColors) => {
