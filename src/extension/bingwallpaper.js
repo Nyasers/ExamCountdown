@@ -3,7 +3,7 @@ const api = 'https://raw.onmicrosoft.cn/Bing-Wallpaper-Action/main';
 const bing = 'https://cn.bing.com'; //s.cn.bing.net
 
 async function getURLBase(index = 0) {
-    const data = await $.getJSON(`${api}/data/zh-CN_${index > 7 ? 'all' : 'update'}.json`)
+    const data = await $.getJSON(`${api}/data/zh-CN_${index > 7 ? 'all' : 'update'}.json?_=${new Date().getTime()}`)
     const images = data[index > 7 ? 'data' : 'images'];
     if (index >= images.length)
         throw new Error(`Trying to get the ${index + 1} from ${images.length} elements.`);
@@ -12,7 +12,7 @@ async function getURLBase(index = 0) {
 }
 
 async function fetchBW(index = 0, ext = 'UHD.jpg') {
-    const url = `${await getURLBase(index)}_${ext}&_=${new Date().getTime()}`;
+    const url = `${await getURLBase(index)}_${ext}`;
     const preloader = new Image();
     preloader.onload = () => {
         globalThis.themeColor(preloader, (themeColors) => {
