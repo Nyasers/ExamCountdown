@@ -24,9 +24,9 @@ async function fetchBW(index = 0, ext = 'UHD.jpg') {
 
 async function applyImage(img) {
     globalThis.themeColor(img, (themeColors) => {
-        console.log(themeColors);
-        globalThis.debug_setColors = async (index) => await setColors(themeColors[index]);
-        setColors(themeColors[0]);
+        // console.log(themeColors);
+        // globalThis.debug_setColors = async (index) => await setColors(themeColors[index]);
+        setColors(themeColors[6]);
         let url = img.src;
         document.body.style.backgroundImage = `url(${url})`;
     })
