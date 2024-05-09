@@ -24,12 +24,29 @@ async function fetchBW(index = 0, ext = 'UHD.jpg') {
 
 async function applyImage(img) {
     globalThis.themeColor(img, (themeColors) => {
-        // console.log(themeColors);
+        console.log(themeColors);
         // globalThis.debug_setColors = async (index) => await setColors(themeColors[index]);
-        setColors(themeColors[6]);
+        let aveColor = getAverageColor(themeColors);
+        console.log(aveColor);
+        setColors(aveColor);
         let url = img.src;
         document.body.style.backgroundImage = `url(${url})`;
     })
+}
+
+async function getAverageColor(themeColors) {
+    let len = themeColors.length;
+    let sum = [0, 0, 0];
+    let res = [0, 0, 0];
+    themeColors.forEach(e => {
+        sum[0] += e[0];
+        sum[1] += e[1];
+        sum[2] += e[2];
+    });
+    for (let i = 0; i < sum.length; i++) {
+        res[i] = sum[i] / len;
+    }
+    return res;
 }
 
 async function setColors(themeColorRgbArray) {
