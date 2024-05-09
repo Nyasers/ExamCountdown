@@ -43,4 +43,4 @@ async function waitter() {
         .catch(() => setTimeout(waitter.bind(), 1e4));
 }
 
-waitter();
+setTimeout(waitter.bind(), 1e4);
