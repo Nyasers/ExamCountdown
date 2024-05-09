@@ -4,7 +4,7 @@ import { themeColor } from "./themecolor.js";
 
 async function applyImage(img) {
     document.body.style.backgroundImage = `url(${img.src})`;
-    setTimeout(() => themeColor(img, async (themeColors) => {
+    if (img.src != ec.background.default) setTimeout(() => themeColor(img, async (themeColors) => {
         let colors = [themeColors[5], themeColors[6]];
         let aveColor = await getAverageColor(colors);
         await setColors(aveColor);

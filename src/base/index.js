@@ -15,7 +15,8 @@ globalThis.ec = {
         hitokoto: true
     },
     background: {
-        set: applyImageUrl.bind()
+        default: 'url("file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg")',
+        set: undefined
     },
     extension: extension,
     fetchBW: fetchBW.bind(),
@@ -23,6 +24,7 @@ globalThis.ec = {
 };
 
 // Init
+ec.background.set = applyImageUrl.bind()
 main();
 
 // wait for online
@@ -32,7 +34,7 @@ async function onConnected() {
     if (location.protocol !== 'file:') {
         setTimeout(() => fetchBW(0, '1920x1080.webp'));
     } else if (document.body.style.backgroundImage == ''
-        || document.body.style.backgroundImage == 'url("file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg")') {
+        || document.body.style.backgroundImage == ec.background.default) {
         setTimeout(fetchBW.bind());
     }
 }
@@ -43,4 +45,4 @@ async function waitter() {
         .catch(() => setTimeout(waitter.bind(), 1e4));
 }
 
-setTimeout(waitter.bind(), 1e4);
+setTimeout(waitter.bind());
