@@ -3,10 +3,11 @@ import { getContrast, rgbArrayToHex } from "./color.js";
 import { themeColor } from "./themecolor.js";
 
 async function getThemeColor(img) {
-    let themeColors = await themeColor(img);
-    let colors = [themeColors[5], themeColors[6]];
-    let aveColor = await getAverageColor(colors);
-    return aveColor;
+    themeColor(img, async (themeColors) => {
+        var colors = [themeColors[5], themeColors[6]];
+        let aveColor = await getAverageColor(colors);
+        return aveColor;
+    });
 }
 
 /*
@@ -21,7 +22,7 @@ worker.addEventListener('message', function (color) {
 
 async function applyImage(img) {
     document.body.style.backgroundImage = `url(${img.src})`;
-    let themeColor = await getThemeColor(img);
+    var themeColor = await getThemeColor(img);
     setColors(themeColor);
     //worker.postMessage(() => new Image(img));
 }
@@ -35,7 +36,7 @@ async function setColors(themeColorRgbArray) {
 }
 
 export function applyImageUrl(url) {
-    let preloader = new Image();
+    var preloader = new Image();
     preloader.onload = async () => await applyImage(preloader);
     preloader.src = url;
     preloader.setAttribute('crossOrigin', '');
