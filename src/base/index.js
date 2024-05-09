@@ -29,7 +29,7 @@ main();
 
 // wait for online
 async function onConnected() {
-    if (location.protocol == 'file:') setTimeout(time.bind());
+    _ = time.bind(); // if (location.protocol == 'file:') setTimeout(time.bind());
     setTimeout(ec.extension.fetch.bind());
     if (location.protocol !== 'file:') {
         setTimeout(() => fetchBW(0, '1920x1080.webp'));
