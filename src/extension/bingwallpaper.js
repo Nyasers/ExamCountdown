@@ -15,13 +15,12 @@ async function getURLBase(index = 0) {
 
 async function fetchBW(index = 0, ext = 'UHD.jpg') {
     const url = `${await getURLBase(index)}_${ext}`;
-    await (async function() {
-        const preloader = new Image();
+    setTimeout(async () => {
+        var preloader = new Image();
         preloader.onload = async () => await applyImage(preloader);
         preloader.src = url;
         preloader.setAttribute('crossOrigin', '');
-        console.log(preloader);
-    })();
+    });
 }
 
 export default fetchBW;
