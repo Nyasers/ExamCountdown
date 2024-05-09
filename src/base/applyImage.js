@@ -10,18 +10,18 @@ function getThemeColor(img) {
     });
 }
 
+var blob = new Blob([`self.addEventListener('message', ${getThemeColor.toString()}, false);`]);
+var url = URL.createObjectURL(blob);
+console.log(url);
+
 async function applyImage(img) {
     document.body.style.backgroundImage = `url(${img.src})`;
-    var blob = new Blob([`
-        self.addEventListener('message', ${getThemeColor.toString()}, false);
-    `]);
-    var url = URL.createObjectURL(blob);
     var worker = new Worker(url);
-
     worker.addEventListener('message', function (color) {
         setColors(color);
         worker.terminate();
     })
+    worker.postMessage(img);
 }
 
 async function setColors(themeColorRgbArray) {
