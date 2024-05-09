@@ -29,14 +29,14 @@ main();
 
 // wait for online
 async function onConnected() {
-    _ = time.bind(); // if (location.protocol == 'file:') setTimeout(time.bind());
     setTimeout(ec.extension.fetch.bind());
     if (location.protocol !== 'file:') {
         setTimeout(() => fetchBW(0, '1920x1080.webp'));
     } else if (document.body.style.backgroundImage == ''
-        || document.body.style.backgroundImage == `url("${ec.background.default}")`) {
+    || document.body.style.backgroundImage == `url("${ec.background.default}")`) {
         setTimeout(fetchBW.bind());
     }
+    if (location.protocol == 'file:') setTimeout(time.bind(), 1e4);
 }
 
 async function waitter() {
