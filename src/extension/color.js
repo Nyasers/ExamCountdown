@@ -20,11 +20,21 @@ function hexToRgbArray(hex) {
     ];
 }
 
-export function getContrastYIQ(hexcolor) {
+function getContrast50(hexcolor) {
+    var rgb = hexToRgbArray(hexcolor);
+    var hex = rgbArrayToHex(rgb)
+    return (parseInt(hex, 16) > 0xffffff/2) ? 'black':'white';
+}
+
+function getContrastYIQ(hexcolor) {
     var rgb = hexToRgbArray(hexcolor);
     var r = rgb[0], g = rgb[1], b = rgb[2];
     var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
     return (yiq >= 128) ? 'black' : 'white';
+}
+
+export function getContrast(hexcolor) {
+    getContrast50(hexcolor);
 }
 
 export function rgbArrayToHex(rgb) {

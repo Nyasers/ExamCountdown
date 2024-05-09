@@ -1,4 +1,4 @@
-import { getContrastYIQ, rgbArrayToHex } from "./color.js";
+import { getContrast, rgbArrayToHex } from "./color.js";
 
 const $ = globalThis.$;
 const api = 'https://raw.onmicrosoft.cn/Bing-Wallpaper-Action/main';
@@ -55,7 +55,7 @@ async function setColors(themeColorRgbArray) {
     console.log(themeColor);
     document.documentElement.style.setProperty('--themeColor', themeColor);
 
-    let fontColor = getContrastYIQ(themeColor);
+    let fontColor = getContrast(themeColor);
     console.log(fontColor);
     document.documentElement.style.setProperty('--fontColor', fontColor);
 }
