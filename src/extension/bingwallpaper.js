@@ -45,7 +45,7 @@ async function getAverageColor(themeColors) {
     });
     for (let i = 0; i < sum.length; i++) {
         console.log(sum[i]);
-        res[i] = Number(sum[i] / len);
+        res[i] = (sum[i] / len).toFixed();
         console.log(res[i]);
     }
     return res;
