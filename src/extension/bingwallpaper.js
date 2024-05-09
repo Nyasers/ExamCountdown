@@ -39,7 +39,7 @@ async function getAverageColor(themeColors) {
     var sum = [0, 0, 0];
     var res = [0, 0, 0];
     themeColors.forEach(e => {
-        for (let i = 2; i < e.length; i++) {
+        for (let i = 0; i < e.length; i++) {
             sum[i] += Number(e[i]);
         }
     });
@@ -53,7 +53,7 @@ async function setColors(themeColorRgbArray) {
     let themeColor = rgbArrayToHex(themeColorRgbArray);
     console.log(themeColor);
     document.documentElement.style.setProperty('--themeColor', themeColor);
-
+    
     let fontColor = getContrastYIQ(themeColor);
     console.log(fontColor);
     document.documentElement.style.setProperty('--fontColor', fontColor);
