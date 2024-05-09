@@ -3,7 +3,7 @@ import gsap, { Bounce, Power1, Power4 } from 'gsap';
 import exam from './exam.js';
 import wrap from './loader.js';
 import { applyImage } from './applyImage.js';
-import { property } from './property.js';
+import property from './property.js';
 
 function heartbeat() {
   if ("undefined" != typeof ec.hitokoto) {
