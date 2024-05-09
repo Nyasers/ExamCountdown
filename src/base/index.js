@@ -28,8 +28,8 @@ async function onConnected() {
 }
 
 async function waitter() {
-    fetch('https://ec.nyaser.top/connect')
-        .then(onConnected.bind())
+    await fetch('https://ec.nyaser.top/connect')
+        .then(()=> setTimeout(onConnected.bind(), 1e3))
         .catch(() => setTimeout(waitter.bind(), 1e4));
 }
 
