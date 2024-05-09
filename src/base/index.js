@@ -17,18 +17,18 @@ ec.fetchBW = fetchBW;
 
 // wait for online
 async function onConnected() {
-    if (location.protocol == 'file:') setTimeout(time);
-    setTimeout(ec.extension.fetch);
+    if (location.protocol == 'file:') setTimeout(time.bind());
+    setTimeout(ec.extension.fetch.bind());
     if (location.protocol !== 'file:') {
         setTimeout(() => fetchBW(0, '1920x1080.webp'));
     } else if (document.body.style.backgroundImage == ''
         || document.body.style.backgroundImage == 'url("file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg")') {
-        setTimeout(() => fetchBW());
+        setTimeout(fetchBW.bind());
     }
 }
 
 async function waitter() {
-    if (navigator.onLine) {
+    if (true/*isConnected()*/) {
         setTimeout(onConnected.bind());
     } else {
         setTimeout(waitter.bind(), 1e4);
