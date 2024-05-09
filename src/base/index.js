@@ -3,7 +3,7 @@ import time from './time.js';
 import { applyImageUrl } from './applyImage.js';
 import main from './main.js';
 import extension from './extension.js';
-import fetchBW from "../base/bingwallpaper.js";
+import fetchBW from "./bingwallpaper.js";
 import '../../cache/index.css';
 
 // Expose $ and ec
@@ -15,7 +15,7 @@ globalThis.ec = {
         hitokoto: true
     },
     background: {
-        default: 'url("file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg")',
+        default: 'file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg',
         set: undefined
     },
     extension: extension,
@@ -34,7 +34,7 @@ async function onConnected() {
     if (location.protocol !== 'file:') {
         setTimeout(() => fetchBW(0, '1920x1080.webp'));
     } else if (document.body.style.backgroundImage == ''
-        || document.body.style.backgroundImage == ec.background.default) {
+        || document.body.style.backgroundImage == `url("${ec.background.default}")`) {
         setTimeout(fetchBW.bind());
     }
 }
