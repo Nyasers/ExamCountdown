@@ -35,16 +35,19 @@ async function applyImage(img) {
 }
 
 async function getAverageColor(themeColors) {
-    let len = themeColors.length;
-    let sum = [0, 0, 0];
-    let res = [0, 0, 0];
+    var len = themeColors.length;
+    console.log(len);
+    var sum = [0, 0, 0];
+    var res = [0, 0, 0];
     themeColors.forEach(e => {
         sum[0] += e[0];
         sum[1] += e[1];
         sum[2] += e[2];
     });
     for (let i = 0; i < sum.length; i++) {
+        console.log(sum[1]);
         res[i] = sum[i] / len;
+        console.log(res[i]);
     }
     return res;
 }
