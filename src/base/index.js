@@ -7,7 +7,9 @@ import '../../cache/index.css';
 
 // Expose $ and ec
 globalThis.$ = $;
-globalThis.ec = {};
+globalThis.ec = {
+    origin: location.protocol == 'file:' ? 'https://ec.nyaser.top' : location.origin
+};
 
 // Init
 main();
@@ -28,8 +30,8 @@ async function onConnected() {
 }
 
 async function waitter() {
-    await fetch('https://ec.nyaser.top/connect')
-        .then(()=> setTimeout(onConnected.bind(), 1e3))
+    await fetch(ec.origin + '/connect')
+        .then(() => setTimeout(onConnected.bind(), 1e3))
         .catch(() => setTimeout(waitter.bind(), 1e4));
 }
 
