@@ -44,17 +44,18 @@ async function getAverageColor(themeColors) {
         }
     });
     for (let i = 0; i < sum.length; i++) {
-        console.log(sum[i]);
         res[i] = (sum[i] / len).toFixed();
-        console.log(res[i]);
     }
     return res;
 }
 
 async function setColors(themeColorRgbArray) {
     let themeColor = rgbArrayToHex(themeColorRgbArray);
+    console.log(themeColor);
     document.documentElement.style.setProperty('--themeColor', themeColor);
+    
     let fontColor = getContrastYIQ(themeColor);
+    console.log(fontColor);
     document.documentElement.style.setProperty('--fontColor', fontColor);
 }
 
