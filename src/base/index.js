@@ -8,12 +8,21 @@ import '../../cache/index.css';
 // Expose $ and ec
 globalThis.$ = $;
 globalThis.ec = {
-    origin: location.protocol == 'file:' ? 'https://ec.nyaser.top' : location.origin
+    origin: location.protocol == 'file:' ? 'https://ec.nyaser.top' : location.origin,
+    version: new Date(VERSION),
+    background: {
+        set: applyImage.bind()
+    },
+    extable: {
+        hitokoto: true
+    },
+    extension: undefined,
+    fetchBW: undefined,
+    hitokoto: undefined
 };
 
 // Init
 main();
-ec.version = new Date(VERSION);
 ec.extension = extension;
 ec.fetchBW = fetchBW;
 

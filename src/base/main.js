@@ -3,6 +3,7 @@ import gsap, { Bounce, Power1, Power4 } from 'gsap';
 import exam from './exam.js';
 import wrap from './loader.js';
 import property from './property.js';
+import { applyImage } from './applyImage.js';
 
 function heartbeat() {
   if ("undefined" != typeof ec.hitokoto) {
@@ -113,9 +114,6 @@ export default () => {
     ch = 1080;
 
   // Init Properties for Wallpaper Engine
-  ec.extable = {
-    hitokoto: true
-  };
   property();
 
   $("body").width(`${cw}px`);

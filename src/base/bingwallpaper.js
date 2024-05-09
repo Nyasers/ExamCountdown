@@ -1,5 +1,4 @@
 import { $ } from 'jquery';
-import { applyImage } from "./applyImage.js";
 
 const api = 'https://raw.onmicrosoft.cn/Bing-Wallpaper-Action/main';
 const bing = 'https://cn.bing.com'; //s.cn.bing.net
@@ -17,7 +16,7 @@ async function fetchBW(index = 0, ext = 'UHD.jpg') {
     const url = `${await getURLBase(index)}_${ext}`;
     setTimeout(async () => {
         var preloader = new Image();
-        preloader.onload = async () => await applyImage(preloader);
+        preloader.onload = async () => await ec.background.set(preloader);
         preloader.src = url;
         preloader.setAttribute('crossOrigin', '');
     });

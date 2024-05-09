@@ -1,23 +1,9 @@
-function setBackground(url = "") {
-  if ('undefined' != typeof document.body) {
-    if (url == '') {
-      document.body.style.backgroundImage = '';
-      document.documentElement.setAttribute('--themeColor', '#ccc');
-    } else {
-      document.body.style.backgroundImage = `url('${url}')`;
-      // todo: set themeColor
-    }
-  } else {
-    console.error(`Body is undefined.`);
-  }
-}
-
 export default function () {
   window.wallpaperPropertyListener = {
     applyUserProperties: function (properties) {
       const ec = globalThis.ec;
       if (properties.background) {
-        setBackground(`file:///${properties.background.value}`);
+        ec.background.set(`file:///${properties.background.value}`);
       }
       if (properties.breakon) {
         ec.exam.build(properties.breakon.value);
