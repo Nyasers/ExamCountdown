@@ -17,15 +17,13 @@ globalThis.ec = {
     background: {
         set: applyImageUrl.bind()
     },
-    extension: undefined,
-    fetchBW: undefined,
+    extension: extension,
+    fetchBW: fetchBW.bind(),
     hitokoto: undefined
 };
 
 // Init
 main();
-ec.extension = extension;
-ec.fetchBW = fetchBW;
 
 // wait for online
 async function onConnected() {
