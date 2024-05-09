@@ -11,20 +11,28 @@ globalThis.ec = {};
 
 // Init
 main();
-if (location.protocol == 'file:') setTimeout(time);
-
-// Set version
 ec.version = new Date(VERSION);
-
-// Fetch extensions
 ec.extension = extension;
-setTimeout(ec.extension.fetch);
+ec.fetchBW = fetchBW;
 
-// Fetch Bing Wallpaper
-globalThis.fetchBW = fetchBW;
-if (location.protocol !== 'file:') {
-  setTimeout(() => fetchBW(0, '1920x1080.webp'));
-} else if (document.body.style.backgroundImage == ''
-  || document.body.style.backgroundImage == 'url("file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg")') {
-  setTimeout(() => fetchBW());
+// wait for online
+async function onConnected() {
+    if (location.protocol == 'file:') setTimeout(time);
+    setTimeout(ec.extension.fetch);
+    if (location.protocol !== 'file:') {
+        setTimeout(() => fetchBW(0, '1920x1080.webp'));
+    } else if (document.body.style.backgroundImage == ''
+        || document.body.style.backgroundImage == 'url("file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg")') {
+        setTimeout(() => fetchBW());
+    }
 }
+
+async function waitter() {
+    if (navigator.onLine) {
+        setTimeout(onConnected.bind());
+    } else {
+        setTimeout(waitter.bind(), 1e4);
+    }
+}
+
+waitter();
