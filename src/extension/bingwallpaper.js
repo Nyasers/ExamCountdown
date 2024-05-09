@@ -23,10 +23,10 @@ async function fetchBW(index = 0, ext = 'UHD.jpg') {
 }
 
 async function applyImage(img) {
-    globalThis.themeColor(img, (themeColors) => {
+    globalThis.themeColor(img, async (themeColors) => {
         console.log(themeColors);
         // globalThis.debug_setColors = async (index) => await setColors(themeColors[index]);
-        let aveColor = getAverageColor(themeColors);
+        let aveColor = await getAverageColor(themeColors);
         console.log(aveColor);
         setColors(aveColor);
         let url = img.src;
