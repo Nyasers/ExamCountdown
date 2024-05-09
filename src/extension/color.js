@@ -34,7 +34,7 @@ function getContrastYIQ(hexcolor) {
 }
 
 export function getContrast(hexcolor) {
-    return getContrast50(hexcolor);
+    return getContrastYIQ(hexcolor);
 }
 
 export function rgbArrayToHex(rgb) {
