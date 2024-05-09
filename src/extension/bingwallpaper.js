@@ -40,9 +40,11 @@ async function getAverageColor(themeColors) {
     var sum = [0, 0, 0];
     var res = [0, 0, 0];
     themeColors.forEach(e => {
-        sum[0] += e[0];
-        sum[1] += e[1];
-        sum[2] += e[2];
+        for (let i = 0; i < e.length; i++) {
+            console.log(e[i]);
+            sum[i] += Number(e[i]);
+            console.log(sum[i]);
+        }
     });
     for (let i = 0; i < sum.length; i++) {
         console.log(sum[1]);
