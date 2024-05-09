@@ -1,4 +1,4 @@
-import { getContrastYIQ, rgbArrayToHex } from "./color";
+import { getContrastYIQ, rgbArrayToHex } from "./color.js";
 
 const $ = globalThis.$;
 const api = 'https://raw.onmicrosoft.cn/Bing-Wallpaper-Action/main';
