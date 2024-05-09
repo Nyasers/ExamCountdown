@@ -1,3 +1,5 @@
+import { getContrastYIQ, rgbArrayToHex } from "./color";
+
 const $ = globalThis.$;
 const api = 'https://raw.onmicrosoft.cn/Bing-Wallpaper-Action/main';
 const bing = 'https://cn.bing.com'; //s.cn.bing.net
@@ -14,19 +16,20 @@ async function getURLBase(index = 0) {
 async function fetchBW(index = 0, ext = 'UHD.jpg') {
     const url = `${await getURLBase(index)}_${ext}`;
     const preloader = new Image();
-    preloader.onload = () => {
-        globalThis.themeColor(preloader, (themeColors) => {
-            console.log(themeColors);
-            const color = globalThis.invertColor(themeColors[0]);
-            const theme = globalThis.invertColor(color);
-            console.log(theme);
-            document.documentElement.style.setProperty('--themeColor', theme);
-        })
-        document.body.style.backgroundImage = `url(${url})`;
-    }
+    preloader.onload = async () => await applyImage(preloader);
     preloader.src = url;
     preloader.setAttribute('crossOrigin', '');
     console.log(preloader);
+}
+
+async function applyImage(img) {
+    globalThis.themeColor(img, (themeColors) => {
+        const themeColor = rgbArrayToHex(themeColors[0]);
+        document.documentElement.style.setProperty('--themeColor', themeColor);
+        const fontColor = getContrastYIQ(themeColor);
+        document.documentElement.style.setProperty('--fontColor', fontColor);
+        document.body.style.backgroundImage = `url(${url})`;
+    })
 }
 
 export default fetchBW;

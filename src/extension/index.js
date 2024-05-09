@@ -1,4 +1,4 @@
-import invert from 'invert-color';
+// import invert from 'invert-color';
 import update from './update.js'
 import hitokoto from "./hitokoto.js";
 import fetchBW from './bingwallpaper.js';
@@ -33,4 +33,4 @@ if (location.protocol !== 'file:') {
 
 // Color
 globalThis.themeColor = themeColor;
-globalThis.invertColor = invert;
+// globalThis.invertColor = invert;

@@ -1,7 +1,7 @@
 /* html, */
 :root {
-  --themeColor: #ccc;
-  --fontColor: color-contrast(var(--themeColor) vs white, black)
+  --themeColor: #ccc; /* color-contrast is unable to use right now*/
+  --fontColor: black; /* color-contrast(var(--themeColor) vs white, black) */
 }
 
 body {
