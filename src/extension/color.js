@@ -6,6 +6,7 @@ function padz(str, len) {
 function hexToRgbArray(hex) {
     if (hex.slice(0, 1) === '#')
         hex = hex.slice(1);
+    var RE_HEX = /^(?:[0-9a-f]{3}){1,2}$/i;
     if (!RE_HEX.test(hex))
         throw new Error("Invalid HEX color: \"" + hex + "\"");
     // normalize / convert 3-chars hex to 6-chars.
