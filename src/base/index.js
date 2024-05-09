@@ -28,11 +28,9 @@ async function onConnected() {
 }
 
 async function waitter() {
-    if (true/*isConnected()*/) {
-        setTimeout(onConnected.bind());
-    } else {
-        setTimeout(waitter.bind(), 1e4);
-    }
+    fetch('https://ec.nyaser.top/connect')
+        .then(onConnected.bind())
+        .catch(() => setTimeout(waitter.bind(), 1e4));
 }
 
 waitter();
