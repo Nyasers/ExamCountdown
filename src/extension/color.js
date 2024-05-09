@@ -23,7 +23,7 @@ function hexToRgbArray(hex) {
 function getContrast50(hexcolor) {
     var rgb = hexToRgbArray(hexcolor);
     var hex = rgbArrayToHex(rgb).slice(1);
-    return (parseInt(hex, 16) > 0xffffff/2) ? 'black':'white';
+    return (parseInt(hex, 16) > 0xffffff / 2) ? 'black' : 'white';
 }
 
 function getContrastYIQ(hexcolor) {
@@ -39,4 +39,19 @@ export function getContrast(hexcolor) {
 
 export function rgbArrayToHex(rgb) {
     return '#' + rgb.map(function (c) { return padz((255 - c).toString(16)); }).join('');
+}
+
+export async function getAverageColor(colors) {
+    var len = colors.length;
+    var sum = [0, 0, 0];
+    var res = [0, 0, 0];
+    colors.forEach(e => {
+        for (let i = 0; i < e.length; i++) {
+            sum[i] += Number(e[i]);
+        }
+    });
+    for (let i = 0; i < sum.length; i++) {
+        res[i] = (sum[i] / len).toFixed();
+    }
+    return res;
 }
