@@ -24,10 +24,7 @@ async function fetchBW(index = 0, ext = 'UHD.jpg') {
 
 async function applyImage(img) {
     globalThis.themeColor(img, async (themeColors) => {
-        console.log(themeColors);
-        // globalThis.debug_setColors = async (index) => await setColors(themeColors[index]);
         let aveColor = await getAverageColor(themeColors);
-        console.log(aveColor);
         setColors(aveColor);
         let url = img.src;
         document.body.style.backgroundImage = `url(${url})`;
@@ -52,11 +49,9 @@ async function getAverageColor(themeColors) {
 
 async function setColors(themeColorRgbArray) {
     let themeColor = rgbArrayToHex(themeColorRgbArray);
-    console.log(themeColor);
     document.documentElement.style.setProperty('--themeColor', themeColor);
 
     let fontColor = getContrast(themeColor);
-    console.log(fontColor);
     document.documentElement.style.setProperty('--fontColor', fontColor);
 }
 
