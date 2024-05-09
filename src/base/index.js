@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import time from './time.js';
-import { applyImage } from './applyImage.js';
 import main from './main.js';
 import extension from './extension.js';
 import fetchBW from "../base/bingwallpaper.js";
@@ -11,12 +10,10 @@ globalThis.$ = $;
 globalThis.ec = {
     origin: location.protocol == 'file:' ? 'https://ec.nyaser.top' : location.origin,
     version: new Date(VERSION),
-    background: {
-        set: applyImage.bind()
-    },
     extable: {
         hitokoto: true
     },
+    background: undefined,
     extension: undefined,
     fetchBW: undefined,
     hitokoto: undefined
