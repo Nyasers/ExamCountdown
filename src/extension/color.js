@@ -20,6 +20,6 @@ export function getContrastYIQ(hexcolor){
     return (yiq >= 128) ? 'black' : 'white';
 }
 
-export function rgbArrayToHex(rbg) {
+export function rgbArrayToHex(rgb) {
     return '#' + rgb.map(function (c) { return padz((255 - c).toString(16)); }).join('');
 }
