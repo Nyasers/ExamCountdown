@@ -20,9 +20,10 @@ function hexToRgbArray(hex) {
     ];
 }
 
-export function getContrastYIQ(hexcolor){
+export function getContrastYIQ(hexcolor) {
     var rgb = hexToRgbArray(hexcolor);
-    var yiq = ((rbg[0]*299)+(rgb[1]*587)+(rgb[2]*114))/1000;
+    var r = rgb[0], g = rgb[1], b = rgb[2];
+    var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
     return (yiq >= 128) ? 'black' : 'white';
 }
 
