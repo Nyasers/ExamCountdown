@@ -2,10 +2,8 @@ import { getAverageColor } from "./color.js";
 import { getContrast, rgbArrayToHex } from "./color.js";
 import { themeColor } from "./themecolor.js";
 
-function getThemeColor(url) {
-    var img = new globalThis.Image();
-    img.src = url;
-    img.setAttribute('crossOrigin', '');
+function getThemeColor(imgf) {
+    var img = imgf.bind()();
     themeColor(img, async (themeColors) => {
         var colors = [themeColors[5], themeColors[6]];
         let aveColor = await getAverageColor(colors);
@@ -23,7 +21,7 @@ worker.addEventListener('message', function (color) {
 
 async function applyImage(img) {
     document.body.style.backgroundImage = `url(${img.src})`;
-    worker.postMessage(img.src);
+    worker.postMessage(() => new Image(img));
 }
 
 async function setColors(themeColorRgbArray) {
