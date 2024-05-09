@@ -1,6 +1,5 @@
 import { applyImage } from "./applyImage.js";
 
-const $ = globalThis.$;
 const api = 'https://raw.onmicrosoft.cn/Bing-Wallpaper-Action/main';
 const bing = 'https://cn.bing.com'; //s.cn.bing.net
 

@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 export default {
     extable: {
         hitokoto: true,
