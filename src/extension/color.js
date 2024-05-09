@@ -1,3 +1,8 @@
+function padz(str, len) {
+    if (len === void 0) { len = 2; }
+    return (new Array(len).join('0') + str).slice(-len);
+}
+
 function hexToRgbArray(hex) {
     if (hex.slice(0, 1) === '#')
         hex = hex.slice(1);
