@@ -20,7 +20,7 @@ async function setColors(themeColorRgbArray) {
     document.documentElement.style.setProperty('--fontColor', fontColor);
 }
 
-export function applyImageUrl() {
+export function applyImageUrl(url) {
     var preloader = new Image();
     preloader.onload = async () => await applyImage(preloader);
     preloader.src = url;
