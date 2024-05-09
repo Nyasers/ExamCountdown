@@ -3,7 +3,7 @@ import { getContrast, rgbArrayToHex } from "./color.js";
 import { themeColor } from "./themecolor.js";
 
 function getThemeColor(url) {
-    var img = new Image();
+    var img = new globalThis.Image();
     img.src = url;
     img.setAttribute('crossOrigin', '');
     themeColor(img, async (themeColors) => {
