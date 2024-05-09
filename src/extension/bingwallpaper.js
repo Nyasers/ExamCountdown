@@ -24,10 +24,11 @@ async function fetchBW(index = 0, ext = 'UHD.jpg') {
 
 async function applyImage(img) {
     globalThis.themeColor(img, (themeColors) => {
-        const themeColor = rgbArrayToHex(themeColors[0]);
+        let themeColor = rgbArrayToHex(themeColors[0]);
         document.documentElement.style.setProperty('--themeColor', themeColor);
-        const fontColor = getContrastYIQ(themeColor);
+        let fontColor = getContrastYIQ(themeColor);
         document.documentElement.style.setProperty('--fontColor', fontColor);
+        let url = img.src;
         document.body.style.backgroundImage = `url(${url})`;
     })
 }
