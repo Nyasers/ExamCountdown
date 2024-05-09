@@ -3,13 +3,12 @@ import { getContrast, rgbArrayToHex } from "./color.js";
 import { themeColor } from "./themecolor.js";
 
 async function applyImage(img) {
-    themeColor(img, async (themeColors) => {
+    document.body.style.backgroundImage = `url(${img.src})`;
+    setTimeout(async () => themeColor(img, async (themeColors) => {
         var colors = [themeColors[5], themeColors[6]];
         let aveColor = await getAverageColor(colors);
         setColors(aveColor);
-        let url = img.src;
-        document.body.style.backgroundImage = `url(${url})`;
-    });
+    }), 1e3);
 }
 
 async function setColors(themeColorRgbArray) {
