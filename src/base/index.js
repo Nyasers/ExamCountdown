@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import time from './time.js';
+import { applyImageUrl } from './applyImage.js';
 import main from './main.js';
 import extension from './extension.js';
 import fetchBW from "../base/bingwallpaper.js";
@@ -13,7 +14,9 @@ globalThis.ec = {
     extable: {
         hitokoto: true
     },
-    background: undefined,
+    background: {
+        set: applyImageUrl.bind()
+    },
     extension: undefined,
     fetchBW: undefined,
     hitokoto: undefined

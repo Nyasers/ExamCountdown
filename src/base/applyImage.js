@@ -2,7 +2,7 @@ import { getAverageColor } from "./color.js";
 import { getContrast, rgbArrayToHex } from "./color.js";
 import { themeColor } from "./themecolor.js";
 
-export async function applyImage(img) {
+async function applyImage(img) {
     themeColor(img, async (themeColors) => {
         var colors = [themeColors[5], themeColors[6]];
         let aveColor = await getAverageColor(colors);
@@ -18,4 +18,11 @@ async function setColors(themeColorRgbArray) {
 
     let fontColor = getContrast(themeColor);
     document.documentElement.style.setProperty('--fontColor', fontColor);
+}
+
+export function applyImageUrl() {
+    var preloader = new Image();
+    preloader.onload = async () => await applyImage(preloader);
+    preloader.src = url;
+    preloader.setAttribute('crossOrigin', '');
 }

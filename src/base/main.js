@@ -2,7 +2,6 @@ import { $ } from 'jquery';
 import gsap, { Bounce, Power1, Power4 } from 'gsap';
 import exam from './exam.js';
 import wrap from './loader.js';
-import { applyImage } from './applyImage.js';
 import property from './property.js';
 
 function heartbeat() {
@@ -114,9 +113,6 @@ export default () => {
     ch = 1080;
 
   // Init Properties for Wallpaper Engine
-  ec.background = {
-    set: applyImage.bind()
-  };
   property();
 
   $("body").width(`${cw}px`);
