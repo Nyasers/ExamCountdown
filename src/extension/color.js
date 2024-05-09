@@ -22,7 +22,7 @@ function hexToRgbArray(hex) {
 
 function getContrast50(hexcolor) {
     var rgb = hexToRgbArray(hexcolor);
-    var hex = rgbArrayToHex(rgb)
+    var hex = rgbArrayToHex(rgb).slice(1);
     return (parseInt(hex, 16) > 0xffffff/2) ? 'black':'white';
 }
 
