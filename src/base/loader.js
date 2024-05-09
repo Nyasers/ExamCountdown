@@ -1,4 +1,7 @@
+import { $ } from 'jquery';
+
 var colon = $('<div>').attr('class', 'colon')[0].outerHTML;
+
 var num = $('<div>').attr('class', 'num')
   .append(
     $('<div>').attr('class', 'upper'),
@@ -6,6 +9,7 @@ var num = $('<div>').attr('class', 'num')
     $('<div>').attr('class', 'base lower'),
     $('<div>').attr('class', 'lower')
   )[0].outerHTML;
+
 var clock = $('<div>').attr('id', 'clock')
   .append(
     $(num).attr('id', 'd100'),
@@ -22,6 +26,7 @@ var clock = $('<div>').attr('id', 'clock')
     $(num).attr('id', 's0'),
     $(colon).text('秒'),
   );
+
 var wrap = $('<div>')
   .attr('id', 'wrap')
   .append(
@@ -46,4 +51,5 @@ var wrap = $('<div>')
           )
       )
   );
+
 export default wrap;

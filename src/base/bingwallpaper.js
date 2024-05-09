@@ -1,3 +1,4 @@
+import { $ } from 'jquery';
 import { applyImage } from "./applyImage.js";
 
 const api = 'https://raw.onmicrosoft.cn/Bing-Wallpaper-Action/main';
