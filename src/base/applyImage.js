@@ -4,11 +4,11 @@ import { themeColor } from "./themecolor.js";
 
 async function applyImage(img) {
     document.body.style.backgroundImage = `url(${img.src})`;
-    themeColor(img, async (themeColors) => {
+    setTimeout(() => themeColor(img, async (themeColors) => {
         let colors = [themeColors[5], themeColors[6]];
         let aveColor = await getAverageColor(colors);
         await setColors(aveColor);
-    });
+    }), 3e3);
 }
 
 async function setColors(themeColorRgbArray) {
