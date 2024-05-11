@@ -9,7 +9,7 @@ import '../../cache/index.css';
 // Expose $ and ec
 globalThis.$ = $;
 globalThis.ec = {
-    origin: location.protocol == 'file:' ? 'https://ec.nyaser.top' : location.origin,
+    origin: location.protocol == 'file:' ? 'https://ec.nyase.ru' : location.origin,
     version: new Date(VERSION),
     extable: {
         hitokoto: true
