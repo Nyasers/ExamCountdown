@@ -12,7 +12,7 @@ async function getURLBase(index = 0) {
         dataType: "json",
         success: function (res) {
             console.log(res);
-            const data = res.data;
+            const data = res;
             const images = data[index > 7 ? 'data' : 'images'];
             if (index >= images.length)
                 throw new Error(`Trying to get the ${index + 1} from ${images.length} elements.`);
