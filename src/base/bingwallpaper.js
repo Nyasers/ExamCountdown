@@ -10,14 +10,17 @@ async function getURLBase(index = 0) {
         url,
         cache: false,
         dataType: "json",
-        success: function (res) {
-            console.log(res);
-            const data = res;
+        success: function (data) {
+            console.log(data);
             const images = data[index > 7 ? 'data' : 'images'];
+            console.log(images);
             if (index >= images.length)
                 throw new Error(`Trying to get the ${index + 1} from ${images.length} elements.`);
             let image = images[index];
-            return bing + image.urlbase;
+            console.log(image);
+            const urlbase = bing + image.urlbase;
+            console.log(urlbase);
+            return urlbase;
         }
     });
 }
