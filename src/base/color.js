@@ -45,7 +45,8 @@ export async function getAverageColor(colors) {
     var len = colors.length;
     var sum = [0, 0, 0];
     var res = [0, 0, 0];
-    colors.forEach(e => {
+    colors.forEach(c => {
+        const e = c;
         for (let i = 0; i < e.length; i++) {
             sum[i] += Number(e[i]);
         }
