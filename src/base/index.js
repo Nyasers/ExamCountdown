@@ -16,10 +16,10 @@ globalThis.ec = {
     },
     background: {
         default: 'file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg',
+        fetchBW: fetchBW.bind(),
         set: undefined
     },
     extension: extension,
-    fetchBW: fetchBW.bind(),
     hitokoto: undefined
 };
 
@@ -39,10 +39,10 @@ async function onConnected() {
     if (location.protocol == 'file:') setTimeout(time.bind(), 1e4);
 }
 
-async function waitter() {
+async function waiter() {
     await fetch(ec.origin + '/connect')
         .then(() => setTimeout(onConnected.bind(), 1e3))
-        .catch(() => setTimeout(waitter.bind(), 1e4));
+        .catch(() => setTimeout(waiter.bind(), 1e4));
 }
 
-setTimeout(waitter.bind());
+setTimeout(waiter.bind());
