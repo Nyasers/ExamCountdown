@@ -5,9 +5,10 @@ const bing = 'https://s.cn.bing.net'; //cn.bing.com
 
 async function getURLBase(index = 0) {
     const url = `${api}/data/zh-CN_${index > 7 ? 'all' : 'update'}.json`;
-    await $.ajax({
+    return await $.ajax({
         type: "GET",
         url,
+        async: false,
         cache: false,
         dataType: "json",
         success: function (data) {
