@@ -4,22 +4,18 @@ const api = 'https://raw.onmicrosoft.cn/Bing-Wallpaper-Action/main';
 const bing = 'https://s.cn.bing.net'; //cn.bing.com
 
 async function getURLBase(index = 0) {
-    const url = `${api}/data/zh-CN_${index > 7 ? 'all' : 'update'}.json`;
-    const data = await $.ajax({
+    let url = `${api}/data/zh-CN_${index > 7 ? 'all' : 'update'}.json`;
+    let data = await $.ajax({
         type: "GET",
         url,
         cache: false,
         dataType: "json"
     });
-    // console.log(data);
-    const images = data[index > 7 ? 'data' : 'images'];
-    // console.log(images);
+    let images = data[index > 7 ? 'data' : 'images'];
     if (index >= images.length)
         throw new Error(`Trying to get the ${index + 1} from ${images.length} elements.`);
     let image = images[index];
-    // console.log(image);
-    const urlbase = bing + image.urlbase;
-    console.log(urlbase);
+    let urlbase = bing + image.urlbase;
     return urlbase;
 }
 
