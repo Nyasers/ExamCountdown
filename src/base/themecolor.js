@@ -132,6 +132,7 @@ function colorsStats(node, object) {
 
 export const themeColor = function (blob, callback) {
     let img = createImageBitmap(blob);
+    console.log(img);
     var canvas = new OffscreenCanvas(img.width, img.height),
         ctx = canvas.getContext('2d'),
         width = 0,
