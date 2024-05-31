@@ -83,17 +83,30 @@ function setCounter(mc, i) {
   gsap.fromTo(
     mc.childNodes[0],
     { alpha: 0 },
-    { duration: 0.3, alpha: 1, ease: Power4.easeIn }
+    {
+      duration: 0.3,
+      alpha: 1,
+      ease: Power4.easeIn
+    }
   );
   gsap.fromTo(
     mc.childNodes[1],
     { rotationX: 0 },
-    { duration: 0.3, rotationX: -90, ease: Power1.easeIn }
+    {
+      duration: 0.3,
+      rotationX: -90,
+      ease: Power1.easeIn
+    }
   );
   gsap.fromTo(
     mc.childNodes[2],
     { alpha: 1 },
-    { duration: 0.6, alpha: 0, ease: Bounce.easeOut, delay: 0.3 }
+    {
+      duration: 0.6,
+      alpha: 0,
+      ease: Bounce.easeOut,
+      delay: 0.3
+    }
   );
   gsap.fromTo(
     mc.childNodes[3],
@@ -108,8 +121,7 @@ function setCounter(mc, i) {
 }
 
 export default () => {
-  var interval,
-    cw = 1920,
+  var cw = 1920,
     ch = 1080;
 
   // Init Properties for Wallpaper Engine
@@ -145,5 +157,5 @@ export default () => {
   ec.exam.json.push(ec.exam.default);
   ec.exam.build('高考');
 
-  interval = setInterval(heartbeat, 1e2);
+  ec.interval = setInterval(heartbeat, 1e2);
 }
