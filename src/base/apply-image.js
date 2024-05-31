@@ -1,6 +1,15 @@
 import { getAverageColor } from "./color.js";
 import { getContrast, rgbArrayToHex } from "./color.js";
 import { themeColor } from "./themecolor.js";
+import ImageLoaderWorker from './workers/image-loader.worker.js'
+
+const imageLoader = new ImageLoaderWorker
+
+ImageLoaderWorker.addEventListener('message', event => {
+    const imageData = event.data
+    const objectURL = URL.createObjectURL(imageData.blob)
+    console.log({ objectURL })
+})
 
 async function applyImage(img) {
     document.body.style.backgroundImage = `url(${img.src})`;
@@ -20,6 +29,8 @@ async function setColors(themeColorRgbArray) {
 }
 
 export function applyImageUrl(url) {
+    ImageLoaderWorker.postMessage(url)
+    return;
     let preloader = new Image();
     preloader.onload = async () => await applyImage(preloader);
     preloader.src = url;

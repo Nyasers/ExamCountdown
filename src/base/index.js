@@ -1,9 +1,9 @@
 import $ from 'jquery';
 import time from './time.js';
-import { applyImageUrl } from './applyImage.js';
+import { applyImageUrl } from './apply-image.js';
 import main from './main.js';
 import extension from './extension.js';
-import fetchBW from "./bingwallpaper.js";
+import fetchBW from "./bing-wallpaper.js";
 import '../../cache/index.css';
 
 // Expose $ and ec
