@@ -13,11 +13,11 @@ ImageLoaderWorker.addEventListener('message', event => {
 async function applyImage(imageData) {
     document.body.style.backgroundImage = `url(${imageData.objectURL})`;
     if (imageData.imageURL != ec.background.default)
-        setTimeout(() => themeColor(imageData.blob, async (themeColors) => {
+        themeColor(imageData.blob, async (themeColors) => {
             let colors = [themeColors[themeColors.length - 3], themeColors[themeColors.length - 2]];
             let aveColor = await getAverageColor(colors);
             await setColors(aveColor);
-        }), 1e3);
+        });
 }
 
 async function setColors(themeColorRgbArray) {
