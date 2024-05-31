@@ -107,7 +107,7 @@ export default {
         enabled: true,
         retry: 6,
         url: 'extraexams.json',
-        fetch: async function (url = this.url) {
+        fetch: async function (url = ec.exam.extra.url) {
             $.getJSON(url)
                 .done(function (data) {
                     try {
