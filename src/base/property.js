@@ -16,7 +16,7 @@ export default function () {
         ec.extable.hitokoto = properties.hitokoto.value;
       }
       if (properties.extraexams) {
-        ec.exam.extra.fetch(properties.extraexams.value);
+        ec.exam.extra.url = properties.extraexams.value;
       }
     }
   };
