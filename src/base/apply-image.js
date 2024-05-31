@@ -26,10 +26,6 @@ async function setColors(themeColorRgbArray) {
     document.documentElement.style.setProperty('--fontColor', fontColor);
 }
 
-export function applyImageUrl(url) {
-    ImageLoaderWorker.postMessage(url)
-    /*let preloader = new Image();
-    preloader.onload = async () => await applyImage(preloader);
-    preloader.src = url;
-    preloader.setAttribute('crossOrigin', '');*/
-}
+var applyImageUrl = ImageLoaderWorker.postMessage.bind();
+
+export default applyImageUrl;
