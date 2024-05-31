@@ -157,5 +157,6 @@ export default () => {
   ec.exam.json.push(ec.exam.default);
   ec.exam.build('高考');
 
-  ec.interval = setInterval(heartbeat, 1e2);
+  let interval = setInterval(heartbeat, 1e2);
+  ec.stop = (function () { clearInterval(interval) }).bind();
 }
