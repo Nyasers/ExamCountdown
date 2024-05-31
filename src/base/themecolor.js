@@ -130,9 +130,8 @@ function colorsStats(node, object) {
     }
 }
 
-export const themeColor = async function (blob, callback) {
+export const themeColor = async function (blob) {
     let img = await createImageBitmap(blob);
-    console.log(img);
     var canvas = new OffscreenCanvas(img.width, img.height),
         ctx = canvas.getContext('2d'),
         width = 0,
@@ -147,7 +146,6 @@ export const themeColor = async function (blob, callback) {
     ctx.drawImage(img, 0, 0, width, height);
 
     imageData = ctx.getImageData(0, 0, width, height).data;
-    console.log(imageData);
 
     root = new OctreeNode();
     colorMap = {};
@@ -168,5 +166,5 @@ export const themeColor = async function (blob, callback) {
     arr.forEach(function (item, index) {
         arr[index] = item.split(',')
     })
-    callback(arr)
+    return arr;
 }
