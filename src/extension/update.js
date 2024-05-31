@@ -15,6 +15,6 @@ export default {
     let content = `Nyaser: 更新可用 (${ec.version ? ec.version.toLocaleString('zh-cn') : undefined
       } -> ${ec.update.version ? ec.update.version.toLocaleString('zh-cn') : undefined
       })<br>${ec.update.msg}`;
-    $("body").append(`<center><big><big>${content}</big></big></center>`);
+    $("body").append(`<center style="color:var(--fontColor)"><big><big>${content}</big></big></center>`);
   },
 };
