@@ -11,6 +11,8 @@ const TerserOptions = import('./terser.config.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 
+const MODE = 'production';
+//const MODE = 'development';
 const VERSION = '"2024/06/01"';
 
 const commonPostcssLoader = {
@@ -27,8 +29,7 @@ const commonPostcssLoader = {
 module.exports = [
   {
     name: 'css',
-    mode: 'production',
-    //mode: 'development',
+    mode: MODE,
     entry: {
       index: './src/base/css/index.js',
       extension: './src/extension/css/index.js',
@@ -65,7 +66,7 @@ module.exports = [
   },
   {
     name: 'workers',
-    mode: 'production',
+    mode: MODE,
     dependencies: [],
     entry: {
       'image-loader': './src/workers/image-loader.worker.js',
@@ -89,8 +90,7 @@ module.exports = [
   },
   {
     name: 'app',
-    mode: 'production',
-    //mode: 'development',
+    mode: MODE,
     dependencies: ['css', 'workers'],
     entry: {
       index: './src/base/index.js',
