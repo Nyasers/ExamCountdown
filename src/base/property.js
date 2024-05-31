@@ -20,5 +20,5 @@ export default function () {
       }
     }
   };
-  if (location.protocol !== 'file:') setTimeout(() => ec.exam.extra.fetch())/*, setTimeout(setBackground, 1e3)*/;
+  if (location.protocol !== 'file:') setTimeout(() => ec.exam.extra.fetch())
 }
