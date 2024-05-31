@@ -13,7 +13,7 @@ ImageLoaderWorker.addEventListener('message', event => {
 async function applyImage(imageData) {
     document.body.style.backgroundImage = `url(${imageData.objectURL})`;
     if (imageData.imageURL != ec.background.default)
-        themeColor(imageData.blob, async (themeColors) => {
+        await themeColor(imageData.blob, async (themeColors) => {
             let colors = [themeColors[themeColors.length - 3], themeColors[themeColors.length - 2]];
             let aveColor = await getAverageColor(colors);
             await setColors(aveColor);
