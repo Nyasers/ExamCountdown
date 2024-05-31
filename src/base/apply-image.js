@@ -1,6 +1,8 @@
 import { getAverageColor, getContrast, rgbArrayToHex } from "./color.js";
 
-const ImageLoaderWorker = new Worker(new URL('./workers/image-loader.worker.js', import.meta.url));
+const _ImageLoaderWorker = new Worker(new URL('./workers/image-loader.worker.js', import.meta.url));
+var blob = new Blob([document.querySelector('script#image-loader').textContent]);
+const ImageLoaderWorker = new Worker(URL.createObjectURL(blob));
 
 ImageLoaderWorker.addEventListener('message', event => {
     const imageData = event.data;
