@@ -106,7 +106,8 @@ export default {
     extra: {
         enabled: true,
         retry: 6,
-        fetch: async function (url = 'extraexams.json') {
+        url: 'extraexams.json',
+        fetch: async function (url = this.url) {
             $.getJSON(url)
                 .done(function (data) {
                     try {
@@ -117,7 +118,8 @@ export default {
                     }
                 })
                 .fail(function () {
-                    if (ec.extra.retry-- >= 0) setTimeout(() => ec.extra.fetch(url), 1e4), console.warn(`ec.exam.extra.fetch: retry ${ec.extra.retry}`)
+                    if (ec.exam.extra.retry-- >= 0) setTimeout(() => ec.extra.fetch(url), 1e4), console.warn(`ec.exam.extra.fetch: retry ${ec.extra.retry}`)
+                    else ec.exam.extra.retry = 6;
                 });
         },
         json: []
