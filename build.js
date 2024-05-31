@@ -86,7 +86,7 @@ async function postBuild() {
     // Index
     fs.writeFile(
         path.resolve('dist/index.html'),
-        await packHTML(path.resolve('dist/index.js'), { id: 'image-loader', js: path.resolve('dist/878.js') }),
+        await packHTML(path.resolve('dist/index.js'), { id: 'image-loader', js: path.resolve('dist/image-loader.worker.js') }),
         'utf-8',
         postMake
     );

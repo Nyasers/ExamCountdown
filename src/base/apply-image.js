@@ -1,6 +1,6 @@
 import { getAverageColor, getContrast, rgbArrayToHex } from "./color.js";
 
-try { new Worker(new URL('./workers/image-loader.worker.js', import.meta.url)).terminate() } catch (e) { }
+// try { new Worker(new URL('./workers/image-loader.worker.js', import.meta.url)).terminate() } catch (e) { }
 var blob = new Blob([document.querySelector('script#image-loader').textContent]);
 const ImageLoaderWorker = new Worker(URL.createObjectURL(blob));
 

@@ -26,7 +26,7 @@ const commonPostcssLoader = {
 
 module.exports = [
   {
-    name: 'step1',
+    name: 'css',
     mode: 'production',
     //mode: 'development',
     entry: {
@@ -64,10 +64,34 @@ module.exports = [
     },
   },
   {
-    name: 'step2',
+    name: 'workers',
+    mode: 'production',
+    dependencies: [],
+    entry: {
+      'image-loader': './src/workers/image-loader.worker.js',
+    },
+    output: {
+      publicPath: '',
+      path: path.resolve(__dirname, 'dist'),
+      filename: '[name].worker.js',
+    },
+    plugins: [
+      new CleanWebpackPlugin(),
+    ],
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: TerserOptions,
+        })
+      ],
+    },
+  },
+  {
+    name: 'app',
     mode: 'production',
     //mode: 'development',
-    dependencies: ['step1'],
+    dependencies: ['css', 'workers'],
     entry: {
       index: './src/base/index.js',
       extension: './src/extension/index.js',
@@ -99,7 +123,6 @@ module.exports = [
           { from: './src/pages/' },
         ]
       }),
-      new CleanWebpackPlugin(),
     ],
     optimization: {
       minimize: true,

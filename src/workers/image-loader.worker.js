@@ -1,4 +1,4 @@
-import { themeColor } from "../theme-color.js";
+import { themeColor } from "../base/theme-color.js";
 
 self.addEventListener('message', async event => {
     const imageURL = event.data;
