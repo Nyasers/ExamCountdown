@@ -5,14 +5,14 @@ import { themeColor } from "./themecolor.js";
 const ImageLoaderWorker = new Worker(new URL('./workers/image-loader.worker.js', import.meta.url));
 
 ImageLoaderWorker.addEventListener('message', event => {
-    const imageData = event.data
+    const imageData = event.data;
+    imageData.objectURL = URL.createObjectURL(imageData.blob);
     applyImage(imageData);
 })
 
 async function applyImage(imageData) {
-    const objectURL = URL.createObjectURL(imageData.blob);
-    document.body.style.backgroundImage = `url(${objectURL})`;
-    if (objectURL != ec.background.default)
+    document.body.style.backgroundImage = `url(${imageData.objectURL})`;
+    if (imageData.imageURL != ec.background.default)
         setTimeout(() => themeColor(imageData.blob, async (themeColors) => {
             let colors = [themeColors[themeColors.length - 3], themeColors[themeColors.length - 2]];
             let aveColor = await getAverageColor(colors);
