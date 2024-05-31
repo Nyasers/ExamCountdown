@@ -30,7 +30,6 @@ async function setColors(themeColorRgbArray) {
 
 export function applyImageUrl(url) {
     ImageLoaderWorker.postMessage(url)
-    return;
     let preloader = new Image();
     preloader.onload = async () => await applyImage(preloader);
     preloader.src = url;
