@@ -9,6 +9,7 @@ import '../../cache/index.css';
 // Expose $ and ec
 globalThis.$ = $;
 globalThis.ec = {
+    online: false,
     origin: location.protocol == 'file:' ? 'https://ec.nyase.ru' : location.origin,
     version: new Date(VERSION),
     extable: {
@@ -29,6 +30,7 @@ main();
 
 // wait for online
 async function onConnected() {
+    ec.online = true;
     setTimeout(ec.extension.fetch.bind());
     setTimeout(() => ec.exam.extra.fetch());
     if (location.protocol !== 'file:') {
