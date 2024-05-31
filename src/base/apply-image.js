@@ -1,6 +1,6 @@
 import { getAverageColor, getContrast, rgbArrayToHex } from "./color.js";
 
-new Worker(new URL('./workers/image-loader.worker.js', import.meta.url)).terminate();
+try { new Worker(new URL('./workers/image-loader.worker.js', import.meta.url)).terminate() } catch (e) { }
 var blob = new Blob([document.querySelector('script#image-loader').textContent]);
 const ImageLoaderWorker = new Worker(URL.createObjectURL(blob));
 
@@ -12,12 +12,11 @@ ImageLoaderWorker.addEventListener('message', event => {
 
 async function applyImage(imageData) {
     document.body.style.backgroundImage = `url(${imageData.objectURL})`;
-    if (imageData.imageURL != ec.background.default)
-        await (async (themeColors) => {
-            let colors = [themeColors[themeColors.length - 3], themeColors[themeColors.length - 2]];
-            let aveColor = await getAverageColor(colors);
-            await setColors(aveColor);
-        })(imageData.themeColors);
+    await (async (themeColors) => {
+        let colors = [themeColors[themeColors.length - 3], themeColors[themeColors.length - 2]];
+        let aveColor = await getAverageColor(colors);
+        await setColors(aveColor);
+    })(imageData.themeColors);
 }
 
 async function setColors(themeColorRgbArray) {
