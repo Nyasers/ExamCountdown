@@ -6,17 +6,18 @@ const ImageLoaderWorker = new Worker(new URL('./workers/image-loader.worker.js',
 
 ImageLoaderWorker.addEventListener('message', event => {
     const imageData = event.data
-    const objectURL = URL.createObjectURL(imageData.blob)
-    console.log({ objectURL })
+    applyImage(imageData);
 })
 
-async function applyImage(img) {
-    document.body.style.backgroundImage = `url(${img.src})`;
-    if (img.src != ec.background.default) setTimeout(() => themeColor(img, async (themeColors) => {
-        let colors = [themeColors[themeColors.length - 3], themeColors[themeColors.length - 2]];
-        let aveColor = await getAverageColor(colors);
-        await setColors(aveColor);
-    }), 1e3);
+async function applyImage(imageData) {
+    const objectURL = URL.createObjectURL(imageData.blob);
+    document.body.style.backgroundImage = `url(${objectURL})`;
+    if (objectURL != ec.background.default)
+        setTimeout(() => themeColor(imageData.blob, async (themeColors) => {
+            let colors = [themeColors[themeColors.length - 3], themeColors[themeColors.length - 2]];
+            let aveColor = await getAverageColor(colors);
+            await setColors(aveColor);
+        }), 1e3);
 }
 
 async function setColors(themeColorRgbArray) {
@@ -29,8 +30,8 @@ async function setColors(themeColorRgbArray) {
 
 export function applyImageUrl(url) {
     ImageLoaderWorker.postMessage(url)
-    let preloader = new Image();
+    /*let preloader = new Image();
     preloader.onload = async () => await applyImage(preloader);
     preloader.src = url;
-    preloader.setAttribute('crossOrigin', '');
+    preloader.setAttribute('crossOrigin', '');*/
 }

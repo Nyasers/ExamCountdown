@@ -130,8 +130,9 @@ function colorsStats(node, object) {
     }
 }
 
-export const themeColor = function (img, callback) {
-    var canvas = document.createElement('canvas'),
+export const themeColor = function (blob, callback) {
+    let img = createImageBitmap(blob);
+    var canvas = new OffscreenCanvas(img.width, img.height),
         ctx = canvas.getContext('2d'),
         width = 0,
         height = 0,
@@ -139,8 +140,8 @@ export const themeColor = function (img, callback) {
         length = 0,
         blockSize = 1;
 
-    width = canvas.width = img.width;
-    height = canvas.height = img.height;
+    width = img.width;
+    height = img.height;
 
     ctx.drawImage(img, 0, 0, width, height);
 
