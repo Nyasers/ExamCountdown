@@ -6,7 +6,7 @@ self.addEventListener('message', async event => {
     const response = await fetch(imageURL)
     const blob = await response.blob()
 
-    const themeColors = themeColor(blob)
+    const themeColors = await themeColor(blob)
 
     // Send the image data to the UI thread!
     self.postMessage({
