@@ -34,6 +34,7 @@ module.exports = [
       extension: './src/extension/css/index.js',
     },
     output: {
+      publicPath: '',
       path: path.resolve(__dirname, 'cache'),
       filename: '[name].js'
     },
@@ -72,6 +73,7 @@ module.exports = [
       extension: './src/extension/index.js',
     },
     output: {
+      publicPath: '',
       path: path.resolve(__dirname, 'dist'),
       filename: '[name].js'
     },
