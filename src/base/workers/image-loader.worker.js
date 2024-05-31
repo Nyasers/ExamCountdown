@@ -11,4 +11,4 @@ self.addEventListener('message', async event => {
     })
 })
 
-export default self;
+export default this
