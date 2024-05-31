@@ -3,6 +3,7 @@
  */
 
 const webpack = require('webpack');
+const fs = require('fs');
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -25,6 +26,9 @@ const commonPostcssLoader = {
     }
   }
 }
+
+var workerEntry = [];
+var workerContent = [];
 
 module.exports = [
   {
@@ -78,6 +82,20 @@ module.exports = [
     },
     plugins: [
       new CleanWebpackPlugin(),
+      {
+        apply: compiler => {
+          compiler.hooks.done.tap('MyWebpackPlugin', function (stats) {
+            const entrypoints = stats.toJson().entrypoints;
+
+            Object.keys(entrypoints).forEach((entryName) => {
+              const entryFiles = entrypoints[entryName].assets;
+              const entryFilename = entryFiles[0].name;
+              workerEntry[entryName] = path.join(stats.compilation.outputOptions.path, entryFilename);
+              workerContent[entryName] = JSON.stringify(fs.readFileSync(workerEntry[entryName], 'utf-8'));
+            });
+          });
+        }
+      },
     ],
     optimization: {
       minimize: true,
@@ -123,6 +141,16 @@ module.exports = [
           { from: './src/pages/' },
         ]
       }),
+      new CleanWebpackPlugin(),
+      {
+				apply: compiler => {
+					compiler.hooks.beforeRun.tap('MyWebpackPlugin', function(stats) {
+						new webpack.DefinePlugin({
+							WORKERS: workerContent
+						}).apply(compiler);
+					});
+				}
+			},
     ],
     optimization: {
       minimize: true,
