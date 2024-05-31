@@ -13,7 +13,7 @@ ImageLoaderWorker.addEventListener('message', event => {
 async function applyImage(imageData) {
     setBackground(imageData.objectURL);
     await (async (themeColors) => {
-        return await setColors(themeColors[0]);
+        globalThis.theme = (function (i) { setColors(themeColors[i]) }).bind();
         let colors = [themeColors[themeColors.length - 3], themeColors[themeColors.length - 2]];
         let aveColor = await getAverageColor(colors);
         await setColors(aveColor);
