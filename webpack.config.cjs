@@ -11,7 +11,7 @@ const TerserOptions = import('./terser.config.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 
-const VERSION = '"2024/05/31"';
+const VERSION = '"2024/06/01"';
 
 const commonPostcssLoader = {
   loader: 'postcss-loader',
@@ -28,11 +28,13 @@ module.exports = [
   {
     name: 'step1',
     mode: 'production',
+    //mode: 'development',
     entry: {
       index: './src/base/css/index.js',
       extension: './src/extension/css/index.js',
     },
     output: {
+      publicPath: '',
       path: path.resolve(__dirname, 'cache'),
       filename: '[name].js'
     },
@@ -71,6 +73,7 @@ module.exports = [
       extension: './src/extension/index.js',
     },
     output: {
+      publicPath: '',
       path: path.resolve(__dirname, 'dist'),
       filename: '[name].js'
     },

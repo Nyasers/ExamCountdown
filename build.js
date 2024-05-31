@@ -11,14 +11,21 @@ function MinifyJSON(code) {
     return JSON.stringify(JSON.parse(code));
 }
 
-async function packHTML(jsfile) {
+async function packHTML(jsfile, ...workers) {
     var output = "<!doctype html><noscript><strong>We're sorry but ExamCountdown doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>";
-    output += "<ec><script>";
+    output += "<ec>";
+    workers.forEach(worker => {
+        output += `<script id="${worker.id}" type="app/worker">`;
+        output += fs.readFileSync(worker.js, 'utf-8');
+        output += "</script>";
+    });
+    output += "<script>";
     var js = fs.readFileSync(jsfile, 'utf-8');
     var result = await minify(js, terserConfig);
     output += result.code;
     fs.writeFileSync(jsfile, result.code)
-    output += "</script></ec>";
+    output += "</script>";
+    output += "</ec>";
     return output;
 }
 
@@ -58,7 +65,7 @@ async function postMake() {
     });
 }
 
-async function postBuild () {
+async function postBuild() {
     // Merge license
     var license = '';
     fs.readdirSync(path.resolve('dist')).filter(n => n.endsWith('.LICENSE.txt'))
@@ -79,7 +86,7 @@ async function postBuild () {
     // Index
     fs.writeFile(
         path.resolve('dist/index.html'),
-        await packHTML(path.resolve('dist/index.js')),
+        await packHTML(path.resolve('dist/index.js'), { id: 'image-loader', js: path.resolve('dist/354.js') }),
         'utf-8',
         postMake
     );

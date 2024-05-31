@@ -1,9 +1,9 @@
 import $ from 'jquery';
 import time from './time.js';
-import { applyImageUrl } from './applyImage.js';
+import applyImageUrl from './apply-image.js';
 import main from './main.js';
 import extension from './extension.js';
-import fetchBW from "./bingwallpaper.js";
+import fetchBW from "./bing-wallpaper.js";
 import '../../cache/index.css';
 
 // Expose $ and ec
@@ -34,7 +34,7 @@ async function onConnected() {
     if (location.protocol !== 'file:') {
         setTimeout(() => fetchBW(0, '1920x1080.webp'));
     } else if (document.body.style.backgroundImage == ''
-    || document.body.style.backgroundImage == `url("${ec.background.default}")`) {
+        || document.body.style.backgroundImage == `url("${ec.background.default}")`) {
         setTimeout(fetchBW.bind());
     }
     if (location.protocol == 'file:') setTimeout(time.bind(), 1e4);
