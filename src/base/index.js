@@ -30,7 +30,7 @@ main();
 // wait for online
 async function onConnected() {
     setTimeout(ec.extension.fetch.bind());
-    setTimeout(ec.exam.extra.fetch.bind());
+    setTimeout(() => ec.exam.extra.fetch());
     if (location.protocol !== 'file:') {
         setTimeout(() => fetchBW(0, '1920x1080.webp'));
     } else if (document.body.style.backgroundImage == ''
