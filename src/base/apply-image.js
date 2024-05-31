@@ -1,24 +1,6 @@
 import { getAverageColor, getContrast, rgbArrayToHex } from "./color.js";
 
-const ImageLoaderWorker = new Worker(URL.createObjectURL(`
-import { themeColor } from "./themecolor.js";
-
-self.addEventListener('message', async event => {
-    const imageURL = event.data;
-
-    const response = await fetch(imageURL);
-    const blob = await response.blob();
-
-    const themeColors = await themeColor(blob);
-
-    self.postMessage({
-        blob: blob,
-        imageURL: imageURL,
-        themeColors: themeColors,
-    });
-});
-`));
-//const ImageLoaderWorker = new Worker(new URL('./workers/image-loader.worker.js', import.meta.url));
+const ImageLoaderWorker = new Worker(new URL('./workers/image-loader.worker.js', import.meta.url));
 
 ImageLoaderWorker.addEventListener('message', event => {
     const imageData = event.data;

@@ -40,11 +40,13 @@ async function postMake() {
     const json = path.resolve('dist/project.json');
     const pathto = '/wallpaper_engine/projects/myprojects/ExamCountdown';
     const install = [
+        { filename: '354.js', data: { name: '354.js' } },
         { filename: 'index.html', data: { name: path.resolve(pathto, 'index.html') } },
         { filename: 'project.json', data: { name: path.resolve(pathto, 'project.json') } },
         { filename: 'update.cmd', data: { name: path.resolve(pathto, 'update.cmd') } },
     ];
     const update = [
+        { filename: '354.js', data: { name: '354.js' } },
         { filename: 'index.html', data: { name: 'index.html' } },
         { filename: 'project.json', data: { name: 'project.json' } },
         { filename: 'update.cmd', data: { name: 'update.cmd' } },
