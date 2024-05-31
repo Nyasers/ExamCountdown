@@ -118,7 +118,7 @@ export default {
                     }
                 })
                 .fail(function () {
-                    if (ec.exam.extra.retry-- >= 0) setTimeout(() => ec.exam.extra.fetch(url), 1e4), console.warn({ url, retry: ec.exam.extra.retry })
+                    if (ec.exam.extra.retry-- >= 0) setTimeout(() => ec.exam.extra.fetch(url), 1e4), console.warn({ url, retry: ec.exam.extra.retry + 1 })
                     else ec.exam.extra.retry = 6;
                 });
         },
