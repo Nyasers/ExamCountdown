@@ -16,7 +16,7 @@ async function packHTML(jsfile, ...workers) {
     output += "<ec>";
     workers.forEach(worker => {
         output += `<script id="${worker.id}" type="app/worker">`;
-        output += fs.readFileSync(worker.js, 'utf-8');
+        output += fs.readFileSync(worker.js, 'utf-8'); fs.rmSync(worker.js);
         output += "</script>";
     });
     output += "<script>";
