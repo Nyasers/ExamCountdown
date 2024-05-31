@@ -10,5 +10,3 @@ self.addEventListener('message', async event => {
         blob: blob,
     })
 })
-
-export default this

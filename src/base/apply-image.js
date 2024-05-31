@@ -1,9 +1,8 @@
 import { getAverageColor } from "./color.js";
 import { getContrast, rgbArrayToHex } from "./color.js";
 import { themeColor } from "./themecolor.js";
-import ImageLoaderWorker from './workers/image-loader.worker.js'
 
-const imageLoader = new ImageLoaderWorker
+const ImageLoaderWorker = new Worker(new URL('./workers/image-loader.worker.js', import.meta.url));
 
 ImageLoaderWorker.addEventListener('message', event => {
     const imageData = event.data
