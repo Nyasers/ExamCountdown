@@ -1,7 +1,7 @@
 import version from './version.js';
 
 function getVersionString(date) {
-  return date.toJSON().split(':00.')[0] ?? undefined;
+  try { return date.toJSON().split(':00.')[0] } catch { return null }
 }
 
 export default {
