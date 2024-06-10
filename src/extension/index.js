@@ -8,7 +8,7 @@ else throw new Error('Duplicate Runs Not Allowed.');
 
 // Init update
 ec.update = update;
-ec.update.version = new Date(VERSION);
+ec.update.version = new Date(VERSION + "Z");
 
 // check update
 setTimeout(() => {

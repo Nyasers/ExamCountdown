@@ -28,7 +28,7 @@ export default {
     if (version.length > 0) {
       content += "<br>--更新日志--<br>";
       version.forEach(v => {
-        if (ec.version.getTime() < new Date(v.date).getTime()) {
+        if (new Date(v.date) - ec.version) {
           content += `${getVersionString(v.date)}: ${v.msg}<br>`;
         }
       });
