@@ -13,13 +13,13 @@ let input = [
 let output = [];
 input.forEach(version => {
     let build = {
-        date: new Date(version[d] ?? 0),
-        msg: version[m] ?? ''
+        date: new Date(version.d ?? 0),
+        msg: version.m ?? ''
     }
     output.join(build);
 });
 output.sort((left, right) =>
-    left[date].getTime() ?? 0 - right[date].getTime() ?? 0
+    left.date.getTime() ?? 0 - right.date.getTime() ?? 0
 );
 
 export default output;
