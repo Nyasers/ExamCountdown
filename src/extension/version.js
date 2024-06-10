@@ -9,7 +9,7 @@ var o = [];
         m: '更新高考时间'
     }
 ].forEach(v => o = o.concat({
-    date: new Date(v.d ?? 0),
+    date: new Date(v.d + 'Z' ?? 0),
     msg: v.m ?? ''
 }));
-export default o.sort((a, b) => a.date.getTime() - b.date.getTime());
+export default o.sort((a, b) => a.date - b.date);
