@@ -1,7 +1,5 @@
 /uc /update.cmd
 /up /update.ps1
-/uz /zip
-/update.zip /zip
 /zip /ExamCountdown.zip
 /ij /index.js
 /ic /index.css
