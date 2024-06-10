@@ -29,7 +29,7 @@ export default {
       content += "<br>--更新日志--<br>";
       version.forEach(v => {
         if (ec.version.getTime() < new Date(v.date).getTime()) {
-          content += `${v.date}: ${v.msg}<br>`;
+          content += `${getVersionString(v.date)}: ${v.msg}<br>`;
         }
       });
     }
