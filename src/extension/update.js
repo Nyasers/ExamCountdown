@@ -14,8 +14,8 @@ export default {
   },
   notice: function () {
     const ec = globalThis.ec;
-    let content = `Nyaser: 更新可用 (${ec.version ? ec.version.toLocaleString('zh-cn') : undefined
-      } -> ${ec.update.version ? ec.update.version.toLocaleString('zh-cn') : undefined
+    let content = `Nyaser: 更新可用 (${ec.version ? ec.version.toJSON().split(':00.')[0] : undefined
+      } -> ${ec.update.version ? ec.update.version.toJSON().split(':00.')[0] : undefined
       })<br>${ec.update.msg}`;
     version.forEach(v => {
       if (ec.version.getTime() < new Date(v.date).getTime()) {

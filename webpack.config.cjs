@@ -14,7 +14,7 @@ const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 
 const MODE = 'production';
 //const MODE = 'development';
-const VERSION = '"2024/06/10"';
+const VERSION = '"2024/06/10T16:00"';
 
 const commonPostcssLoader = {
   loader: 'postcss-loader',
@@ -143,14 +143,14 @@ module.exports = [
       }),
       new CleanWebpackPlugin(),
       {
-				apply: compiler => {
-					compiler.hooks.beforeRun.tap('MyWebpackPlugin', function(stats) {
-						new webpack.DefinePlugin({
-							WORKERS: workerContent
-						}).apply(compiler);
-					});
-				}
-			},
+        apply: compiler => {
+          compiler.hooks.beforeRun.tap('MyWebpackPlugin', function (stats) {
+            new webpack.DefinePlugin({
+              WORKERS: workerContent
+            }).apply(compiler);
+          });
+        }
+      },
     ],
     optimization: {
       minimize: true,

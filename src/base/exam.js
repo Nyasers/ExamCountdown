@@ -86,7 +86,7 @@ export default {
         title: "福建高考",
         time: {
             start: "$YYYY/06/07 09:00",
-            end: "$YYYY/06/10 16:30",
+            end: "$YYYY/06/09 18:15",
         }
     },
     {
