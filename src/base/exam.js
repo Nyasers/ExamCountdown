@@ -92,15 +92,15 @@ export default {
     {
         title: '福建中考',
         time: {
-            start: '$YYYY/06/25 08:30',
-            end: '$YYYY/06/27 11:55'
+            start: '$YYYY/06/19 08:30',
+            end: '$YYYY/06/21 11:55'
         }
     },
     {
         title: '福建会考',
         time: {
-            start: '$YYYY/06/27 15:00',
-            end: '$YYYY/06/27 17:45'
+            start: '$YYYY/06/21 15:00',
+            end: '$YYYY/06/21 17:45'
         }
     }],
     extra: {
