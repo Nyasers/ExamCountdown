@@ -21,11 +21,14 @@ export default {
   notice: (function () {
     let content = `Nyaser: 更新可用 (${getVersionString(ec.version)} -> ${getVersionString(ec.update.version)})`;
     content += `<br>--更新方法--<br>${ec.update.msg}`;
-    version.forEach(v => {
-      if (ec.version.getTime() < new Date(v.date).getTime()) {
-        content += `<br>${v.date}: ${v.msg} `;
-      }
-    });
-    $("body").append(`<center style="color:var(--fontColor)"><big><big>${content}</big></big></center>`);
+    if (version.length > 0) {
+      content += "<br>--更新日志--<br>";
+      version.forEach(v => {
+        if (ec.version.getTime() < new Date(v.date).getTime()) {
+          content += `${v.date}: ${v.msg}<br>`;
+        }
+      });
+    }
+    $("body").append(`<center style="color:var(--fontColor)"><big>${content}</big></center>`);
   }).bind(globalThis),
 };
