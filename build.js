@@ -90,6 +90,13 @@ async function postBuild() {
         JSON.stringify(exams),
         'utf-8'
     );
+
+    // VERSION
+    fs.writeFileSync(
+        path.resolve('dist/VERSION'),
+        webpackConfig[2].plugins[0].definitions.VERSION.split('"')[1].split("Z")[0],
+        'utf-8'
+    )
 }
 
 webpack(webpackConfig, postBuild);
