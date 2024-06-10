@@ -45,13 +45,7 @@ async function packZip(files, destination) {
 
 async function postMake() {
     const json = path.resolve('dist/project.json');
-    const pathto = '/wallpaper_engine/projects/myprojects/ExamCountdown';
-    const install = [
-        { filename: 'index.html', data: { name: path.resolve(pathto, 'index.html') } },
-        { filename: 'project.json', data: { name: path.resolve(pathto, 'project.json') } },
-        { filename: 'update.cmd', data: { name: path.resolve(pathto, 'update.cmd') } },
-    ];
-    const update = [
+    const zip = [
         { filename: 'index.html', data: { name: 'index.html' } },
         { filename: 'project.json', data: { name: 'project.json' } },
         { filename: 'update.cmd', data: { name: 'update.cmd' } },
@@ -60,8 +54,7 @@ async function postMake() {
         if (err) throw err;
         const minified = MinifyJSON(data);
         fs.writeFileSync(json, minified, 'utf-8');
-        packZip(install, 'ExamCountdown.zip');
-        packZip(update, 'update.zip');
+        packZip(zip, 'ExamCountdown.zip');
     });
 }
 
