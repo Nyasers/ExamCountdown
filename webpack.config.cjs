@@ -14,7 +14,7 @@ const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 
 const MODE = 'production';
 //const MODE = 'development';
-const VERSION = '"2024/06/10T16:00"';
+const VERSION = '"2024-06-10T16:00"';
 
 const commonPostcssLoader = {
   loader: 'postcss-loader',
