@@ -11,14 +11,14 @@ export default {
       ? `1.运行 ${projectRoot + 'update.cmd'}<br>`
       + `2.用浏览器打开 https://ec.nyase.ru/zip 下载压缩包，解压到${projectRoot}<br>`
       : '才不需要更新呢，哼！<br>';
-  }).bind()(),
+  }).bind(global)(),
   check: (function () {
     if (typeof ec.version == "undefined") return Infinity;
     else if (typeof ec.update.version == "undefined") return false;
     else if (ec.version.getTime() == ec.update.version.getTime()) return false;
     else return (Time().getTime() - ec.update.version.getTime()) / 8.64e7;
-  }).bind(),
-  notice: (function () {
+  }).bind(global),
+  notice: (function (version) {
     let content = `Nyaser: 更新可用 (${getVersionString(ec.version)} -> ${getVersionString(ec.update.version)})`;
     content += `<br>--更新方法--<br>${ec.update.msg}`;
     if (version.length > 0) {
@@ -30,5 +30,5 @@ export default {
       });
     }
     $("body").append(`<center style="color:var(--fontColor)"><big>${content}</big></center>`);
-  }).bind(),
+  }).bind(global, version),
 };
