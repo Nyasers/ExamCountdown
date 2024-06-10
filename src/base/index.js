@@ -11,7 +11,7 @@ globalThis.$ = $;
 globalThis.ec = {
     online: false,
     origin: location.protocol == 'file:' ? 'https://ec.nyase.ru' : location.origin,
-    version: new Date(VERSION + "Z"),
+    version: new Date(VERSION),
     extable: {
         hitokoto: true
     },
