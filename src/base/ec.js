@@ -38,11 +38,12 @@ export const ec = {
             value: true,
             func: function (value) {
                 ec.properties.bingwallpaper.value = value;
-                if (ec.online)
+                if (ec.online) {
                     if (ec.properties.bingwallpaper.value)
                         ec.background.fetchBW();
                     else
                         ec.background.set(ec.properties.background.value);
+                }
             }
         },
         extraexams: {
