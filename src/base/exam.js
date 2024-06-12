@@ -143,7 +143,7 @@ export default {
             }
         }
 
-        if (ec.properties.finalonly)
+        if (ec.properties.finalonly.value)
             ec.exam.array.splice(0, ec.exam.array.length - 1);
         return ec.exam.array;
     },

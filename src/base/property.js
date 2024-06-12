@@ -3,24 +3,22 @@ export default function () {
     applyUserProperties: function (properties) {
       const ec = globalThis.ec;
       if (properties.background) {
-        ec.background.set(`file:///${properties.background.value}`);
+        ec.properties.background.func(`file:///${properties.background.value}`);
       }
       if (properties.breakon) {
-        ec.exam.build(properties.breakon.value);
+        ec.properties.breakon.func(properties.breakon.value);
       }
       if (properties.finalonly) {
-        ec.properties.finalonly = properties.finalonly.value;
-        ec.exam.build();
+        ec.properties.finalonly.func(properties.finalonly.value);
       }
       if (properties.hitokoto) {
-        ec.properties.hitokoto = properties.hitokoto.value;
+        ec.properties.hitokoto.func(properties.hitokoto.value);
       }
       if (properties.bingwallpaper) {
-        ec.properties.bingwallpaper = properties.bingwallpaper.value
+        ec.properties.bingwallpaper.func(properties.bingwallpaper.value);
       }
       if (properties.extraexams) {
-        if (ec.online) ec.exam.extra.fetch(properties.extraexams.value);
-        else ec.exam.extra.url = properties.extraexams.value;
+        ec.properties.extraexams.func(properties.extraexams.value);
       }
     }
   };

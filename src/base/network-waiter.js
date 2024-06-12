@@ -9,7 +9,7 @@ export function networkWaiter() {
         if (location.protocol !== 'file:') {
             setTimeout(() => fetchBW(0, '1920x1080.webp'));
         } else if (document.body.style.backgroundImage == ''
-            || ec.properties.bingwallpaper == true) {
+            || ec.properties.bingwallpaper.value == true) {
             setTimeout(fetchBW.bind());
         }
         if (location.protocol == 'file:') setTimeout(time.bind(), 10000);

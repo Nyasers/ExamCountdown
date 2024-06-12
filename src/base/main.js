@@ -6,7 +6,7 @@ import initProperties from './property.js';
 
 function heartbeat() {
   if ("undefined" != typeof ec.hitokoto) {
-    if (ec.properties.hitokoto == true) {
+    if (ec.properties.hitokoto.value == true) {
       if ($("li.hitokoto").html() == '') {
         ec.hitokoto.get();
       } else {
