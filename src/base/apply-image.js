@@ -17,12 +17,14 @@ async function applyImage(imageData) {
         await applyThemeColorBinded();
     })(imageData.themeColors);
 
-    async function applyThemeColor(index = 0) {
+    async function applyThemeColor(index = [4, 6]) {
+        const themeColors = this.themeColors ?? [[0, 0, 0]];
         let colors = [];
-        if (typeof index == typeof 0) colors = colors.concat([this.themeColors[index]]);
+        if (typeof index == typeof 0) colors = colors.concat([themeColors[index]]);
         if (typeof index == typeof [0]) index.forEach(i => {
-            colors = colors.concat([this.themeColors[i]]);
+            if (i < themeColors.length) colors = colors.concat([themeColors[i]]);
         });
+        if (colors.length == 0) colors = themeColors[0];
         let aveColor = await getAverageColor(colors);
         await setColors(aveColor);
     }
