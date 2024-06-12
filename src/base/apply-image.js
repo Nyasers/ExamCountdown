@@ -11,12 +11,13 @@ ImageLoaderWorker.addEventListener('message', event => {
 async function applyImage(imageData) {
     if (!imageData.imageURL.startsWith('file:///')) setBackground(imageData.objectURL);
     await (async (themeColors) => {
+        let applyThemeColorBinded = applyThemeColor.bind({themeColors});
         delete globalThis.applyThemeColor;
-        globalThis.applyThemeColor = applyThemeColor.bind({themeColors}, index = 0);
-        await globalThis.applyThemeColor();
+        globalThis.applyThemeColor = applyThemeColorBinded;
+        await applyThemeColorBinded();
     })(imageData.themeColors);
 
-    async function applyThemeColor(themeColors, index = 0) {
+    async function applyThemeColor(index = 0) {
         let colors = [];
         if (typeof index == typeof 0) colors = colors.concat([themeColors[index]]);
         if (typeof index == typeof [0]) index.forEach(i => {
