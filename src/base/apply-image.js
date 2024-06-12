@@ -11,12 +11,23 @@ ImageLoaderWorker.addEventListener('message', event => {
 async function applyImage(imageData) {
     if (!imageData.imageURL.startsWith('file:///')) setBackground(imageData.objectURL);
     await (async (themeColors) => {
-        // delete globalThis.theme;
-        // globalThis.theme = (function (i) { setColors(themeColors[i]) }).bind();
-        let colors = [themeColors[themeColors.length - 3], themeColors[themeColors.length - 2]];
+        let applyThemeColorBinded = applyThemeColor.bind({ themeColors: themeColors });
+        delete globalThis.applyThemeColor;
+        globalThis.applyThemeColor = applyThemeColorBinded;
+        await applyThemeColorBinded();
+    })(imageData.themeColors);
+
+    async function applyThemeColor(index = [4, 6]) {
+        const themeColors = this.themeColors ?? [[0, 0, 0]];
+        let colors = [];
+        if (typeof index == typeof 0) colors = colors.concat([themeColors[index]]);
+        if (typeof index == typeof [0]) index.forEach(i => {
+            if (i < themeColors.length) colors = colors.concat([themeColors[i]]);
+        });
+        if (colors.length == 0) colors = themeColors[0];
         let aveColor = await getAverageColor(colors);
         await setColors(aveColor);
-    })(imageData.themeColors);
+    }
 }
 
 function setBackground(url) {

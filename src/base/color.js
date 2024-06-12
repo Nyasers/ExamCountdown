@@ -42,16 +42,14 @@ export function rgbArrayToHex(rgb) {
 }
 
 export async function getAverageColor(colors) {
-    var len = colors.length;
-    var sum = [0, 0, 0];
-    var res = [0, 0, 0];
+    var sum = [0, 0, 0], res = [0, 0, 0];
     colors.forEach(c => {
-        for (let i = 0; i < len; i++) {
+        for (let i = 0; i < 3; i++) {
             sum[i] += Number(c[i]);
         }
     });
-    for (let i = 0; i < sum.length; i++) {
-        res[i] = (sum[i] / len).toFixed();
+    for (let i = 0; i < 3; i++) {
+        res[i] = (sum[i] / colors.length).toFixed();
     }
     return res;
 }

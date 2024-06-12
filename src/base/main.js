@@ -2,11 +2,11 @@ import { $ } from 'jquery';
 import gsap, { Bounce, Power1, Power4 } from 'gsap';
 import exam from './exam.js';
 import wrap from './loader.js';
-import property from './property.js';
+import initProperties from './property.js';
 
 function heartbeat() {
   if ("undefined" != typeof ec.hitokoto) {
-    if (ec.extable.hitokoto == true) {
+    if (ec.properties.hitokoto == true) {
       if ($("li.hitokoto").html() == '') {
         ec.hitokoto.get();
       } else {
@@ -120,20 +120,22 @@ function setCounter(mc, i) {
   );
 }
 
-export default () => {
+function initExam() {
+  ec.exam = exam;
+  ec.exam.json.push(ec.exam.default);
+  ec.exam.build('高考');
+}
+
+function initWindow() {
   var cw = 1920,
     ch = 1080;
-
-  // Init Properties for Wallpaper Engine
-  property();
 
   $("body").width(`${cw}px`);
   $("body").height(`${ch}px`);
   $('ec').append(wrap);
 
   (window.onresize = () => {
-    let w = window.innerWidth,
-      h = window.innerHeight;
+    let w = window.innerWidth, h = window.innerHeight;
     let r = w / cw < h / ch ? w / cw : h / ch;
     $("body")[0].style.transform = `scale(${r})`;
     $("body")[0].style.marginLeft =
@@ -151,11 +153,12 @@ export default () => {
     rotationX: 0.01,
     transformOrigin: "50% 0%",
   });
+}
 
-  // Init exam
-  ec.exam = exam;
-  ec.exam.json.push(ec.exam.default);
-  ec.exam.build('高考');
+export default () => {
+  initProperties();
+  initWindow();
+  initExam();
 
   ec.start = (function () {
     if (typeof ec.stop != typeof undefined) ec.stop();

@@ -125,7 +125,6 @@ export default {
         json: []
     },
     breakon: null,
-    finalonly: false,
     build: function (breakon = null) {
         ec.exam.json = Array.from(ec.exam.default);
         if (ec.exam.extra.enabled)
@@ -144,7 +143,7 @@ export default {
             }
         }
 
-        if (ec.exam.finalonly)
+        if (ec.properties.finalonly)
             ec.exam.array.splice(0, ec.exam.array.length - 1);
         return ec.exam.array;
     },
