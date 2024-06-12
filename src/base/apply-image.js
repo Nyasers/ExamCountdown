@@ -21,7 +21,7 @@ async function applyImage(imageData) {
         let colors = [];
         if (typeof index == typeof 0) colors = colors.concat([this.themeColors[index]]);
         if (typeof index == typeof [0]) index.forEach(i => {
-            colors = colors.concat([this.themeColors[index]]);
+            colors = colors.concat([this.themeColors[i]]);
         });
         let aveColor = await getAverageColor(colors);
         await setColors(aveColor);
