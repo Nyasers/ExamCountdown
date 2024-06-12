@@ -11,7 +11,7 @@ ImageLoaderWorker.addEventListener('message', event => {
 async function applyImage(imageData) {
     if (!imageData.imageURL.startsWith('file:///')) setBackground(imageData.objectURL);
     await (async (themeColors) => {
-        let applyThemeColorBinded = applyThemeColor.bind({themeColors: themeColors});
+        let applyThemeColorBinded = applyThemeColor.bind({ themeColors: themeColors });
         delete globalThis.applyThemeColor;
         globalThis.applyThemeColor = applyThemeColorBinded;
         await applyThemeColorBinded();
