@@ -13,7 +13,7 @@ export default {
     const projectRoot = location.protocol == 'file:' ? decodeURI(location.href.split('file:///')[1].split('index.html')[0]).replaceAll('/', '\\') : undefined;
     return projectRoot
       ? `1.运行 ${projectRoot + 'update.cmd'}<br>`
-      + `2.用浏览器打开 https://ec.nyase.ru/zip 下载压缩包，解压到${projectRoot}<br>`
+      + `2.用浏览器打开 https://ec.nyase.ru/zip 下载压缩包，解压到 ${projectRoot}<br>`
       : '才不需要更新呢，哼！<br>';
   }).bind()(),
   check: (function () {
