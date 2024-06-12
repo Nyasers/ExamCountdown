@@ -23,10 +23,10 @@ export default {
     else return (Time().getTime() - ec.update.version.getTime()) / 8.64e7;
   }).bind(),
   notice: (function () {
-    let content = `Nyaser: 发现新版本！ (${getVersionString(ec.version)} -> ${getVersionString(ec.update.version)})`;
-    content += `<br>--更新方法--<br>${ec.update.msg}`;
+    let content = `Nyaser: 发现新版本！ (${getVersionString(ec.version)} -> ${getVersionString(ec.update.version)})<br>`;
+    content += `--更新方法--<br>${ec.update.msg}`;
     if (version.length > 0) {
-      content += "<br>--更新日志--<br>";
+      content += "--更新日志--<br>";
       version.forEach(v => {
         if (new Date(v.date) - ec.version) {
           content += `${getVersionString(v.date)}: ${v.msg}<br>`;
