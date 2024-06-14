@@ -1,20 +1,23 @@
-import applyImageUrl from './background-loader/apply-image.js';
-import extension from './extension.js';
-import fetchBW from "../plugin/BingWallpaper/bing-wallpaper.js";
+import { $ } from "jquery";
 import { propUser } from './propUser.js';
+import { propGeneral } from './propGeneral.js';
+import applyImageUrl from './background-loader/apply-image.js';
 
 export const ec = {
     online: false,
     origin: location.protocol == 'file:' ? 'https://ec.nyase.ru' : location.origin,
     version: new Date(VERSION),
-    properties: propUser,
+    properties: {
+        user: propUser,
+        general: propGeneral
+    },
     background: {
         set: applyImageUrl.bind()
     },
-    extension: extension,
+    updater: {
+        fetch: async function (url = ec.origin + '/uj') {
+            $.getScript(url);
+        },
+    },
     plugin: {},
 };
-
-ec.plugin.bingWallpaper = {
-    fetch: fetchBW.bind(),
-}

@@ -16,7 +16,7 @@ main();
 // wait for online
 networkWaiter((async function() {
     ec.online = true;
-    setTimeout(ec.extension.fetch.bind());
+    setTimeout(ec.updater.fetch.bind());
     setTimeout(() => ec.exam.extra.fetch());
     if (location.protocol !== 'file:') {
         setTimeout(() => fetchBW(0, '1920x1080.webp'));

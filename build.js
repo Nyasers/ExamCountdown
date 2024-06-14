@@ -7,10 +7,21 @@ import webpackConfig from './webpack.config.cjs';
 import terserConfig from './terser.config.js';
 import exams from './src/extraexams/exams.js';
 
+/**
+ * MinifyJSON
+ * @param {string} code 
+ * @returns {string} minified JSON
+ */
 function MinifyJSON(code) {
     return JSON.stringify(JSON.parse(code));
 }
 
+/**
+ * packHTML
+ * @param {string} jsfile 
+ * @param  {...{id: string, js: string}} workers 
+ * @returns {Promise<string>} HTML
+ */
 async function packHTML(jsfile, ...workers) {
     var output = "<!doctype html><noscript><strong>We're sorry but ExamCountdown doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>";
     output += "<ec>";
@@ -70,7 +81,6 @@ async function postBuild() {
     if (license != '') fs.writeFileSync(path.resolve('dist', 'license.txt'), license, 'utf-8');
 
     // Move css files
-    console.info(webpackConfig[0].mode);
     if (webpackConfig[0].mode == 'development') {
         fs.readdirSync(path.resolve('cache')).filter(n => n.endsWith('.css'))
             .forEach(n =>

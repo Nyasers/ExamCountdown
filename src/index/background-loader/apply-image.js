@@ -45,4 +45,5 @@ async function setColors(themeColorRgbArray) {
 export default function applyImageUrl(url) {
     if (url.startsWith('file:///')) setBackground(url);
     ImageLoaderWorker.postMessage(url);
+    return url;
 }
