@@ -21,7 +21,7 @@ async function getURLBase(index = 0) {
 
 async function fetchBW(index = 0, ext = 'UHD.jpg') {
     const url = `${await getURLBase(index)}_${ext}`;
-    return setTimeout(async () => ec.background.set(url));
+    return url;
 }
 
 export default fetchBW;

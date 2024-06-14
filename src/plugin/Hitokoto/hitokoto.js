@@ -30,13 +30,13 @@ export default {
   },
   set: function (data = {}) {
     if (data.type != 'x') console.log(data);
-    let type = ec.hitokoto.type[data.type];
+    let type = ec.plugin.hitokoto.type[data.type];
     if ('undefined' == typeof type) {
-      setTimeout(() => ec.hitokoto.set({
+      setTimeout(() => ec.plugin.hitokoto.set({
         type: "x",
         from: "Nyaser",
         hitokoto: "加载失败，稍后重试。",
-        ttl: ec.hitokoto.timeout.retry,
+        ttl: ec.plugin.hitokoto.timeout.retry,
       }));
       return;
     }
@@ -53,54 +53,54 @@ export default {
     }
     if (data.type === "e")
       author += ` => [UID${data.creator_uid}] ${data.creator}`;
-    let ttl = data.ttl ?? ec.hitokoto.timeout.refresh;
-    ec.hitokoto.expiration = Time().getTime() + ttl;
+    let ttl = data.ttl ?? ec.plugin.hitokoto.timeout.refresh;
+    ec.plugin.hitokoto.expiration = Time().getTime() + ttl;
     $("li.hitokoto").html(
       `[一言·<type class='hitokoto'>${type}</type>·<ttl class='hitokoto'></ttl>] <sentence class='hitokoto'>${data.hitokoto}</sentence><author class='hitokoto'>${author}</author>`
     );
     $("ttl.hitokoto").html(
-      `<a class='hitokoto' href='javascript:void(0);' onClick='ec.hitokoto.change();'>${(
-        (ec.hitokoto.expiration - Time().getTime()) / 1e3
+      `<a class='hitokoto' href='javascript:void(0);' onClick='ec.plugin.hitokoto.change();'>${(
+        (ec.plugin.hitokoto.expiration - Time().getTime()) / 1e3
       ).toFixed(0)}</a>`
     );
   },
   get: function () {
-    ec.hitokoto.set({
+    ec.plugin.hitokoto.set({
       type: "x",
       from: "Nyaser",
       hitokoto: "加载中，请稍候。",
-      ttl: ec.hitokoto.timeout.request,
+      ttl: ec.plugin.hitokoto.timeout.request,
     });
     var request;
     if (request != null) request.abort();
-    let url = ec.hitokoto.api.url + "?" + ec.hitokoto.api.args;
-    let types = Object.assign({}, ec.hitokoto.type); delete types.x;
+    let url = ec.plugin.hitokoto.api.url + "?" + ec.plugin.hitokoto.api.args;
+    let types = Object.assign({}, ec.plugin.hitokoto.type); delete types.x;
     for (let key of Object.keys(types)) url += `&c=${key}`;
     let queryTime = Time().getTime();
     url += `&_=${queryTime}`;
-    let duration = queryTime - ec.hitokoto.lastquery;
-    if (duration > 1000 / ec.hitokoto.qps) {
-      ec.hitokoto.lastquery = queryTime;
+    let duration = queryTime - ec.plugin.hitokoto.lastquery;
+    if (duration > 1000 / ec.plugin.hitokoto.qps) {
+      ec.plugin.hitokoto.lastquery = queryTime;
       request = $.getJSON(url)
-        .then((d) => ec.hitokoto.set(d))
-        .fail(ec.hitokoto.set);
+        .then((d) => ec.plugin.hitokoto.set(d))
+        .fail(ec.plugin.hitokoto.set);
     } else {
-      ec.hitokoto.set({
+      ec.plugin.hitokoto.set({
         type: "x",
         from: "Nyaser",
         hitokoto: "请求过快，稍后再试。",
-        ttl: ec.hitokoto.timeout.retry,
+        ttl: ec.plugin.hitokoto.timeout.retry,
       });
     }
   },
   change: function () {
-    let timeout = ec.hitokoto.expiration - Time().getTime();
-    ec.hitokoto.expiration = Time().getTime()
-      + (timeout > 3000 ? timeout == Infinity ? ec.hitokoto.timeout.refresh : 3000 : Infinity);
+    let timeout = ec.plugin.hitokoto.expiration - Time().getTime();
+    ec.plugin.hitokoto.expiration = Time().getTime()
+      + (timeout > 3000 ? timeout == Infinity ? ec.plugin.hitokoto.timeout.refresh : 3000 : Infinity);
   },
   heartbeat: function () {
-    let hitokoto_ttl = (ec.hitokoto.expiration - Time().getTime()) / 1e3;
-    if (hitokoto_ttl < 0) ec.hitokoto.get();
+    let hitokoto_ttl = (ec.plugin.hitokoto.expiration - Time().getTime()) / 1e3;
+    if (hitokoto_ttl < 0) ec.plugin.hitokoto.get();
     hitokoto_ttl = hitokoto_ttl.toFixed(0);
     if ($("ttl.hitokoto").text() != `${hitokoto_ttl}`)
       if ($("ttl.hitokoto a").html())

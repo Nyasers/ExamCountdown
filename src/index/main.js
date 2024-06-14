@@ -5,12 +5,12 @@ import wrap from './loader.js';
 import initProperties from './property.js';
 
 function heartbeat() {
-  if ("undefined" != typeof ec.hitokoto) {
+  if ("undefined" != typeof ec.plugin.hitokoto) {
     if (ec.properties.hitokoto.value == true) {
       if ($("li.hitokoto").html() == '') {
-        ec.hitokoto.get();
+        ec.plugin.hitokoto.get();
       } else {
-        ec.hitokoto.heartbeat();
+        ec.plugin.hitokoto.heartbeat();
       }
     } else if ($("li.hitokoto").html() != '') {
       $("li.hitokoto").html('');

@@ -12,8 +12,7 @@ const TerserOptions = import('./terser.config.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 
-//const MODE = 'production';
-const MODE = 'development';
+const MODE = 0 ? 'production' : 'development';
 const VERSION = '"2024-06-14T10:00Z"';
 
 const commonPostcssLoader = {
@@ -35,8 +34,8 @@ module.exports = [
     name: 'css',
     mode: MODE,
     entry: {
-      index: './src/base/css/index.js',
-      extension: './src/extension/css/index.js',
+      index: './src/index/css/index.js',
+      hitokoto: './src/plugin/Hitokoto/css/index.js',
     },
     output: {
       publicPath: '',
@@ -111,8 +110,8 @@ module.exports = [
     mode: MODE,
     dependencies: ['css', 'workers'],
     entry: {
-      index: './src/base/index.js',
-      extension: './src/extension/index.js',
+      index: './src/index/index.js',
+      update: './src/update/index.js',
     },
     output: {
       publicPath: '',

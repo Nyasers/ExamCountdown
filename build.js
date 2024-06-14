@@ -5,7 +5,7 @@ import archiver from 'archiver';
 import webpack from 'webpack';
 import webpackConfig from './webpack.config.cjs';
 import terserConfig from './terser.config.js';
-import exams from './src/extension/exams.js';
+import exams from './src/extraexams/exams.js';
 
 function MinifyJSON(code) {
     return JSON.stringify(JSON.parse(code));
@@ -70,10 +70,12 @@ async function postBuild() {
     if (license != '') fs.writeFileSync(path.resolve('dist', 'license.txt'), license, 'utf-8');
 
     // Move css files
-    fs.readdirSync(path.resolve('cache')).filter(n => n.endsWith('.css'))
-        .forEach(n =>
-            fs.cpSync(path.resolve('cache', n), path.resolve('dist', n))
-        );
+    if (webpackConfig[0].mode == 'development') {
+        fs.readdirSync(path.resolve('cache')).filter(n => n.endsWith('.css'))
+            .forEach(n =>
+                fs.cpSync(path.resolve('cache', n), path.resolve('dist', n))
+            );
+    }
     fs.rmSync(path.resolve('cache'), { recursive: true });
 
     // Index
