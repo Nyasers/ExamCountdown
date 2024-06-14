@@ -13,22 +13,22 @@ globalThis.ec = ec;
 globalThis.Time = () => new Date;
 
 // Init
-main();
+main(globalThis, ec);
 
 // wait for online
 networkWaiter((async function () {
-    ec.online = true;
-    setTimeout(() => ec.updater.fetch());
-    setTimeout(() => ec.exam.extra.fetch());
+    this.online = true;
+    setTimeout(() => this.updater.fetch());
+    setTimeout(() => this.exam.extra.fetch());
 
-    initBW(ec);
+    initBW(this);
     if (location.protocol !== 'file:') {
-        setTimeout(async () => ec.background.set(await ec.plugin.bingWallpaper.fetch(0, '1920x1080.webp')));
+        setTimeout(async () => this.background.set(await this.plugin.bingWallpaper.fetch(0, '1920x1080.webp')));
     } else if (document.body.style.backgroundImage == ''
-        || ec.properties.user.bingwallpaper.value == true) {
-        setTimeout(async () => ec.background.set(await ec.plugin.bingWallpaper.fetch()));
+        || this.properties.user.bingwallpaper.value == true) {
+        setTimeout(async () => this.background.set(await this.plugin.bingWallpaper.fetch()));
     }
 
-    initHitokoto(ec);
+    initHitokoto(this);
     // if (location.protocol == 'file:') setTimeout(time.bind(), 10000);
-}));
+}).bind(ec));

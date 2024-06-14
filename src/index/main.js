@@ -113,13 +113,13 @@ function setCounter(mc, i) {
   );
 }
 
-function initExam() {
+function initExam(ec) {
   ec.exam = exam;
   ec.exam.json.push(ec.exam.default);
   ec.exam.build('高考');
 }
 
-function initWindow() {
+function initWindow(window) {
   var cw = 1920,
     ch = 1080;
 
@@ -148,19 +148,19 @@ function initWindow() {
   });
 }
 
-export default () => {
-  initProperties();
-  initWindow();
-  initExam();
+export default function (window, ec) {
+  initProperties(window);
+  initWindow(window);
+  initExam(ec);
 
   ec.start = (function () {
-    if (typeof ec.stop != typeof undefined) ec.stop();
+    if (typeof this.stop != typeof undefined) this.stop();
     let interval = setInterval(heartbeat, 1e2);
-    ec.stop = (function () {
+    this.stop = (function () {
       clearInterval(interval);
-      delete ec.stop;
-    }).bind();
-  }).bind();
+      delete this.stop;
+    }).bind(this);
+  }).bind(ec);
 
   ec.start();
 }
