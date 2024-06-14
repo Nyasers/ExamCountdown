@@ -22,10 +22,10 @@ networkWaiter((async function () {
 
     InitBW(ec);
     if (location.protocol !== 'file:') {
-        setTimeout(() => ec.background.set(ec.plugin.bingWallpaper.fetch(0, '1920x1080.webp')));
+        setTimeout(async () => ec.background.set(await ec.plugin.bingWallpaper.fetch(0, '1920x1080.webp')));
     } else if (document.body.style.backgroundImage == ''
         || ec.properties.user.bingwallpaper.value == true) {
-        setTimeout(() => ec.background.set(ec.plugin.bingWallpaper.fetch()));
+        setTimeout(async () => ec.background.set(await ec.plugin.bingWallpaper.fetch()));
     }
 
     // if (location.protocol == 'file:') setTimeout(time.bind(), 10000);
