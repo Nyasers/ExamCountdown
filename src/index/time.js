@@ -5,7 +5,6 @@ const meta = $('<meta>').attr('name', 'referrer').attr('content', 'never');
 const iframe = $('<iframe>').attr('src', url).attr('rel', 'noreferrer').attr('hidden', '');
 
 $('head').append(meta);
-globalThis.Time = () => new Date;
 export default function () {
     $('body').append(iframe);
     globalThis.Time = getTime;
