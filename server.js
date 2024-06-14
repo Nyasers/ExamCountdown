@@ -4,7 +4,7 @@ const app = express();
 app.use(express.static('dist'));
 
 app.get('/ej', function(req, res) {
-    res.redirect('/extension.js');
+    res.redirect('/update.js');
 });
 
 app.listen(3000);

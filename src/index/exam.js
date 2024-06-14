@@ -79,52 +79,13 @@ export class Exam {
     }
 }
 
-export default {
+
+export const exam = {
     json: [],
     array: [],
-    default: [{
-        title: "福建高考",
-        time: {
-            start: "$YYYY/06/07 09:00",
-            end: "$YYYY/06/09 18:15",
-        }
-    },
-    {
-        title: '福建中考',
-        time: {
-            start: '$YYYY/06/19 08:30',
-            end: '$YYYY/06/21 11:55'
-        }
-    },
-    {
-        title: '福建会考',
-        time: {
-            start: '$YYYY/06/21 15:00',
-            end: '$YYYY/06/21 17:45'
-        }
-    }],
-    extra: {
-        enabled: true,
-        retry: 6,
-        url: 'extraexams.json',
-        fetch: async function (url = ec.exam.extra.url) {
-            $.getJSON(url)
-                .done(function (data) {
-                    try {
-                        ec.exam.extra.json = data;
-                        ec.exam.build();
-                    } catch (e) {
-                        console.error(e);
-                    }
-                })
-                .fail(function () {
-                    if (ec.exam.extra.retry-- >= 0) setTimeout(() => ec.exam.extra.fetch(url), 1e4), console.warn({ url, retry: ec.exam.extra.retry + 1 })
-                    else ec.exam.extra.retry = 6;
-                });
-        },
-        json: []
-    },
-    breakon: null,
+    default: [],
+    extra: {},
+    breakon: '',
     build: function (breakon = null) {
         ec.exam.json = Array.from(ec.exam.default);
         if (ec.exam.extra.enabled)
@@ -143,8 +104,52 @@ export default {
             }
         }
 
-        if (ec.properties.finalonly.value)
+        if (ec.properties.user.finalonly.value)
             ec.exam.array.splice(0, ec.exam.array.length - 1);
         return ec.exam.array;
     },
+};
+
+exam.default = [{
+    title: "福建高考",
+    time: {
+        start: "$YYYY/06/07 09:00",
+        end: "$YYYY/06/09 18:15",
+    }
+},
+{
+    title: '福建中考',
+    time: {
+        start: '$YYYY/06/19 08:30',
+        end: '$YYYY/06/21 11:55'
+    }
+},
+{
+    title: '福建会考',
+    time: {
+        start: '$YYYY/06/21 15:00',
+        end: '$YYYY/06/21 17:45'
+    }
+}]
+
+exam.extra = {
+    enabled: true,
+    retry: 6,
+    url: 'extraexams.json',
+    fetch: async function (url = ec.exam.extra.url) {
+        $.getJSON(url)
+            .done(function (data) {
+                try {
+                    ec.exam.extra.json = data;
+                    ec.exam.build();
+                } catch (e) {
+                    console.error(e);
+                }
+            })
+            .fail(function () {
+                if (ec.exam.extra.retry-- >= 0) setTimeout(() => ec.exam.extra.fetch(url), 1e4), console.warn({ url, retry: ec.exam.extra.retry + 1 })
+                else ec.exam.extra.retry = 6;
+            });
+    },
+    json: []
 };

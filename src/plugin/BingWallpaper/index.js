@@ -1,4 +1,4 @@
-import { $ } from 'jquery';
+import { $ } from "jquery";
 
 const api = 'https://raw.onmicrosoft.cn/Bing-Wallpaper-Action/main';
 const bing = 'https://s.cn.bing.net'; //cn.bing.com
@@ -21,7 +21,11 @@ async function getURLBase(index = 0) {
 
 async function fetchBW(index = 0, ext = 'UHD.jpg') {
     const url = `${await getURLBase(index)}_${ext}`;
-    return setTimeout(async () => ec.background.set(url));
+    return url;
 }
 
-export default fetchBW;
+export function init(ec) {
+    ec.plugin.bingWallpaper = {
+        fetch: fetchBW.bind(),
+    }
+}

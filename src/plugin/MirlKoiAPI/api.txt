@@ -1,0 +1,2 @@
+https://dev.iw233.cn/api.php?sort=pc&type=json
+Referer:https://weibo.com/
