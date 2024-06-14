@@ -24,7 +24,7 @@ networkWaiter((async function () {
     if (location.protocol !== 'file:') {
         setTimeout(() => ec.background.set(ec.plugin.bingWallpaper.fetch(0, '1920x1080.webp')));
     } else if (document.body.style.backgroundImage == ''
-        || ec.properties.bingwallpaper.value == true) {
+        || ec.properties.user.bingwallpaper.value == true) {
         setTimeout(() => ec.background.set(ec.plugin.bingWallpaper.fetch()));
     }
 

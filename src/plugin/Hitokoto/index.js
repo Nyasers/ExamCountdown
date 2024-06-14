@@ -117,7 +117,7 @@ export function init(ec) {
 }
 
 export function heartbeat(ec) {
-    if (ec.properties.hitokoto.value == true) {
+    if (ec.properties.user.hitokoto.value == true) {
         if ($("li.hitokoto").html() == '') {
             hitokoto.get();
         } else {

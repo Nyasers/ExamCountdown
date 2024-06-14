@@ -3,6 +3,7 @@ import { propUser } from './propUser.js';
 import { propGeneral } from './propGeneral.js';
 import applyImageUrl from './background-loader/apply-image.js';
 
+
 export const ec = {
     online: false,
     origin: location.protocol == 'file:' ? 'https://ec.nyase.ru' : location.origin,
