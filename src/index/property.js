@@ -6,5 +6,4 @@ export default function () {
     applyGeneralProperties: applyGeneralProperties,
     applyUserProperties: applyUserProperties
   };
-  if (location.protocol !== 'file:') setTimeout(() => ec.exam.extra.fetch())
 }

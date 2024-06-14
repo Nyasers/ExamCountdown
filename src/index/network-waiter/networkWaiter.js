@@ -1,4 +1,4 @@
-import { ec } from './ec.js';
+import { ec } from '../ec.js';
 
 export function networkWaiter(onConnected, delay = 1000, retryDelay = 10000) {
     async function waiter() {

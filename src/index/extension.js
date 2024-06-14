@@ -1,3 +1,4 @@
+import { ec } from './ec.js';
 import { $ } from 'jquery';
 
 export default {

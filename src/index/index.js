@@ -4,7 +4,7 @@ import '../../cache/index.css';
 import { ec } from './ec.js';
 import fetchBW from "../plugin/BingWallpaper/bing-wallpaper.js";
 import time from "./time.js";
-import { networkWaiter } from './networkWaiter.js';
+import { networkWaiter } from './network-waiter/networkWaiter.js';
 
 // Expose $ and ec
 globalThis.$ = $;
@@ -14,7 +14,7 @@ globalThis.ec = ec
 main();
 
 // wait for online
-networkWaiter((async function onConnected() {
+networkWaiter((async function() {
     ec.online = true;
     setTimeout(ec.extension.fetch.bind());
     setTimeout(() => ec.exam.extra.fetch());

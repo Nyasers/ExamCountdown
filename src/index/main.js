@@ -3,18 +3,11 @@ import gsap, { Bounce, Power1, Power4 } from 'gsap';
 import exam from './exam.js';
 import wrap from './loader.js';
 import initProperties from './property.js';
+import { heartbeat as hitokotoHeatbeat } from '../plugin/Hitokoto/index.js';
 
 function heartbeat() {
   if ("undefined" != typeof ec.plugin.hitokoto) {
-    if (ec.properties.hitokoto.value == true) {
-      if ($("li.hitokoto").html() == '') {
-        ec.plugin.hitokoto.get();
-      } else {
-        ec.plugin.hitokoto.heartbeat();
-      }
-    } else if ($("li.hitokoto").html() != '') {
-      $("li.hitokoto").html('');
-    }
+    hitokotoHeatbeat(ec);
   }
 
   if (ec.exam.array[0]) {
