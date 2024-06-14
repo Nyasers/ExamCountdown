@@ -1,5 +1,4 @@
 import { ec } from './ec.js';
-
 export const propUser = {};
 
 propUser.background = {

@@ -114,7 +114,6 @@ hitokoto.heartbeat = (function () {
         else $("ttl.hitokoto").text(`${hitokoto_ttl}`);
 }).bind(hitokoto);
 
-// Init hitokoto
 export const init = (function (ec) {
     $("ul#main").append($('<li class="hitokoto"></li>'));
     ec.plugin.hitokoto = this;
