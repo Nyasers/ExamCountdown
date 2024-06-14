@@ -13,7 +13,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 
 const MODE = true ? 'production' : 'development';
-const VERSION = '"2024-06-14T16:00Z"';
+const VERSION = '"2024-06-14T17:00Z"';
 
 const commonPostcssLoader = {
   loader: 'postcss-loader',
