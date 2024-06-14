@@ -1,5 +1,5 @@
 import '../../../cache/hitokoto.css';
-const { $ } = globalThis;
+import { $ } from 'jquery';
 
 const hitokoto = {
     api: {
