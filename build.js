@@ -70,6 +70,7 @@ async function postBuild() {
     if (license != '') fs.writeFileSync(path.resolve('dist', 'license.txt'), license, 'utf-8');
 
     // Move css files
+    console.info(webpackConfig[0].mode);
     if (webpackConfig[0].mode == 'development') {
         fs.readdirSync(path.resolve('cache')).filter(n => n.endsWith('.css'))
             .forEach(n =>

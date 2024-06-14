@@ -1,11 +1,10 @@
 /uc /update.cmd
 /up /update.ps1
-/zip /ExamCountdown.zip
-/ij /index.js
-/ic /index.css
+/uj /update.js
 /ej /extension.js
-/ec /extension.css
-/pj /project.json
+/extension.js /uj
+/ij /index.js
+/zip /ExamCountdown.zip
 /eej /extraexams.json
 /exe https://c5.nyase.ru/%E5%85%B6%E5%AE%83/Nyaser/wallpaper_engine/Wallpaper_Engine_2.4.82_with_ExamCountdown_2024-06-13_Installer.exe
 /clean https://nyaser-ec-cleaner.nyaser.workers.dev/
