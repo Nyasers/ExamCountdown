@@ -79,37 +79,36 @@ export class Exam {
     }
 }
 
-export default exam;
 
-const exam = {
+export const exam = {
     json: [],
     array: [],
     default: [],
     extra: {},
     breakon: '',
     build,
-};
-
-exam.default = [{
-    title: "福建高考",
-    time: {
-        start: "$YYYY/06/07 09:00",
-        end: "$YYYY/06/09 18:15",
-    }
-},
-{
+    };
+    
+    exam.default = [{
+        title: "福建高考",
+        time: {
+            start: "$YYYY/06/07 09:00",
+            end: "$YYYY/06/09 18:15",
+            }
+            },
+            {
     title: '福建中考',
     time: {
         start: '$YYYY/06/19 08:30',
         end: '$YYYY/06/21 11:55'
-    }
-},
-{
+        }
+        },
+        {
     title: '福建会考',
     time: {
         start: '$YYYY/06/21 15:00',
         end: '$YYYY/06/21 17:45'
-    }
+        }
 }]
 
 exam.build = function (breakon = null) {
@@ -117,7 +116,7 @@ exam.build = function (breakon = null) {
     if (ec.exam.extra.enabled)
         ec.exam.extra.json.forEach(exam => ec.exam.json.push(exam));
     ec.exam.array = buildExamArray(ec.exam.json);
-
+    
     if (breakon != null)
         ec.exam.breakon = breakon;
     if (ec.exam.breakon == '')
@@ -127,15 +126,15 @@ exam.build = function (breakon = null) {
         if (endex != -1) {
             ec.exam.array[endex].top = true;
             ec.exam.array.splice(endex + 1);
-        }
-    }
-
-    if (ec.properties.user.finalonly.value)
-        ec.exam.array.splice(0, ec.exam.array.length - 1);
-    return ec.exam.array;
-};
-
-exam.extra = {
+            }
+            }
+            
+            if (ec.properties.user.finalonly.value)
+                ec.exam.array.splice(0, ec.exam.array.length - 1);
+            return ec.exam.array;
+            };
+            
+            exam.extra = {
     enabled: true,
     retry: 6,
     url: 'extraexams.json',
@@ -145,10 +144,10 @@ exam.extra = {
                 try {
                     ec.exam.extra.json = data;
                     ec.exam.build();
-                } catch (e) {
-                    console.error(e);
-                }
-            })
+                    } catch (e) {
+                        console.error(e);
+                        }
+                        })
             .fail(function () {
                 if (ec.exam.extra.retry-- >= 0) setTimeout(() => ec.exam.extra.fetch(url), 1e4), console.warn({ url, retry: ec.exam.extra.retry + 1 })
                 else ec.exam.extra.retry = 6;
