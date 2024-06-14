@@ -1,8 +1,7 @@
 import { $ } from "jquery";
-import { propUser } from './propUser.js';
-import { propGeneral } from './propGeneral.js';
+import { propUser } from './property/propUser.js';
+import { propGeneral } from './property/propGeneral.js';
 import applyImageUrl from './background-loader/apply-image.js';
-
 
 export const ec = {
     online: false,
