@@ -15,9 +15,13 @@ var o = [];
     {
         d: '2024-06-13T00:00',
         m: '新增“每日壁纸”选项（默认开启，可打开 Wallpaper Engine 进行设置）'
+    },
+    {
+        d: '2024-06-14T10:00',
+        m: '将“每日壁纸”改为“必应壁纸”'
     }
 ].forEach(v => o = o.concat({
     date: new Date(v.d + 'Z' ?? 0),
     msg: v.m ?? ''
 }));
-export default o.sort((a, b) => a.date - b.date);
+export default o.sort((a, b) => b.date - a.date);

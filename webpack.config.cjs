@@ -12,9 +12,9 @@ const TerserOptions = import('./terser.config.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 
-const MODE = 'production';
-//const MODE = 'development';
-const VERSION = '"2024-06-13T00:00Z"';
+//const MODE = 'production';
+const MODE = 'development';
+const VERSION = '"2024-06-14T10:00Z"';
 
 const commonPostcssLoader = {
   loader: 'postcss-loader',
