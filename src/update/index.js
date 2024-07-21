@@ -1,7 +1,7 @@
 import update from './update.js'
 
 // Avoid duplicate runs
-if ('undefined' != typeof ec.update) delete ec.update;
+if ('undefined' != typeof ec.updater) delete ec.updater;
 else throw new Error('Duplicate Runs Not Allowed.');
 
 // Init update
