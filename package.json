@@ -1,11 +1,11 @@
 {
   "name": "ExamCountdown",
   "version": "24.11.16",
-  "main": "main.cjs",
+  "main": "main.js",
   "type": "module",
   "scripts": {
     "test": "npx webpack",
-    "build": "node build.js || npm run test",
+    "build": "npm install && (node build.js || npm run test)",
     "deploy": "rm -rf dist node_modules && npm i && npm run build",
     "server": "node build.js & node server.js",
     "upgrade": "node upgrade.js & npm up",
@@ -16,24 +16,13 @@
   "author": "Nyaser",
   "license": "ISC",
   "dependencies": {
-    "archiver": "^6.0.2",
-    "clean-webpack-plugin": "^4.0.0",
-    "copy-webpack-plugin": "^12.0.2",
-    "css-loader": "^6.11.0",
-    "css-minimizer-webpack-plugin": "^6.0.0",
-    "electron-squirrel-startup": "^1.0.1",
+    "bindings": "^1.5.0",
+    "electron-log": "^5.2.2",
     "gsap": "^3.12.5",
     "invert-color": "^2.0.0",
     "jquery": "^4.0.0-beta.2",
-    "mini-css-extract-plugin": "^2.9.0",
-    "postcss-loader": "^8.1.1",
-    "postcss-preset-env": "^9.6.0",
-    "style-loader": "^3.3.4",
-    "terser": "^5.31.5",
-    "terser-webpack-plugin": "^5.3.10",
-    "update-electron-app": "^3.0.0",
-    "webpack": "^5.93.0",
-    "webpack-cli": "^5.1.4"
+    "os": "^0.1.2",
+    "update-electron-app": "^3.0.0"
   },
   "keywords": [],
   "description": "A countdown timer for exams",
@@ -46,6 +35,28 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.5.0",
     "@electron-forge/plugin-fuses": "^7.5.0",
     "@electron/fuses": "^1.8.0",
-    "electron": "^33.2.0"
-  }
+    "archiver": "^6.0.2",
+    "electron": "^33.2.0",
+    "electron-squirrel-startup": "^1.0.1",
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4",
+    "postcss-loader": "^8.1.1",
+    "postcss-preset-env": "^9.6.0",
+    "style-loader": "^3.3.4",
+    "terser": "^5.31.5",
+    "terser-webpack-plugin": "^5.3.10",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^12.0.2",
+    "css-loader": "^6.11.0",
+    "css-minimizer-webpack-plugin": "^6.0.0",
+    "mini-css-extract-plugin": "^2.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nyasers/ExamCountdown.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Nyasers/ExamCountdown/issues"
+  },
+  "homepage": "https://github.com/Nyasers/ExamCountdown#readme"
 }

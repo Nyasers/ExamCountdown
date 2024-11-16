@@ -1,15 +1,15 @@
 // main.js
 
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
-const { updateElectronApp, UpdateSourceType } = require('update-electron-app')
-const path = require('node:path')
+import electronLog from 'electron-log'
+import { app, BrowserWindow } from 'electron'
+import { updateElectronApp, UpdateSourceType } from 'update-electron-app'
 
 const createWindow = () => {
     // Create the browser window.
     const mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1280,
+        height: 768,
         // webPreferences: {
         //     preload: path.join(__dirname, 'preload.js')
         // }
@@ -19,7 +19,7 @@ const createWindow = () => {
     mainWindow.loadFile('dist/index.html')
 
     // 隐藏菜单栏
-    mainWindow.setMenu(null);
+    mainWindow.setMenu(null)
 
     // 打开开发工具
     // mainWindow.webContents.openDevTools()
@@ -27,11 +27,14 @@ const createWindow = () => {
     // 注册更新服务
     updateElectronApp({
         updateSource: {
-            type: UpdateSourceType.ElectronPublicUpdateService,
             repo: 'Nyasers/ExamCountdown',
+            host: 'https://update.electronjs.org',
+            type: UpdateSourceType.ElectronPublicUpdateService,
+            provider: 'github',
+            channel: 'latest'
         },
         updateInterval: '1 hour',
-        logger: require('electron-log')
+        logger: electronLog
     })
 }
 
