@@ -1,7 +1,6 @@
 // main.js
 
 // Modules to control application life and create native browser window
-import electronLog from 'electron-log'
 import { app, BrowserWindow } from 'electron'
 import { updateElectronApp, UpdateSourceType } from 'update-electron-app'
 
@@ -25,17 +24,7 @@ const createWindow = () => {
     // mainWindow.webContents.openDevTools()
 
     // 注册更新服务
-    updateElectronApp({
-        updateSource: {
-            repo: 'Nyasers/ExamCountdown',
-            host: 'https://update.electronjs.org',
-            type: UpdateSourceType.ElectronPublicUpdateService,
-            provider: 'github',
-            channel: 'latest'
-        },
-        updateInterval: '1 hour',
-        logger: electronLog
-    })
+    updateElectronApp()
 }
 
 // 这段程序将会在 Electron 结束初始化
