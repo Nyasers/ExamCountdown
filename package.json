@@ -22,7 +22,6 @@
     "css-loader": "^6.11.0",
     "css-minimizer-webpack-plugin": "^6.0.0",
     "electron-squirrel-startup": "^1.0.1",
-    "express": "^4.19.2",
     "gsap": "^3.12.5",
     "invert-color": "^2.0.0",
     "jquery": "^4.0.0-beta.2",
@@ -47,7 +46,6 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.5.0",
     "@electron-forge/plugin-fuses": "^7.5.0",
     "@electron/fuses": "^1.8.0",
-    "@types/express": "^4.17.21",
     "electron": "^33.2.0"
   }
 }
