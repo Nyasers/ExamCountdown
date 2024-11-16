@@ -40,3 +40,16 @@ export const plugins = [
     [FuseV1Options.OnlyLoadAppFromAsar]: true,
   }),
 ];
+export const publishers = [
+  {
+    name: '@electron-forge/publisher-github',
+    config: {
+      repository: {
+        owner: 'Nyasers',
+        name: 'ExamCountdown',
+      },
+      prerelease: false,
+      draft: true
+    },
+  },
+];

@@ -11,16 +11,15 @@
     "upgrade": "node upgrade.js & npm up",
     "start": "npm run build && electron-forge start",
     "package": "npm run build && electron-forge package",
-    "make": "npm run build && electron-forge make"
+    "make": "npm run build && electron-forge make",
+    "publish": "npm run build && electron-forge publish"
   },
   "author": "Nyaser",
   "license": "ISC",
   "dependencies": {
-    "bindings": "^1.5.0",
     "gsap": "^3.12.5",
     "invert-color": "^2.0.0",
     "jquery": "^4.0.0-beta.2",
-    "os": "^0.1.2",
     "update-electron-app": "^3.0.0"
   },
   "keywords": [],
@@ -33,6 +32,7 @@
     "@electron-forge/maker-zip": "^7.5.0",
     "@electron-forge/plugin-auto-unpack-natives": "^7.5.0",
     "@electron-forge/plugin-fuses": "^7.5.0",
+    "@electron-forge/publisher-github": "^7.5.0",
     "@electron/fuses": "^1.8.0",
     "archiver": "^6.0.2",
     "clean-webpack-plugin": "^4.0.0",

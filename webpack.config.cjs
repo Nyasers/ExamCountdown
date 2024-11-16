@@ -135,8 +135,8 @@ module.exports = [
       // }),
       new CopyPlugin({
         patterns: [
-          { from: './src/cmd/' },
-          { from: './src/json/' },
+          // { from: './src/cmd/' },
+          // { from: './src/json/' },
           { from: './src/pages/' },
         ]
       }),

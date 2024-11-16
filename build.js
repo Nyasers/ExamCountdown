@@ -54,20 +54,20 @@ async function packZip(files, destination) {
     await archive.finalize();
 }
 
-async function postMake() {
-    const json = path.resolve('dist/project.json');
-    const zip = [
-        { filename: 'index.html', data: { name: 'index.html' } },
-        { filename: 'project.json', data: { name: 'project.json' } },
-        { filename: 'update.cmd', data: { name: 'update.cmd' } },
-    ];
-    fs.readFile(json, 'utf-8', (err, data) => {
-        if (err) throw err;
-        const minified = MinifyJSON(data);
-        fs.writeFileSync(json, minified, 'utf-8');
-        packZip(zip, 'ExamCountdown.zip');
-    });
-}
+// async function postMake() {
+//     const json = path.resolve('dist/project.json');
+//     const zip = [
+//         { filename: 'index.html', data: { name: 'index.html' } },
+//         { filename: 'project.json', data: { name: 'project.json' } },
+//         { filename: 'update.cmd', data: { name: 'update.cmd' } },
+//     ];
+//     fs.readFile(json, 'utf-8', (err, data) => {
+//         if (err) throw err;
+//         const minified = MinifyJSON(data);
+//         fs.writeFileSync(json, minified, 'utf-8');
+//         packZip(zip, 'ExamCountdown.zip');
+//     });
+// }
 
 async function postBuild() {
     // Merge license
@@ -90,19 +90,18 @@ async function postBuild() {
     fs.rmSync(path.resolve('cache'), { recursive: true });
 
     // Index
-    fs.writeFile(
+    fs.writeFileSync(
         path.resolve('dist/index.html'),
         await packHTML(path.resolve('dist/index.js')),
-        'utf-8',
-        postMake
+        'utf-8'
     );
 
     // Extra Exams
-    fs.writeFileSync(
-        path.resolve('dist/extraexams.json'),
-        JSON.stringify(exams),
-        'utf-8'
-    );
+    // fs.writeFileSync(
+    //     path.resolve('dist/extraexams.json'),
+    //     JSON.stringify(exams),
+    //     'utf-8'
+    // );
 
     // VERSION
     // fs.writeFileSync(
