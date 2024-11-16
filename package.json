@@ -1,6 +1,6 @@
 {
   "name": "ExamCountdown",
-  "version": "24.11.16",
+  "version": "24.11.17",
   "main": "main.js",
   "type": "module",
   "scripts": {
