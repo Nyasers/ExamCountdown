@@ -18,8 +18,8 @@ main(globalThis, ec);
 // wait for online
 networkWaiter((async function () {
     this.online = true;
-    setTimeout(() => this.updater.fetch());
-    setTimeout(() => this.exam.extra.fetch());
+    // setTimeout(() => this.updater.fetch());
+    // setTimeout(() => this.exam.extra.fetch());
 
     initBW(this);
     if (location.protocol !== 'file:') {

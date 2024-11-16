@@ -13,7 +13,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 
 const MODE = true ? 'production' : 'development';
-const VERSION = '"2024-06-14T17:00Z"';
+// const VERSION = '"2024-06-14T17:00Z"';
 
 const commonPostcssLoader = {
   loader: 'postcss-loader',
@@ -111,7 +111,7 @@ module.exports = [
     dependencies: ['css', 'workers'],
     entry: {
       index: './src/index/index.js',
-      update: './src/update/index.js',
+      // update: './src/update/index.js',
     },
     output: {
       publicPath: '',
@@ -130,9 +130,9 @@ module.exports = [
       ],
     },
     plugins: [
-      new webpack.DefinePlugin({
-        'VERSION': VERSION,
-      }),
+      // new webpack.DefinePlugin({
+      //   'VERSION': VERSION,
+      // }),
       new CopyPlugin({
         patterns: [
           { from: './src/cmd/' },
@@ -143,7 +143,7 @@ module.exports = [
       new CleanWebpackPlugin(),
       {
         apply: compiler => {
-          compiler.hooks.beforeRun.tap('MyWebpackPlugin', function (stats) {
+          compiler.hooks.beforeRun.tap('MyWebpackPlugin', function (_stats) {
             new webpack.DefinePlugin({
               WORKERS: workerContent
             }).apply(compiler);

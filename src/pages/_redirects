@@ -1,8 +1,3 @@
-/uc /update.cmd
-/up /update.ps1
-/uj /update.js
-/ej /extension.js
-/extension.js /uj
 /ij /index.js
 /zip /ExamCountdown.zip
 /eej /extraexams.json
