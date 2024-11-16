@@ -10,7 +10,6 @@
     "server": "node build.js & node server.js",
     "upgrade": "node upgrade.js & npm up",
     "start": "npm run build && electron-forge start",
-    "win": "npm run build && electron-packager . ExamCountdown --platform=win32 --arch=x64 --overwrite --out=./out",
     "package": "npm run build && electron-forge package",
     "make": "npm run build && electron-forge make"
   },
