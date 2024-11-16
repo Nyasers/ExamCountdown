@@ -1,0 +1,24 @@
+name: Electron Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v4
+      
+    - name: Setup nodejs
+      uses: actions/setup-nodejs@v4
+      with:
+        nodejs-version: v22
+      
+    - name: Publish
+      run: npm run publish
