@@ -19,7 +19,7 @@ jobs:
     - name: Setup nodejs
       uses: actions/setup-node@v4
       with:
-        nodejs-version: v22
+        node-version: v22
       
     - name: Publish
       run: npm run publish
