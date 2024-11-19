@@ -1,24 +1,36 @@
-// main.js
-
-// Modules to control application life and create native browser window
-import { app, BrowserWindow } from 'electron'
-import { updateElectronApp, UpdateSourceType } from 'update-electron-app'
+import { app, BrowserWindow, Tray } from 'electron'
+import { updateElectronApp } from 'update-electron-app'
+import { attach, detach, reset } from 'electron-as-wallpaper'
 
 const createWindow = () => {
-    // Create the browser window.
+    // 创建浏览器窗口
     const mainWindow = new BrowserWindow({
-        width: 1280,
-        height: 768,
-        // webPreferences: {
-        //     preload: path.join(__dirname, 'preload.js')
-        // }
+        menu: null,
+        frame: false,
+        fullscreen: true,
+        transparent: true,
     })
 
     // 加载 index.html
     mainWindow.loadFile('dist/index.html')
 
-    // 隐藏菜单栏
-    mainWindow.setMenu(null)
+    // 注册壁纸
+    attach(mainWindow, {
+        transparent: true,
+        forwardKeyboardInput: false,
+        forwardMouseInput: true,
+    })
+
+    // 注册托盘图标
+    app.getFileIcon(process.execPath).then((icon) => {
+        const tray = new Tray(icon)
+        tray.setToolTip('ExamCountdown: 双击退出')
+        tray.on('double-click', () => {
+            mainWindow.hide()
+            detach(mainWindow)
+            mainWindow.close()
+        })
+    })
 
     // 打开开发工具
     // mainWindow.webContents.openDevTools()
@@ -31,21 +43,21 @@ const createWindow = () => {
 // 和创建浏览器窗口的时候调用
 // 部分 API 在 ready 事件触发后才能使用。
 app.whenReady().then(() => {
+    // 检查操作系统
+    if (process.platform !== 'win32') {
+        alert('Sorry, this app only works properly on Windows.')
+        app.quit()
+    }
+
+    // 创建浏览器窗口
     createWindow()
-
-    app.on('activate', () => {
-        // 在 macOS 系统内, 如果没有已开启的应用窗口
-        // 点击托盘图标时通常会重新创建一个新窗口
-        if (BrowserWindow.getAllWindows().length === 0) createWindow()
-    })
 })
 
-// 除了 macOS 外，当所有窗口都被关闭的时候退出程序。 因此, 通常
-// 对应用程序和它们的菜单栏来说应该时刻保持激活状态, 
-// 直到用户使用 Cmd + Q 明确退出
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') app.quit()
-})
+// 在程序退出前，重置壁纸
+app.on('will-quit', reset)
+
+// 当所有窗口被关闭时退出应用
+app.on('window-all-closed', app.quit)
 
 // 在当前文件中你可以引入所有的主进程代码
 // 也可以拆分成几个文件，然后用 require 导入。
