@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npx webpack",
     "build": "npm install && (node build.js || npm run test)",
-    "deploy": "rm -rf dist node_modules && npm i && npm run build",
+    "deploy": "npm un electron-as-wallpaper && npm run build",
     "server": "node build.js & node server.js",
     "upgrade": "node upgrade.js & npm up",
     "start": "npm run build && electron-forge start",
