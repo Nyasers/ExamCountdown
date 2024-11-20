@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Tray } from 'electron'
+import { app, BrowserWindow, Tray, Notification } from 'electron'
 import { updateElectronApp } from 'update-electron-app'
 import { attach, detach, reset } from 'electron-as-wallpaper'
 
@@ -45,12 +45,27 @@ const createWindow = () => {
 app.whenReady().then(() => {
     // 检查操作系统
     if (process.platform !== 'win32') {
-        alert('Sorry, this app only works properly on Windows.')
+        new Notification({
+            'title': 'ExamCountdown',
+            'body': 'Sorry, this app only works properly on Windows.'
+        }).show()
         app.quit()
     }
 
-    // 创建浏览器窗口
-    createWindow()
+    // 检查单实例锁
+    const lock = app.requestSingleInstanceLock()
+
+    // 如果锁定失败，则退出应用
+    if (!lock) {
+        new Notification({
+            title: 'ExamCountdown',
+            body: 'Another instance is already running. Exiting...'
+        }).show()
+        app.quit()
+    } else {
+        // 创建浏览器窗口
+        createWindow()
+    }
 })
 
 // 在程序退出前，重置壁纸
