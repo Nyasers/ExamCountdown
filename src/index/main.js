@@ -153,6 +153,8 @@ export default function (window, ec) {
   initWindow(window);
   initExam(ec);
 
+  ec.background.set(ec.properties.user.background.value);
+
   ec.start = (function () {
     if (typeof this.stop != typeof undefined) this.stop();
     let interval = setInterval(heartbeat, 1e2);

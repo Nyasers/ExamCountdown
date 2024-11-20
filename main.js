@@ -39,10 +39,7 @@ const createWindow = () => {
     })
 
     // 打开开发工具
-    // mainWindow.webContents.openDevTools()
-
-    // 注册更新服务
-    updateElectronApp()
+    mainWindow.webContents.openDevTools()
 
     return mainWindow
 }
@@ -76,6 +73,9 @@ app.whenReady().then(() => {
         mainWindow.once('ready-to-show', () => {
             mainWindow.show()
         })
+
+        // 注册更新服务
+        updateElectronApp()
     }
 })
 
