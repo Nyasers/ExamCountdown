@@ -1,14 +1,20 @@
-import { app, BrowserWindow, Tray, Notification } from 'electron'
 import { updateElectronApp } from 'update-electron-app'
 import { attach, detach, reset } from 'electron-as-wallpaper'
+import { app, BrowserWindow, Tray, Notification } from 'electron'
 
 const createWindow = () => {
     // 创建浏览器窗口
     const mainWindow = new BrowserWindow({
         menu: null,
+        show: false,
         frame: false,
         fullscreen: true,
         transparent: true,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false,
+            enableRemoteModule: true,
+        },
     })
 
     // 加载 index.html
@@ -37,6 +43,8 @@ const createWindow = () => {
 
     // 注册更新服务
     updateElectronApp()
+
+    return mainWindow
 }
 
 // 这段程序将会在 Electron 结束初始化
@@ -46,7 +54,7 @@ app.whenReady().then(() => {
     // 检查操作系统
     if (process.platform !== 'win32') {
         new Notification({
-            'title': 'ExamCountdown',
+            'title': app.getName(),
             'body': 'Sorry, this app only works properly on Windows.'
         }).show()
         app.quit()
@@ -58,13 +66,19 @@ app.whenReady().then(() => {
     // 如果锁定失败，则退出应用
     if (!lock) {
         new Notification({
-            title: 'ExamCountdown',
+            title: app.getName(),
             body: 'Another instance is already running. Exiting...'
         }).show()
         app.quit()
     } else {
         // 创建浏览器窗口
-        createWindow()
+        const mainWindow = createWindow()
+        mainWindow.once('ready-to-show', () => {
+            mainWindow.show()
+        })
+        mainWindow.on('closed', () => {
+            mainWindow = null
+        })
     }
 })
 
