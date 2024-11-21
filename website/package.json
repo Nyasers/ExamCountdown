@@ -1,0 +1,34 @@
+{
+  "name": "examcountdown",
+  "version": "24.11.21",
+  "description": "Website for ExamCountdown",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "npx webpack",
+    "build": "npm install && (node build.js || npm run test)",
+    "upgrade": "node upgrade.js & npm up"
+  },
+  "author": "Nyasers",
+  "license": "ISC",
+  "dependencies": {
+    "gsap": "^3.12.5",
+    "invert-color": "^2.0.0",
+    "jquery": "^4.0.0-beta.2"
+  },
+  "devDependencies": {
+    "archiver": "^7.0.1",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^12.0.2",
+    "css-loader": "^7.1.2",
+    "css-minimizer-webpack-plugin": "^7.0.0",
+    "mini-css-extract-plugin": "^2.9.2",
+    "postcss-loader": "^8.1.1",
+    "postcss-preset-env": "^10.1.1",
+    "style-loader": "^4.0.0",
+    "terser": "^5.36.0",
+    "terser-webpack-plugin": "^5.3.10",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4"
+  }
+}

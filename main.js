@@ -18,7 +18,7 @@ const createWindow = () => {
     })
 
     // 加载 index.html
-    mainWindow.loadFile('dist/index.html')
+    mainWindow.loadFile('index.html')
 
     // 注册壁纸
     attach(mainWindow, {
@@ -39,7 +39,7 @@ const createWindow = () => {
     })
 
     // 打开开发工具
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
 
     return mainWindow
 }

@@ -5,7 +5,6 @@ import archiver from 'archiver';
 import webpack from 'webpack';
 import webpackConfig from './webpack.config.cjs';
 import terserConfig from './terser.config.js';
-import exams from './src/extraexams/exams.js';
 
 /**
  * MinifyJSON
