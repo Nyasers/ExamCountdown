@@ -3,25 +3,24 @@ import { FuseV1Options, FuseVersion } from '@electron/fuses';
 
 export const packagerConfig = {
   asar: true,
+  name: 'ExamCountdown',
+  executableName: 'ExamCountdown',
+  ignore: [
+    ".github",
+    ".gitignore",
+    ".gitpod.yml",
+    "website",
+  ]
 };
 export const rebuildConfig = {};
 export const makers = [
   {
     name: '@electron-forge/maker-squirrel',
-    config: {},
+    config: {
+      name: 'ExamCountdown',
+      authors: 'Nyasers',
+    },
   },
-  // {
-  //   name: '@electron-forge/maker-zip',
-  //   platforms: ['darwin'],
-  // },
-  // {
-  //   name: '@electron-forge/maker-deb',
-  //   config: {},
-  // },
-  // {
-  //   name: '@electron-forge/maker-rpm',
-  //   config: {},
-  // },
 ];
 export const plugins = [
   {
