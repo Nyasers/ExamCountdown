@@ -1,12 +1,13 @@
 {
   "name": "examcountdown",
-  "version": "24.11.21",
+  "version": "24.11.25",
   "description": "Website for ExamCountdown",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "npx webpack",
-    "build": "npm install && (node build.js || npm run test)",
+    "build": "npm install && npm run webpack",
+    "webpack": "node build.js || npm run test",
     "upgrade": "node upgrade.js & npm up"
   },
   "author": "Nyasers",

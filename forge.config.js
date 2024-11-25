@@ -6,9 +6,10 @@ export const packagerConfig = {
   name: 'ExamCountdown',
   executableName: 'ExamCountdown',
   ignore: [
-    ".github",
+    ".github/workflows",
     ".gitignore",
     ".gitpod.yml",
+    "forge.config.js",
     "website",
   ]
 };

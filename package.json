@@ -1,6 +1,6 @@
 {
   "name": "examcountdown",
-  "version": "24.11.21",
+  "version": "24.11.25",
   "description": "Electron shell for ExamCountdown",
   "main": "main.js",
   "type": "module",
@@ -8,7 +8,7 @@
     "forge": "forge.config.js"
   },
   "scripts": {
-    "build": "npm install && cd ./website && npm run build && copy /y .\\dist\\index.html .. && cd ..",
+    "build": "npm install && cd website && npm run build && copy /y dist\\index.html .. && cd ..",
     "start": "npm run build && electron-forge start",
     "package": "npm run build && electron-forge package",
     "make": "npm run build && electron-forge make",
