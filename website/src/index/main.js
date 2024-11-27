@@ -5,26 +5,26 @@ import wrap from './loader.js';
 import initProperties from './property/index.js';
 import { heartbeat as hitokotoHeatbeat } from '../plugin/Hitokoto/index.js';
 
-function heartbeat() {
-  if ("undefined" != typeof ec.plugin.hitokoto) {
-    hitokotoHeatbeat(ec);
+function heartbeat(ec) {
+  if ("undefined" != typeof this.plugin.hitokoto) {
+    hitokotoHeatbeat(this);
   }
 
-  if (ec.exam.array[0]) {
-    if (ec.exam.array[0].time.start - Time() < 0)
+  if (this.exam.array[0]) {
+    if (this.exam.array[0].time.start - Time() < 0)
       if (
-        ec.exam.array[0].time.end.getTime() &&
-        ec.exam.array[0].time.end - Time() > 0
+        this.exam.array[0].time.end.getTime() &&
+        this.exam.array[0].time.end - Time() > 0
       );
       else {
-        ec.exam.array.splice(0, 1);
+        this.exam.array.splice(0, 1);
         return;
       }
   } else location.reload();
 
-  let current = ec.exam.array.find((exam) => exam.top == true) ?? ec.exam.array[0];
-  setCurrent(current, current == ec.exam.array[0] && ec.exam.array.length > 1);
-  setFuture(ec.exam.array.filter((exam) => exam != current));
+  let current = this.exam.array.find((exam) => exam.top == true) ?? this.exam.array[0];
+  setCurrent(current, current == this.exam.array[0] && this.exam.array.length > 1);
+  setFuture(this.exam.array.filter((exam) => exam != current));
 }
 
 function prefixer(num, n) {
@@ -153,11 +153,9 @@ export default function (window, ec) {
   initWindow(window);
   initExam(ec);
 
-  ec.background.set(ec.properties.user.background.value);
-
   ec.start = (function () {
     if (typeof this.stop != typeof undefined) this.stop();
-    let interval = setInterval(heartbeat, 1e2);
+    let interval = setInterval(heartbeat.bind(ec), 1e2);
     this.stop = (function () {
       clearInterval(interval);
       delete this.stop;

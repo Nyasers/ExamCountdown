@@ -86,28 +86,7 @@ export const exam = {
     default: [],
     extra: {},
     breakon: '',
-    build: function (breakon = null) {
-        ec.exam.json = Array.from(ec.exam.default);
-        if (ec.exam.extra.enabled)
-            ec.exam.extra.json.forEach(exam => ec.exam.json.push(exam));
-        ec.exam.array = buildExamArray(ec.exam.json);
-
-        if (breakon != null)
-            ec.exam.breakon = breakon;
-        if (ec.exam.breakon == '')
-            ec.exam.breakon = null;
-        if (ec.exam.breakon != null) {
-            var endex = ec.exam.array.findLastIndex((exam) => exam.title.includes(ec.exam.breakon));
-            if (endex != -1) {
-                ec.exam.array[endex].top = true;
-                ec.exam.array.splice(endex + 1);
-            }
-        }
-
-        if (ec.properties.user.finalonly.value)
-            ec.exam.array.splice(0, ec.exam.array.length - 1);
-        return ec.exam.array;
-    },
+    build: null,
 };
 
 exam.default = [{
@@ -153,3 +132,26 @@ exam.extra = {
     },
     json: []
 };
+
+exam.build = (function (breakon = null) {
+    this.json = Array.from(this.default);
+    if (this.extra.enabled)
+        this.extra.json.forEach(exam => this.json.push(exam));
+    this.array = buildExamArray(this.json);
+
+    if (breakon != null)
+        this.breakon = breakon;
+    if (this.breakon == '')
+        this.breakon = null;
+    if (this.breakon != null) {
+        var endex = this.array.findLastIndex((exam) => exam.title.includes(this.breakon));
+        if (endex != -1) {
+            this.array[endex].top = true;
+            this.array.splice(endex + 1);
+        }
+    }
+
+    // if (typeof undefined != typeof parent.properties.user.finalonly.value)
+    //     this.array.splice(0, this.array.length - 1);
+    return this.array;
+}).bind(exam);

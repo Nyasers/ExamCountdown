@@ -1,6 +1,13 @@
+import { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { updateElectronApp } from 'update-electron-app'
 import { attach, detach, reset } from 'electron-as-wallpaper'
-import { app, BrowserWindow, Tray, Notification } from 'electron'
+import { app, BrowserWindow, Tray, Menu, Notification, ipcMain } from 'electron'
+import settings from './settings.js'
+
+async function handleGetSettings() {
+    return settings.get()
+}
 
 const createWindow = () => {
     // 创建浏览器窗口
@@ -11,9 +18,10 @@ const createWindow = () => {
         fullscreen: true,
         transparent: true,
         webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-            enableRemoteModule: true,
+            preload: dirname(fileURLToPath(import.meta.url)) + '\\preload.cjs',
+            nodeIntegration: false,
+            contextIsolation: true,
+            enableRemoteModule: false,
         },
     })
 
@@ -24,22 +32,46 @@ const createWindow = () => {
     attach(mainWindow, {
         transparent: true,
         forwardKeyboardInput: false,
-        forwardMouseInput: true,
+        forwardMouseInput: false,
     })
+
+    // 设置
+    function settings() {
+        new Notification({
+            title: app.getName(),
+            body: '功能开发中，敬请期待！',
+        }).show()
+    }
+
+    // 退出事件
+    function exit() {
+        mainWindow.hide()
+        detach(mainWindow)
+        mainWindow.close()
+    }
+
+    // 系统托盘菜单
+    const trayMenu = Menu.buildFromTemplate([
+        {
+            label: '设置',
+            click: settings,
+        },
+        {
+            label: '退出',
+            click: exit,
+        },
+    ])
 
     // 注册托盘图标
     app.getFileIcon(process.execPath).then((icon) => {
         const tray = new Tray(icon)
-        tray.setToolTip('ExamCountdown: 双击退出')
-        tray.on('double-click', () => {
-            mainWindow.hide()
-            detach(mainWindow)
-            mainWindow.close()
-        })
+        tray.setToolTip(app.name)
+        tray.setContextMenu(trayMenu)
+        tray.on('click', trayMenu.popup.bind(trayMenu))
     })
 
     // 打开开发工具
-    // mainWindow.webContents.openDevTools()
+    if (!app.isPackaged) mainWindow.webContents.openDevTools()
 
     return mainWindow
 }
@@ -68,9 +100,16 @@ app.whenReady().then(() => {
         }).show()
         app.quit()
     } else {
+        // 注册IPC通信
+        ipcMain.handle('get-settings', handleGetSettings)
+
         // 创建浏览器窗口
         const mainWindow = createWindow()
         mainWindow.once('ready-to-show', () => {
+            // 应用设置
+            mainWindow.webContents.send('apply-settings')
+
+            // 显示窗口
             mainWindow.show()
         })
 

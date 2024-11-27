@@ -1,7 +1,8 @@
 {
   "name": "examcountdown",
-  "version": "24.11.25",
-  "description": "Website for ExamCountdown",
+  "productName": "ExamCountdown",
+  "version": "24.11.27",
+  "description": "Website of ExamCountdown",
   "main": "index.js",
   "type": "module",
   "scripts": {

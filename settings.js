@@ -1,4 +1,4 @@
-import { Store } from 'electron-store';
+import Store from 'electron-store';
 
 const schema = {
     background: {
@@ -34,6 +34,5 @@ const schema = {
     },
 };
 
-const settings = new Store({ name: 'settings' });
-settings.defaults(schema);
+const settings = new Store({ name: 'settings', schema });
 export default settings;
