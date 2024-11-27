@@ -9,4 +9,6 @@ window.onload = function () {
     }
 
     api.applySettings(ec.getAndApplySettings)
+
+    // api.hitokotoChange(ec.plugin.hitokoto.change.bind(ec.plugin.hitokoto))
 }

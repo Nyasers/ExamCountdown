@@ -55,13 +55,13 @@ const createWindow = () => {
 
     // 设置
     function settings() {
-        // 应用设置
-        webContents.send('apply-settings')
-
         new Notification({
             title: app.getName(),
             body: '功能开发中，敬请期待！',
         }).show()
+
+        // 应用设置
+        webContents.send('apply-settings')
     }
 
     // 退出
@@ -77,6 +77,10 @@ const createWindow = () => {
             label: '控制台',
             click: devTools,
         },
+        // {
+        //     label: '一言',
+        //     click: webContents.send.bind(null, 'hitokoto-change')
+        // },
         {
             label: '设置',
             click: settings,
