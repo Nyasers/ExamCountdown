@@ -1,6 +1,13 @@
 import { ec } from '../ec.js';
 export const propUser = {};
 
+propUser.apply = (function (settings) {
+    this.breakon.func(settings.breakon)
+    this.finalonly.func(settings.finalonly)
+    this.background.func(settings.background)
+    this.bingwallpaper.func(settings.bingwallpaper)
+}).bind(propUser);
+
 propUser.background = {
     value: 'file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg',
     func: (

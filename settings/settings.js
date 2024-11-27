@@ -34,5 +34,5 @@ const schema = {
     },
 };
 
-const settings = new Store({ name: 'settings', schema });
+const settings = new Store({ name: 'Settings', schema });
 export default settings;

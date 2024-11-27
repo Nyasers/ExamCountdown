@@ -3,7 +3,9 @@ import { fileURLToPath } from 'node:url'
 import { updateElectronApp } from 'update-electron-app'
 import { attach, detach, reset } from 'electron-as-wallpaper'
 import { app, BrowserWindow, Tray, Menu, Notification, ipcMain } from 'electron'
-import settings from './settings.js'
+import settings from './settings/settings.js'
+
+const isDev = !app.isPackaged
 
 async function handleGetSettings() {
     return settings.get()
@@ -25,25 +27,44 @@ const createWindow = () => {
         },
     })
 
+    const webContents = mainWindow.webContents
+
+    // 控制台
+
+    const devTools = (function () {
+        if (this.isDevToolsOpened())
+            this.closeDevTools()
+        else
+            this.openDevTools({ mode: 'detach' })
+    }).bind(webContents)
+
+    // 网页加载完成后，读取配置文件
+    webContents.on('did-finish-load', () => {
+        webContents.send('apply-settings')
+    })
+
     // 加载 index.html
     mainWindow.loadFile('index.html')
 
     // 注册壁纸
     attach(mainWindow, {
         transparent: true,
-        forwardKeyboardInput: false,
         forwardMouseInput: false,
+        forwardKeyboardInput: false,
     })
 
     // 设置
     function settings() {
+        // 应用设置
+        webContents.send('apply-settings')
+
         new Notification({
             title: app.getName(),
             body: '功能开发中，敬请期待！',
         }).show()
     }
 
-    // 退出事件
+    // 退出
     function exit() {
         mainWindow.hide()
         detach(mainWindow)
@@ -52,6 +73,10 @@ const createWindow = () => {
 
     // 系统托盘菜单
     const trayMenu = Menu.buildFromTemplate([
+        {
+            label: '控制台',
+            click: devTools,
+        },
         {
             label: '设置',
             click: settings,
@@ -71,7 +96,8 @@ const createWindow = () => {
     })
 
     // 打开开发工具
-    if (!app.isPackaged) mainWindow.webContents.openDevTools()
+    if (isDev)
+        devTools()
 
     return mainWindow
 }
@@ -83,8 +109,8 @@ app.whenReady().then(() => {
     // 检查操作系统
     if (process.platform !== 'win32') {
         new Notification({
-            'title': app.getName(),
-            'body': 'Sorry, this app only works properly on Windows.'
+            title: app.getName(),
+            body: 'Sorry, this app only works properly on Windows.'
         }).show()
         app.quit()
     }
@@ -106,12 +132,10 @@ app.whenReady().then(() => {
         // 创建浏览器窗口
         const mainWindow = createWindow()
         mainWindow.once('ready-to-show', () => {
-            // 应用设置
-            mainWindow.webContents.send('apply-settings')
-
             // 显示窗口
             mainWindow.show()
         })
+
 
         // 注册更新服务
         updateElectronApp()

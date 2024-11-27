@@ -1,10 +1,12 @@
-ec.getSettings = electronAPI.getSettings.bind()
+window.onload = function () {
+    const ec = globalThis.ec;
+    const api = window.electronAPI;
 
-electronAPI.applySettings(async () => {
-    const settings = await ec.getSettings()
-    ec.properties.user.breakon.func(settings.breakon)
-    ec.properties.user.finalonly.func(settings.finalonly)
-    ec.properties.user.background.func(settings.background)
-    ec.properties.user.bingwallpaper.func(settings.bingwallpaper)
-    // ec.properties.user.exams.func(settings.exams)
-})
+    ec.getSettings = api.getSettings.bind()
+    ec.applySettings = ec.properties.user.apply.bind()
+    ec.getAndApplySettings = async () => {
+        ec.applySettings(await ec.getSettings())
+    }
+
+    api.applySettings(ec.getAndApplySettings)
+}
