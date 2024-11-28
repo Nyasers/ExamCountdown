@@ -1,9 +1,7 @@
 {
   "name": "examcountdown",
   "productName": "ExamCountdown",
-  "version": "24.11.27",
   "description": "Website of ExamCountdown",
-  "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "npx webpack",
