@@ -1,7 +1,6 @@
-window.onload = function () {
-    const ec = globalThis.ec;
-    const api = window.electronAPI;
-
+const ec = globalThis.ec;
+const api = window.electronAPI;
+if ("undefined" !== typeof api) {
     ec.getSettings = api.getSettings.bind()
     ec.applySettings = ec.properties.user.apply.bind()
     ec.getAndApplySettings = async () => {
