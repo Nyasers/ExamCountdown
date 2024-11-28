@@ -3,12 +3,26 @@ import { fileURLToPath } from 'node:url'
 import { updateElectronApp } from 'update-electron-app'
 import { attach, detach, reset } from 'electron-as-wallpaper'
 import { app, BrowserWindow, Tray, Menu, Notification, ipcMain } from 'electron'
-import settings from './settings/settings.js'
+
+import { settings } from './settings/settings.js'
+import { createWindow as createSettingsWindow } from './settings/main.js'
 
 const isDev = !app.isPackaged
 
-async function handleGetSettings() {
-    return settings.get()
+var settingsWindow = null
+
+function handleHasSettings(_event, key) {
+    return settings.has(key)
+}
+
+async function handleGetSettings(_event, key) {
+    return settings.get(key)
+}
+
+async function handleSetSettings(_event, key, value) {
+    if (settings.has(key))
+        settings.set(key, value)
+    return settings.get(key)
 }
 
 const createWindow = () => {
@@ -20,10 +34,10 @@ const createWindow = () => {
         fullscreen: true,
         transparent: true,
         webPreferences: {
-            preload: dirname(fileURLToPath(import.meta.url)) + '\\preload.cjs',
             nodeIntegration: false,
             contextIsolation: true,
             enableRemoteModule: false,
+            preload: dirname(fileURLToPath(import.meta.url)) + '\\preload.cjs',
         },
     })
 
@@ -53,17 +67,21 @@ const createWindow = () => {
 
     // 设置
     function settings() {
-        new Notification({
-            title: app.getName(),
-            body: '功能开发中，敬请期待！',
-        }).show()
-
-        // 应用设置
-        webContents.send('apply-settings')
+        if (settingsWindow) {
+            settingsWindow.focus()
+        } else {
+            settingsWindow = createSettingsWindow()
+            settingsWindow.once('closed', () => {
+                webContents.send('apply-settings')
+                settingsWindow = null
+            })
+        }
     }
 
     // 退出
     function exit() {
+        if (settingsWindow)
+            settingsWindow.close()
         mainWindow.hide()
         detach(mainWindow)
         mainWindow.close()
@@ -130,6 +148,8 @@ app.whenReady().then(() => {
     } else {
         // 注册IPC通信
         ipcMain.handle('get-settings', handleGetSettings)
+        ipcMain.handle('set-settings', handleSetSettings)
+        ipcMain.handle('has-settings', handleHasSettings)
 
         // 创建浏览器窗口
         const mainWindow = createWindow()

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings Editor</title>
+</head>
+
+<body>
+    <h1>Settings Editor</h1>
+    <form id="settingsForm">
+        <label for="settingKey">Key:</label>
+        <select id="settingKey" name="settingKey" onchange="onSelectChange()"></select><br><br>
+        <label for="settingValue">Value:</label>
+        <textarea id="settingValue" name="settingValue" style="resize: both; overlay: auto;"></textarea><br><br>
+        <button type="submit">Save</button>
+    </form>
+    <div id="output"></div>
+    <script src="renderer.js"></script>
+</body>
+
+</html>
