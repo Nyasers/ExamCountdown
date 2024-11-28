@@ -4,6 +4,7 @@ import main from './main.js';
 import { networkWaiter } from './network-waiter/networkWaiter.js';
 import '../../cache/index.css';
 
+import { init as initRenderer } from './renderer.js';
 import { init as initBW } from '../plugin/BingWallpaper/index.js';
 import { init as initHitokoto } from '../plugin/Hitokoto/index.js';
 
@@ -14,6 +15,9 @@ globalThis.Time = () => new Date;
 
 // Init
 main(globalThis, ec);
+
+// Init renderer
+initRenderer(ec);
 
 // wait for online
 networkWaiter((async function () {

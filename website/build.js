@@ -24,7 +24,7 @@ function MinifyJSON(code) {
 async function packHTML(jsfile, ...workers) {
     var output = "<!doctype html><noscript><strong>We're sorry but ExamCountdown doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>";
     output += "<ec>";
-    output += "<script src='./renderer.js' defer></script>";
+    // output += "<script src='./renderer.js' defer></script>";
     workers.forEach(worker => {
         output += `<script id="${worker.id}" type="app/worker">`;
         output += fs.readFileSync(worker.js, 'utf-8'); fs.rmSync(worker.js);
