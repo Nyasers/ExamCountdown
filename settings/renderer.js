@@ -14,24 +14,28 @@ document.getElementById('settingsForm').addEventListener('submit', async (event)
     }
 
     console.log(parsedValue == await store.set(key, parsedValue))
-    await displaySettings();
+    await displaySettings(key);
 });
 
-async function displaySettings() {
+async function displaySettings(skey = null) {
     const select = document.getElementById('settingKey');
     const outputDiv = document.getElementById('output');
     select.innerHTML = outputDiv.innerHTML = '';
 
     const keys = Object.keys(await store.get());
+
+    if (skey == null || !store.has(skey))
+        skey = keys[0];
+
     keys.forEach(async (key) => {
         if (store.has(key)) {
             const option = document.createElement('option');
             option.value = key;
             option.textContent = key;
             select.appendChild(option);
-            if (key == keys[0]) {
+            if (key == skey) {
                 option.selected = true;
-                onSelectChange();
+                await onSelectChange();
             }
 
             const value = JSON.stringify(await store.get(key));
@@ -46,7 +50,7 @@ async function onSelectChange() {
     const select = document.getElementById('settingKey');
     const key = select.value;
     const value = await store.get(key);
-    document.getElementById('settingValue').value = value;
+    document.getElementById('settingValue').value = JSON.stringify(value);
 }
 
 displaySettings();
