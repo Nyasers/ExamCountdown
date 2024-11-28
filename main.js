@@ -30,12 +30,10 @@ const createWindow = () => {
     const webContents = mainWindow.webContents
 
     // 控制台
-
     const devTools = (function () {
         if (this.isDevToolsOpened())
             this.closeDevTools()
-        else
-            this.openDevTools({ mode: 'detach' })
+        this.openDevTools({ mode: 'detach' })
     }).bind(webContents)
 
     // 网页加载完成后，读取配置文件
@@ -74,7 +72,7 @@ const createWindow = () => {
     // 系统托盘菜单
     const trayMenu = Menu.buildFromTemplate([
         {
-            label: '控制台',
+            label: 'DevTools',
             click: devTools,
         },
         // {
