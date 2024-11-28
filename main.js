@@ -2,30 +2,16 @@ import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { updateElectronApp } from 'update-electron-app'
 import { attach, detach, reset } from 'electron-as-wallpaper'
-import { app, BrowserWindow, Tray, Menu, Notification, ipcMain } from 'electron'
+import { app, BrowserWindow, Tray, Menu, Notification } from 'electron'
 
-import { settings } from './settings/settings.js'
+import initIPC from './handleIPC.js'
 import { createWindow as createSettingsWindow } from './settings/main.js'
 
 const isDev = !app.isPackaged
 
 var settingsWindow = null
 
-function handleHasSettings(_event, key) {
-    return settings.has(key)
-}
-
-async function handleGetSettings(_event, key) {
-    return settings.get(key)
-}
-
-async function handleSetSettings(_event, key, value) {
-    if (settings.has(key))
-        settings.set(key, value)
-    return settings.get(key)
-}
-
-const createWindow = () => {
+function createWindow() {
     // 创建浏览器窗口
     const mainWindow = new BrowserWindow({
         menu: null,
@@ -147,9 +133,7 @@ app.whenReady().then(() => {
         app.quit()
     } else {
         // 注册IPC通信
-        ipcMain.handle('get-settings', handleGetSettings)
-        ipcMain.handle('set-settings', handleSetSettings)
-        ipcMain.handle('has-settings', handleHasSettings)
+        initIPC()
 
         // 创建浏览器窗口
         const mainWindow = createWindow()
