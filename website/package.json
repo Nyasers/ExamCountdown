@@ -1,13 +1,12 @@
 {
   "name": "examcountdown",
   "productName": "ExamCountdown",
-  "version": "24.11.27",
   "description": "Website of ExamCountdown",
-  "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "npx webpack",
-    "build": "npm install && npm run webpack",
+    "prebuild": "npm install",
+    "build": "npm run webpack",
     "webpack": "node build.js || npm run test",
     "upgrade": "node upgrade.js & npm up"
   },
