@@ -1,6 +1,6 @@
-import Store from 'electron-store';
+import Store from 'electron-store'
 
-const schema = {
+export const schema = {
     background: {
         type: 'string',
         default: 'file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg',
@@ -32,7 +32,6 @@ const schema = {
             top: false,
         }],
     },
-};
+}
 
-const settings = new Store({ name: 'Settings', schema });
-export default settings;
+export const settings = new Store({ name: 'Settings', schema })

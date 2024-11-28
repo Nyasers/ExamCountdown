@@ -1,15 +1,15 @@
-export const api = window.electronAPI
+export const store = window.electronStore
 
 export function init(ec) {
-    if ("undefined" !== typeof api) {
-        ec.getSettings = api.getSettings.bind()
+    if ("undefined" !== typeof store) {
+        ec.getSettings = store.get.bind()
         ec.applySettings = ec.properties.user.apply.bind()
         ec.getAndApplySettings = async () => {
             ec.applySettings(await ec.getSettings())
         }
 
-        api.applySettings(ec.getAndApplySettings)
+        store.onApply(ec.getAndApplySettings)
 
-        // api.hitokotoChange(ec.plugin.hitokoto.change.bind(ec.plugin.hitokoto))
+        // store.hitokotoChange(ec.plugin.hitokoto.change.bind(ec.plugin.hitokoto))
     }
 }

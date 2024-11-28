@@ -3,23 +3,12 @@ export const propUser = {};
 
 propUser.apply = (function (settings) {
     this.breakon.func(settings.breakon)
+    this.hitokoto.func(settings.hitokoto)
     this.finalonly.func(settings.finalonly)
     this.background.func(settings.background)
     this.bingwallpaper.func(settings.bingwallpaper)
 }).bind(propUser);
 
-propUser.background = {
-    value: 'file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg',
-    func: (
-        /**
-        * @param {string} value 
-        */
-        function (value) {
-            this.background.value = value;
-            ec.background.set(this.background.value);
-        }
-    ).bind(propUser)
-};
 propUser.breakon = {
     value: '高考',
     func: (
@@ -29,6 +18,17 @@ propUser.breakon = {
         function (value) {
             this.breakon.value = value;
             ec.exam.build(this.breakon.value);
+        }
+    ).bind(propUser)
+};
+propUser.hitokoto = {
+    value: true,
+    func: (
+        /**
+        * @param {boolean} value 
+        */
+        function (value) {
+            this.hitokoto.value = value;
         }
     ).bind(propUser)
 };
@@ -44,14 +44,15 @@ propUser.finalonly = {
         }
     ).bind(propUser)
 };
-propUser.hitokoto = {
-    value: true,
+propUser.background = {
+    value: 'file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg',
     func: (
         /**
-        * @param {boolean} value 
+        * @param {string} value 
         */
         function (value) {
-            this.hitokoto.value = value;
+            this.background.value = value;
+            ec.background.set(this.background.value);
         }
     ).bind(propUser)
 };
@@ -89,14 +90,14 @@ propUser.bingwallpaper = {
 // };
 
 export const applyUserProperties = (function (properties) {
-    if (properties.background)
-        this.background.func(`file:///${properties.background.value}`);
     if (properties.breakon)
         this.breakon.func(properties.breakon.value);
-    if (properties.finalonly)
-        this.finalonly.func(properties.finalonly.value);
     if (properties.hitokoto)
         this.hitokoto.func(properties.hitokoto.value);
+    if (properties.finalonly)
+        this.finalonly.func(properties.finalonly.value);
+    if (properties.background)
+        this.background.func(`file:///${properties.background.value}`);
     if (properties.bingwallpaper)
         this.bingwallpaper.func(properties.bingwallpaper.value);
     // if (properties.extraexams)
