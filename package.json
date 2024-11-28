@@ -1,7 +1,7 @@
 {
   "name": "examcountdown",
   "productName": "ExamCountdown",
-  "version": "24.11.27",
+  "version": "24.11.28",
   "description": "Electron shell of ExamCountdown",
   "main": "main.js",
   "type": "module",
