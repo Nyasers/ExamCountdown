@@ -4,8 +4,10 @@ import { BrowserWindow } from 'electron';
 
 export function createWindow() {
     const mainWindow = new BrowserWindow({
+        menu: null,
         width: 800,
         height: 600,
+        center: true,
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
