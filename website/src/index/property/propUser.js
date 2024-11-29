@@ -2,6 +2,7 @@ import { ec } from '../ec.js';
 export const propUser = {};
 
 propUser.apply = (function (settings) {
+    this.exams.func(settings.exams)
     this.breakon.func(settings.breakon)
     this.hitokoto.func(settings.hitokoto)
     this.finalonly.func(settings.finalonly)
@@ -9,6 +10,25 @@ propUser.apply = (function (settings) {
     this.bingwallpaper.func(settings.bingwallpaper)
 }).bind(propUser);
 
+propUser.exams = {
+    value: [{
+        title: "福建高考",
+        time: {
+            start: "$YYYY/06/07 09:00",
+            end: "$YYYY/06/09 18:15",
+        },
+        top: false,
+    }],
+    func: (
+        /**
+        * @param {Array<Object>} value
+        */
+        function (value) {
+            this.exams.value = value;
+            ec.exam.build(this.breakon.value);
+        }
+    ).bind(propUser)
+};
 propUser.breakon = {
     value: '高考',
     func: (

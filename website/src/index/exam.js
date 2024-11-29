@@ -84,59 +84,62 @@ export const exam = {
     json: [],
     array: [],
     default: [],
-    extra: {},
+    // extra: {},
     breakon: '',
     build: null,
 };
 
-exam.default = [{
-    title: "福建高考",
-    time: {
-        start: "$YYYY/06/07 09:00",
-        end: "$YYYY/06/09 18:15",
-    }
-},
-{
-    title: '福建中考',
-    time: {
-        start: '$YYYY/06/19 08:30',
-        end: '$YYYY/06/21 11:55'
-    }
-},
-{
-    title: '福建会考',
-    time: {
-        start: '$YYYY/06/21 15:00',
-        end: '$YYYY/06/21 17:45'
-    }
-}]
-
-exam.extra = {
-    enabled: true,
-    retry: 6,
-    url: 'extraexams.json',
-    fetch: async function (url = ec.exam.extra.url) {
-        $.getJSON(url)
-            .done(function (data) {
-                try {
-                    ec.exam.extra.json = data;
-                    ec.exam.build();
-                } catch (e) {
-                    console.error(e);
-                }
-            })
-            .fail(function () {
-                if (ec.exam.extra.retry-- >= 0) setTimeout(() => ec.exam.extra.fetch(url), 1e4), console.warn({ url, retry: ec.exam.extra.retry + 1 })
-                else ec.exam.extra.retry = 6;
-            });
+exam.default = [
+    {
+        title: "福建高考",
+        time: {
+            start: "$YYYY/06/07 09:00",
+            end: "$YYYY/06/09 18:15",
+        }
     },
-    json: []
-};
+    // {
+    //     title: '福建中考',
+    //     time: {
+    //         start: '$YYYY/06/19 08:30',
+    //         end: '$YYYY/06/21 11:55'
+    //     }
+    // },
+    // {
+    //     title: '福建会考',
+    //     time: {
+    //         start: '$YYYY/06/21 15:00',
+    //         end: '$YYYY/06/21 17:45'
+    //     }
+    // },
+]
+
+// exam.extra = {
+//     enabled: true,
+//     retry: 6,
+//     url: 'extraexams.json',
+//     fetch: async function (url = ec.exam.extra.url) {
+//         $.getJSON(url)
+//             .done(function (data) {
+//                 try {
+//                     ec.exam.extra.json = data;
+//                     ec.exam.build();
+//                 } catch (e) {
+//                     console.error(e);
+//                 }
+//             })
+//             .fail(function () {
+//                 if (ec.exam.extra.retry-- >= 0) setTimeout(() => ec.exam.extra.fetch(url), 1e4), console.warn({ url, retry: ec.exam.extra.retry + 1 })
+//                 else ec.exam.extra.retry = 6;
+//             });
+//     },
+//     json: []
+// };
 
 exam.build = (function (breakon = null) {
-    this.json = Array.from(this.default);
-    if (this.extra.enabled)
-        this.extra.json.forEach(exam => this.json.push(exam));
+    this.json = Array.from(ec.properties.user.exams.value);
+    if (this.json.length == 0)
+        this.json = Array.from(this.default);
+
     this.array = buildExamArray(this.json);
 
     if (breakon != null)
@@ -151,7 +154,7 @@ exam.build = (function (breakon = null) {
         }
     }
 
-    // if (typeof undefined != typeof parent.properties.user.finalonly.value)
-    //     this.array.splice(0, this.array.length - 1);
+    if (typeof undefined != typeof ec.properties.user.finalonly.value)
+        this.array.splice(0, this.array.length - 1);
     return this.array;
 }).bind(exam);
