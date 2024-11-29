@@ -14,7 +14,9 @@
     "start": "npm run build && electron-forge start",
     "package": "npm run build && electron-forge package",
     "make": "npm run build && electron-forge make",
-    "publish": "npm run build && electron-forge publish"
+    "publish": "npm run build && electron-forge publish",
+    "release": "npm version",
+    "postrelease": "git push origin --tags"
   },
   "author": "Nyasers",
   "license": "ISC",
