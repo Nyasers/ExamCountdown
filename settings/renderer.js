@@ -56,10 +56,9 @@ async function displaySettings(skey = null) {
 }
 
 async function onSelectChange() {
-    const select = document.getElementById('settingKey');
-    const key = select.value;
+    const key = document.getElementById('settingKey').value;
     const value = await store.get(key);
-    document.getElementById('settingValue').value = JSON.stringify(value);
+    document.getElementById('settingValue').value = typeof value == 'string' ? value : JSON.stringify(value);
 }
 
 async function onResetClick() {
