@@ -31,6 +31,32 @@ export const schema = {
             },
             top: false,
         }],
+        items: {
+            type: 'object',
+            properties: {
+                title: {
+                    type: 'string',
+                },
+                time: {
+                    type: 'object',
+                    properties: {
+                        start: {
+                            type: 'string',
+                        },
+                        end: {
+                            type: 'string',
+                        },
+                    },
+                    required: ['start', 'end'],
+                },
+                top: {
+                    type: 'boolean',
+                    default: false,
+                }
+            },
+            required: ['title', 'time'],
+        },
+        minItems: 1,
     },
 }
 
