@@ -4,7 +4,6 @@ import { BrowserWindow } from 'electron';
 
 export function createWindow() {
     const mainWindow = new BrowserWindow({
-        menu: null,
         width: 800,
         height: 600,
         center: true,
@@ -15,6 +14,8 @@ export function createWindow() {
             preload: dirname(fileURLToPath(import.meta.url)) + '\\preload.cjs',
         },
     });
+
+    mainWindow.setMenu(null);
 
     mainWindow.loadFile('settings/index.html');
 
