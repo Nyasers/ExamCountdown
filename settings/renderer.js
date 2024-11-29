@@ -13,8 +13,17 @@ document.getElementById('settingsForm').addEventListener('submit', async (event)
         parsedValue = value; // 如果解析失败，则保持为字符串
     }
 
-    console.log(parsedValue == await store.set(key, parsedValue))
-    await displaySettings(key);
+    store.set(key, parsedValue)
+        .then(async (res) => {
+            await displaySettings(key);
+            if (JSON.stringify(parsedValue) == JSON.stringify(res)) {
+                alert(`设置 ${key} 成功.`);
+                await displaySettings(key);
+            } else throw new Error(`设置结果与期望值不符 (可能是自动补全): \n\n期望: \n${JSON.stringify(parsedValue)}\n\n结果: \n${JSON.stringify(res)}`);
+        })
+        .catch((err) => {
+            alert(`设置 ${key} 失败: \n\n${err.message}`);
+        });
 });
 
 async function displaySettings(skey = null) {
@@ -51,6 +60,19 @@ async function onSelectChange() {
     const key = select.value;
     const value = await store.get(key);
     document.getElementById('settingValue').value = JSON.stringify(value);
+}
+
+async function onResetClick() {
+    const key = document.getElementById('settingKey').value;
+    try {
+        await store.reset(key);
+        alert(`重置 ${key} 成功.`);
+    } catch (err) {
+        console.error(err);
+        alert(`重置 ${key} 失败: \n\n${err.message}`);
+    } finally {
+        await displaySettings(key);
+    }
 }
 
 displaySettings();
