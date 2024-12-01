@@ -1,33 +1,39 @@
+import os from 'node:os'
 import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { updateElectronApp } from 'update-electron-app'
 import { attach, detach, reset } from 'electron-as-wallpaper'
-import { app, BrowserWindow, Tray, Menu, Notification } from 'electron'
+import { app, BrowserWindow, Tray, Menu, Notification, dialog } from 'electron'
 
 import initIPC from './handleIPC.js'
 import { createWindow as createSettingsWindow } from './settings/main.js'
 
 const isDev = !app.isPackaged
 
+// var win11 = os.release().startsWith('10.0.22')
+var wallpaper = false
 var settingsWindow = null
 
 function createWindow() {
-    // 创建浏览器窗口
-    const mainWindow = new BrowserWindow({
-        menu: null,
+    const config = {
         show: false,
-        frame: false,
-        fullscreen: true,
-        transparent: true,
+        width: 1280,
+        height: 720,
+        center: true,
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
             enableRemoteModule: false,
             preload: dirname(fileURLToPath(import.meta.url)) + '\\preload.cjs',
         },
-    })
+    }
 
+    // 创建浏览器窗口
+    const mainWindow = new BrowserWindow(config)
     const webContents = mainWindow.webContents
+
+    // 隐藏菜单栏
+    mainWindow.setMenu(null)
 
     // 控制台
     const devTools = (function () {
@@ -44,12 +50,25 @@ function createWindow() {
     // 加载 index.html
     mainWindow.loadFile('index.html')
 
-    // 注册壁纸
-    attach(mainWindow, {
-        transparent: true,
-        forwardMouseInput: false,
-        forwardKeyboardInput: false,
-    })
+    // 壁纸注册相关
+    function attachWallpaper() {
+        wallpaper = true
+        mainWindow.flashFrame(false)
+        mainWindow.setFullScreen(true)
+        attach(mainWindow, {
+            transparent: true,
+            forwardMouseInput: false,
+            forwardKeyboardInput: false,
+        })
+    }
+
+    function detachWallpaper() {
+        wallpaper = false
+        mainWindow.flashFrame(true)
+        mainWindow.setFullScreen(false)
+        detach(mainWindow)
+        reset()
+    }
 
     // 设置
     function settings() {
@@ -69,7 +88,8 @@ function createWindow() {
         if (settingsWindow)
             settingsWindow.close()
         mainWindow.hide()
-        detach(mainWindow)
+        if (wallpaper)
+            detachWallpaper()
         mainWindow.close()
     }
 
@@ -79,10 +99,12 @@ function createWindow() {
             label: 'DevTools',
             click: devTools,
         },
-        // {
-        //     label: '一言',
-        //     click: webContents.send.bind(null, 'hitokoto-change')
-        // },
+        {
+            label: '切换壁纸状态',
+            click: () => {
+                wallpaper ? detachWallpaper() : attachWallpaper()
+            }
+        },
         {
             label: '设置',
             click: settings,
@@ -101,6 +123,9 @@ function createWindow() {
         tray.on('click', trayMenu.popup.bind(trayMenu))
     })
 
+    // 注册壁纸
+    attachWallpaper()
+
     // 打开开发工具
     if (isDev)
         devTools()
@@ -112,12 +137,14 @@ function createWindow() {
 // 和创建浏览器窗口的时候调用
 // 部分 API 在 ready 事件触发后才能使用。
 app.whenReady().then(() => {
+    // new Notification({
+    //     title: app.name,
+    //     body: `Running on ${process.platform} ${os.release()}`,
+    // }).show()
+
     // 检查操作系统
     if (process.platform !== 'win32') {
-        new Notification({
-            title: app.getName(),
-            body: 'Sorry, this app only works properly on Windows.'
-        }).show()
+        dialog.showErrorBox(app.getName(), 'Sorry, this app only works properly on Windows.')
         app.quit()
     }
 
@@ -126,10 +153,7 @@ app.whenReady().then(() => {
 
     // 如果锁定失败，则退出应用
     if (!lock) {
-        new Notification({
-            title: app.getName(),
-            body: 'Another instance is already running. Exiting...'
-        }).show()
+        dialog.showErrorBox(app.getName(), 'Another instance is already running. Exiting...')
         app.quit()
     } else {
         // 注册IPC通信
