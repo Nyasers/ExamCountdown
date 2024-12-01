@@ -1,4 +1,3 @@
-import os from 'node:os'
 import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { updateElectronApp } from 'update-electron-app'
