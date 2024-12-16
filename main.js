@@ -1,4 +1,4 @@
-import { dirname } from 'node:path'
+import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { updateElectronApp } from 'update-electron-app'
 import { attach, detach, reset } from 'electron-as-wallpaper'
@@ -8,7 +8,7 @@ import initIPC from './handleIPC.js'
 import { createWindow as createSettingsWindow } from './settings/main.js'
 
 const isDev = !app.isPackaged
-const __dirname = dirname(fileURLToPath(import.meta.url))
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // const win11 = process.platform === 'win32' && os.release().startsWith('10.0.22')
 
 var wallpaper = false
@@ -20,11 +20,12 @@ function createWindow() {
         width: 1280,
         height: 720,
         center: true,
+        icon: path.resolve(__dirname, 'assets/icon.ico'),
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
             enableRemoteModule: false,
-            preload: `${__dirname}\\preload.cjs`,
+            preload: path.resolve(__dirname, 'preload.cjs'),
         },
     }
 

@@ -1,11 +1,15 @@
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export const packagerConfig = {
   asar: true,
   name: 'ExamCountdown',
   executableName: 'ExamCountdown',
-  icon: './assets/icon.ico',
+  icon: path.resolve(__dirname, 'assets/icon'),
   ignore: [
     ".github/workflows",
     ".gitignore",
@@ -21,8 +25,8 @@ export const makers = [
     config: {
       name: 'ExamCountdown',
       authors: 'Nyasers',
-      setupIcon: './assets/icon.ico',
       iconUrl: 'https://ec.nyase.ru/favicon.ico',
+      setupIcon: path.resolve(__dirname, 'assets/icon.ico'),
     },
   },
 ];

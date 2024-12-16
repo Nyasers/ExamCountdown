@@ -2,9 +2,9 @@ import Store from 'electron-store'
 
 export const config = {
     name: 'Settings',
-    encryptionKey: 'ExamCountdown',
-    clearInvalidConfig: true,
     fileExtension: null,
+    clearInvalidConfig: true,
+    encryptionKey: 'ExamCountdown',
     schema: {
         background: {
             type: 'string',
