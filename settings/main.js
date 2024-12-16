@@ -2,6 +2,7 @@ import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { BrowserWindow } from 'electron';
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
 export function createWindow() {
     const mainWindow = new BrowserWindow({
         width: 800,
@@ -11,7 +12,7 @@ export function createWindow() {
             nodeIntegration: false,
             contextIsolation: true,
             enableRemoteModule: false,
-            preload: dirname(fileURLToPath(import.meta.url)) + '\\preload.cjs',
+            preload: `${__dirname}\\preload.cjs`,
         },
     });
 

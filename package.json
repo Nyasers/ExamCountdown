@@ -21,8 +21,8 @@
   "author": "Nyasers",
   "license": "ISC",
   "dependencies": {
-    "electron-store": "^10.0.0",
     "electron-as-wallpaper": "^2.0.2",
+    "electron-store": "^10.0.0",
     "update-electron-app": "^3.0.0"
   },
   "devDependencies": {

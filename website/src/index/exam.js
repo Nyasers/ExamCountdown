@@ -154,7 +154,7 @@ exam.build = (function (breakon = null) {
         }
     }
 
-    if (typeof undefined != typeof ec.properties.user.finalonly.value)
+    if (true === ec.properties.user.finalonly.value)
         this.array.splice(0, this.array.length - 1);
     return this.array;
 }).bind(exam);

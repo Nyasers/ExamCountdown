@@ -5,13 +5,14 @@ export const packagerConfig = {
   asar: true,
   name: 'ExamCountdown',
   executableName: 'ExamCountdown',
+  icon: './assets/icon.ico',
   ignore: [
     ".github/workflows",
     ".gitignore",
     ".gitpod.yml",
     "forge.config.js",
     "website",
-  ]
+  ],
 };
 export const rebuildConfig = {};
 export const makers = [
@@ -20,6 +21,8 @@ export const makers = [
     config: {
       name: 'ExamCountdown',
       authors: 'Nyasers',
+      setupIcon: './assets/icon.ico',
+      iconUrl: 'https://ec.nyase.ru/favicon.ico',
     },
   },
 ];

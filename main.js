@@ -8,8 +8,9 @@ import initIPC from './handleIPC.js'
 import { createWindow as createSettingsWindow } from './settings/main.js'
 
 const isDev = !app.isPackaged
+const __dirname = dirname(fileURLToPath(import.meta.url))
+// const win11 = process.platform === 'win32' && os.release().startsWith('10.0.22')
 
-// var win11 = os.release().startsWith('10.0.22')
 var wallpaper = false
 var settingsWindow = null
 
@@ -23,7 +24,7 @@ function createWindow() {
             nodeIntegration: false,
             contextIsolation: true,
             enableRemoteModule: false,
-            preload: dirname(fileURLToPath(import.meta.url)) + '\\preload.cjs',
+            preload: `${__dirname}\\preload.cjs`,
         },
     }
 
@@ -152,10 +153,9 @@ app.whenReady().then(() => {
 
     // 如果锁定失败，则退出应用
     if (!lock) {
-        dialog.showErrorBox(app.getName(), 'Another instance is already running. Exiting...')
         app.quit()
     } else {
-        // 注册IPC通信
+        // 注册 IPC 通信
         initIPC()
 
         // 创建浏览器窗口
@@ -165,9 +165,24 @@ app.whenReady().then(() => {
             mainWindow.show()
         })
 
+        // 当运行第二个实例时，将会聚焦到这个窗口
+        app.on('second-instance', (event, commandLine, workingDirectory) => {
+            if (mainWindow) {
+                if (mainWindow.isMinimized()) mainWindow.restore()
+                mainWindow.focus()
+            }
+        })
 
-        // 注册更新服务
-        updateElectronApp()
+        if (app.isPackaged) {
+            // 开机自动启动
+            app.setLoginItemSettings({
+                openAtLogin: true,
+                path: process.execPath,
+            })
+
+            // 注册更新服务
+            updateElectronApp()
+        }
     }
 })
 

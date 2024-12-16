@@ -135,6 +135,7 @@ module.exports = [
       // }),
       new CopyPlugin({
         patterns: [
+          { from: '../assets/icon.ico', to: 'favicon.ico' },
           // { from: './src/cmd/' },
           // { from: './src/json/' },
           { from: './src/pages/' },

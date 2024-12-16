@@ -5,7 +5,7 @@ import wrap from './loader.js';
 import initProperties from './property/index.js';
 import { heartbeat as hitokotoHeatbeat } from '../plugin/Hitokoto/index.js';
 
-function heartbeat(ec) {
+function heartbeat() {
   if ("undefined" != typeof this.plugin.hitokoto) {
     hitokotoHeatbeat(this);
   }
