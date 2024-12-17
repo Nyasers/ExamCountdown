@@ -18,7 +18,6 @@ document.getElementById('settingsForm').addEventListener('submit', async (event)
             await displaySettings(key);
             if (JSON.stringify(parsedValue) == JSON.stringify(res)) {
                 alert(`设置 ${key} 成功.`);
-                await displaySettings(key);
             } else throw new Error(`设置结果与期望值不符 (可能是自动补全): \n\n期望: \n${JSON.stringify(parsedValue)}\n\n结果: \n${JSON.stringify(res)}`);
         })
         .catch((err) => {
