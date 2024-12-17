@@ -7,7 +7,6 @@ import { app, BrowserWindow, Tray, Menu, Notification, dialog } from 'electron'
 import initIPC from './handleIPC.js'
 import { createWindow as createSettingsWindow } from './settings/main.js'
 
-const isDev = !app.isPackaged
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // const win11 = process.platform === 'win32' && os.release().startsWith('10.0.22')
 
@@ -127,10 +126,6 @@ function createWindow() {
     // 注册壁纸
     attachWallpaper()
 
-    // 打开开发工具
-    if (isDev)
-        devTools()
-
     return mainWindow
 }
 
@@ -178,7 +173,7 @@ app.whenReady().then(() => {
             // 开机自动启动
             app.setLoginItemSettings({
                 openAtLogin: true,
-                path: process.execPath,
+                path: path.resolve(path.dirname(app.getPath('exe')), '..', `${app.getName()}.exe`)
             })
 
             // 注册更新服务
