@@ -49,7 +49,7 @@ async function displaySettings(skey = null) {
 
             const value = JSON.stringify(await store.get(key));
             const p = document.createElement('p');
-            p.textContent = `${key}: ${value}`;
+            p.textContent = `${key}=${value}`;
             outputDiv.appendChild(p);
         }
     });
