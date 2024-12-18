@@ -177,7 +177,7 @@ app.whenReady().then(() => {
             })
 
             // 注册更新服务
-            updateElectronApp()
+            updateElectronApp({ notifyUser: false })
         }
     }
 })
