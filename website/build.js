@@ -34,7 +34,7 @@ async function packHTML(jsfile, ...workers) {
     var js = fs.readFileSync(jsfile, 'utf-8');
     var result = await minify(js, terserConfig);
     output += result.code;
-    fs.writeFileSync(jsfile, result.code)
+    fs.writeFileSync(jsfile, result.code);
     output += "</script>";
     output += "</ec>";
     return output;
@@ -109,6 +109,15 @@ async function postBuild() {
     //     webpackConfig[2].plugins[0].definitions.VERSION.split('"')[1].split("Z")[0],
     //     'utf-8'
     // )
+
+    // _redirects
+    fs.readFile(path.resolve('../package.json'), 'utf-8', (_err, data) => {
+        const version = JSON.parse(data).version;
+        fs.readFile(path.resolve('dist/_redirects'), 'utf-8', (_err, data) => {
+            const redirects = data.replaceAll('${VERSION}', version);
+            fs.writeFileSync(path.resolve('dist/_redirects'), redirects, 'utf-8');
+        });
+    });
 }
 
 webpack(webpackConfig, postBuild);
