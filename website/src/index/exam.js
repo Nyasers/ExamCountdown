@@ -38,6 +38,19 @@ function autoYear(time) {
     return time;
 }
 
+// https://www.cnblogs.com/soymilk2019/p/15388984.html
+if (!String.prototype.format) {
+    String.prototype.format = function () {
+        const args = arguments;
+        return this.replace(/{(\d+)}/g, function (match, number) {
+            return typeof args[number] != 'undefined'
+                ? args[number]
+                : match
+                ;
+        });
+    };
+}
+
 export class Exam {
     constructor(json) {
         Object.assign(this, json);
@@ -64,17 +77,16 @@ export class Exam {
             return `${text} ${(t / 8.64e7).toFixed(3)} 天`;
         };
         this.getText = function () {
+            const { start, ending, time } = ec.properties.user.text.value;
             var t = this.getTime(),
                 text;
             if (t >= 0) {
-                text = `距离 ${this.title} <strong>仅剩</strong>`;
+                text = start.format(this.title);
             } else {
                 t = -t;
-                text = `距离 ${this.title} 结束还有`;
+                text = ending.format(this.title);
             }
-            return `${text} ~ ${(t / 8.64e7).toFixed(3)} 天 ~ ${(t / 3.6e6).toFixed(
-                2
-            )} 小时 ~ ${(t / 1e3).toFixed(1)} 秒`;
+            return time.format(text, (t / 8.64e7).toFixed(3), (t / 3.6e6).toFixed(2), (t / 1e3).toFixed(1));
         };
     }
 }

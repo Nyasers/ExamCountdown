@@ -63,6 +63,24 @@ export const config = {
             },
             minItems: 1,
         },
+        text: {
+            type: 'object',
+            properties: {
+                start: {
+                    type: 'string',
+                    default: '距离 {0} <strong>仅剩</strong>',
+                },
+                ending: {
+                    type: 'string',
+                    default: '距离 {0} 结束还有',
+                },
+                time: {
+                    type: 'string',
+                    default: '{0} ~ {1} 天 ~ {2} 小时 ~ {3} 秒',
+                },
+            },
+            required: ['start', 'ending', 'time'],
+        },
     }
 }
 

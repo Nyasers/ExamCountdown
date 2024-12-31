@@ -4,6 +4,9 @@ export const propUser = {};
 propUser.apply = (function (settings) {
     this.exams.func(settings.exams)
     this.breakon.func(settings.breakon)
+    this.textStart.func(settings.textStart)
+    this.textEnding.func(settings.textEnding)
+    this.textTime.func(settings.textTime)
     this.hitokoto.func(settings.hitokoto)
     this.finalonly.func(settings.finalonly)
     this.background.func(settings.background)
@@ -26,6 +29,21 @@ propUser.exams = {
         function (value) {
             this.exams.value = value;
             ec.exam.build(this.breakon.value);
+        }
+    ).bind(propUser)
+};
+propUser.text = {
+    value: {
+        start: '距离 {0} <strong>仅剩</strong>',
+        ending: '距离 {0} 结束还有',
+        time: '{0} ~ {1} 天 ~ {2} 小时 ~ {3} 秒',
+    },
+    func: (
+        /**
+        * @param {Object} value 
+        */
+        function (value) {
+            this.text.value = value;
         }
     ).bind(propUser)
 };
