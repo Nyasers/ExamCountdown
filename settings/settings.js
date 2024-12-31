@@ -65,18 +65,20 @@ export const config = {
         },
         text: {
             type: 'object',
+            default: {
+                start: '距离 {0} <strong>仅剩</strong>',
+                ending: '距离 {0} 结束还有',
+                time: '{0} ~ {1} 天 ~ {2} 小时 ~ {3} 秒',
+            },
             properties: {
                 start: {
                     type: 'string',
-                    default: '距离 {0} <strong>仅剩</strong>',
                 },
                 ending: {
                     type: 'string',
-                    default: '距离 {0} 结束还有',
                 },
                 time: {
                     type: 'string',
-                    default: '{0} ~ {1} 天 ~ {2} 小时 ~ {3} 秒',
                 },
             },
             required: ['start', 'ending', 'time'],
