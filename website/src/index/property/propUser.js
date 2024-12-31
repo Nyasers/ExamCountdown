@@ -3,10 +3,8 @@ export const propUser = {};
 
 propUser.apply = (function (settings) {
     this.exams.func(settings.exams)
+    this.text.func(settings.text)
     this.breakon.func(settings.breakon)
-    this.textStart.func(settings.textStart)
-    this.textEnding.func(settings.textEnding)
-    this.textTime.func(settings.textTime)
     this.hitokoto.func(settings.hitokoto)
     this.finalonly.func(settings.finalonly)
     this.background.func(settings.background)
