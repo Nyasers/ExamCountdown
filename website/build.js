@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import { minify } from 'terser';
-import archiver from 'archiver';
-import webpack from 'webpack';
-import webpackConfig from './webpack.config.cjs';
+// import archiver from 'archiver';
+import rspack from '@rspack/core';
+import rspackConfig from './rspack.config.cjs';
 import terserConfig from './terser.config.js';
 
 /**
@@ -11,9 +11,9 @@ import terserConfig from './terser.config.js';
  * @param {string} code 
  * @returns {string} minified JSON
  */
-function MinifyJSON(code) {
-    return JSON.stringify(JSON.parse(code));
-}
+// function MinifyJSON(code) {
+//     return JSON.stringify(JSON.parse(code));
+// }
 
 /**
  * packHTML
@@ -40,19 +40,19 @@ async function packHTML(jsfile, ...workers) {
     return output;
 }
 
-async function packZip(files, destination) {
-    const archive = archiver('zip', { zlib: { level: 9, memLevel: 9 } });
-    const filename = path.resolve('dist', destination);
-    const output = fs.createWriteStream(filename);
-    archive.pipe(output);
+// async function packZip(files, destination) {
+//     const archive = archiver('zip', { zlib: { level: 9, memLevel: 9 } });
+//     const filename = path.resolve('dist', destination);
+//     const output = fs.createWriteStream(filename);
+//     archive.pipe(output);
 
-    files.forEach((file) => {
-        const filename1 = path.resolve('dist', file.filename);
-        archive.file(filename1, file.data);
-    })
+//     files.forEach((file) => {
+//         const filename1 = path.resolve('dist', file.filename);
+//         archive.file(filename1, file.data);
+//     })
 
-    await archive.finalize();
-}
+//     await archive.finalize();
+// }
 
 // async function postMake() {
 //     const json = path.resolve('dist/project.json');
@@ -81,7 +81,7 @@ async function postBuild() {
     if (license != '') fs.writeFileSync(path.resolve('dist', 'license.txt'), license, 'utf-8');
 
     // Move css files
-    if (webpackConfig[0].mode == 'development') {
+    if (rspackConfig[0].mode == 'development') {
         fs.readdirSync(path.resolve('cache')).filter(n => n.endsWith('.css'))
             .forEach(n =>
                 fs.cpSync(path.resolve('cache', n), path.resolve('dist', n))
@@ -106,7 +106,7 @@ async function postBuild() {
     // VERSION
     // fs.writeFileSync(
     //     path.resolve('dist/VERSION'),
-    //     webpackConfig[2].plugins[0].definitions.VERSION.split('"')[1].split("Z")[0],
+    //     rspackConfig[2].plugins[0].definitions.VERSION.split('"')[1].split("Z")[0],
     //     'utf-8'
     // )
 
@@ -120,4 +120,4 @@ async function postBuild() {
     });
 }
 
-webpack(webpackConfig, postBuild);
+rspack(rspackConfig, postBuild);

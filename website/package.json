@@ -4,11 +4,11 @@
   "description": "Website of ExamCountdown",
   "type": "module",
   "scripts": {
-    "test": "npx webpack",
+    "test": "npx rspack",
     "prebuild": "npm install",
-    "build": "npm run webpack",
-    "webpack": "node build.js || npm run test",
-    "upgrade": "node upgrade.js & npm up"
+    "build": "npm run rspack",
+    "rspack": "node build.js || npm run test",
+    "depend": "node depend.js"
   },
   "author": "Nyasers",
   "license": "ISC",
@@ -18,18 +18,14 @@
     "jquery": "^4.0.0-beta.2"
   },
   "devDependencies": {
-    "archiver": "^7.0.1",
+    "@rspack/cli": "^1.1.8",
+    "@rspack/core": "^1.1.8",
     "clean-webpack-plugin": "^4.0.0",
-    "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
-    "css-minimizer-webpack-plugin": "^7.0.0",
-    "mini-css-extract-plugin": "^2.9.2",
     "postcss-loader": "^8.1.1",
-    "postcss-preset-env": "^10.1.1",
+    "postcss-preset-env": "^10.1.3",
     "style-loader": "^4.0.0",
-    "terser": "^5.36.0",
-    "terser-webpack-plugin": "^5.3.10",
-    "webpack": "^5.96.1",
-    "webpack-cli": "^5.1.4"
+    "terser": "^5.37.0",
+    "terser-webpack-plugin": "^5.3.11"
   }
 }

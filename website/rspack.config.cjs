@@ -1,16 +1,13 @@
 /**
- * @type {import('webpack').Configuration}
+ * @type {import('@rspack/core').Configuration}
  */
 
-const webpack = require('webpack');
 const fs = require('fs');
 const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const rspack = require('@rspack/core');
 const TerserPlugin = require('terser-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserOptions = import('./terser.config.js');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 
 const MODE = true ? 'production' : 'development';
 // const VERSION = '"2024-06-14T17:00Z"';
@@ -47,7 +44,7 @@ module.exports = [
         {
           test: /\.css$/,
           use: [
-            MiniCssExtractPlugin.loader,
+            rspack.CssExtractRspackPlugin.loader,
             'css-loader',
             commonPostcssLoader,
           ],
@@ -55,7 +52,7 @@ module.exports = [
       ],
     },
     plugins: [
-      new MiniCssExtractPlugin({
+      new rspack.CssExtractRspackPlugin({
         filename: '[name].css'
       }),
       new CleanWebpackPlugin(),
@@ -63,7 +60,7 @@ module.exports = [
     optimization: {
       minimize: true,
       minimizer: [
-        new CssMinimizerWebpackPlugin()
+        new rspack.LightningCssMinimizerRspackPlugin()
       ],
     },
   },
@@ -133,7 +130,7 @@ module.exports = [
       // new webpack.DefinePlugin({
       //   'VERSION': VERSION,
       // }),
-      new CopyPlugin({
+      new rspack.CopyRspackPlugin({
         patterns: [
           { from: '../assets/icon.ico', to: 'favicon.ico' },
           // { from: './src/cmd/' },
@@ -145,7 +142,7 @@ module.exports = [
       {
         apply: compiler => {
           compiler.hooks.beforeRun.tap('MyWebpackPlugin', function (_stats) {
-            new webpack.DefinePlugin({
+            new rspack.DefinePlugin({
               WORKERS: workerContent
             }).apply(compiler);
           });
