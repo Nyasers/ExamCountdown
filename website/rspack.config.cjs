@@ -23,8 +23,8 @@ const commonPostcssLoader = {
   }
 }
 
-var workerEntry = [];
-var workerContent = [];
+var workerEntry = {};
+var workerContent = {};
 
 module.exports = [
   {
@@ -80,7 +80,7 @@ module.exports = [
       new CleanWebpackPlugin(),
       {
         apply: compiler => {
-          compiler.hooks.done.tap('MyWebpackPlugin', function (stats) {
+          compiler.hooks.done.tap('MyRspackPlugin', function (stats) {
             const entrypoints = stats.toJson().entrypoints;
 
             Object.keys(entrypoints).forEach((entryName) => {
@@ -88,6 +88,8 @@ module.exports = [
               const entryFilename = entryFiles[0].name;
               workerEntry[entryName] = path.join(stats.compilation.outputOptions.path, entryFilename);
               workerContent[entryName] = JSON.stringify(fs.readFileSync(workerEntry[entryName], 'utf-8'));
+
+              console.log(`Worker ${entryName} generated: ${workerEntry[entryName]}`, workerContent[entryName].length);
             });
           });
         }
@@ -141,10 +143,11 @@ module.exports = [
       new CleanWebpackPlugin(),
       {
         apply: compiler => {
-          compiler.hooks.beforeRun.tap('MyWebpackPlugin', function (_stats) {
+          compiler.hooks.beforeRun.tap('MyRspackPlugin', function (_stats) {
             new rspack.DefinePlugin({
               WORKERS: workerContent
             }).apply(compiler);
+            console.log('Workers defined: ', Object.keys(workerContent));
           });
         }
       },
