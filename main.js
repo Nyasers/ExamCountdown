@@ -162,7 +162,7 @@ app.whenReady().then(() => {
         })
 
         // 当运行第二个实例时，将会聚焦到这个窗口
-        app.on('second-instance', (event, commandLine, workingDirectory) => {
+        app.on('second-instance', (_event, _commandLine, _workingDirectory) => {
             if (mainWindow) {
                 if (mainWindow.isMinimized()) mainWindow.restore()
                 mainWindow.focus()
