@@ -1,4 +1,4 @@
 .vscode
 node_modules
-/index.html
-/out
+out
+index.html
