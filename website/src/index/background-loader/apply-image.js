@@ -1,5 +1,3 @@
-import { getAverageColor, getContrast, rgbArrayToHex } from "./color.js";
-
 const loader = WORKERS['image-loader'];
 const ImageLoaderWorker = new Worker(URL.createObjectURL(new Blob([loader])));
 
@@ -11,23 +9,18 @@ ImageLoaderWorker.addEventListener('message', event => {
 
 async function applyImage(imageData) {
     if (!imageData.imageURL.startsWith('file:///')) setBackground(imageData.objectURL);
-    await (async (themeColors) => {
-        let applyThemeColorBinded = applyThemeColor.bind({ themeColors: themeColors });
+    await (async (imageData) => {
+        let applyThemeColorBinded = applyThemeColor.bind(imageData);
         delete globalThis.applyThemeColor;
         globalThis.applyThemeColor = applyThemeColorBinded;
-        await applyThemeColorBinded();
-    })(imageData.themeColors);
+        applyThemeColorBinded();
+    })(imageData);
 
-    async function applyThemeColor(index = [4, 6]) {
-        const themeColors = this.themeColors ?? [[0, 0, 0]];
-        let colors = [];
-        if (typeof index == typeof 0) colors = colors.concat([themeColors[index]]);
-        if (typeof index == typeof [0]) index.forEach(i => {
-            if (i < themeColors.length) colors = colors.concat([themeColors[i]]);
-        });
-        if (colors.length == 0) colors = themeColors[0];
-        let aveColor = await getAverageColor(colors);
-        await setColors(aveColor);
+    function applyThemeColor(index = 0) {
+        const themeColor = (this.themeColors?.length > 0) ? this.themeColors[index] : "#ffffff";
+        const fontColor = (this.fontColors?.length > 0) ? this.fontColors[index] : "#000000";
+        console.log(this.themeColors, this.fontColors, index);
+        setColors(themeColor, fontColor);
     }
 }
 
@@ -35,11 +28,8 @@ function setBackground(url) {
     document.body.style.backgroundImage = `url(${url})`;
 }
 
-async function setColors(themeColorRgbArray) {
-    let themeColor = rgbArrayToHex(themeColorRgbArray);
+function setColors(themeColor, fontColor) {
     document.documentElement.style.setProperty('--themeColor', themeColor);
-
-    let fontColor = getContrast(themeColor);
     document.documentElement.style.setProperty('--fontColor', fontColor);
 }
 

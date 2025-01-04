@@ -32,7 +32,7 @@ function addColor(node, color, level) {
         node.pixelCount += 1;
         node.red += color.r;
         node.green += color.g;
-        node.bllue += color.b;
+        node.blue += color.b;
     }
     else {
         var str = "";
@@ -96,7 +96,7 @@ function reduceTree() {
     leafNum++;
 }
 
-function buidOctree(imageData, maxColors) {
+function buildOctree(imageData, maxColors) {
     var total = imageData.length / 4;
     for (var i = 0; i < total; i++) {
         // 添加颜色
@@ -130,7 +130,7 @@ function colorsStats(node, object) {
     }
 }
 
-export const themeColor = async function (blob) {
+export const getThemeColor = async function (blob) {
     let img = await createImageBitmap(blob);
     var canvas = new OffscreenCanvas(img.width, img.height),
         ctx = canvas.getContext('2d'),
@@ -152,7 +152,7 @@ export const themeColor = async function (blob) {
     reducible = {};
     leafNum = 0;
 
-    buidOctree(imageData, 8)
+    buildOctree(imageData, 8)
 
     colorsStats(root, colorMap)
 
