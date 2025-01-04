@@ -1,3 +1,4 @@
+import { rgbArrayToHex } from "./color.js";
 import { getFontColor } from "./font-color.js";
 import { getThemeColor } from "./theme-color.js";
 
@@ -11,8 +12,10 @@ self.addEventListener('message', async event => {
     var themeColors = [];
     var fontColors = [];
     for (let color of result) {
-        themeColors.push(calculateHexColor(color));
-        fontColors.push(getFontColor(color));
+        const hexcolor = rgbArrayToHex(color);
+        const fontColor = getFontColor(hexcolor);
+        themeColors.push(hexcolor);
+        fontColors.push(fontColor);
     }
 
     self.postMessage({
@@ -23,11 +26,3 @@ self.addEventListener('message', async event => {
     });
 });
 
-function padz(str, len) {
-    if (len === void 0) { len = 2; }
-    return (new Array(len).join('0') + str).slice(-len);
-}
-
-function calculateHexColor(color) {
-    return `#${color.map(function (c) { return padz((255 - c).toString(16)); }).join('')}`;
-}

@@ -1,11 +1,13 @@
-var OctreeNode = function () {
-    this.isLeaf = false;
-    this.pixelCount = 0;
-    this.red = 0;
-    this.green = 0;
-    this.blue = 0;
-    this.children = [null, null, null, null, null, null, null, null];
-    this.next = null;
+class OctreeNode {
+    constructor() {
+        this.isLeaf = false;
+        this.pixelCount = 0;
+        this.red = 0;
+        this.green = 0;
+        this.blue = 0;
+        this.children = [null, null, null, null, null, null, null, null];
+        this.next = null;
+    }
 }
 
 var root = null,
@@ -130,15 +132,9 @@ function colorsStats(node, object) {
     }
 }
 
-export const getThemeColor = async function (blob) {
+export async function getThemeColor(blob) {
     let img = await createImageBitmap(blob);
-    var canvas = new OffscreenCanvas(img.width, img.height),
-        ctx = canvas.getContext('2d'),
-        width = 0,
-        height = 0,
-        imageData = null,
-        length = 0,
-        blockSize = 1;
+    var canvas = new OffscreenCanvas(img.width, img.height), ctx = canvas.getContext('2d'), width = 0, height = 0, imageData = null, length = 0, blockSize = 1;
 
     width = img.width;
     height = img.height;
@@ -152,9 +148,9 @@ export const getThemeColor = async function (blob) {
     reducible = {};
     leafNum = 0;
 
-    buildOctree(imageData, 8)
+    buildOctree(imageData, 8);
 
-    colorsStats(root, colorMap)
+    colorsStats(root, colorMap);
 
     var arr = [];
     for (var key in colorMap) {
@@ -162,9 +158,9 @@ export const getThemeColor = async function (blob) {
     }
     arr.sort(function (a, b) {
         return colorMap[a] - colorMap[b];
-    })
+    });
     arr.forEach(function (item, index) {
-        arr[index] = item.split(',')
-    })
+        arr[index] = item.split(',');
+    });
     return arr;
 }

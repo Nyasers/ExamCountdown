@@ -9,6 +9,7 @@
     "forge": "forge.config.js"
   },
   "scripts": {
+    "test": "cd website && npm run test && cd ..",
     "prebuild": "npm install",
     "build": "cd website && npm run build && copy /y dist\\index.html .. && cd ..",
     "make": "npm run build && electron-forge make",

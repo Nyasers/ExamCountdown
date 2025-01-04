@@ -17,9 +17,13 @@ async function applyImage(imageData) {
     })(imageData);
 
     function applyThemeColor(index = 0) {
-        const themeColor = (this.themeColors?.length > 0) ? this.themeColors[index] : "#ffffff";
-        const fontColor = (this.fontColors?.length > 0) ? this.fontColors[index] : "#000000";
-        console.log(this.themeColors, this.fontColors, index);
+        const themeColor = (this.themeColors?.length > 0) ?
+            this.themeColors[index]
+            : "#ffffff";
+        const fontColor = (this.fontColors?.length > 0) ?
+            getMostFrequentElement(this.fontColors)// this.fontColors[index]
+            : "#000000";
+        console.log(this.themeColors, themeColor, this.fontColors, fontColor);
         setColors(themeColor, fontColor);
     }
 }
@@ -37,4 +41,21 @@ export default function applyImageUrl(url) {
     if (typeof loader === 'undefined' || url.startsWith('file:///')) setBackground(url);
     ImageLoaderWorker.postMessage(url);
     return url;
+}
+
+function getMostFrequentElement(arr) {
+    const frequencyMap = arr.reduce((acc, val) => {
+        acc[val] = (acc[val] || 0) + 1;
+        return acc;
+    }, {});
+
+    return Object.keys(frequencyMap).reduce((a, b) => {
+        if (frequencyMap[a] > frequencyMap[b]) {
+            return a;
+        } else if (frequencyMap[a] < frequencyMap[b]) {
+            return b;
+        } else {
+            return a > b ? a : b;
+        }
+    });
 }
