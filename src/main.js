@@ -13,6 +13,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 var wallpaper = false
 var settingsWindow = null
 
+if (app.isPackaged)
+    // 注册更新服务
+    updateElectronApp({ notifyUser: false })
+
 function createWindow() {
     const config = {
         show: false,
@@ -170,9 +174,6 @@ app.whenReady().then(() => {
         })
 
         if (app.isPackaged) {
-            // 注册更新服务
-            updateElectronApp({ notifyUser: false })
-
             // 开机自动启动
             app.setLoginItemSettings({
                 openAtLogin: true,
