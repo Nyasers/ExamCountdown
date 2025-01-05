@@ -1,3 +1,4 @@
+import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { BrowserWindow } from 'electron';
@@ -20,6 +21,11 @@ export function createWindow() {
     mainWindow.setMenu(null);
 
     mainWindow.loadFile(path.resolve(__dirname, 'index.html'));
+
+    fs.readFile(path.resolve(__dirname, 'renderer.js'), 'utf-8', (err, data) => {
+        if (err) throw err;
+        mainWindow.webContents.executeJavaScript(data);
+    });
 
     return mainWindow;
 }
