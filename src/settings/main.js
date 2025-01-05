@@ -8,7 +8,7 @@ export function createWindow() {
         width: 800,
         height: 600,
         center: true,
-        icon: path.resolve(__dirname, 'assets/icon.ico'),
+        icon: path.resolve(__dirname, '../../assets/icon.ico'),
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
@@ -19,7 +19,7 @@ export function createWindow() {
 
     mainWindow.setMenu(null);
 
-    mainWindow.loadFile('settings/index.html');
+    mainWindow.loadFile(path.resolve(__dirname, 'index.html'));
 
     return mainWindow;
 }

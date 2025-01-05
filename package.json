@@ -3,7 +3,7 @@
   "productName": "ExamCountdown",
   "version": "25.1.4",
   "description": "Electron shell of ExamCountdown",
-  "main": "main.js",
+  "main": "src/main.js",
   "type": "module",
   "config": {
     "forge": "forge.config.js"
@@ -11,7 +11,7 @@
   "scripts": {
     "test": "cd website && npm run test && cd ..",
     "prebuild": "npm install",
-    "build": "cd website && npm run build && copy /y dist\\index.html .. && cd ..",
+    "build": "cd website && npm run build && copy /y dist\\index.html ..\\src\\ && cd ..",
     "make": "npm run build && electron-forge make",
     "start": "npm run build && electron-forge start",
     "package": "npm run build && electron-forge package",

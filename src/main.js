@@ -19,7 +19,7 @@ function createWindow() {
         width: 1280,
         height: 720,
         center: true,
-        icon: path.resolve(__dirname, 'assets/icon.ico'),
+        icon: path.resolve(__dirname, '../assets/icon.ico'),
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
@@ -48,7 +48,7 @@ function createWindow() {
     })
 
     // 加载 index.html
-    mainWindow.loadFile('index.html')
+    mainWindow.loadFile(path.resolve(__dirname, 'index.html'))
 
     // 壁纸注册相关
     function attachWallpaper() {
