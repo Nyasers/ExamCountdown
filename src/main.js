@@ -170,14 +170,14 @@ app.whenReady().then(() => {
         })
 
         if (app.isPackaged) {
+            // 注册更新服务
+            updateElectronApp({ notifyUser: false })
+
             // 开机自动启动
             app.setLoginItemSettings({
                 openAtLogin: true,
                 path: path.resolve(path.dirname(app.getPath('exe')), '..', `${app.getName()}.exe`)
             })
-
-            // 注册更新服务
-            updateElectronApp({ notifyUser: false })
         }
     }
 })
