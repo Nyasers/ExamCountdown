@@ -3,7 +3,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { updateElectronApp } from 'update-electron-app'
 import { attach, detach, reset } from 'electron-as-wallpaper'
-import { app, BrowserWindow, Tray, Menu, Notification, dialog } from 'electron'
+import { app, BrowserWindow, Tray, Menu, dialog } from 'electron'
 
 import assets from './assets.js'
 import initIPC from './handleIPC.js'
