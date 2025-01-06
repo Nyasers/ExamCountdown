@@ -7,7 +7,6 @@ import electronSquirrelStartup from 'electron-squirrel-startup'
 import { app, BrowserWindow, Tray, Menu, dialog } from 'electron'
 
 if (electronSquirrelStartup) app.quit()
-if (app.isPackaged) updateElectronApp({ notifyUser: false })
 
 import assets from './assets.js'
 import initIPC from './handleIPC.js'
@@ -186,6 +185,7 @@ app.whenReady().then(() => {
                     openAtLogin: true,
                     path: appEntry
                 })
+                updateElectronApp({ notifyUser: false })
             } else {
                 dialog.showErrorBox(app.getName(), `Failed to set auto-start.\n\n${appEntry}`)
             }
