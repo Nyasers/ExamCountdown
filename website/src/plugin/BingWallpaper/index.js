@@ -15,6 +15,7 @@ async function getURLBase(index = 0) {
     if (index >= images.length)
         throw new Error(`Trying to get the ${index + 1} from ${images.length} elements.`);
     let image = images[index];
+    console.log(image);
     let urlbase = bing + image.urlbase;
     return urlbase;
 }
