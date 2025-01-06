@@ -5,6 +5,7 @@ import { updateElectronApp } from 'update-electron-app'
 import { attach, detach, reset } from 'electron-as-wallpaper'
 import { app, BrowserWindow, Tray, Menu, Notification, dialog } from 'electron'
 
+import assets from './assets.js'
 import initIPC from './handleIPC.js'
 import { createWindow as createSettingsWindow } from './settings/main.js'
 
@@ -24,7 +25,7 @@ function createWindow() {
         width: 1280,
         height: 720,
         center: true,
-        icon: path.resolve(__dirname, '../assets/icon.ico'),
+        icon: assets.icon,
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
