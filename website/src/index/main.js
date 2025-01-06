@@ -149,9 +149,6 @@ function initWindow(window) {
 }
 
 export default function (window, ec) {
-  if (ec.inited) throw new Error('Already inited!');
-  else ec.inited = true;
-
   initProperties(window);
   initWindow(window);
   initExam(ec);

@@ -48,8 +48,8 @@ function createWindow() {
         this.openDevTools({ mode: 'detach' })
     }).bind(webContents)
 
-    // 网页加载完成后，读取配置文件
-    webContents.on('did-finish-load', () => {
+    // 网页加载完成后，执行渲染器脚本
+    webContents.on('dom-ready', () => {
         fs.readFile(path.resolve(__dirname, 'renderer.js'), 'utf-8', (err, data) => {
             if (err) throw err
             webContents.executeJavaScript(data).then(() => webContents.send('apply-settings'))
