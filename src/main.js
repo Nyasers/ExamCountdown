@@ -178,12 +178,17 @@ app.whenReady().then(() => {
             }
         })
 
+        // 设置开机自启
         if (app.isPackaged) {
-            // 开机自动启动
-            app.setLoginItemSettings({
-                openAtLogin: true,
-                path: path.resolve(path.dirname(app.getPath('exe')), '..', `${app.getName()}.exe`)
-            })
+            const appEntry = path.resolve(path.dirname(app.getPath('exe')), '..', `${app.getName()}.exe`)
+            if (fs.existsSync(appEntry)) {
+                app.setLoginItemSettings({
+                    openAtLogin: true,
+                    path: appEntry
+                })
+            } else {
+                dialog.showErrorBox(app.getName(), `Failed to set auto-start.\n\n${appEntry}`)
+            }
         }
     }
 })
