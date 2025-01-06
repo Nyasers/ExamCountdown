@@ -20,12 +20,14 @@ export function createWindow() {
 
     mainWindow.setMenu(null);
 
-    mainWindow.loadFile(path.resolve(__dirname, 'index.html'));
-
-    fs.readFile(path.resolve(__dirname, 'renderer.js'), 'utf-8', (err, data) => {
-        if (err) throw err;
-        mainWindow.webContents.executeJavaScript(data);
+    mainWindow.webContents.on('did-finish-load', () => {
+        fs.readFile(path.resolve(__dirname, 'renderer.js'), 'utf-8', (err, data) => {
+            if (err) throw err;
+            mainWindow.webContents.executeJavaScript(data);
+        });
     });
+
+    mainWindow.loadFile(path.resolve(__dirname, 'index.html'));
 
     return mainWindow;
 }
