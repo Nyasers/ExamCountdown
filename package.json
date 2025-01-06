@@ -1,6 +1,5 @@
 {
   "name": "examcountdown",
-  "productName": "ExamCountdown",
   "version": "25.1.6",
   "description": "Electron shell of ExamCountdown",
   "main": "src/main.js",

@@ -8,12 +8,14 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const packagerConfig = {
   asar: true,
   name: 'ExamCountdown',
-  executableName: 'ExamCountdown',
   icon: path.resolve(__dirname, 'assets/icon'),
+  junk: true,
+  prune: true,
   ignore: [
     ".github/workflows",
     ".gitignore",
     ".gitpod.yml",
+    "node_modules/@",
     "forge.config.js",
     "website",
   ],
