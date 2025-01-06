@@ -11,7 +11,7 @@
   "scripts": {
     "test": "cd website && npm run test && cd ..",
     "prebuild": "npm install",
-    "build": "cd website && npm run build && copy /y dist\\index.html ..\\src\\ && cd ..",
+    "build": "cd website && npm run build && copy /y dist\\index.js ..\\src\\renderer.js && cd ..",
     "make": "npm run build && electron-forge make",
     "start": "npm run build && electron-forge start",
     "package": "npm run build && electron-forge package",

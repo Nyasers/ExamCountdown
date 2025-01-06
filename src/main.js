@@ -1,3 +1,4 @@
+import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { updateElectronApp } from 'update-electron-app'
@@ -48,7 +49,10 @@ function createWindow() {
 
     // 网页加载完成后，读取配置文件
     webContents.on('did-finish-load', () => {
-        webContents.send('apply-settings')
+        fs.readFile(path.resolve(__dirname, 'renderer.js'), 'utf-8', (err, data) => {
+            if (err) throw err
+            webContents.executeJavaScript(data).then(() => webContents.send('apply-settings'))
+        })
     })
 
     // 加载 index.html
@@ -81,7 +85,7 @@ function createWindow() {
         } else {
             settingsWindow = createSettingsWindow()
             settingsWindow.once('closed', () => {
-                webContents.send('apply-settings')
+                webContents.reload()
                 settingsWindow = null
             })
         }
@@ -105,9 +109,9 @@ function createWindow() {
         },
         {
             label: '切换壁纸状态',
-            click: () => {
-                wallpaper ? detachWallpaper() : attachWallpaper()
-            }
+            click: () => wallpaper
+                ? detachWallpaper()
+                : attachWallpaper()
         },
         {
             label: '设置',
