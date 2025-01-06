@@ -1,6 +1,6 @@
 {
   "name": "examcountdown",
-  "version": "25.1.6",
+  "version": "25.1.7",
   "description": "Electron shell of ExamCountdown",
   "main": "src/main.js",
   "type": "module",
