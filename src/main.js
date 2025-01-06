@@ -3,7 +3,11 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { updateElectronApp } from 'update-electron-app'
 import { attach, detach, reset } from 'electron-as-wallpaper'
+import electronSquirrelStartup from 'electron-squirrel-startup'
 import { app, BrowserWindow, Tray, Menu, dialog } from 'electron'
+
+if (electronSquirrelStartup) app.quit()
+if (app.isPackaged) updateElectronApp({ notifyUser: false })
 
 import assets from './assets.js'
 import initIPC from './handleIPC.js'
@@ -14,10 +18,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 var wallpaper = false
 var settingsWindow = null
-
-if (app.isPackaged)
-    // 注册更新服务
-    updateElectronApp({ notifyUser: false })
 
 function createWindow() {
     const config = {
