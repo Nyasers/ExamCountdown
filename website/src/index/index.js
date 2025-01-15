@@ -4,9 +4,11 @@ import main from './main.js';
 import { networkWaiter } from './network-waiter/networkWaiter.js';
 import '../../cache/index.css';
 
-import { createTray, attachWallpaper, detachWallpaper } from './tauri.js';
 import { init as initBW } from '../plugin/BingWallpaper/index.js';
 import { init as initHitokoto } from '../plugin/Hitokoto/index.js';
+
+let createTray, attachWallpaper, detachWallpaper;
+if (TAURI) ({ createTray, attachWallpaper, detachWallpaper } = await import('./tauri.js'));
 
 // Expose
 globalThis.$ = $;
@@ -14,14 +16,16 @@ globalThis.ec = ec;
 globalThis.Time = () => new Date;
 
 // Event
-window.onclose = detachWallpaper;
+if (TAURI) window.onclose = detachWallpaper;
 
 // Init
 main(globalThis, ec)
     .then(async () => {
-        await attachWallpaper();
-        if (!globalThis.tray)
-            globalThis.tray = await createTray();
+        if (TAURI) {
+            await attachWallpaper();
+            if (!globalThis.tray)
+                globalThis.tray = await createTray();
+        }
     });
 
 // wait for online

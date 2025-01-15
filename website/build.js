@@ -120,4 +120,8 @@ async function postBuild() {
     });
 }
 
+const args = process.argv.slice(2);
+
+rspackConfig[2].plugins[0]._args[0]["TAURI"] = args[0] != 'deploy';
+
 rspack(rspackConfig, postBuild);

@@ -129,9 +129,9 @@ module.exports = [
       ],
     },
     plugins: [
-      // new webpack.DefinePlugin({
-      //   'VERSION': VERSION,
-      // }),
+      new rspack.DefinePlugin({
+        "TAURI": true,
+      }),
       new rspack.CopyRspackPlugin({
         patterns: [
           { from: '../assets/icon.ico', to: 'favicon.ico' },

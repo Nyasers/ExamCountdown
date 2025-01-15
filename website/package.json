@@ -6,9 +6,9 @@
   "scripts": {
     "test": "npx rspack",
     "prebuild": "npm install",
-    "build": "npm run rspack",
-    "rspack": "node build.js || npm run test",
-    "depend": "node depend.js"
+    "build": "node build.js",
+    "depend": "node depend.js",
+    "deploy": "npm run build deploy"
   },
   "author": "Nyasers",
   "license": "ISC",
