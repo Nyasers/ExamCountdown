@@ -1,48 +1,18 @@
 {
   "name": "examcountdown",
-  "version": "25.1.7",
-  "description": "Electron shell of ExamCountdown",
-  "main": "src/main.js",
-  "type": "module",
-  "config": {
-    "forge": "forge.config.js"
-  },
+  "version": "25.1.12",
+  "main": "index.js",
   "scripts": {
-    "test": "cd website && npm run test && cd ..",
-    "prebuild": "npm install",
-    "build": "cd website && npm run build && copy /y dist\\index.js ..\\src\\renderer.js && cd ..",
-    "make": "npm run build && electron-forge make",
-    "start": "npm run build && electron-forge start",
-    "package": "npm run build && electron-forge package",
-    "publish": "npm run build && electron-forge publish",
-    "release": "npm version",
-    "postrelease": "git push origin --tags"
+    "build": "cd website && npm run build && cd ..",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nyasers",
   "license": "ISC",
-  "dependencies": {
-    "electron-as-wallpaper": "^2.0.3",
-    "electron-squirrel-startup": "^1.0.1",
-    "electron-store": "^10.0.0",
-    "update-electron-app": "^3.1.0"
-  },
+  "description": "",
   "devDependencies": {
-    "@electron-forge/cli": "^7.6.0",
-    "@electron-forge/maker-squirrel": "^7.6.0",
-    "@electron-forge/plugin-auto-unpack-natives": "^7.6.0",
-    "@electron-forge/plugin-fuses": "^7.6.0",
-    "@electron-forge/publisher-github": "^7.6.0",
-    "@electron/fuses": "^1.8.0",
-    "@electron/rebuild": "^3.7.1",
-    "electron": "^33.2.1"
+    "@tauri-apps/cli": "^2.2.2"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Nyasers/ExamCountdown.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Nyasers/ExamCountdown/issues"
-  },
-  "homepage": "https://github.com/Nyasers/ExamCountdown#readme",
-  "keywords": []
+  "dependencies": {
+    "tauri-plugin-wallpaper": "^2.0.1"
+  }
 }

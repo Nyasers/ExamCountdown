@@ -148,7 +148,7 @@ function initWindow(window) {
   });
 }
 
-export default function (window, ec) {
+export default async function (window, ec) {
   initProperties(window);
   initWindow(window);
   initExam(ec);

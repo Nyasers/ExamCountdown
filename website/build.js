@@ -22,7 +22,7 @@ import terserConfig from './terser.config.js';
  * @returns {Promise<string>} HTML
  */
 async function packHTML(jsfile, ...workers) {
-    var output = "<!doctype html><noscript><strong>We're sorry but ExamCountdown doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>";
+    var output = "<!doctype html><meta charset='utf-8'><noscript><strong>We're sorry but ExamCountdown doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>";
     output += "<ec>";
     // output += "<script src='./renderer.js' defer></script>";
     workers.forEach(worker => {

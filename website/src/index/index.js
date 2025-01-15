@@ -4,7 +4,7 @@ import main from './main.js';
 import { networkWaiter } from './network-waiter/networkWaiter.js';
 import '../../cache/index.css';
 
-import { init as initRenderer } from './renderer.js';
+import { createTray, attachWallpaper, detachWallpaper } from './tauri.js';
 import { init as initBW } from '../plugin/BingWallpaper/index.js';
 import { init as initHitokoto } from '../plugin/Hitokoto/index.js';
 
@@ -13,15 +13,21 @@ globalThis.$ = $;
 globalThis.ec = ec;
 globalThis.Time = () => new Date;
 
-// Init
-main(globalThis, ec);
+// Event
+window.onclose = detachWallpaper;
 
-// Init renderer
-initRenderer(ec);
+// Init
+main(globalThis, ec)
+    .then(async () => {
+        await attachWallpaper();
+        if (!globalThis.tray)
+            globalThis.tray = await createTray();
+    });
 
 // wait for online
 networkWaiter((async function () {
     this.online = true;
+
     // setTimeout(() => this.updater.fetch());
     // setTimeout(() => this.exam.extra.fetch());
 
