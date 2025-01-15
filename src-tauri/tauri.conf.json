@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "ExamCountdown",
-  "version": "25.1.12",
+  "version": "25.1.15",
   "identifier": "top.nyaser.ec",
   "build": {
     "frontendDist": "../website/dist",

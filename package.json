@@ -1,6 +1,6 @@
 {
   "name": "examcountdown",
-  "version": "25.1.12",
+  "version": "25.1.15",
   "main": "index.js",
   "scripts": {
     "build": "cd website && npm run build && cd ..",
