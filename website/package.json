@@ -28,5 +28,16 @@
     "style-loader": "^4.0.0",
     "terser": "^5.37.0",
     "terser-webpack-plugin": "^5.3.11"
+  },
+  "optionalDependencies": {
+    "@rspack/binding-darwin-arm64": "0.4.2",
+    "@rspack/binding-win32-arm64-msvc": "0.4.2",
+    "@rspack/binding-linux-arm64-gnu": "0.4.2",
+    "@rspack/binding-linux-arm64-musl": "0.4.2",
+    "@rspack/binding-darwin-x64": "0.4.2",
+    "@rspack/binding-win32-ia32-msvc": "0.4.2",
+    "@rspack/binding-win32-x64-msvc": "0.4.2",
+    "@rspack/binding-linux-x64-musl": "0.4.2",
+    "@rspack/binding-linux-x64-gnu": "0.4.2"
   }
 }
