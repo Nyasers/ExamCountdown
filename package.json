@@ -1,15 +1,17 @@
 {
   "name": "examcountdown",
-  "version": "25.1.15",
+  "version": "25.1.16",
   "main": "index.js",
   "scripts": {
     "build": "cd website && npm run build && cd ..",
+    "postbuild": "node src-tauri\\version.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nyasers",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@iarna/toml": "^2.2.5",
     "@tauri-apps/cli": "^2.2.2"
   },
   "dependencies": {

@@ -10,7 +10,7 @@ export default {
     compress: {
         passes: 3,
         arguments: true,
-        // drop_console: true,
+        drop_console: false,
         // booleans_as_integers: true,
         unsafe: true,
         unsafe_arrows: true,

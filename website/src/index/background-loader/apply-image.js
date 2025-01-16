@@ -3,12 +3,12 @@ const ImageLoaderWorker = new Worker(URL.createObjectURL(new Blob([loader])));
 
 ImageLoaderWorker.addEventListener('message', event => {
     const imageData = event.data;
-    imageData.objectURL = URL.createObjectURL(imageData.blob);
+    imageData.objectURL = imageData.imageURL.startsWith('blob:') ? imageData.imageURL : URL.createObjectURL(imageData.blob);
     applyImage(imageData);
 })
 
 async function applyImage(imageData) {
-    if (!imageData.imageURL.startsWith('file:///')) setBackground(imageData.objectURL);
+    if (!imageData.imageURL.startsWith('file:///') || !imageData.imageURL.startsWith('blob:')) setBackground(imageData.objectURL);
     await (async (imageData) => {
         let applyThemeColorBinded = applyThemeColor.bind(imageData);
         delete globalThis.applyThemeColor;
@@ -38,7 +38,7 @@ function setColors(themeColor, fontColor) {
 }
 
 export default function applyImageUrl(url) {
-    if (typeof loader === 'undefined' || url.startsWith('file:///')) setBackground(url);
+    if (typeof loader === 'undefined' || url.startsWith('file:///') || url.startsWith('blob:')) setBackground(url);
     ImageLoaderWorker.postMessage(url);
     return url;
 }

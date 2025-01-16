@@ -1,28 +1,52 @@
-use tauri::{generate_context, AppHandle, Builder, Manager};
+use tauri::{generate_context, AppHandle, Manager};
+use winreg::RegKey;
+use winreg::enums::HKEY_CURRENT_USER;
+use std::fs::File;
+use std::io::Read;
+
+
+#[tauri::command]
+fn get_wallpaper_data() -> Result<Vec<u8>, String> {
+    // 打开注册表项
+    let hkcu = RegKey::predef(HKEY_CURRENT_USER);
+    let key = hkcu.open_subkey("Control Panel\\Desktop").map_err(|e| format!("打开注册表项失败: {}", e))?;
+
+    // 读取 Wallpaper 值
+    let wallpaper_path: String = key.get_value("Wallpaper").map_err(|e| format!("读取 Wallpaper 值失败: {}", e))?;
+
+    // 读取图片文件
+    let mut file = File::open(&wallpaper_path).map_err(|e| format!("打开图片文件失败: {}", e))?;
+    let mut buffer = Vec::new();
+    file.read_to_end(&mut buffer).map_err(|e| format!("读取图片文件内容失败: {}", e))?;
+
+    Ok(buffer)
+}
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    Builder::default()
-        .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
-            let _ = show_window(app);
-        }))
-        .plugin(tauri_plugin_wallpaper::init())
-        .setup(|app| {
-            #[cfg(debug_assertions)] // 仅在调试构建时包含此代码
-            {
-                let window = app.get_webview_window("main").unwrap();
-                window.open_devtools(); // 打开开发者工具
-                                        // window.close_devtools();
-                app.handle().plugin(
-                    tauri_plugin_log::Builder::default()
-                        .level(log::LevelFilter::Info)
-                        .build(),
-                )?;
-            }
-            Ok(())
-        })
-        .run(generate_context!())
-        .expect("error while running tauri application");
+    tauri::Builder::default()
+    .plugin(tauri_plugin_store::Builder::new().build())
+    .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
+        let _ = show_window(app);
+    }))
+    .plugin(tauri_plugin_wallpaper::init())
+    .invoke_handler(tauri::generate_handler![get_wallpaper_data])
+    .setup(|app| {
+        #[cfg(debug_assertions)] // 仅在调试构建时包含此代码
+        {
+            let window = app.get_webview_window("main").unwrap();
+            window.open_devtools(); // 打开开发者工具
+            // window.close_devtools();
+            app.handle().plugin(
+                tauri_plugin_log::Builder::default()
+                .level(log::LevelFilter::Info)
+                .build(),
+            )?;
+        }
+        Ok(())
+    })
+    .run(generate_context!())
+    .expect("error while running tauri application");
 }
 
 fn show_window(app: &AppHandle) {

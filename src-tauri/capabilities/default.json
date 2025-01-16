@@ -12,6 +12,7 @@
     "core:window:default",
     "core:window:allow-close",
     "core:window:allow-show",
-    "wallpaper:default"
+    "wallpaper:default",
+    "store:default"
   ]
 }

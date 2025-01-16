@@ -7,19 +7,21 @@ import '../../cache/index.css';
 import { init as initBW } from '../plugin/BingWallpaper/index.js';
 import { init as initHitokoto } from '../plugin/Hitokoto/index.js';
 
-let createTray, attachWallpaper, detachWallpaper;
-if (TAURI) ({ createTray, attachWallpaper, detachWallpaper } = await import('./tauri.js'));
-
 // Expose
 globalThis.$ = $;
 globalThis.ec = ec;
 globalThis.Time = () => new Date;
 
-// Event
-if (TAURI) window.onclose = detachWallpaper;
+// Tauri
+let createTray, attachWallpaper, detachWallpaper, fetchWallpaper;
+if (TAURI) {
+    ({ createTray, attachWallpaper, detachWallpaper, fetchWallpaper } = await import('./tauri.js'));
+    await ec.background.set(await fetchWallpaper());
+    window.onclose = detachWallpaper;
+}
 
 // Init
-main(globalThis, ec)
+await main(globalThis, ec)
     .then(async () => {
         if (TAURI) {
             await attachWallpaper();

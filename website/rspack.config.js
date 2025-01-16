@@ -2,15 +2,25 @@
  * @type {import('@rspack/core').Configuration}
  */
 
-const fs = require('fs');
-const path = require('path');
-const rspack = require('@rspack/core');
-const TerserPlugin = require('terser-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const TerserOptions = import('./terser.config.js');
+import fs from 'fs';
+import path from 'path';
+import rspack from '@rspack/core';
+import TerserPlugin from 'terser-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+import terserConfig from './terser.config.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const MODE = true ? 'production' : 'development';
 // const VERSION = '"2024-06-14T17:00Z"';
+
+if (MODE == 'production') {
+  terserConfig.compress.drop_console = true;
+}
 
 const commonPostcssLoader = {
   loader: 'postcss-loader',
@@ -23,10 +33,10 @@ const commonPostcssLoader = {
   }
 }
 
-var workerEntry = {};
-var workerContent = {};
+const workerEntry = {};
+const workerContent = {};
 
-module.exports = [
+export default [
   {
     name: 'css',
     mode: MODE,
@@ -99,7 +109,7 @@ module.exports = [
       minimize: true,
       minimizer: [
         new TerserPlugin({
-          terserOptions: TerserOptions,
+          terserOptions: terserConfig,
         })
       ],
     },
@@ -156,7 +166,7 @@ module.exports = [
       minimize: true,
       minimizer: [
         new TerserPlugin({
-          terserOptions: TerserOptions,
+          terserOptions: terserConfig,
         })
       ],
     },

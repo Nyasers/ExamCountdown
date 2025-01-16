@@ -24,6 +24,8 @@ log = "0.4"
 tauri = { version = "2.2.0", features = ["tray-icon"] }
 tauri-plugin-log = "2.0.0-rc"
 tauri-plugin-wallpaper = "2.0.1"
+tauri-plugin-store = "2"
+winreg = "0.55.0"
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-single-instance = "2"

@@ -3,7 +3,7 @@ import path from 'path';
 import { minify } from 'terser';
 // import archiver from 'archiver';
 import rspack from '@rspack/core';
-import rspackConfig from './rspack.config.cjs';
+import rspackConfig from './rspack.config.js';
 import terserConfig from './terser.config.js';
 
 /**
