@@ -1,6 +1,7 @@
 {
     "type": "object",
-    "ui:title": "Config Editor: 修改后请保存 (按钮位于页面底部)",
+    "ui:title": "Config Editor: 修改后请保存",
+    "ui:description": "按钮位于页面底部，保存后关闭窗口生效",
     "properties": {
         "breakon": {
             "type": "string",

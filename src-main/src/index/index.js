@@ -30,7 +30,7 @@ await main(globalThis, ec)
             window.onbeforeunload = () => {
                 globalThis.tray = null;
             }
-            ec.applyConfig = async () => ec.properties.user.apply(await getConfig());
+            (ec.applyConfig = async () => ec.properties.user.apply(await getConfig()))();
             enableAutoStart().then(async (enabled) => console.log("autostart", enabled));
         }
     });
@@ -43,10 +43,9 @@ networkWaiter((async function () {
     // setTimeout(() => this.exam.extra.fetch());
 
     initBW(this);
-    if (location.protocol !== 'file:') {
+    if (location.protocol !== 'file:' && !TAURI) {
         setTimeout(async () => this.background.set(await this.plugin.bingWallpaper.fetch(0, '1920x1080.webp')));
-    } else if (document.body.style.backgroundImage == ''
-        || this.properties.user.bingwallpaper.value == true) {
+    } else if (document.body.style.backgroundImage == '' || this.properties.user.bingwallpaper.value == true) {
         setTimeout(async () => this.background.set(await this.plugin.bingWallpaper.fetch()));
     }
 

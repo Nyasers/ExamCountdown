@@ -2,12 +2,7 @@ import { ec } from '../ec.js';
 export const propUser = {};
 
 propUser.apply = (function (config) {
-    if (config.text) this.text.func(config.text)
-    if (config.exams) this.exams.func(config.exams)
-    if (config.breakon) this.breakon.func(config.breakon)
-    if (config.hitokoto) this.hitokoto.func(config.hitokoto)
-    if (config.finalonly) this.finalonly.func(config.finalonly)
-    if (config.bingwallpaper) this.bingwallpaper.func(config.bingwallpaper)
+    Object.keys(config).forEach(key => this[key].func(config[key]));
 }).bind(propUser);
 
 propUser.exams = {
@@ -87,12 +82,8 @@ propUser.bingwallpaper = {
          */
         async function (value) {
             this.bingwallpaper.value = value;
-            if (ec.online) {
-                if (this.bingwallpaper.value)
-                    ec.background.set(await ec.plugin.bingWallpaper.fetch());
-                else
-                    ec.background.set(this.background.value);
-            }
+            if (ec.online && this.bingwallpaper.value)
+                ec.background.set(await ec.plugin.bingWallpaper.fetch());
         }
     ).bind(propUser)
 };

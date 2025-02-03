@@ -1,6 +1,6 @@
 {
   "name": "examcountdown",
-  "version": "25.1.16",
+  "version": "25.2.4",
   "main": "index.js",
   "scripts": {
     "prebuild": "npm install && (mkdir dist || del /s /q dist) || echo.",
