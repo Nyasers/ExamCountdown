@@ -2,25 +2,29 @@
     "$schema": "https://json-schema.org/draft-07/schema",
     "type": "object",
     "properties": {
-        "background": {
-            "type": "string",
-            "default": "file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg"
-        },
         "breakon": {
             "type": "string",
-            "default": "高考"
+            "default": "高考",
+            "ui:title": "截止考试",
+            "ui:description": "[按开始时间排序] 将标题中包含此关键词的作为最后一个考试"
         },
         "finalonly": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "ui:title": "只看截止",
+            "ui:description": "[按开始时间排序] 只显示最后一个考试"
         },
         "hitokoto": {
             "type": "boolean",
-            "default": true
+            "default": false,
+            "ui:title": "显示一言",
+            "ui:description": "接口文档: https://developer.hitokoto.cn/sentence/"
         },
         "bingwallpaper": {
             "type": "boolean",
-            "default": true
+            "default": false,
+            "ui:title": "必应壁纸",
+            "ui:description": "获取必应壁纸作为背景图片<br>默认背景图片为系统桌面背景（通过注册表获取）"
         },
         "exams": {
             "type": "array",
@@ -34,20 +38,26 @@
                     "top": false
                 }
             ],
+            "ui:title": "考试列表",
             "items": {
                 "type": "object",
                 "properties": {
                     "title": {
-                        "type": "string"
+                        "type": "string",
+                        "ui:title": "标题"
                     },
                     "time": {
                         "type": "object",
+                        "ui:title": "时间",
+                        "ui:description": "可使用 $YYYY 替代年份",
                         "properties": {
                             "start": {
-                                "type": "string"
+                                "type": "string",
+                                "ui:title": "开始时间"
                             },
                             "end": {
-                                "type": "string"
+                                "type": "string",
+                                "ui:title": "结束时间"
                             }
                         },
                         "required": [
@@ -57,7 +67,8 @@
                     },
                     "top": {
                         "type": "boolean",
-                        "default": false
+                        "default": false,
+                        "ui:title": "置顶"
                     }
                 },
                 "required": [
@@ -69,6 +80,8 @@
         },
         "text": {
             "type": "object",
+            "ui:title": "文本模板",
+            "ui:description": "可使用 HTML 标签<br>其中 {N} 为占位符，会替换为相应内容",
             "default": {
                 "start": "距离 {0} <strong>仅剩</strong>",
                 "ending": "距离 {0} 结束还有",
@@ -76,13 +89,19 @@
             },
             "properties": {
                 "start": {
-                    "type": "string"
+                    "type": "string",
+                    "ui:title": "试前文本",
+                    "ui:description": "在考试开始前显示<br>其中 {0} 为考试标题"
                 },
                 "ending": {
-                    "type": "string"
+                    "type": "string",
+                    "ui:title": "试中文本",
+                    "ui:description": "在考试结束前显示<br>其中 {0} 为考试标题"
                 },
                 "time": {
-                    "type": "string"
+                    "type": "string",
+                    "ui:title": "时间文本",
+                    "ui:description": "展示考试时间<br>其中 {0} 为前两项的文本，{1} 为天数，{2} 为小时数，{3} 为秒数"
                 }
             },
             "required": [

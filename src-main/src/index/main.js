@@ -155,7 +155,7 @@ export default async function (window, ec) {
 
   ec.start = (function () {
     if (typeof this.stop != typeof undefined) this.stop();
-    let interval = setInterval(heartbeat.bind(ec), 1e2);
+    let interval = setInterval(heartbeat.bind(ec), 2e2);
     this.stop = (function () {
       clearInterval(interval);
       delete this.stop;

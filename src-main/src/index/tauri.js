@@ -4,6 +4,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { TrayIcon } from '@tauri-apps/api/tray';
 import { defaultWindowIcon } from '@tauri-apps/api/app';
 import { getCurrentWindow } from '@tauri-apps/api/window';
+import { enable, isEnabled, disable } from '@tauri-apps/plugin-autostart';
 
 const mainWindow = getCurrentWindow();
 
@@ -44,4 +45,22 @@ export async function fetchWallpaper() {
     } catch (error) {
         console.error('获取并应用壁纸失败:', error);
     }
+}
+
+const installed = await invoke('is_installed');
+
+export async function isAutoStartEnabled() {
+    return installed && await isEnabled();
+}
+
+export async function enableAutoStart() {
+    if (installed && !await isEnabled())
+        await enable();
+    return await isAutoStartEnabled();
+}
+
+export async function disableAutoStart() {
+    if (installed && await isEnabled())
+        await disable();
+    return !await isAutoStartEnabled();
 }
