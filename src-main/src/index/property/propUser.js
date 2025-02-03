@@ -1,14 +1,13 @@
 import { ec } from '../ec.js';
 export const propUser = {};
 
-propUser.apply = (function (settings) {
-    this.exams.func(settings.exams)
-    this.text.func(settings.text)
-    this.breakon.func(settings.breakon)
-    this.hitokoto.func(settings.hitokoto)
-    this.finalonly.func(settings.finalonly)
-    this.background.func(settings.background)
-    this.bingwallpaper.func(settings.bingwallpaper)
+propUser.apply = (function (config) {
+    if (config.text) this.text.func(config.text)
+    if (config.exams) this.exams.func(config.exams)
+    if (config.breakon) this.breakon.func(config.breakon)
+    if (config.hitokoto) this.hitokoto.func(config.hitokoto)
+    if (config.finalonly) this.finalonly.func(config.finalonly)
+    if (config.bingwallpaper) this.bingwallpaper.func(config.bingwallpaper)
 }).bind(propUser);
 
 propUser.exams = {
@@ -80,18 +79,6 @@ propUser.finalonly = {
         }
     ).bind(propUser)
 };
-propUser.background = {
-    value: 'file:///C%3A/Windows/Web/Wallpaper/Windows/img0.jpg',
-    func: (
-        /**
-        * @param {string} value 
-        */
-        function (value) {
-            this.background.value = value;
-            ec.background.set(this.background.value);
-        }
-    ).bind(propUser)
-};
 propUser.bingwallpaper = {
     value: true,
     func: (
@@ -109,33 +96,3 @@ propUser.bingwallpaper = {
         }
     ).bind(propUser)
 };
-// propUser.extraexams = {
-//     value: 'https://ec.nyase.ru/extraexams.json',
-//     func: (
-//         /**
-//         * @param {string} value  
-//         */
-//         function (value) {
-//             this.extraexams.value = value;
-//             if (ec.online)
-//                 ec.exam.extra.fetch(this.extraexams.value);
-//             else
-//                 ec.exam.extra.url = this.extraexams.value;
-//         }
-//     ).bind(propUser)
-// };
-
-export const applyUserProperties = (function (properties) {
-    if (properties.breakon)
-        this.breakon.func(properties.breakon.value);
-    if (properties.hitokoto)
-        this.hitokoto.func(properties.hitokoto.value);
-    if (properties.finalonly)
-        this.finalonly.func(properties.finalonly.value);
-    if (properties.background)
-        this.background.func(`file:///${properties.background.value}`);
-    if (properties.bingwallpaper)
-        this.bingwallpaper.func(properties.bingwallpaper.value);
-    // if (properties.extraexams)
-    //     this.extraexams.func(properties.extraexams.value);
-}).bind(propUser);

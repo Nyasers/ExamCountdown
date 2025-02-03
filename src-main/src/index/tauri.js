@@ -4,9 +4,35 @@ import { invoke } from '@tauri-apps/api/core';
 import { TrayIcon } from '@tauri-apps/api/tray';
 import { defaultWindowIcon } from '@tauri-apps/api/app';
 import { getCurrentWindow } from '@tauri-apps/api/window';
+import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { enable, isEnabled, disable } from '@tauri-apps/plugin-autostart';
 
+import { load } from '@tauri-apps/plugin-store';
+
+const store = await load('store.json', { autoSave: true });
+
 const mainWindow = getCurrentWindow();
+
+export async function getConfig() {
+    return await store.get('config');
+}
+
+export async function setConfig(config) {
+    await store.set('config', config);
+    await store.save();
+}
+
+export async function craeteEditor() {
+    const webview = new WebviewWindow('editor', {
+        center: true,
+        title: "Config Editor - ExamCountdown",
+        url: 'editor.html',
+    });
+
+    webview.once('tauri://destroyed', ec.applyConfig);
+
+    return webview;
+}
 
 export async function attachWallpaper() {
     await wallpaper.attach();
@@ -21,6 +47,11 @@ export async function detachWallpaper() {
 export async function createTray() {
     const menu = await Menu.new({
         items: [
+            {
+                id: 'settings',
+                text: '设置',
+                action: craeteEditor,
+            },
             {
                 id: 'quit',
                 text: '退出',
@@ -43,7 +74,7 @@ export async function fetchWallpaper() {
         const imageData = new Uint8Array((await invoke('get_wallpaper_data')));
         return URL.createObjectURL(new Blob([(imageData.buffer)]));
     } catch (error) {
-        console.error('获取并应用壁纸失败:', error);
+        console.error('获取壁纸失败:', error);
     }
 }
 

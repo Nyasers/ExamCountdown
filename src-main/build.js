@@ -25,7 +25,7 @@ async function packHTML(jsfile, ...workers) {
     var output = "<!doctype html><meta charset='utf-8'><noscript><strong>We're sorry but ExamCountdown doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>";
     output += "<ec>";
     // output += "<script src='./renderer.js' defer></script>";
-    workers.forEach(async worker => {
+    await workers.forEach(async worker => {
         var js = fs.readFileSync(worker.js, 'utf-8'); fs.rmSync(worker.js);
         var result = await minify(js, terserConfig);
         output += `<script id="${worker.id}" type="app/worker">`;

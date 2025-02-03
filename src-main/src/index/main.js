@@ -2,7 +2,6 @@ import { $ } from 'jquery';
 import gsap, { Bounce, Power1, Power4 } from 'gsap';
 import { exam } from './exam.js';
 import wrap from './loader.js';
-import initProperties from './property/index.js';
 import { heartbeat as hitokotoHeatbeat } from '../plugin/Hitokoto/index.js';
 
 function heartbeat() {
@@ -149,7 +148,6 @@ function initWindow(window) {
 }
 
 export default async function (window, ec) {
-  initProperties(window);
   initWindow(window);
   initExam(ec);
 

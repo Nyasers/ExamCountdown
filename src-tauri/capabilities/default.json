@@ -3,16 +3,17 @@
   "identifier": "default",
   "description": "enables the default permissions",
   "windows": [
-    "main"
+    "main",
+    "editor"
   ],
   "permissions": [
     "core:default",
     "core:app:default",
     "core:app:allow-default-window-icon",
+    "core:webview:allow-create-webview-window",
     "core:window:default",
     "core:window:allow-close",
     "core:window:allow-show",
-    "wallpaper:default",
     "store:default"
   ]
 }

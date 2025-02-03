@@ -16,7 +16,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const MODE = true ? 'production' : 'development';
-// const VERSION = '"2024-06-14T17:00Z"';
 
 if (MODE == 'production') {
   terserConfig.compress.drop_console = true;

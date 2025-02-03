@@ -6,7 +6,6 @@ import applyImageUrl from './background-loader/apply-image.js';
 export const ec = {
     online: false,
     origin: location.protocol == 'file:' ? 'https://ec.nyase.ru' : location.origin,
-    // version: new Date(VERSION),
     properties: {
         user: propUser,
         general: propGeneral
@@ -14,10 +13,6 @@ export const ec = {
     background: {
         set: applyImageUrl.bind()
     },
-    // updater: {
-    //     fetch: async function (url = ec.origin + '/uj') {
-    //         $.getScript(url);
-    //     },
-    // },
+    applyConfig: null,
     plugin: {},
 };

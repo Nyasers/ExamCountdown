@@ -1,6 +1,6 @@
 {
     "type": "object",
-    "ui:title": "ExamCountdown Config",
+    "ui:title": "Config Editor: 修改后请保存 (按钮位于页面底部)",
     "properties": {
         "breakon": {
             "type": "string",
@@ -16,13 +16,13 @@
         },
         "hitokoto": {
             "type": "boolean",
-            "default": false,
+            "default": true,
             "ui:title": "显示一言",
             "ui:description": "接口文档: https://developer.hitokoto.cn/sentence/"
         },
         "bingwallpaper": {
             "type": "boolean",
-            "default": false,
+            "default": true,
             "ui:title": "必应壁纸",
             "ui:description": "获取必应壁纸作为背景图片<br>默认背景图片为系统桌面背景（通过注册表获取）"
         },
