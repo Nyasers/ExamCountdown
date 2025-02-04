@@ -20,7 +20,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: dtolnay/rust-toolchain@stable
-    - uses: pl-strflt/rust-sccache-action@v1
+    - uses: visvirial/sccache-action@v1
     - uses: actions/setup-node@v4
       with:
         node-version: v22
