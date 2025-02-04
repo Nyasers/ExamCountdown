@@ -13,8 +13,7 @@ jobs:
       contents: write
     env:
       RUSTC_WRAPPER: sccache
-      SCCACHE_DIR: C:\Users\runneradmin\.cache\sccache
-      SCCACHE_CACHE_SIZE: 2G
+      SCCACHE_DIR: $HOME\.cache\sccache
       GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
 
