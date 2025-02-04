@@ -1,4 +1,4 @@
-name: Electron Release
+name: Release
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  release:
     runs-on: windows-latest
     permissions:
       contents: write
@@ -15,13 +15,35 @@ jobs:
     steps:
     - name: Checkout source
       uses: actions/checkout@v4
+
+    - name: Rust setup
+      uses: dtolnay/rust-toolchain@stable
       
     - name: Setup nodejs
       uses: actions/setup-node@v4
       with:
         node-version: v22
+
+    - name: Install frontend dependencies
+      run: npm install
+      # 使用tauri actions
       
-    - name: Publish
-      run: npm run publish
+    - name: Build the app
+      id: build
+      uses: tauri-apps/tauri-action@v0
       env:
         GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
+        TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_PRIVATE_KEY_PASSWORD }}
+      with:
+        tagName: ${{ github.ref_name }}
+        releaseName: "ComfyUI Startup v__VERSION__"
+        releaseBody: "See the assets to download and install this version."
+        releaseDraft: true
+        prerelease: false
+  
+    - name: Upload assets
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # 运行自己的脚本
+      run: node updater.mjs
