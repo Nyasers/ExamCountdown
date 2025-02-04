@@ -27,7 +27,7 @@ jobs:
 
     - name: Setup rust
       uses: dtolnay/rust-toolchain@stable
-      
+
     - name: Setup nodejs
       uses: actions/setup-node@v4
       with:
@@ -38,8 +38,8 @@ jobs:
       with:
         path: ${{ env.SCCACHE_DIR }}
         key: ${{ runner.os }}-sccache-${{ hashFiles('**/Cargo.lock') }}
-      
-    - name: Build the app
+
+    - name: Build and release
       id: build
       uses: tauri-apps/tauri-action@v0
       with:
