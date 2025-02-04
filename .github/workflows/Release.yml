@@ -11,6 +11,12 @@ jobs:
     runs-on: windows-latest
     permissions:
       contents: write
+    env:
+      RUSTC_WRAPPER: sccache
+      SCCACHE_DIR: C:\Users\runneradmin\Cache\sccache
+      SCCACHE_CACHE_SIZE: 2G
+      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
 
     steps:
     - name: Checkout source
@@ -30,15 +36,12 @@ jobs:
     - name: Cache sccache
       use: actions/cache@v4
       with:
-        path: C:\Users\runneradmin\Cache\sccache
+        path: ${{ env.SCCACHE_DIR }}
         key: ${{ runner.os }}-sccache-${{ hashFiles('**/Cargo.lock') }}
       
     - name: Build the app
       id: build
       uses: tauri-apps/tauri-action@v0
-      env:
-        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
       with:
         tagName: ${{ github.ref_name }}
         releaseName: "ComfyUI Startup v__VERSION__"
