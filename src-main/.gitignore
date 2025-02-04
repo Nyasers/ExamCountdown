@@ -1,4 +1,3 @@
-.tauri
-.vscode
 node_modules
+cache
 dist

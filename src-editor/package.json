@@ -1,0 +1,22 @@
+{
+  "name": "config-editor",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "prebuild": "npm install",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@lljj/vue3-form-ant": "^1.19.0",
+    "ant-design-vue": "^4.2.6",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.0.11",
+    "vite-plugin-singlefile": "^2.1.0",
+    "vite-plugin-vue-devtools": "^7.7.0"
+  }
+}

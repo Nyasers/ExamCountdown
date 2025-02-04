@@ -1,48 +1,31 @@
 {
   "name": "examcountdown",
-  "version": "25.1.7",
-  "description": "Electron shell of ExamCountdown",
-  "main": "src/main.js",
-  "type": "module",
-  "config": {
-    "forge": "forge.config.js"
-  },
+  "version": "25.2.4",
   "scripts": {
-    "test": "cd website && npm run test && cd ..",
-    "prebuild": "npm install",
-    "build": "cd website && npm run build && copy /y dist\\index.js ..\\src\\renderer.js && cd ..",
-    "make": "npm run build && electron-forge make",
-    "start": "npm run build && electron-forge start",
-    "package": "npm run build && electron-forge package",
-    "publish": "npm run build && electron-forge publish",
-    "release": "npm version",
-    "postrelease": "git push origin --tags"
+    "tauri": "tauri",
+    "pretauri": "npm run build",
+    "prebuild": "npm install && (mkdir dist || del /s /q dist) || echo.",
+    "build": "npm run build:main && npm run build:editor",
+    "postbuild": "node src-tauri\\version.js",
+    "build:main": "cd src-main && npm run build && copy dist\\index.html ..\\dist && copy dist\\*.js ..\\dist",
+    "build:editor": "cd src-editor && npm run build && copy dist\\index.html ..\\dist\\editor.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nyasers",
   "license": "ISC",
-  "dependencies": {
-    "electron-as-wallpaper": "^2.0.3",
-    "electron-squirrel-startup": "^1.0.1",
-    "electron-store": "^10.0.0",
-    "update-electron-app": "^3.1.0"
-  },
+  "description": "",
   "devDependencies": {
-    "@electron-forge/cli": "^7.6.0",
-    "@electron-forge/maker-squirrel": "^7.6.0",
-    "@electron-forge/plugin-auto-unpack-natives": "^7.6.0",
-    "@electron-forge/plugin-fuses": "^7.6.0",
-    "@electron-forge/publisher-github": "^7.6.0",
-    "@electron/fuses": "^1.8.0",
-    "@electron/rebuild": "^3.7.1",
-    "electron": "^33.2.1"
+    "@actions/github": "^6.0.0",
+    "@iarna/toml": "^2.2.5",
+    "@tauri-apps/cli": "^2.2.2"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Nyasers/ExamCountdown.git"
+  "dependencies": {
+    "@tauri-apps/api": "^2.2.0",
+    "@tauri-apps/plugin-autostart": "^2.2.0",
+    "@tauri-apps/plugin-process": "^2.2.0",
+    "@tauri-apps/plugin-store": "^2.2.0",
+    "@tauri-apps/plugin-updater": "^2.4.0",
+    "tauri-plugin-wallpaper": "^2.0.1"
   },
-  "bugs": {
-    "url": "https://github.com/Nyasers/ExamCountdown/issues"
-  },
-  "homepage": "https://github.com/Nyasers/ExamCountdown#readme",
-  "keywords": []
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

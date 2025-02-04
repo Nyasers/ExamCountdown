@@ -1,0 +1,43 @@
+{
+  "name": "examcountdown",
+  "productName": "ExamCountdown",
+  "description": "Website of ExamCountdown",
+  "type": "module",
+  "scripts": {
+    "test": "npx rspack",
+    "prebuild": "npm install",
+    "depend": "node depend.js",
+    "build": "node build.js || rspack",
+    "deploy": "node build.js deploy || repack"
+  },
+  "author": "Nyasers",
+  "license": "ISC",
+  "dependencies": {
+    "gsap": "^3.12.5",
+    "invert-color": "^2.0.0",
+    "jquery": "^4.0.0-beta.2",
+    "tauri-plugin-wallpaper": "^2.0.1"
+  },
+  "devDependencies": {
+    "@rspack/cli": "^1.1.8",
+    "@rspack/core": "^1.1.8",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^7.1.2",
+    "postcss-loader": "^8.1.1",
+    "postcss-preset-env": "^10.1.3",
+    "style-loader": "^4.0.0",
+    "terser": "^5.37.0",
+    "terser-webpack-plugin": "^5.3.11"
+  },
+  "optionalDependencies": {
+    "@rspack/binding-darwin-arm64": "0.4.2",
+    "@rspack/binding-win32-arm64-msvc": "0.4.2",
+    "@rspack/binding-linux-arm64-gnu": "0.4.2",
+    "@rspack/binding-linux-arm64-musl": "0.4.2",
+    "@rspack/binding-darwin-x64": "0.4.2",
+    "@rspack/binding-win32-ia32-msvc": "0.4.2",
+    "@rspack/binding-win32-x64-msvc": "0.4.2",
+    "@rspack/binding-linux-x64-musl": "0.4.2",
+    "@rspack/binding-linux-x64-gnu": "0.4.2"
+  }
+}

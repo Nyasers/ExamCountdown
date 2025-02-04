@@ -1,0 +1,6 @@
+/l /license
+/download /exe
+/license /license.txt
+/clean https://nyaser-ec-cleaner.nyaser.workers.dev/
+/guide https://nyase.ru/2024/11/30/ExamCountdownElectron/
+/exe https://github.com/Nyasers/ExamCountdown/releases/latest/download/ExamCountdown_${VERSION}_x64-setup.exe

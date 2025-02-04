@@ -1,4 +1,4 @@
-name: Electron Release
+name: Release
 
 on:
   push:
@@ -7,21 +7,29 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  release:
     runs-on: windows-latest
     permissions:
       contents: write
-
     steps:
-    - name: Checkout source
-      uses: actions/checkout@v4
-      
-    - name: Setup nodejs
-      uses: actions/setup-node@v4
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
         node-version: v22
-      
-    - name: Publish
-      run: npm run publish
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+    - uses: Swatinem/rust-cache@v2
+      with:
+        workspaces: "src-tauri -> target"
+    - uses: tauri-apps/tauri-action@v0
+      with:
+        tagName: ${{ github.ref_name }}
+        releaseName: "ExamCountdown v__VERSION__"
+        releaseBody: "See the assets to download and install this version."
+        updaterJsonPreferNsis: true
+        releaseDraft: false
+        prerelease: false
       env:
         GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}

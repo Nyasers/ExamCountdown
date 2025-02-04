@@ -1,0 +1,56 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "ExamCountdown",
+  "version": "25.2.4",
+  "identifier": "top.nyaser.ec",
+  "build": {
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "url": "index.html",
+        "title": "ExamCountdown",
+        "width": 1280,
+        "height": 720,
+        "visible": false,
+        "resizable": true,
+        "fullscreen": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "createUpdaterArtifacts": true,
+    "targets": [
+      "nsis"
+    ],
+    "icon": [
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "nsis": {
+        "languages": [
+          "SimpChinese",
+          "TradChinese",
+          "English"
+        ]
+      }
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEE2NUE2RkYyQTMzOUI2RjMKUldUenRqbWo4bTlhcHR1SzErM1ZLeTNjdWg4TE9vTzZydVlzV1dVazE0VFo3cjMzVVhLd2grSlYK",
+      "endpoints": [
+        "https://github.com/Nyasers/ExamCountdown/releases/latest/download/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
+  }
+}

