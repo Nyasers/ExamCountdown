@@ -16,7 +16,10 @@ jobs:
     - name: Checkout source
       uses: actions/checkout@v4
 
-    - name: Rust setup
+    - name: Setup sccache
+      run: scoop install sccache
+
+    - name: Setup rust
       uses: dtolnay/rust-toolchain@stable
       
     - name: Setup nodejs
@@ -24,10 +27,12 @@ jobs:
       with:
         node-version: v22
 
-    - name: Install frontend dependencies
-      run: npm install
+    - name: Cache sccache
+      use: actions/cache@v4
+      with:
+        path: C:\Users\runneradmin\Cache\sccache
+        key: ${{ runner.os }}-sccache-${{ hashFiles('**/Cargo.lock') }}
       
-    # 使用tauri actions
     - name: Build the app
       id: build
       uses: tauri-apps/tauri-action@v0
@@ -40,3 +45,6 @@ jobs:
         releaseBody: "See the assets to download and install this version."
         releaseDraft: true
         prerelease: false
+
+    - name: Show sccache stats
+      run: sccache --show-stats
