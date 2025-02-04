@@ -1,3 +1,4 @@
+.tauri
 .vscode
 node_modules
 dist
