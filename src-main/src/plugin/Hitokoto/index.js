@@ -14,7 +14,7 @@ const hitokoto = {
         request: 30000,
         refresh: 180000,
     },
-    type: {
+    types: {
         a: "动画",
         b: "漫画",
         c: "游戏",
@@ -26,14 +26,14 @@ const hitokoto = {
         i: "诗词",
         j: "网易云",
         k: "哲学",
-        // l: '抖机灵',
+        l: '抖机灵',
         x: "提示",
     },
 };
 
 hitokoto.set = (function (data = {}) {
     if (data.type != 'x') console.log(data);
-    let type = this.type[data.type];
+    let type = this.types[data.type];
     if ('undefined' == typeof type) {
         setTimeout(() => this.set({
             type: "x",
@@ -78,8 +78,7 @@ hitokoto.get = (function () {
     var request;
     if (request != null) request.abort();
     let url = this.api.url + "?" + this.api.args;
-    let types = Object.assign({}, this.type); delete types.x;
-    for (let key of Object.keys(types)) url += `&c=${key}`;
+    ec.properties.user.hitokoto_types.value.forEach(key => url += `&c=${key}`);
     let queryTime = Time().getTime();
     url += `&_=${queryTime}`;
     let duration = queryTime - this.lastquery;

@@ -62,6 +62,17 @@ propUser.hitokoto = {
         }
     ).bind(propUser)
 };
+propUser.hitokoto_types = {
+    value: [],
+    func: (
+        /**
+         * @param {Array<string>} value 
+         */
+        function (value) {
+            this.hitokoto_types.value = value;
+        }
+    ).bind(propUser)
+}
 propUser.finalonly = {
     value: false,
     func: (

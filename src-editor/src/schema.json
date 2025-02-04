@@ -21,6 +21,46 @@
             "ui:title": "显示一言",
             "ui:description": "接口文档: https://developer.hitokoto.cn/sentence/"
         },
+        "hitokoto_types": {
+            "type": "array",
+            "uniqueItems": true,
+            "default": [],
+            "items": {
+                "type": "string",
+                "enum": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l"
+                ],
+                "enumNames": [
+                    "动画",
+                    "漫画",
+                    "游戏",
+                    "文学",
+                    "原创",
+                    "网络",
+                    "其他",
+                    "影视",
+                    "诗词",
+                    "网易云",
+                    "哲学",
+                    "抖机灵"
+                ]
+            },
+            "ui:title": "一言类型",
+            "ui:description": "可多选，不选相当于全选。",
+            "ui:widget": "SelectWidget",
+            "ui:hidden": "{{rootFormData.hitokoto === false}}"
+        },
         "bingwallpaper": {
             "type": "boolean",
             "default": true,
