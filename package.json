@@ -3,10 +3,11 @@
   "version": "25.2.4",
   "scripts": {
     "tauri": "tauri",
-    "prebuild": "npm install && (mkdir dist || del /s /q dist) || echo.",
+    "pretauri": "npm install",
+    "prebuild": "mkdir dist || del /s /q dist",
     "build": "npm run build:main && npm run build:editor",
     "postbuild": "node src-tauri\\version.js",
-    "build:main": "cd src-main && npm run build && copy dist\\index.html ..\\dist && copy dist\\*.js ..\\dist && copy dist\\favicon.ico ..\\dist",
+    "build:main": "cd src-main && npm run build && copy dist\\index.html ..\\dist && copy dist\\*.js ..\\dist",
     "build:editor": "cd src-editor && npm run build && copy dist\\index.html ..\\dist\\editor.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
