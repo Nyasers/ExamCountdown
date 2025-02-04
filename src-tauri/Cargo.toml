@@ -23,6 +23,7 @@ tauri-plugin-log = "2.0.0-rc"
 tauri-plugin-wallpaper = "2.0.1"
 tauri-plugin-store = "2"
 winreg = "0.55.0"
+tauri-plugin-process = "2"
 
   [dependencies.serde]
   version = "1.0"

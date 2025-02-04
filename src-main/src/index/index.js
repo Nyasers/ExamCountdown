@@ -13,9 +13,9 @@ globalThis.ec = ec;
 globalThis.Time = () => new Date;
 
 // Tauri
-let createTray, attachWallpaper, detachWallpaper, fetchWallpaper, enableAutoStart, getConfig;
+let createTray, attachWallpaper, detachWallpaper, fetchWallpaper, enableAutoStart, getConfig, checkUpdate;
 if (TAURI) {
-    ({ createTray, attachWallpaper, detachWallpaper, fetchWallpaper, enableAutoStart, getConfig } = await import('./tauri.js'));
+    ({ createTray, attachWallpaper, detachWallpaper, fetchWallpaper, enableAutoStart, getConfig, checkUpdate } = await import('./tauri.js'));
     await ec.background.set(await fetchWallpaper());
     window.onclose = detachWallpaper;
 }
@@ -31,7 +31,10 @@ await main(globalThis, ec)
                 globalThis.tray = null;
             }
             (ec.applyConfig = async () => ec.properties.user.apply(await getConfig()))();
-            enableAutoStart().then(async (enabled) => console.log("autostart", enabled));
+            enableAutoStart().then(async (enabled) => {
+                console.log("autostart", enabled)
+                if (enabled) await checkUpdate();
+            });
         }
     });
 

@@ -2,6 +2,8 @@ import wallpaper from 'tauri-plugin-wallpaper';
 import { Menu } from '@tauri-apps/api/menu';
 import { invoke } from '@tauri-apps/api/core';
 import { TrayIcon } from '@tauri-apps/api/tray';
+import { check } from "@tauri-apps/plugin-updater";
+import { relaunch } from "@tauri-apps/plugin-process";
 import { defaultWindowIcon } from '@tauri-apps/api/app';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
@@ -12,6 +14,14 @@ import { load } from '@tauri-apps/plugin-store';
 const store = await load('store.json', { autoSave: true });
 
 const mainWindow = getCurrentWindow();
+
+export async function checkUpdate() {
+    const update = await check();
+    if (update?.available) {
+        await update.downloadAndInstall();
+        await relaunch();
+    }
+}
 
 export async function getConfig() {
     return await store.get('config');
