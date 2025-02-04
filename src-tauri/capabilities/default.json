@@ -14,6 +14,8 @@
     "core:window:default",
     "core:window:allow-close",
     "core:window:allow-show",
-    "store:default"
+    "process:allow-restart",
+    "store:default",
+    "updater:default"
   ]
 }
