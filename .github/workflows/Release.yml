@@ -18,25 +18,12 @@ jobs:
       TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
 
     steps:
-    - name: Checkout source
-      uses: actions/checkout@v4
-
-    - name: Setup rust
-      uses: dtolnay/rust-toolchain@stable
-
-    - name: Setup nodejs
-      uses: actions/setup-node@v4
+    - uses: actions/checkout@v4
+    - uses: actions-rs/toolchain@v1
+    - uses: pl-strflt/rust-sccache-action@v1
+    - uses: actions/setup-node@v4
       with:
         node-version: v22
-
-    - name: Cache sccache
-      uses: actions/cache@v4
-      with:
-        path: ${{ env.SCCACHE_DIR }}
-        key: ${{ runner.os }}-sccache-${{ hashFiles('**/Cargo.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-sccache-
-          ${{ runner.os }}-
 
     - name: Build and release
       id: build
@@ -47,6 +34,3 @@ jobs:
         releaseBody: "See the assets to download and install this version."
         releaseDraft: true
         prerelease: false
-
-    - name: Show sccache stats
-      run: sccache -s
