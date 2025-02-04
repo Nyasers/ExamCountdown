@@ -1,5 +1,4 @@
 <template>
-  <pre hidden>{{ formData }}</pre>
   <vue-form v-model="formData" :schema="schema" :formFooter="formFooter"></vue-form>
 </template>
 

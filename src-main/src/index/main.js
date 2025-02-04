@@ -151,14 +151,14 @@ export default async function (window, ec) {
   initWindow(window);
   initExam(ec);
 
-  ec.start = (function () {
+  ec.start = (function (timeout) {
     if (typeof this.stop != typeof undefined) this.stop();
-    let interval = setInterval(heartbeat.bind(ec), 2e2);
+    let interval = setInterval(heartbeat.bind(ec), timeout);
     this.stop = (function () {
       clearInterval(interval);
       delete this.stop;
     }).bind(this);
   }).bind(ec);
 
-  ec.start();
+  ec.start(ec.properties.interval);
 }
