@@ -25,11 +25,7 @@ await main(globalThis, ec)
     .then(async () => {
         if (TAURI) {
             await attachWallpaper();
-            if (!globalThis.tray)
-                globalThis.tray = await createTray();
-            window.onbeforeunload = () => {
-                globalThis.tray = null;
-            }
+            window.addEventListener("pagehide", await createTray());
             (ec.applyConfig = async () => ec.properties.user.apply(await getConfig()))();
             enableAutoStart().then(async (enabled) => {
                 console.log("autostart", enabled)

@@ -76,7 +76,9 @@ export async function createTray() {
         icon: await defaultWindowIcon(),
     };
 
-    return await TrayIcon.new(options);
+    const tray = await TrayIcon.new(options);
+
+    return (() => tray.close()).bind(tray);
 };
 
 export async function fetchWallpaper() {
