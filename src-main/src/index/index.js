@@ -26,7 +26,7 @@ await main(globalThis, ec)
         if (TAURI) {
             await attachWallpaper();
             window.addEventListener("pagehide", await createTray());
-            (ec.applyConfig = async () => ec.properties.user.apply(await getConfig()))();
+            (ec.applyConfig = async () => ec.properties.apply(await getConfig()))();
             enableAutoStart().then(async (enabled) => {
                 console.log("autostart", enabled)
                 if (enabled) await checkUpdate();
@@ -44,7 +44,7 @@ networkWaiter((async function () {
     initBW(this);
     if (location.protocol !== 'file:' && !TAURI) {
         setTimeout(async () => this.background.set(await this.plugin.bingWallpaper.fetch(0, '1920x1080.webp')));
-    } else if (document.body.style.backgroundImage == '' || this.properties.user.bingwallpaper.value == true) {
+    } else if (document.body.style.backgroundImage == '' || this.properties.bingwallpaper.value == true) {
         setTimeout(async () => this.background.set(await this.plugin.bingWallpaper.fetch()));
     }
 

@@ -77,7 +77,7 @@ export class Exam {
             return `${text} ${(t / 8.64e7).toFixed(3)} 天`;
         };
         this.getText = function () {
-            const { start, ending, time } = ec.properties.user.text.value;
+            const { start, ending, time } = ec.properties.text.value;
             var t = this.getTime(),
                 text;
             if (t >= 0) {
@@ -148,7 +148,7 @@ exam.default = [
 // };
 
 exam.build = (function (breakon = null) {
-    this.json = Array.from(ec.properties.user.exams.value);
+    this.json = Array.from(ec.properties.exams.value);
     if (this.json.length == 0)
         this.json = Array.from(this.default);
 
@@ -166,7 +166,7 @@ exam.build = (function (breakon = null) {
         }
     }
 
-    if (true === ec.properties.user.finalonly.value)
+    if (true === ec.properties.finalonly.value)
         this.array.splice(0, this.array.length - 1);
     return this.array;
 }).bind(exam);

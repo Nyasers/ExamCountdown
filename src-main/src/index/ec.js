@@ -1,15 +1,11 @@
 // import { $ } from "jquery";
-import { propUser } from './property/propUser.js';
-import { propGeneral } from './property/propGeneral.js';
+import { properties } from './property/index.js';
 import applyImageUrl from './background-loader/apply-image.js';
 
 export const ec = {
     online: false,
     origin: location.protocol == 'file:' ? 'https://ec.nyase.ru' : location.origin,
-    properties: {
-        user: propUser,
-        general: propGeneral
-    },
+    properties: properties,
     background: {
         set: applyImageUrl.bind()
     },

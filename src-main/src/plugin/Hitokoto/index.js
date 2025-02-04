@@ -78,7 +78,7 @@ hitokoto.get = (function () {
     var request;
     if (request != null) request.abort();
     let url = this.api.url + "?" + this.api.args;
-    ec.properties.user.hitokoto_types.value.forEach(key => url += `&c=${key}`);
+    ec.properties.hitokoto_types.value.forEach(key => url += `&c=${key}`);
     let queryTime = Time().getTime();
     url += `&_=${queryTime}`;
     let duration = queryTime - this.lastquery;
@@ -119,7 +119,7 @@ export const init = (function (ec) {
 }).bind(hitokoto);
 
 export const heartbeat = (function (ec) {
-    if (ec.properties.user.hitokoto.value == true) {
+    if (ec.properties.hitokoto.value == true) {
         if ($("li.hitokoto").html() == '') {
             this.get();
         } else {

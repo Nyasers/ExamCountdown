@@ -1,11 +1,11 @@
 import { ec } from '../ec.js';
-export const propUser = {};
+export const properties = {};
 
-propUser.apply = (function (config) {
+properties.apply = (function (config) {
     Object.keys(config).forEach(key => this[key].func(config[key]));
-}).bind(propUser);
+}).bind(properties);
 
-propUser.exams = {
+properties.exams = {
     value: [{
         title: "福建高考",
         time: {
@@ -22,9 +22,9 @@ propUser.exams = {
             this.exams.value = value;
             ec.exam.build(this.breakon.value);
         }
-    ).bind(propUser)
+    ).bind(properties)
 };
-propUser.text = {
+properties.text = {
     value: {
         start: '距离 {0} <strong>仅剩</strong>',
         ending: '距离 {0} 结束还有',
@@ -37,9 +37,9 @@ propUser.text = {
         function (value) {
             this.text.value = value;
         }
-    ).bind(propUser)
+    ).bind(properties)
 };
-propUser.breakon = {
+properties.breakon = {
     value: '高考',
     func: (
         /**
@@ -49,9 +49,9 @@ propUser.breakon = {
             this.breakon.value = value;
             ec.exam.build(this.breakon.value);
         }
-    ).bind(propUser)
+    ).bind(properties)
 };
-propUser.hitokoto = {
+properties.hitokoto = {
     value: true,
     func: (
         /**
@@ -60,9 +60,9 @@ propUser.hitokoto = {
         function (value) {
             this.hitokoto.value = value;
         }
-    ).bind(propUser)
+    ).bind(properties)
 };
-propUser.hitokoto_types = {
+properties.hitokoto_types = {
     value: [],
     func: (
         /**
@@ -71,9 +71,9 @@ propUser.hitokoto_types = {
         function (value) {
             this.hitokoto_types.value = value;
         }
-    ).bind(propUser)
+    ).bind(properties)
 }
-propUser.finalonly = {
+properties.finalonly = {
     value: false,
     func: (
         /**
@@ -83,9 +83,9 @@ propUser.finalonly = {
             this.finalonly.value = value;
             ec.exam.build();
         }
-    ).bind(propUser)
+    ).bind(properties)
 };
-propUser.bingwallpaper = {
+properties.bingwallpaper = {
     value: true,
     func: (
         /**
@@ -96,5 +96,5 @@ propUser.bingwallpaper = {
             if (ec.online && this.bingwallpaper.value)
                 ec.background.set(await ec.plugin.bingWallpaper.fetch());
         }
-    ).bind(propUser)
+    ).bind(properties)
 };
