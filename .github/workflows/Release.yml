@@ -22,9 +22,6 @@ jobs:
     - name: Checkout source
       uses: actions/checkout@v4
 
-    - name: Setup sccache
-      run: scoop install sccache
-
     - name: Setup rust
       uses: dtolnay/rust-toolchain@stable
 
@@ -32,6 +29,9 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: v22
+
+    - name: Setup sccache
+      run: cargo install sccache
 
     - name: Cache sccache
       uses: actions/cache@v4
