@@ -7,7 +7,15 @@ use winreg::enums::HKEY_CURRENT_USER;
 use winreg::RegKey;
 
 #[tauri::command]
-fn is_installed() -> Result<bool, String> {
+fn is_installed() -> bool {
+    let f = is_installed_inner();
+    match f {
+        Ok(e) => e,
+        Err(_) => false
+    }
+}
+
+fn is_installed_inner() -> Result<bool, String> {
     let hkcu = RegKey::predef(HKEY_CURRENT_USER);
     let key = hkcu
         .open_subkey("Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\ExamCountdown")
@@ -20,6 +28,7 @@ fn is_installed() -> Result<bool, String> {
     let current_path = format!("\"{}\"", current_dir().unwrap().display().to_string());
 
     let installed: bool = install_path == current_path;
+    
     Ok(installed)
 }
 
