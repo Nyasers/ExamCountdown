@@ -3,8 +3,8 @@
   "version": "25.2.4",
   "scripts": {
     "tauri": "tauri",
-    "pretauri": "npm install",
-    "prebuild": "mkdir dist || del /s /q dist",
+    "pretauri": "npm run build",
+    "prebuild": "npm install && (mkdir dist || del /s /q dist) || echo.",
     "build": "npm run build:main && npm run build:editor",
     "postbuild": "node src-tauri\\version.js",
     "build:main": "cd src-main && npm run build && copy dist\\index.html ..\\dist && copy dist\\*.js ..\\dist",

@@ -4,9 +4,7 @@
   "version": "25.2.4",
   "identifier": "top.nyaser.ec",
   "build": {
-    "frontendDist": "../dist",
-    "beforeDevCommand": "npm run build",
-    "beforeBuildCommand": "npm run build"
+    "frontendDist": "../dist"
   },
   "app": {
     "windows": [
