@@ -1,6 +1,6 @@
 import { load } from '@tauri-apps/plugin-store';
 
-const store = await load('store.json', { autoSave: true });
+const store = await load('config.json', { autoSave: true });
 
 export async function get_config() {
     if (!await store.get('config'))

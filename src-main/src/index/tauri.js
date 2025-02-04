@@ -11,7 +11,7 @@ import { enable, isEnabled, disable } from '@tauri-apps/plugin-autostart';
 
 import { load } from '@tauri-apps/plugin-store';
 
-const store = await load('store.json', { autoSave: true });
+const store = await load('config.json', { autoSave: true });
 
 const mainWindow = getCurrentWindow();
 
