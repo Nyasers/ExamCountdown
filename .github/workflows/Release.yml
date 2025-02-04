@@ -34,7 +34,7 @@ jobs:
         node-version: v22
 
     - name: Cache sccache
-      use: actions/cache@v4
+      uses: actions/cache@v4
       with:
         path: ${{ env.SCCACHE_DIR }}
         key: ${{ runner.os }}-sccache-${{ hashFiles('**/Cargo.lock') }}
