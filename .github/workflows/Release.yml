@@ -25,8 +25,9 @@ jobs:
     - uses: tauri-apps/tauri-action@v0
       with:
         tagName: ${{ github.ref_name }}
-        releaseName: "Release v__VERSION__"
+        releaseName: "ExamCountdown v__VERSION__"
         releaseBody: "See the assets to download and install this version."
+        updaterJsonPreferNsis: true
         releaseDraft: false
         prerelease: false
       env:
