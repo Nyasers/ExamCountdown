@@ -1,6 +1,6 @@
 /l /license
+/download /exe
 /license /license.txt
 /clean https://nyaser-ec-cleaner.nyaser.workers.dev/
 /guide https://nyase.ru/2024/11/30/ExamCountdownElectron/
-/exe https://a.nyase.ru/d/public/Project/ExamCountdown/Wallpaper_Engine_2.4.82_with_ExamCountdown_2024-06-14_Installer.exe
-/download https://github.com/Nyasers/ExamCountdown/releases/latest/download/ExamCountdown_${VERSION}_x64-setup.exe
+/exe https://github.com/Nyasers/ExamCountdown/releases/latest/download/ExamCountdown_${VERSION}_x64-setup.exe
