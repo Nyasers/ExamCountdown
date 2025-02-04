@@ -1,7 +1,6 @@
 {
   "name": "examcountdown",
   "version": "25.2.5",
-  "main": "index.js",
   "scripts": {
     "tauri": "tauri",
     "prebuild": "npm install && (mkdir dist || del /s /q dist) || echo.",
