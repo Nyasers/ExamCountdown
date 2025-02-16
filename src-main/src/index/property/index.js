@@ -29,23 +29,11 @@ properties.finalonly = {
         }
     ).bind(properties)
 };
-properties.interval = {
-    value: 1e2,
-    func: (
-        /**
-        * @param {number} value 
-        */
-        async function (value) {
-            this.interval.value = value;
-            ec.start(value);
-        }
-    ).bind(properties)
-};
 properties.hitokoto = {
     value: true,
     func: (
         /**
-        * @param {boolean} value 
+         * @param {boolean} value 
         */
         function (value) {
             this.hitokoto.value = value;
@@ -56,7 +44,7 @@ properties.hitokoto_types = {
     value: [],
     func: (
         /**
-        * @param {Array<string>} value 
+         * @param {Array<string>} value 
         */
         function (value) {
             this.hitokoto_types.value = value;
@@ -67,7 +55,7 @@ properties.bingwallpaper = {
     value: true,
     func: (
         /**
-        * @param {boolean} value 
+         * @param {boolean} value 
         */
         async function (value) {
             this.bingwallpaper.value = value;
@@ -87,7 +75,7 @@ properties.exams = {
     }],
     func: (
         /**
-        * @param {Array<Object>} value
+         * @param {Array<Object>} value
         */
         function (value) {
             this.exams.value = value;
@@ -103,10 +91,22 @@ properties.text = {
     },
     func: (
         /**
-        * @param {Object} value 
+         * @param {Object} value 
         */
         function (value) {
             this.text.value = value;
+        }
+    ).bind(properties)
+};
+properties.interval = {
+    value: 1e2,
+    func: (
+        /**
+        * @param {number} value 
+        */
+        async function (value) {
+            this.interval.value = value;
+            ec.start(value);
         }
     ).bind(properties)
 };
@@ -119,7 +119,7 @@ properties.precision = {
     func: (
         /**
          * @param {Object} value
-         */
+        */
         function (value) {
             this.precision.value = value;
         }

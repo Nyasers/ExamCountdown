@@ -15,15 +15,6 @@
             "ui:title": "只看截止",
             "ui:description": "[按开始时间排序] 只显示最后一个考试"
         },
-        "interval": {
-            "type": "integer",
-            "default": 1e2,
-            "minimum": 5e1,
-            "maximum": 1e3,
-            "multipleOf": 5e1,
-            "ui:title": "刷新间隔",
-            "ui:description": "[单位ms] 更新数据的间隔时间"
-        },
         "hitokoto": {
             "type": "boolean",
             "default": true,
@@ -159,6 +150,15 @@
                 "ending",
                 "time"
             ]
+        },
+        "interval": {
+            "type": "integer",
+            "default": 1e2,
+            "minimum": 5e1,
+            "maximum": 1e3,
+            "multipleOf": 5e1,
+            "ui:title": "刷新间隔",
+            "ui:description": "[单位ms] 更新数据的间隔时间"
         },
         "precision": {
             "type": "object",
