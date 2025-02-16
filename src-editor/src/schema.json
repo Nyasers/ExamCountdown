@@ -159,6 +159,36 @@
                 "ending",
                 "time"
             ]
+        },
+        "precision": {
+            "type": "object",
+            "ui:title": "时间精度",
+            "ui:description": "小数点后位数",
+            "default": {
+                "day": 3,
+                "hour": 2,
+                "second": 1
+            },
+            "properties": {
+                "day": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 46,
+                    "ui:title": "天"
+                },
+                "hour": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 41,
+                    "ui:title": "小时"
+                },
+                "second": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 29,
+                    "ui:title": "秒"
+                }
+            }
         }
     }
 }

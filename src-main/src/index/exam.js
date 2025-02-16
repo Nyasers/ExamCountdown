@@ -66,6 +66,7 @@ export class Exam {
             return t;
         };
         this.getTitle = function () {
+            const precision = ec.properties.precision.value;
             var t = this.getTime(),
                 text = $(`<p>${this.title}</p>`).text();
             if (t >= 0) {
@@ -74,10 +75,11 @@ export class Exam {
                 t = -t;
                 text += "结束倒计时";
             }
-            return `${text} ${(t / 8.64e7).toFixed(3)} 天`;
+            return `${text} ${(t / 8.64e7).toFixed(precision.day)} 天`;
         };
         this.getText = function () {
             const { start, ending, time } = ec.properties.text.value;
+            const { day, hour, second } = ec.properties.precision.value;
             var t = this.getTime(),
                 text;
             if (t >= 0) {
@@ -86,7 +88,7 @@ export class Exam {
                 t = -t;
                 text = ending.format(this.title);
             }
-            return time.format(text, (t / 8.64e7).toFixed(3), (t / 3.6e6).toFixed(2), (t / 1e3).toFixed(1));
+            return time.format(text, (t / 8.64e7).toFixed(day), (t / 3.6e6).toFixed(hour), (t / 1e3).toFixed(second));
         };
     }
 }

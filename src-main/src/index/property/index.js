@@ -110,3 +110,18 @@ properties.text = {
         }
     ).bind(properties)
 };
+properties.precision = {
+    value: {
+        day: 3,
+        hour: 2,
+        second: 1
+    },
+    func: (
+        /**
+         * @param {Object} value
+         */
+        function (value) {
+            this.precision.value = value;
+        }
+    ).bind(properties)
+};
