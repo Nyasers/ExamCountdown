@@ -1,6 +1,6 @@
 [package]
 name = "ExamCountdown"
-version = "25.2.16"
+version = "25.2.17"
 description = "ExamCountdown Tauri"
 authors = [ "Nyasers" ]
 license = ""

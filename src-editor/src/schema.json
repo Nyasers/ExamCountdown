@@ -102,26 +102,12 @@
                         "ui:description": "可使用 $YYYY 替代年份",
                         "properties": {
                             "start": {
-                                "ui:title": "开始时间",
-                                "anyOF": [
-                                    {
-                                        "type": "string"
-                                    },
-                                    {
-                                        "type": "date-time"
-                                    }
-                                ]
+                                "type": "string",
+                                "ui:title": "开始时间"
                             },
                             "end": {
-                                "ui:title": "结束时间",
-                                "anyOF": [
-                                    {
-                                        "type": "string"
-                                    },
-                                    {
-                                        "type": "date-time"
-                                    }
-                                ]
+                                "type": "string",
+                                "ui:title": "结束时间"
                             }
                         },
                         "required": [
