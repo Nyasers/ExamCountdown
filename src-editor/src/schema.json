@@ -3,6 +3,15 @@
     "ui:title": "Config Editor: 修改后请保存",
     "ui:description": "按钮位于页面底部，保存后关闭窗口生效",
     "properties": {
+        "interval": {
+            "type": "integer",
+            "default": 1e2,
+            "minimum": 5e1,
+            "maximum": 1e3,
+            "multipleOf": 5e1,
+            "ui:title": "刷新间隔",
+            "ui:description": "[单位ms] 更新数据的间隔时间"
+        },
         "breakon": {
             "type": "string",
             "default": "高考",
@@ -164,15 +173,6 @@
                 "ending",
                 "time"
             ]
-        },
-        "interval": {
-            "type": "integer",
-            "default": 1e2,
-            "minimum": 5e1,
-            "maximum": 1e3,
-            "multipleOf": 5e1,
-            "ui:title": "刷新间隔",
-            "ui:description": "[单位ms] 更新数据的间隔时间"
         },
         "precision": {
             "type": "object",

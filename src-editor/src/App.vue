@@ -1,5 +1,7 @@
 <template>
-  <vue-form v-model="formData" :schema="schema" :formFooter="formFooter"></vue-form>
+  <vue-form v-model="formData" :schema="schema" :formFooter="formFooter" :formProps="{
+    layoutColumn: 3
+  }"></vue-form>
 </template>
 
 <script>

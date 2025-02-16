@@ -5,6 +5,18 @@ properties.apply = (function (config) {
     Object.keys(config).forEach(key => this[key].func(config[key]));
 }).bind(properties);
 
+properties.interval = {
+    value: 1e2,
+    func: (
+        /**
+        * @param {number} value 
+        */
+        async function (value) {
+            this.interval.value = value;
+            ec.start(value);
+        }
+    ).bind(properties)
+};
 properties.breakon = {
     value: '高考',
     func: (
@@ -95,18 +107,6 @@ properties.text = {
         */
         function (value) {
             this.text.value = value;
-        }
-    ).bind(properties)
-};
-properties.interval = {
-    value: 1e2,
-    func: (
-        /**
-        * @param {number} value 
-        */
-        async function (value) {
-            this.interval.value = value;
-            ec.start(value);
         }
     ).bind(properties)
 };
