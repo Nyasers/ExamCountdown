@@ -4,6 +4,7 @@
   "scripts": {
     "tauri": "tauri",
     "pretauri": "npm run build",
+    "start": "npm run tauri dev",
     "prebuild": "npm install && (mkdir dist || del /s /q dist) || echo.",
     "build": "npm run build:main && npm run build:editor",
     "postbuild": "node src-tauri\\version.js",
