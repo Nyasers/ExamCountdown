@@ -21,14 +21,12 @@ jobs:
         toolchain: stable
     - uses: Swatinem/rust-cache@v2
       with:
-        cache-all-crates: true
         workspaces: "src-tauri -> target"
     - uses: tauri-apps/tauri-action@v0
       with:
         tagName: ${{ github.ref_name }}
         releaseName: "ExamCountdown v__VERSION__"
         releaseBody: "See the assets to download and install this version."
-        updaterJsonPreferNsis: true
         releaseDraft: false
         prerelease: false
       env:
