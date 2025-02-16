@@ -1,6 +1,6 @@
 {
   "name": "examcountdown",
-  "version": "25.2.16",
+  "version": "25.2.17",
   "scripts": {
     "tauri": "tauri",
     "pretauri": "npm run build",
