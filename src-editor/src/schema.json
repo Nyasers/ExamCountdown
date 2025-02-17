@@ -1,7 +1,7 @@
 {
     "type": "object",
-    "ui:title": "Config Editor: 修改后请保存",
-    "ui:description": "按钮位于页面底部，保存后关闭窗口生效",
+    "title": "Config Editor: 修改后请保存",
+    "description": "按钮位于页面底部，保存后关闭窗口生效",
     "properties": {
         "interval": {
             "type": "integer",
@@ -9,26 +9,26 @@
             "minimum": 5e1,
             "maximum": 1e3,
             "multipleOf": 5e1,
-            "ui:title": "刷新间隔",
-            "ui:description": "[单位ms] 更新数据的间隔时间"
+            "title": "刷新间隔",
+            "description": "[单位ms] 更新数据的间隔时间"
         },
         "breakon": {
             "type": "string",
             "default": "高考",
-            "ui:title": "截止考试",
-            "ui:description": "[按开始时间排序] 将标题中包含此关键词的作为最后一个考试"
+            "title": "截止考试",
+            "description": "[按开始时间排序] 将标题中包含此关键词的作为最后一个考试"
         },
         "finalonly": {
             "type": "boolean",
             "default": false,
-            "ui:title": "只看截止",
-            "ui:description": "[按开始时间排序] 只显示最后一个考试"
+            "title": "只看截止",
+            "description": "[按开始时间排序] 只显示最后一个考试"
         },
         "hitokoto": {
             "type": "boolean",
             "default": true,
-            "ui:title": "显示一言",
-            "ui:description": "接口文档: https://developer.hitokoto.cn/sentence/"
+            "title": "显示一言",
+            "description": "接口文档: https://developer.hitokoto.cn/sentence/"
         },
         "hitokoto_types": {
             "type": "array",
@@ -65,16 +65,16 @@
                     "抖机灵"
                 ]
             },
-            "ui:title": "一言类型",
-            "ui:description": "可多选，不选相当于全选。",
+            "title": "一言类型",
+            "description": "可多选，不选相当于全选。",
             "ui:widget": "SelectWidget",
             "ui:hidden": "{{rootFormData.hitokoto === false}}"
         },
         "bingwallpaper": {
             "type": "boolean",
             "default": true,
-            "ui:title": "必应壁纸",
-            "ui:description": "获取必应壁纸作为背景图片<br>默认背景图片为系统桌面背景（通过注册表获取）"
+            "title": "必应壁纸",
+            "description": "获取必应壁纸作为背景图片<br>默认背景图片为系统桌面背景（通过注册表获取）"
         },
         "exams": {
             "type": "array",
@@ -88,26 +88,26 @@
                     "top": false
                 }
             ],
-            "ui:title": "考试列表",
+            "title": "考试列表",
             "items": {
                 "type": "object",
                 "properties": {
                     "title": {
                         "type": "string",
-                        "ui:title": "标题"
+                        "title": "标题"
                     },
                     "time": {
                         "type": "object",
-                        "ui:title": "时间",
-                        "ui:description": "可使用 $YYYY 替代年份",
+                        "title": "时间",
+                        "description": "可使用 $YYYY 替代年份",
                         "properties": {
                             "start": {
                                 "type": "string",
-                                "ui:title": "开始时间"
+                                "title": "开始时间"
                             },
                             "end": {
                                 "type": "string",
-                                "ui:title": "结束时间"
+                                "title": "结束时间"
                             }
                         },
                         "required": [
@@ -118,7 +118,7 @@
                     "top": {
                         "type": "boolean",
                         "default": false,
-                        "ui:title": "置顶"
+                        "title": "置顶"
                     }
                 },
                 "required": [
@@ -130,8 +130,8 @@
         },
         "text": {
             "type": "object",
-            "ui:title": "文本模板",
-            "ui:description": "可使用 HTML 标签<br>其中 {N} 为占位符，会替换为相应内容",
+            "title": "文本模板",
+            "description": "可使用 HTML 标签<br>其中 {N} 为占位符，会替换为相应内容",
             "default": {
                 "start": "距离 {0} <strong>仅剩</strong>",
                 "ending": "距离 {0} 结束还有",
@@ -140,18 +140,18 @@
             "properties": {
                 "start": {
                     "type": "string",
-                    "ui:title": "试前文本",
-                    "ui:description": "在考试开始前显示<br>其中 {0} 为考试标题"
+                    "title": "试前文本",
+                    "description": "在考试开始前显示<br>其中 {0} 为考试标题"
                 },
                 "ending": {
                     "type": "string",
-                    "ui:title": "试中文本",
-                    "ui:description": "在考试结束前显示<br>其中 {0} 为考试标题"
+                    "title": "试中文本",
+                    "description": "在考试结束前显示<br>其中 {0} 为考试标题"
                 },
                 "time": {
                     "type": "string",
-                    "ui:title": "时间文本",
-                    "ui:description": "展示考试时间<br>其中 {0} 为前两项的文本，{1} 为天数，{2} 为小时数，{3} 为秒数"
+                    "title": "时间文本",
+                    "description": "展示考试时间<br>其中 {0} 为前两项的文本，{1} 为天数，{2} 为小时数，{3} 为秒数"
                 }
             },
             "required": [
@@ -162,8 +162,8 @@
         },
         "precision": {
             "type": "object",
-            "ui:title": "时间精度",
-            "ui:description": "小数点后位数",
+            "title": "时间精度",
+            "description": "小数点后位数",
             "default": {
                 "day": 3,
                 "hour": 2,
@@ -174,19 +174,19 @@
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 46,
-                    "ui:title": "天"
+                    "title": "天"
                 },
                 "hour": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 41,
-                    "ui:title": "小时"
+                    "title": "小时"
                 },
                 "second": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 29,
-                    "ui:title": "秒"
+                    "title": "秒"
                 }
             }
         }
