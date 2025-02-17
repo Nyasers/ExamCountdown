@@ -1,8 +1,8 @@
 import $ from 'jquery';
+import '../../cache/index.css';
 import { ec } from './ec.js';
 import main from './main.js';
 import { networkWaiter } from './network-waiter/networkWaiter.js';
-import '../../cache/index.css';
 
 import { init as initBW } from '../plugin/BingWallpaper/index.js';
 import { init as initHitokoto } from '../plugin/Hitokoto/index.js';

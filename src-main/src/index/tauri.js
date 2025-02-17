@@ -1,13 +1,13 @@
-import wallpaper from 'tauri-plugin-wallpaper';
-import { Menu } from '@tauri-apps/api/menu';
-import { invoke } from '@tauri-apps/api/core';
-import { TrayIcon } from '@tauri-apps/api/tray';
-import { check } from "@tauri-apps/plugin-updater";
-import { relaunch } from "@tauri-apps/plugin-process";
 import { defaultWindowIcon } from '@tauri-apps/api/app';
-import { getCurrentWindow } from '@tauri-apps/api/window';
+import { invoke } from '@tauri-apps/api/core';
+import { Menu } from '@tauri-apps/api/menu';
+import { TrayIcon } from '@tauri-apps/api/tray';
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
-import { enable, isEnabled, disable } from '@tauri-apps/plugin-autostart';
+import { getCurrentWindow } from '@tauri-apps/api/window';
+import { disable, enable, isEnabled } from '@tauri-apps/plugin-autostart';
+import { relaunch } from "@tauri-apps/plugin-process";
+import { check } from "@tauri-apps/plugin-updater";
+import wallpaper from 'tauri-plugin-wallpaper';
 
 import { load } from '@tauri-apps/plugin-store';
 

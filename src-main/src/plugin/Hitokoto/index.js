@@ -1,5 +1,5 @@
-import '../../../cache/hitokoto.css';
 import { $ } from 'jquery';
+import '../../../cache/hitokoto.css';
 
 const hitokoto = {
     api: {

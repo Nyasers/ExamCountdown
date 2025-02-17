@@ -2,13 +2,12 @@
  * @type {import('@rspack/core').Configuration}
  */
 
-import fs from 'fs';
-import path from 'path';
 import rspack from '@rspack/core';
-import TerserPlugin from 'terser-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import fs from 'fs';
+import path, { dirname } from 'path';
+import TerserPlugin from 'terser-webpack-plugin';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
 import terserConfig from './terser.config.js';
 

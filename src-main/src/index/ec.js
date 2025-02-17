@@ -1,6 +1,6 @@
 // import { $ } from "jquery";
-import { properties } from './property/index.js';
 import applyImageUrl from './background-loader/apply-image.js';
+import { properties } from './property/index.js';
 
 export const ec = {
     online: false,

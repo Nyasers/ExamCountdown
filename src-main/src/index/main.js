@@ -1,8 +1,8 @@
-import { $ } from 'jquery';
 import gsap, { Bounce, Power1, Power4 } from 'gsap';
+import { $ } from 'jquery';
+import { heartbeat as hitokotoHeatbeat } from '../plugin/Hitokoto/index.js';
 import { exam } from './exam.js';
 import wrap from './loader.js';
-import { heartbeat as hitokotoHeatbeat } from '../plugin/Hitokoto/index.js';
 
 function heartbeat() {
   if ("undefined" != typeof this.plugin.hitokoto) {
