@@ -8,7 +8,8 @@
     "prebuild": "npm install",
     "depend": "node depend.js",
     "build": "node build.js || rspack",
-    "deploy": "node build.js deploy || repack"
+    "deploy": "node build.js deploy || repack",
+    "clean": "rmdir /s /q dist node_modules || echo."
   },
   "author": "Nyasers",
   "license": "ISC",

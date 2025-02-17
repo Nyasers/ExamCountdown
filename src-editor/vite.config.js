@@ -8,7 +8,15 @@ import { viteSingleFile } from "vite-plugin-singlefile"
 // https://vite.dev/config/
 export default defineConfig({
   build: {
-    target: 'esnext'
+    target: 'esnext',
+    minify: 'terser',
+    terserOptions: {
+      ecma: 2025,
+      module: true,
+      format: {
+        comments: false,
+      },
+    },
   },
   plugins: [
     vue(),

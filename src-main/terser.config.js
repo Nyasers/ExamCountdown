@@ -1,5 +1,5 @@
 export default {
-    ecma: 2024,
+    ecma: 2025,
     module: true,
     format: {
         comments: false,
