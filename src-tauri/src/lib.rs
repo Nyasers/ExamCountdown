@@ -69,13 +69,13 @@ pub fn run() {
         }))
         .plugin(tauri_plugin_wallpaper::init())
         .invoke_handler(tauri::generate_handler![is_installed, get_wallpaper_data])
-        .setup(|app| {
+        .setup(|_app| {
             #[cfg(debug_assertions)] // 仅在调试构建时包含此代码
             {
-                let window = app.get_webview_window("main").unwrap();
+                let window = _app.get_webview_window("main").unwrap();
                 window.open_devtools(); // 打开开发者工具
                                         // window.close_devtools();
-                app.handle().plugin(
+                _app.handle().plugin(
                     tauri_plugin_log::Builder::default()
                         .level(log::LevelFilter::Info)
                         .build(),
