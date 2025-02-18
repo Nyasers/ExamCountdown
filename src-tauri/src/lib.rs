@@ -8,16 +8,14 @@ use winreg::RegKey;
 
 #[tauri::command]
 fn is_installed() -> bool {
-    let f = is_installed_inner();
-    match f {
+    match is_installed_inner() {
         Ok(e) => e,
-        Err(_) => false
+        Err(_) => false,
     }
 }
 
 fn is_installed_inner() -> Result<bool, String> {
-    let hkcu = RegKey::predef(HKEY_CURRENT_USER);
-    let key = hkcu
+    let key = RegKey::predef(HKEY_CURRENT_USER)
         .open_subkey("Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\ExamCountdown")
         .map_err(|e| format!("打开注册表项失败: {}", e))?;
 
@@ -27,16 +25,15 @@ fn is_installed_inner() -> Result<bool, String> {
 
     let current_path = format!("\"{}\"", current_dir().unwrap().display().to_string());
 
-    let installed: bool = install_path == current_path;
-    
+    let installed = install_path == current_path;
+
     Ok(installed)
 }
 
 #[tauri::command]
 fn get_wallpaper_data() -> Result<Vec<u8>, String> {
     // 打开注册表项
-    let hkcu = RegKey::predef(HKEY_CURRENT_USER);
-    let key = hkcu
+    let key = RegKey::predef(HKEY_CURRENT_USER)
         .open_subkey("Control Panel\\Desktop")
         .map_err(|e| format!("打开注册表项失败: {}", e))?;
 
