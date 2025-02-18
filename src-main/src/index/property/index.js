@@ -51,7 +51,7 @@ properties.autostart = {
             this.autostart.value = value;
             if (TAURI) {
                 const { enableAutoStart, disableAutoStart } = await import("../tauri.js");
-                (this.autostart ? enableAutoStart() : disableAutoStart()).then(e => console.info('autostart', e));
+                await (this.autostart.value ? enableAutoStart : disableAutoStart)();
             }
         }
     ).bind(properties)
