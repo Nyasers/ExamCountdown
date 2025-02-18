@@ -24,6 +24,25 @@
             "description": "[按开始时间排序] 只显示最后一个考试",
             "default": false
         },
+        "autostart": {
+            "type": "boolean",
+            "title": "开机自启",
+            "description": "顾名思义，但修改后需重启应用生效",
+            "default": true
+        },
+        "fontcolor": {
+            "type": "string",
+            "title": "字体颜色",
+            "description": "若需自定义，请关闭自动",
+            "format": "color",
+            "default": "#000000"
+        },
+        "autocolor": {
+            "type": "boolean",
+            "title": "自动择色",
+            "description": "非黑即白，还不太聪明",
+            "default": true
+        },
         "hitokoto": {
             "type": "boolean",
             "title": "显示一言",

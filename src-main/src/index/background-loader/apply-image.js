@@ -20,9 +20,9 @@ async function applyImage(imageData) {
         const themeColor = (this.themeColors?.length > 0) ?
             this.themeColors[index]
             : "#ffffff";
-        const fontColor = (this.fontColors?.length > 0) ?
+        const fontColor = (ec.properties.autocolor.value && this.fontColors?.length > 0) ?
             getMostFrequentElement(this.fontColors)// this.fontColors[index]
-            : "#000000";
+            : ec.properties.fontcolor.value;
         console.log(this.themeColors, themeColor, this.fontColors, fontColor);
         setColors(themeColor, fontColor);
     }

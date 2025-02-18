@@ -92,6 +92,10 @@ export async function fetchWallpaper() {
 
 const installed = await invoke('is_installed');
 
+export function isInstalled() {
+    return installed;
+}
+
 export async function isAutoStartEnabled() {
     return installed && await isEnabled();
 }

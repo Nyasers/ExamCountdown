@@ -7,7 +7,8 @@ export const ec = {
     origin: location.protocol == 'file:' ? 'https://ec.nyase.ru' : location.origin,
     properties: properties,
     background: {
-        set: applyImageUrl.bind()
+        set: applyImageUrl.bind(),
+        reset: null,
     },
     applyConfig: null,
     plugin: {},

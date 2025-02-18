@@ -41,6 +41,41 @@ properties.finalonly = {
         }
     ).bind(properties)
 };
+properties.autostart = {
+    value: true,
+    func: (
+        /**
+         * @param {boolean} value
+         */
+        function (value) {
+            this.autostart.value = value;
+        }
+    ).bind(properties)
+};
+properties.fontcolor = {
+    value: "#000000",
+    func: (
+        /**
+         * @param {string} value
+         */
+        function (value) {
+            this.fontcolor.value = value;
+            if (!this.autocolor.value)
+                document.documentElement.style.setProperty('--fontColor', this.fontcolor.value);
+        }
+    ).bind(properties)
+}
+properties.autocolor = {
+    value: true,
+    func: (
+        /**
+         * @param {boolean} value
+         */
+        function (value) {
+            this.autocolor.value = value;
+        }
+    ).bind(properties)
+};
 properties.hitokoto = {
     value: true,
     func: (
@@ -70,9 +105,13 @@ properties.bingwallpaper = {
          * @param {boolean} value 
         */
         async function (value) {
-            this.bingwallpaper.value = value;
-            if (ec.online && this.bingwallpaper.value)
-                ec.background.set(await ec.plugin.bingWallpaper.fetch());
+            if (this.bingwallpaper.value != value) {
+                this.bingwallpaper.value = value;
+                if (ec.online && this.bingwallpaper.value)
+                    ec.background.set(await ec.plugin.bingWallpaper.fetch());
+                else
+                    ec.background.reset();
+            }
         }
     ).bind(properties)
 };

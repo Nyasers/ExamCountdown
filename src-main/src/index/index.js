@@ -13,10 +13,10 @@ globalThis.ec = ec;
 globalThis.Time = () => new Date;
 
 // Tauri
-let createTray, attachWallpaper, detachWallpaper, fetchWallpaper, enableAutoStart, getConfig, checkUpdate;
+let createTray, attachWallpaper, detachWallpaper, fetchWallpaper, isInstalled, enableAutoStart, disableAutoStart, getConfig, checkUpdate;
 if (TAURI) {
-    ({ createTray, attachWallpaper, detachWallpaper, fetchWallpaper, enableAutoStart, getConfig, checkUpdate } = await import('./tauri.js'));
-    await ec.background.set(await fetchWallpaper());
+    ({ createTray, attachWallpaper, detachWallpaper, fetchWallpaper, isInstalled, enableAutoStart, disableAutoStart, getConfig, checkUpdate } = await import('./tauri.js'));
+    await (ec.background.reset = async () => await ec.background.set(await fetchWallpaper()))();
     window.onclose = detachWallpaper;
 }
 
@@ -26,10 +26,11 @@ await main(globalThis, ec)
         if (TAURI) {
             await attachWallpaper();
             window.addEventListener("pagehide", await createTray());
-            (ec.applyConfig = async () => ec.properties.apply(await getConfig()))();
-            enableAutoStart().then(async (enabled) => {
-                console.log("autostart", enabled)
-                if (enabled) await checkUpdate();
+            (ec.applyConfig = async () => ec.properties.apply(await getConfig()))().then(async () => {
+                if (isInstalled()) {
+                    (ec.properties.autostart ? enableAutoStart() : disableAutoStart()).then(e => console.info('autostart', e));
+                    await checkUpdate();
+                }
             });
         }
     });
