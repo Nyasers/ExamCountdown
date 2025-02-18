@@ -6,7 +6,7 @@
         "interval": {
             "type": "integer",
             "title": "刷新间隔",
-            "description": "[单位ms] 更新数据的间隔时间",
+            "description": "更新数据的间隔时间 (单位ms)",
             "default": 1e2,
             "minimum": 5e1,
             "maximum": 1e3,
@@ -15,13 +15,13 @@
         "breakon": {
             "type": "string",
             "title": "截止考试",
-            "description": "[按开始时间排序] 将标题中包含此关键词的作为最后一个考试",
+            "description": "将标题中包含此关键词的作为最后一个考试 (按开始时间排序)",
             "default": "高考"
         },
         "finalonly": {
             "type": "boolean",
             "title": "只看截止",
-            "description": "[按开始时间排序] 只显示最后一个考试",
+            "description": "只显示最后一个考试",
             "default": false
         },
         "autostart": {
@@ -92,7 +92,7 @@
         "bingwallpaper": {
             "type": "boolean",
             "title": "必应壁纸",
-            "description": "获取必应壁纸作为背景图片<br>默认背景图片为系统桌面背景（通过注册表获取）",
+            "description": "获取必应壁纸作为背景图片<br>默认背景图片为系统桌面背景",
             "default": true
         },
         "exams": {
