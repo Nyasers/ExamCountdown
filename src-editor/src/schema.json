@@ -5,33 +5,35 @@
     "properties": {
         "interval": {
             "type": "integer",
+            "title": "刷新间隔",
+            "description": "[单位ms] 更新数据的间隔时间",
             "default": 1e2,
             "minimum": 5e1,
             "maximum": 1e3,
-            "multipleOf": 5e1,
-            "title": "刷新间隔",
-            "description": "[单位ms] 更新数据的间隔时间"
+            "multipleOf": 5e1
         },
         "breakon": {
             "type": "string",
-            "default": "高考",
             "title": "截止考试",
-            "description": "[按开始时间排序] 将标题中包含此关键词的作为最后一个考试"
+            "description": "[按开始时间排序] 将标题中包含此关键词的作为最后一个考试",
+            "default": "高考"
         },
         "finalonly": {
             "type": "boolean",
-            "default": false,
             "title": "只看截止",
-            "description": "[按开始时间排序] 只显示最后一个考试"
+            "description": "[按开始时间排序] 只显示最后一个考试",
+            "default": false
         },
         "hitokoto": {
             "type": "boolean",
-            "default": true,
             "title": "显示一言",
-            "description": "接口文档: https://developer.hitokoto.cn/sentence/"
+            "description": "接口文档: https://developer.hitokoto.cn/sentence/",
+            "default": true
         },
         "hitokoto_types": {
             "type": "array",
+            "title": "一言类型",
+            "description": "可多选，不选相当于全选。",
             "uniqueItems": true,
             "default": [],
             "items": {
@@ -65,60 +67,66 @@
                     "抖机灵"
                 ]
             },
-            "title": "一言类型",
-            "description": "可多选，不选相当于全选。",
             "ui:widget": "SelectWidget",
             "ui:hidden": "{{rootFormData.hitokoto === false}}"
         },
         "bingwallpaper": {
             "type": "boolean",
-            "default": true,
             "title": "必应壁纸",
-            "description": "获取必应壁纸作为背景图片<br>默认背景图片为系统桌面背景（通过注册表获取）"
+            "description": "获取必应壁纸作为背景图片<br>默认背景图片为系统桌面背景（通过注册表获取）",
+            "default": true
         },
         "exams": {
             "type": "array",
+            "title": "考试列表",
             "default": [
                 {
                     "title": "福建高考",
+                    "top": false,
                     "time": {
-                        "start": "$YYYY/06/07 09:00",
-                        "end": "$YYYY/06/09 18:15"
-                    },
-                    "top": false
+                        "start": "2024-06-07T09:00:00+08:00",
+                        "end": "2024-06-09T18:15:00+08:00",
+                        "autoyear": true
+                    }
                 }
             ],
-            "title": "考试列表",
             "items": {
                 "type": "object",
                 "properties": {
                     "title": {
                         "type": "string",
-                        "title": "标题"
+                        "title": "标题",
+                        "description": "可使用 YYYY 替代年份"
+                    },
+                    "top": {
+                        "type": "boolean",
+                        "title": "置顶",
+                        "default": false
                     },
                     "time": {
                         "type": "object",
                         "title": "时间",
-                        "description": "可使用 $YYYY 替代年份",
                         "properties": {
                             "start": {
                                 "type": "string",
-                                "title": "开始时间"
+                                "title": "开始时间",
+                                "format": "date-time"
                             },
                             "end": {
                                 "type": "string",
-                                "title": "结束时间"
+                                "title": "结束时间",
+                                "format": "date-time"
+                            },
+                            "autoyear": {
+                                "type": "boolean",
+                                "title": "自动年份",
+                                "default": false
                             }
                         },
                         "required": [
                             "start",
                             "end"
                         ]
-                    },
-                    "top": {
-                        "type": "boolean",
-                        "default": false,
-                        "title": "置顶"
                     }
                 },
                 "required": [
@@ -172,21 +180,21 @@
             "properties": {
                 "day": {
                     "type": "integer",
+                    "title": "天",
                     "minimum": 0,
-                    "maximum": 46,
-                    "title": "天"
+                    "maximum": 46
                 },
                 "hour": {
                     "type": "integer",
+                    "title": "小时",
                     "minimum": 0,
-                    "maximum": 41,
-                    "title": "小时"
+                    "maximum": 41
                 },
                 "second": {
                     "type": "integer",
+                    "title": "秒",
                     "minimum": 0,
-                    "maximum": 29,
-                    "title": "秒"
+                    "maximum": 29
                 }
             }
         }

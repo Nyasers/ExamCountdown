@@ -17,25 +17,24 @@ function buildExamArray(json) {
 
 function buildExam(json) {
     if (typeof json.time.start === typeof undefined) return null;
-    if (typeof json.time.end === typeof undefined)
-        json.time.end = json.time.start;
-    json.time = autoYear(json.time);
+    if (typeof json.time.end === typeof undefined) json.time.end = json.time.start;
     let exam = {
         title: json.title,
-        time: { start: new Date(json.time.start), end: new Date(json.time.end) },
+        time: json.time.autoyear ? autoYear(json.time) : { start: new Date(json.time.start), end: new Date(json.time.end) },
         top: !!json.top,
     };
-    exam.title = exam.title.replace("$YYYY", exam.time.start.getFullYear());
+    exam.title = exam.title.replace("YYYY", exam.time.start.getFullYear());
     if (exam.time.start.getTime()) return new Exam(exam);
     else return null;
 }
 
 function autoYear(time) {
-    let year = Time().getFullYear();
-    if (Time() > new Date(time.end.replace("$YYYY", year))) year++;
-    time.start = time.start.replace("$YYYY", year);
-    time.end = time.end.replace("$YYYY", year);
-    return time;
+    let start = new Date(time.start), end = new Date(time.end);
+    while (Time() > end) {
+        start.setFullYear(start.getFullYear() + 1);
+        end.setFullYear(end.getFullYear() + 1)
+    }
+    return { start, end };
 }
 
 // https://www.cnblogs.com/soymilk2019/p/15388984.html

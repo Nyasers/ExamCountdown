@@ -79,11 +79,12 @@ properties.bingwallpaper = {
 properties.exams = {
     value: [{
         title: "福建高考",
-        time: {
-            start: "$YYYY/06/07 09:00",
-            end: "$YYYY/06/09 18:15",
-        },
         top: false,
+        time: {
+            start: "2024-06-07T09:00:00+08:00",
+            end: "2024-06-09T18:15:00+08:00",
+            autoyear: true,
+        },
     }],
     func: (
         /**
