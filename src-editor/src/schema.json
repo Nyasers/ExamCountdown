@@ -1,7 +1,7 @@
 {
     "type": "object",
-    "title": "Config Editor: 修改后请保存",
-    "description": "按钮位于页面底部，保存后关闭窗口生效",
+    "title": "设置：保存后立即生效",
+    "description": "保存按钮位于页面底部",
     "properties": {
         "interval": {
             "type": "integer",

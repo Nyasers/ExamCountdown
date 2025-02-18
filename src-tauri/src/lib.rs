@@ -1,7 +1,7 @@
 use std::env::current_dir;
 use std::fs::File;
 use std::io::Read;
-use tauri::{generate_context, AppHandle, Manager};
+use tauri::{generate_context, AppHandle, Emitter, Manager};
 use tauri_plugin_autostart::MacosLauncher;
 use winreg::enums::HKEY_CURRENT_USER;
 use winreg::RegKey;
@@ -51,6 +51,12 @@ fn get_wallpaper_data() -> Result<Vec<u8>, String> {
     Ok(buffer)
 }
 
+#[tauri::command]
+fn cross_webview_message(app: AppHandle, target: String, message: String) {
+    app.emit_to(target, "cross-webview-message", message)
+        .unwrap();
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -65,7 +71,11 @@ pub fn run() {
             let _ = show_window(app);
         }))
         .plugin(tauri_plugin_wallpaper::init())
-        .invoke_handler(tauri::generate_handler![is_installed, get_wallpaper_data])
+        .invoke_handler(tauri::generate_handler![
+            is_installed,
+            get_wallpaper_data,
+            cross_webview_message
+        ])
         .setup(|_app| {
             #[cfg(debug_assertions)] // 仅在调试构建时包含此代码
             {

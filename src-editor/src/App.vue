@@ -5,6 +5,7 @@
 
 <script>
 import { JsonSchemaFormAntdV4 as VueForm } from "@lljj/vue3-form-ant";
+import { invoke } from "@tauri-apps/api/core";
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import schema from "./schema.json";
 import { get_config, set_config } from './store.js';
@@ -20,7 +21,13 @@ export default {
       e.forEach(e => this.$message.warning(`${schema.properties[e.name[0]].title} ${e.errors[0]}`))
     },
     handlerSubmit() {
-      set_config(this.formData).then(this.$message.success.bind(this, "保存成功"))
+      set_config(this.formData)
+        .then(this.$message.success.bind(this, "保存成功"))
+        .then(invoke.bind(this, 'cross_webview_message', {
+          target: 'main',
+          message: 'applyConfig',
+        }))
+
     },
     handlerCancel() {
       editorWindow.close()

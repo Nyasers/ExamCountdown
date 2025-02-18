@@ -13,9 +13,8 @@ globalThis.ec = ec;
 globalThis.Time = () => new Date;
 
 // Tauri
-let createTray, attachWallpaper, detachWallpaper, fetchWallpaper, isInstalled, getConfig, checkUpdate;
 if (TAURI) {
-    ({ createTray, attachWallpaper, detachWallpaper, fetchWallpaper, isInstalled, getConfig, checkUpdate } = await import('./tauri.js'));
+    const { fetchWallpaper, detachWallpaper } = await import('./tauri.js');
     await (ec.background.reset = async () => await ec.background.set(await fetchWallpaper()))();
     window.onclose = detachWallpaper;
 }
@@ -24,20 +23,16 @@ if (TAURI) {
 await main(globalThis, ec)
     .then(async () => {
         if (TAURI) {
+            const { createTray, attachWallpaper, getConfig, checkUpdate } = await import('./tauri.js');
             await attachWallpaper();
             window.addEventListener("pagehide", await createTray());
-            (ec.applyConfig = async () => ec.properties.apply(await getConfig()))().then(async () => {
-                if (isInstalled()) await checkUpdate();
-            });
+            (ec.applyConfig = async () => ec.properties.apply(await getConfig()))().then(checkUpdate);
         }
     });
 
 // wait for online
 networkWaiter((async function () {
     this.online = true;
-
-    // setTimeout(() => this.updater.fetch());
-    // setTimeout(() => this.exam.extra.fetch());
 
     initBW(this);
     if (location.protocol !== 'file:' && !TAURI) {

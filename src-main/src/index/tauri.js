@@ -1,5 +1,6 @@
 import { defaultWindowIcon } from '@tauri-apps/api/app';
 import { invoke } from '@tauri-apps/api/core';
+import { listen } from '@tauri-apps/api/event';
 import { Menu } from '@tauri-apps/api/menu';
 import { TrayIcon } from '@tauri-apps/api/tray';
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
@@ -16,6 +17,7 @@ const store = await load('config.json', { autoSave: true });
 const mainWindow = getCurrentWindow();
 
 export async function checkUpdate() {
+    if (!installed) return;
     const update = await check();
     if (update?.available) {
         await update.downloadAndInstall();
@@ -35,11 +37,18 @@ export async function setConfig(config) {
 export async function craeteEditor() {
     const webview = new WebviewWindow('editor', {
         center: true,
-        title: "Config Editor - ExamCountdown",
+        title: "设置",
         url: 'editor.html',
     });
 
-    webview.once('tauri://destroyed', ec.applyConfig);
+    const interval = setInterval(async () => await listen('cross-webview-message', (event) => {
+        console.log(event);
+        const message = event.payload;
+        if (message == "applyConfig")
+            ec.applyConfig();
+    }), 1000);
+
+    webview.once('tauri://destroyed', clearInterval.bind(this, interval));
 
     return webview;
 }
