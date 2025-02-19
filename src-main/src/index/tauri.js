@@ -7,14 +7,18 @@ import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { disable, enable, isEnabled } from '@tauri-apps/plugin-autostart';
 import { relaunch } from "@tauri-apps/plugin-process";
+import { load } from '@tauri-apps/plugin-store';
 import { check } from "@tauri-apps/plugin-updater";
 import wallpaper from 'tauri-plugin-wallpaper';
-
-import { load } from '@tauri-apps/plugin-store';
 
 const store = await load('config.json', { autoSave: true });
 
 const mainWindow = getCurrentWindow();
+
+async function closeWindows() {
+    while (window.editor) await window.editor.close();
+    await mainWindow.close();
+}
 
 export async function checkUpdate() {
     if (!installed) return;
@@ -35,22 +39,21 @@ export async function setConfig(config) {
 }
 
 export async function craeteEditor() {
-    const webview = new WebviewWindow('editor', {
+    if (window.editor) return await window.editor.unminimize(), await window.editor.setFocus();
+
+    window.editor = new WebviewWindow('editor', {
         center: true,
         title: "设置",
         url: 'editor.html',
     });
 
-    const interval = setInterval(async () => await listen('cross-webview-message', (event) => {
-        console.log(event);
-        const message = event.payload;
-        if (message == "applyConfig")
-            ec.applyConfig();
-    }), 1000);
+    window.editor.once('tauri://destroyed', () => delete window.editor);
 
-    webview.once('tauri://destroyed', clearInterval.bind(this, interval));
-
-    return webview;
+    window.editor.once('tauri://close-requested',
+        clearInterval.bind(this, setInterval(async () =>
+            setTimeout(await listen('cross-webview-message', e => {
+                if (e.payload == "applyConfig") ec.applyConfig();
+            }), 1), 1)));
 }
 
 export async function attachWallpaper() {
@@ -74,7 +77,7 @@ export async function createTray() {
             {
                 id: 'quit',
                 text: '退出',
-                action: mainWindow.close,
+                action: closeWindows,
             },
         ],
     });

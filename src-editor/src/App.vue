@@ -22,12 +22,11 @@ export default {
     },
     handlerSubmit() {
       set_config(this.formData)
-        .then(this.$message.success.bind(this, "保存成功"))
         .then(invoke.bind(this, 'cross_webview_message', {
           target: 'main',
           message: 'applyConfig',
         }))
-
+        .then(this.$message.success.bind(this, "保存成功", 3))
     },
     handlerCancel() {
       editorWindow.close()
