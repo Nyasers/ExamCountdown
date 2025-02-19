@@ -17,6 +17,7 @@ export default defineConfig({
         comments: false,
       },
     },
+    reportCompressedSize: false,
   },
   plugins: [
     vue(),

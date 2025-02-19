@@ -22,22 +22,16 @@ import terserConfig from './terser.config.js';
  * @returns {Promise<string>} HTML
  */
 async function packHTML(jsfile, ...workers) {
-    var output = "<!doctype html><meta charset='utf-8'><noscript><strong>We're sorry but ExamCountdown doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>";
+    var output = `<!doctype html><meta charset="utf-8"><noscript><strong>We're sorry but ExamCountdown doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>`;
     output += "<ec>";
-    // output += "<script src='./renderer.js' defer></script>";
-    await workers.forEach(async worker => {
+    workers.forEach(async worker => {
         var js = fs.readFileSync(worker.js, 'utf-8'); fs.rmSync(worker.js);
         var result = await minify(js, terserConfig);
-        output += `<script id="${worker.id}" type="app/worker">`;
-        output += result.code;
-        output += "</script>";
+        output += `<script id="${worker.id}" type="app/worker">${result.code}</script>`;
     });
-    output += "<script>";
     var js = fs.readFileSync(jsfile, 'utf-8'); fs.rmSync(jsfile);
     var result = await minify(js, terserConfig);
-    output += result.code;
-    // fs.writeFileSync(jsfile, result.code);
-    output += "</script>";
+    output += `<script>${result.code}</script>`;
     output += "</ec>";
     return output;
 }

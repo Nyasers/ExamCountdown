@@ -7,6 +7,7 @@
     "prebuild": "npm install",
     "build": "vite build",
     "preview": "vite preview",
+    "postbuild": "html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true .\\dist\\index.html -o .\\dist\\index.min.html && node minify.js",
     "clean": "rmdir /s /q dist node_modules || echo."
   },
   "dependencies": {
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
+    "html-minifier": "^4.0.0",
     "terser": "^5.39.0",
     "vite": "^6.0.11",
     "vite-plugin-singlefile": "^2.1.0",
