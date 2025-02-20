@@ -4,3 +4,4 @@
 /clean https://nyaser-ec-cleaner.nyaser.workers.dev/
 /guide https://nyase.ru/2025/02/17/ExamCountdownTauri/
 /exe https://github.com/Nyasers/ExamCountdown/releases/latest/download/ExamCountdown_${VERSION}_x64-setup.exe
+/proxy https://ghfast.top/github.com/Nyasers/ExamCountdown/releases/latest/download/ExamCountdown_${VERSION}_x64-setup.exe
