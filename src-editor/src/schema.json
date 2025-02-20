@@ -27,7 +27,7 @@
         "autostart": {
             "type": "boolean",
             "title": "开机自启",
-            "description": "当前用户登录后自动启动程序",
+            "description": "当前用户登录后自动启动程序<br>仅在程序被安装时生效",
             "default": true
         },
         "fontcolor": {
