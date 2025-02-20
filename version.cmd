@@ -1,10 +1,10 @@
 @echo off
 set /p version=Input version:
 git add .
-npm version --allow-same-version --no-commit-hooks --no-git-tag-version %version%
+npm version --no-commit-hooks --no-git-tag-version %version%
 npm run postbuild
 git add .
-git commit
+git commit -m %version%
 git pull
 git push
 git tag -d v%version%
