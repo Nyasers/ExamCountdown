@@ -1,6 +1,6 @@
 import { $ } from 'jquery';
 
-function sortExamArray(array) {
+export function sortExamArray(array) {
     return array.sort((a, b) => {
         return a.time.start - b.time.start;
     })

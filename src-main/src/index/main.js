@@ -1,10 +1,10 @@
 import gsap, { Bounce, Power1, Power4 } from 'gsap';
 import { $ } from 'jquery';
 import { heartbeat as hitokotoHeatbeat } from '../plugin/Hitokoto/index.js';
-import { exam, buildExam } from './exam.js';
+import { exam, buildExam, sortExamArray } from './exam.js';
 import wrap from './loader.js';
 
-function heartbeat() {
+async function heartbeat() {
   if ("undefined" != typeof this.plugin.hitokoto) {
     hitokotoHeatbeat(this);
   }
@@ -17,9 +17,10 @@ function heartbeat() {
       );
       else {
         this.exam.array.splice(0, 1);
+        this.exam.array = sortExamArray(this.exam.array);
         return;
       }
-  } else this.exam.array[0] = buildExam(this.exam.default);
+  } else return this.exam.array[0] = buildExam(this.exam.default), void 0;
 
   let current = this.exam.array.find((exam) => exam.top == true) ?? this.exam.array[0];
   setCurrent(current, current == this.exam.array[0] && this.exam.array.length > 1);

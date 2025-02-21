@@ -1,5 +1,5 @@
-import { $ } from 'jquery';
-import '../../../cache/hitokoto.css';
+import { $ } from 'jquery'
+import '../../../cache/hitokoto.css'
 
 const hitokoto = {
     api: {
@@ -29,103 +29,103 @@ const hitokoto = {
         l: '抖机灵',
         x: "提示",
     },
-};
+}
 
-hitokoto.set = (function (data = {}) {
-    if (data.type != 'x') console.log(data);
-    let type = this.types[data.type];
+hitokoto.set = (async function (data = {}) {
+    if (data.type != 'x') console.log(data)
+    let type = this.types[data.type]
     if ('undefined' == typeof type) {
-        setTimeout(() => this.set({
+        setTimeout(this.set.bind(this, {
             type: "x",
             from: "Nyaser",
             hitokoto: "加载失败，稍后重试。",
             ttl: this.timeout.retry,
-        }));
-        return;
+        }))
+        return
     }
-    let from = data.from;
-    let from_who = data.from_who;
-    let author = '';
+    let from = data.from
+    let from_who = data.from_who
+    let author = ''
     if (from || from_who) {
-        author = " -> ";
+        author = " -> "
         if (from_who) {
-            author += from_who;
-            if (from) author += " -> ";
+            author += from_who
+            if (from) author += " -> "
         }
-        author += from ?? "";
+        author += from ?? ""
     }
     if (data.type === "e")
-        author += ` => [UID${data.creator_uid}] ${data.creator}`;
-    let ttl = data.ttl ?? this.timeout.refresh;
-    this.expiration = Time().getTime() + ttl;
+        author += ` => [UID${data.creator_uid}] ${data.creator}`
+    let ttl = data.ttl ?? this.timeout.refresh
+    this.expiration = Time().getTime() + ttl
     $("li.hitokoto").html(
         `[一言·<type class='hitokoto'>${type}</type>·<ttl class='hitokoto'></ttl>] <sentence class='hitokoto'>${data.hitokoto}</sentence><author class='hitokoto'>${author}</author>`
-    );
+    )
     $("ttl.hitokoto").html(
-        `<a class='hitokoto' href='javascript:void(0);' onClick='ec.plugin.hitokoto.change();'>${(
+        `<a class='hitokoto' href='javascript:void(0)' onClick='ec.plugin.hitokoto.change()'>${(
             (this.expiration - Time().getTime()) / 1000
         ).toFixed(0)}</a>`
-    );
-}).bind(hitokoto);
+    )
+}).bind(hitokoto)
 
-hitokoto.get = (function () {
+hitokoto.get = (async function () {
     this.set({
         type: "x",
         from: "Nyaser",
         hitokoto: "加载中，请稍候。",
         ttl: this.timeout.request,
-    });
-    var request;
-    if (request != null) request.abort();
-    let url = this.api.url + "?" + this.api.args;
-    ec.properties.hitokoto_types.value.forEach(key => url += `&c=${key}`);
-    let queryTime = Time().getTime();
-    url += `&_=${queryTime}`;
-    let duration = queryTime - this.lastquery;
+    })
+    var request
+    if (request != null) request.abort()
+    let url = this.api.url + "?" + this.api.args
+    ec.properties.hitokoto_types.value.forEach(key => url += `&c=${key}`)
+    let queryTime = Time().getTime()
+    url += `&_=${queryTime}`
+    let duration = queryTime - this.lastquery
     if (duration > 1000 / this.qps) {
-        this.lastquery = queryTime;
+        this.lastquery = queryTime
         request = $.getJSON(url)
-            .then((d) => this.set(d))
-            .fail(this.set);
+            .then(this.set.bind(this))
+            .fail(this.set.bind(this))
     } else {
         this.set({
             type: "x",
             from: "Nyaser",
             hitokoto: "请求过快，稍后再试。",
             ttl: this.timeout.retry,
-        });
+        })
     }
-}).bind(hitokoto);
+}).bind(hitokoto)
 
 hitokoto.change = (function () {
-    let timeout = this.expiration - Time().getTime();
+    let timeout = this.expiration - Time().getTime()
     this.expiration = Time().getTime()
-        + (timeout > 3000 ? timeout == Infinity ? this.timeout.refresh : 3000 : Infinity);
-}).bind(hitokoto);
+        + (timeout > 3000 ? timeout == Infinity ? this.timeout.refresh : 3000 : Infinity)
+}).bind(hitokoto)
 
 hitokoto.heartbeat = (function () {
-    let hitokoto_ttl = (this.expiration - Time().getTime()) / 1000;
-    if (hitokoto_ttl < 0) this.get();
-    hitokoto_ttl = hitokoto_ttl.toFixed(0);
+    let hitokoto_ttl = (this.expiration - Time().getTime()) / 1000
+    if (hitokoto_ttl < 0) this.get()
+    hitokoto_ttl = hitokoto_ttl.toFixed(0)
     if ($("ttl.hitokoto").text() != `${hitokoto_ttl}`)
         if ($("ttl.hitokoto a").html())
-            $("ttl.hitokoto a").text(`${hitokoto_ttl}`);
-        else $("ttl.hitokoto").text(`${hitokoto_ttl}`);
-}).bind(hitokoto);
+            $("ttl.hitokoto a").text(`${hitokoto_ttl}`)
+        else $("ttl.hitokoto").text(`${hitokoto_ttl}`)
+}).bind(hitokoto)
 
 export const init = (function (ec) {
-    $("ul#main").append($('<li class="hitokoto"></li>'));
-    ec.plugin.hitokoto = this;
-}).bind(hitokoto);
+    $("ul#main").append($('<li class="hitokoto"></li>'))
+    ec.plugin.hitokoto = this
+}).bind(hitokoto)
 
-export const heartbeat = (function (ec) {
+export const heartbeat = (async function (ec) {
     if (ec.properties.hitokoto.value == true) {
         if ($("li.hitokoto").html() == '') {
-            this.get();
+            await this.get()
         } else {
-            this.heartbeat(ec);
+            await this.heartbeat(ec)
         }
     } else if ($("li.hitokoto").html() != '') {
-        $("li.hitokoto").html('');
+        $("li.hitokoto").html('')
     }
-}).bind(hitokoto);
+}).bind(hitokoto)
