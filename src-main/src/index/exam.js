@@ -15,7 +15,7 @@ function buildExamArray(json) {
     return sortExamArray(array);
 }
 
-function buildExam(json) {
+export function buildExam(json) {
     if (typeof json.time.start === typeof undefined) return null;
     if (typeof json.time.end === typeof undefined) json.time.end = json.time.start;
     let exam = {
@@ -92,66 +92,31 @@ export class Exam {
     }
 }
 
-
 export const exam = {
     json: [],
     array: [],
-    default: [],
-    // extra: {},
+    default: null,
     breakon: '',
     build: null,
 };
 
-exam.default = [
-    {
-        title: "福建高考",
+exam.default = (function () {
+    let time = new Date;
+    time.setFullYear(time.getFullYear() + 1);
+    return {
+        title: "<strong>所有考试均已结束，请打开设置配置新项目！</strong><p hidden>",
         time: {
-            start: "$YYYY/06/07 09:00",
-            end: "$YYYY/06/09 18:15",
-        }
-    },
-    // {
-    //     title: '福建中考',
-    //     time: {
-    //         start: '$YYYY/06/19 08:30',
-    //         end: '$YYYY/06/21 11:55'
-    //     }
-    // },
-    // {
-    //     title: '福建会考',
-    //     time: {
-    //         start: '$YYYY/06/21 15:00',
-    //         end: '$YYYY/06/21 17:45'
-    //     }
-    // },
-]
-
-// exam.extra = {
-//     enabled: true,
-//     retry: 6,
-//     url: 'extraexams.json',
-//     fetch: async function (url = ec.exam.extra.url) {
-//         $.getJSON(url)
-//             .done(function (data) {
-//                 try {
-//                     ec.exam.extra.json = data;
-//                     ec.exam.build();
-//                 } catch (e) {
-//                     console.error(e);
-//                 }
-//             })
-//             .fail(function () {
-//                 if (ec.exam.extra.retry-- >= 0) setTimeout(() => ec.exam.extra.fetch(url), 1e4), console.warn({ url, retry: ec.exam.extra.retry + 1 })
-//                 else ec.exam.extra.retry = 6;
-//             });
-//     },
-//     json: []
-// };
+            start: time.toISOString(),
+            end: time.toISOString(),
+        },
+        top: true,
+    }
+})();
 
 exam.build = (function (breakon = null) {
     this.json = Array.from(ec.properties.exams.value);
     if (this.json.length == 0)
-        this.json = Array.from(this.default);
+        this.json = this.default;
 
     this.array = buildExamArray(this.json);
 
