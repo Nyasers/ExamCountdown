@@ -2,22 +2,22 @@
  * @type {import('@rspack/core').Configuration}
  */
 
-import rspack from '@rspack/core';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import fs from 'fs';
-import path, { dirname } from 'path';
-import TerserPlugin from 'terser-webpack-plugin';
-import { fileURLToPath } from 'url';
+import rspack from '@rspack/core'
+import { CleanWebpackPlugin } from 'clean-webpack-plugin'
+import fs from 'fs'
+import path, { dirname } from 'path'
+import TerserPlugin from 'terser-webpack-plugin'
+import { fileURLToPath } from 'url'
 
-import terserConfig from './terser.config.js';
+import terserConfig from './terser.config.js'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
-const MODE = true ? 'production' : 'development';
+const MODE = true ? 'production' : 'development'
 
 if (MODE == 'production') {
-  terserConfig.compress.drop_console = true;
+  terserConfig.compress.drop_console = true
 }
 
 const commonPostcssLoader = {
@@ -31,8 +31,8 @@ const commonPostcssLoader = {
   }
 }
 
-const workerEntry = {};
-const workerContent = {};
+const workerEntry = {}
+const workerContent = {}
 
 export default [
   {
@@ -89,17 +89,17 @@ export default [
       {
         apply: compiler => {
           compiler.hooks.done.tap('MyRspackPlugin', function (stats) {
-            const entrypoints = stats.toJson().entrypoints;
+            const entrypoints = stats.toJson().entrypoints
 
             Object.keys(entrypoints).forEach((entryName) => {
-              const entryFiles = entrypoints[entryName].assets;
-              const entryFilename = entryFiles[0].name;
-              workerEntry[entryName] = path.join(stats.compilation.outputOptions.path, entryFilename);
-              workerContent[entryName] = JSON.stringify(fs.readFileSync(workerEntry[entryName], 'utf-8'));
+              const entryFiles = entrypoints[entryName].assets
+              const entryFilename = entryFiles[0].name
+              workerEntry[entryName] = path.join(stats.compilation.outputOptions.path, entryFilename)
+              workerContent[entryName] = JSON.stringify(fs.readFileSync(workerEntry[entryName], 'utf-8'))
 
-              console.log(`Worker ${entryName} generated: ${workerEntry[entryName]}`, workerContent[entryName].length);
-            });
-          });
+              console.log(`Worker ${entryName} generated: ${workerEntry[entryName]}`, workerContent[entryName].length)
+            })
+          })
         }
       },
     ],
@@ -154,9 +154,9 @@ export default [
           compiler.hooks.beforeRun.tap('MyRspackPlugin', function (_stats) {
             new rspack.DefinePlugin({
               WORKERS: workerContent
-            }).apply(compiler);
-            console.log('Workers defined: ', Object.keys(workerContent));
-          });
+            }).apply(compiler)
+            console.log('Workers defined: ', Object.keys(workerContent))
+          })
         }
       },
     ],
@@ -169,4 +169,4 @@ export default [
       ],
     },
   },
-];
+]

@@ -1,6 +1,6 @@
-// import { $ } from "jquery";
-import applyImageUrl from './background-loader/apply-image.js';
-import { properties } from './property/index.js';
+// import { $ } from "jquery"
+import applyImageUrl from './background-loader/apply-image.js'
+import { properties } from './property/index.js'
 
 export const ec = {
     online: false,
@@ -12,4 +12,4 @@ export const ec = {
     },
     applyConfig: null,
     plugin: {},
-};
+}

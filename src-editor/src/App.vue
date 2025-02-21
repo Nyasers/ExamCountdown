@@ -4,14 +4,14 @@
 </template>
 
 <script>
-import { JsonSchemaFormAntdV4 as VueForm } from "@lljj/vue3-form-ant";
-import { invoke } from "@tauri-apps/api/core";
-import { getCurrentWindow } from '@tauri-apps/api/window';
-import schema from "./schema.json";
-import { get_config, set_config } from './store.js';
+import { JsonSchemaFormAntdV4 as VueForm } from "@lljj/vue3-form-ant"
+import { invoke } from "@tauri-apps/api/core"
+import { getCurrentWindow } from '@tauri-apps/api/window'
+import schema from "./schema.json"
+import { get_config, set_config } from './store.js'
 
-const formData = await get_config();
-const editorWindow = getCurrentWindow();
+const formData = await get_config()
+const editorWindow = getCurrentWindow()
 
 export default {
   name: 'Config Editor',
@@ -35,5 +35,5 @@ export default {
   data() {
     return { formData, schema, formProps: { layoutColumn: 3 }, formFooter: { cancelBtn: "关闭" } }
   },
-};
+}
 </script>
