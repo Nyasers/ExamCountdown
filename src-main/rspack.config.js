@@ -118,7 +118,6 @@ export default [
     dependencies: ['css', 'workers'],
     entry: {
       index: './src/index/index.js',
-      // update: './src/update/index.js',
     },
     output: {
       publicPath: '',
@@ -138,13 +137,11 @@ export default [
     },
     plugins: [
       new rspack.DefinePlugin({
-        "TAURI": true,
+        "TAURI": true && globalThis.isTauri,
       }),
       new rspack.CopyRspackPlugin({
         patterns: [
           { from: '../src-tauri/icons/icon.ico', to: 'favicon.ico' },
-          // { from: './src/cmd/' },
-          // { from: './src/json/' },
           { from: './src/pages/' },
         ]
       }),
