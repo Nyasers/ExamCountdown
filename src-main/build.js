@@ -1,19 +1,9 @@
 import fs from 'fs'
 import path from 'path'
 import { minify } from 'terser'
-// import archiver from 'archiver'
 import rspack from '@rspack/core'
 import rspackConfig from './rspack.config.js'
 import terserConfig from './terser.config.js'
-
-/**
- * MinifyJSON
- * @param {string} code 
- * @returns {string} minified JSON
- */
-// function MinifyJSON(code) {
-//     return JSON.stringify(JSON.parse(code))
-// }
 
 /**
  * packHTML
@@ -35,35 +25,6 @@ async function packHTML(jsfile, ...workers) {
     output += "</ec>"
     return output
 }
-
-// async function packZip(files, destination) {
-//     const archive = archiver('zip', { zlib: { level: 9, memLevel: 9 } })
-//     const filename = path.resolve('dist', destination)
-//     const output = fs.createWriteStream(filename)
-//     archive.pipe(output)
-
-//     files.forEach((file) => {
-//         const filename1 = path.resolve('dist', file.filename)
-//         archive.file(filename1, file.data)
-//     })
-
-//     await archive.finalize()
-// }
-
-// async function postMake() {
-//     const json = path.resolve('dist/project.json')
-//     const zip = [
-//         { filename: 'index.html', data: { name: 'index.html' } },
-//         { filename: 'project.json', data: { name: 'project.json' } },
-//         { filename: 'update.cmd', data: { name: 'update.cmd' } },
-//     ]
-//     fs.readFile(json, 'utf-8', (err, data) => {
-//         if (err) throw err
-//         const minified = MinifyJSON(data)
-//         fs.writeFileSync(json, minified, 'utf-8')
-//         packZip(zip, 'ExamCountdown.zip')
-//     })
-// }
 
 async function postBuild() {
     // Merge license
@@ -91,20 +52,6 @@ async function postBuild() {
         await packHTML(path.resolve('dist/index.js')),
         'utf-8'
     )
-
-    // Extra Exams
-    // fs.writeFileSync(
-    //     path.resolve('dist/extraexams.json'),
-    //     JSON.stringify(exams),
-    //     'utf-8'
-    // )
-
-    // VERSION
-    // fs.writeFileSync(
-    //     path.resolve('dist/VERSION'),
-    //     rspackConfig[2].plugins[0].definitions.VERSION.split('"')[1].split("Z")[0],
-    //     'utf-8'
-    // )
 
     // _redirects
     fs.readFile(path.resolve('../package.json'), 'utf-8', (_err, data) => {
