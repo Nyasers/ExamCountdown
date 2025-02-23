@@ -12,7 +12,7 @@ import terserConfig from './terser.config.js'
  * @returns {Promise<string>} HTML
  */
 async function packHTML(jsfile, ...workers) {
-    var output = `<!doctype html><meta charset="utf-8"><noscript><strong>We're sorry but ExamCountdown doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>`
+    var output = `<!DOCTYPE html><meta charset="utf-8"><noscript><strong>We're sorry but ExamCountdown doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>`
     output += "<ec>"
     workers.forEach(async worker => {
         var js = fs.readFileSync(worker.js, 'utf-8'); fs.rmSync(worker.js)
