@@ -137,7 +137,7 @@ export default [
     },
     plugins: [
       new rspack.DefinePlugin({
-        "TAURI": true && globalThis.isTauri,
+        "TAURI": !!globalThis.isTauri,
       }),
       new rspack.CopyRspackPlugin({
         patterns: [
