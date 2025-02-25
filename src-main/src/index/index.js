@@ -14,7 +14,7 @@ globalThis.ec = ec
 globalThis.Time = () => new Date
 
 // Tauri
-if (!!globalThis.isTauri) {
+if (TAURI && !!globalThis.isTauri) {
     const { fetchWallpaper, detachWallpaper } = await import('./tauri.js')
     await (ec.background.reset = async () => await ec.background.set(await fetchWallpaper()))()
     window.onclose = detachWallpaper
@@ -23,7 +23,7 @@ if (!!globalThis.isTauri) {
 // Init
 await main(globalThis, ec)
     .then(async () => {
-        if (!!globalThis.isTauri) {
+        if (TAURI && !!globalThis.isTauri) {
             const { createTray, attachWallpaper, getConfig, checkUpdate } = await import('./tauri.js')
             await attachWallpaper()
             window.addEventListener("pagehide", await createTray());
@@ -36,7 +36,7 @@ networkWaiter((async function () {
     this.online = true
 
     initBW(this)
-    if (location.protocol !== 'file:' && !globalThis.isTauri) {
+    if (location.protocol !== 'file:' && !(TAURI && globalThis.isTauri)) {
         setTimeout(async () => this.background.set(await this.plugin.bingWallpaper.fetch(0, '1920x1080.webp')))
     } else if (document.body.style.backgroundImage == '' || this.properties.bingwallpaper.value == true) {
         setTimeout(async () => this.background.set(await this.plugin.bingWallpaper.fetch()))

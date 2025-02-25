@@ -49,7 +49,7 @@ properties.autostart = {
          */
         async function (value) {
             this.autostart.value = value
-            if (!!globalThis.isTauri) {
+            if (TAURI && !!globalThis.isTauri) {
                 const { enableAutoStart, disableAutoStart } = await import("../tauri.js")
                 await (this.autostart.value ? enableAutoStart : disableAutoStart)()
             }
