@@ -47,13 +47,12 @@ export async function craeteEditor() {
         url: 'editor.html',
     })
 
-    window.editor.once('tauri://destroyed', () => delete window.editor)
+    const interval = setInterval(async () =>
+        setTimeout(await listen('cross-webview-message', e => {
+            if (e.payload == "applyConfig") ec.applyConfig()
+        }), 1e3), 1e3);
 
-    window.editor.once('tauri://close-requested',
-        clearInterval.bind(this, setInterval(async () =>
-            setTimeout(await listen('cross-webview-message', e => {
-                if (e.payload == "applyConfig") ec.applyConfig()
-            }), 1), 1)))
+    window.editor.once('tauri://destroyed', () => { window.clearInterval(interval); delete window.editor })
 }
 
 export async function attachWallpaper() {
