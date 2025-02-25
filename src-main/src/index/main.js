@@ -1,8 +1,9 @@
-import gsap, { Bounce, Power1, Power4 } from 'gsap'
-import { $ } from 'jquery'
+const { default: gsap, Bounce, Power1, Power4 } = await import('gsap')
+const { $ } = await import('jquery')
+
 import { heartbeat as hitokotoHeatbeat } from '../plugin/Hitokoto/index.js'
 import { exam, buildExam, sortExamArray } from './exam.js'
-import wrap from './loader.js'
+import { wrap } from './loader.js'
 
 async function heartbeat() {
   if ("undefined" != typeof this.plugin.hitokoto) {

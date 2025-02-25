@@ -1,4 +1,4 @@
-import { ec } from '../ec.js'
+import { ec } from '../ec.js';
 export const properties = {}
 
 properties.apply = (function (config) {
@@ -49,7 +49,7 @@ properties.autostart = {
          */
         async function (value) {
             this.autostart.value = value
-            if (TAURI) {
+            if (!!globalThis.isTauri) {
                 const { enableAutoStart, disableAutoStart } = await import("../tauri.js")
                 await (this.autostart.value ? enableAutoStart : disableAutoStart)()
             }

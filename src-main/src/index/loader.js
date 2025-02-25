@@ -1,8 +1,8 @@
-import { $ } from 'jquery'
+const { $ } = await import('jquery')
 
-var colon = $('<div>').attr('class', 'colon')[0].outerHTML
+const colon = $('<div>').attr('class', 'colon')[0].outerHTML
 
-var num = $('<div>').attr('class', 'num')
+const num = $('<div>').attr('class', 'num')
   .append(
     $('<div>').attr('class', 'upper'),
     $('<div>').attr('class', 'base upper'),
@@ -10,7 +10,7 @@ var num = $('<div>').attr('class', 'num')
     $('<div>').attr('class', 'lower')
   )[0].outerHTML
 
-var clock = $('<div>').attr('id', 'clock')
+const clock = $('<div>').attr('id', 'clock')
   .append(
     $(num).attr('id', 'd100'),
     $(num).attr('id', 'd10'),
@@ -27,7 +27,7 @@ var clock = $('<div>').attr('id', 'clock')
     $(colon).text('秒'),
   )
 
-var wrap = $('<div>')
+export const wrap = $('<div>')
   .attr('id', 'wrap')
   .append(
     $('<div>')
@@ -51,5 +51,3 @@ var wrap = $('<div>')
           )
       )
   )
-
-export default wrap

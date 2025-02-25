@@ -1,15 +1,15 @@
-import { defaultWindowIcon } from '@tauri-apps/api/app'
-import { invoke } from '@tauri-apps/api/core'
-import { listen } from '@tauri-apps/api/event'
-import { Menu } from '@tauri-apps/api/menu'
-import { TrayIcon } from '@tauri-apps/api/tray'
-import { WebviewWindow } from '@tauri-apps/api/webviewWindow'
-import { getCurrentWindow } from '@tauri-apps/api/window'
-import { disable, enable, isEnabled } from '@tauri-apps/plugin-autostart'
-import { relaunch } from "@tauri-apps/plugin-process"
-import { load } from '@tauri-apps/plugin-store'
-import { check } from "@tauri-apps/plugin-updater"
-import wallpaper from 'tauri-plugin-wallpaper'
+const { defaultWindowIcon } = await import('@tauri-apps/api/app');
+const { invoke } = await import('@tauri-apps/api/core');
+const { listen } = await import('@tauri-apps/api/event');
+const { Menu } = await import('@tauri-apps/api/menu');
+const { TrayIcon } = await import('@tauri-apps/api/tray');
+const { WebviewWindow } = await import('@tauri-apps/api/webviewWindow');
+const { getCurrentWindow } = await import('@tauri-apps/api/window');
+const { disable, enable, isEnabled } = await import('@tauri-apps/plugin-autostart');
+const { relaunch } = await import("@tauri-apps/plugin-process");
+const { load } = await import('@tauri-apps/plugin-store');
+const { check } = await import("@tauri-apps/plugin-updater");
+const { default: wallpaper } = await import('tauri-plugin-wallpaper');
 
 const store = await load('config.json', { autoSave: true })
 

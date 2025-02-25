@@ -1,4 +1,4 @@
-import { $ } from 'jquery'
+const { $ } = await import('jquery')
 
 export function sortExamArray(array) {
     return array.sort((a, b) => {

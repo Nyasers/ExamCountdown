@@ -1,4 +1,4 @@
-import { $ } from "jquery"
+const { $ } = await import('jquery')
 
 const api = 'https://raw.onmicrosoft.cn/Bing-Wallpaper-Action/main'
 const bing = 'https://s.cn.bing.net'; //cn.bing.com

@@ -1,6 +1,6 @@
 [package]
 name = "ExamCountdown"
-version = "25.2.24"
+version = "25.2.26"
 description = "ExamCountdown Tauri"
 authors = [ "Nyasers" ]
 license = ""
@@ -11,6 +11,13 @@ rust-version = "1.77.2"
 [lib]
 name = "app_lib"
 crate-type = [ "staticlib", "cdylib", "rlib" ]
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true
 
 [build-dependencies.tauri-build]
 version = "2.0.3"

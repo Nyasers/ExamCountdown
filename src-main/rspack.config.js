@@ -97,7 +97,7 @@ export default [
               workerEntry[entryName] = path.join(stats.compilation.outputOptions.path, entryFilename)
               workerContent[entryName] = JSON.stringify(fs.readFileSync(workerEntry[entryName], 'utf-8'))
 
-              console.log(`Worker ${entryName} generated: ${workerEntry[entryName]}`, workerContent[entryName].length)
+              console.info(`Worker ${entryName} generated: ${workerEntry[entryName]}`, workerContent[entryName].length)
             })
           })
         }
@@ -136,9 +136,6 @@ export default [
       ],
     },
     plugins: [
-      new rspack.DefinePlugin({
-        "TAURI": !!globalThis.isTauri,
-      }),
       new rspack.CopyRspackPlugin({
         patterns: [
           { from: '../src-tauri/icons/icon.ico', to: 'favicon.ico' },

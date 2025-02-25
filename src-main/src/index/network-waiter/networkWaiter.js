@@ -1,6 +1,6 @@
 import { ec } from '../ec.js'
 
-export function networkWaiter(onConnected, delay = 1000, retryDelay = 10000) {
+export default function(onConnected, delay = 1000, retryDelay = 10000) {
     async function waiter() {
         await fetch(ec.origin + '/connect')
             .then(() => setTimeout(onConnected.bind(), delay))

@@ -1,4 +1,4 @@
-import { $ } from 'jquery'
+const { $ } = await import('jquery')
 import '../../../cache/hitokoto.css'
 
 const hitokoto = {
