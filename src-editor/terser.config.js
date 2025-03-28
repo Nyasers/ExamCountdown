@@ -4,9 +4,6 @@ export default {
     format: {
         comments: false,
     },
-    mangle: {
-        reserved: ['ec'],
-    },
     compress: {
         passes: 3,
         arguments: true,
