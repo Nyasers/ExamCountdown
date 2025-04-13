@@ -1,7 +1,8 @@
 {
   "name": "examcountdown",
   "private": true,
-  "version": "25.3.28",
+  "productName": "ExamCountdown",
+  "version": "25.4.13",
   "scripts": {
     "tauri": "tauri",
     "pretauri": "npm run build",
@@ -18,9 +19,6 @@
     "start": "npm run tauri build",
     "test": "npm run tauri dev"
   },
-  "author": "Nyasers",
-  "license": "ISC",
-  "description": "",
   "devDependencies": {
     "@actions/github": "^6.0.0",
     "@iarna/toml": "^2.2.5",
@@ -40,6 +38,9 @@
     "type": "git",
     "url": "git+https://github.com/Nyasers/ExamCountdown.git"
   },
+  "author": "Nyasers",
+  "license": "ISC",
+  "description": "",
   "keywords": [],
   "type": "commonjs",
   "bugs": {

@@ -1,6 +1,8 @@
 {
-  "name": "config-editor",
+  "name": "src-editor",
   "private": true,
+  "productName": "ExamCountdown",
+  "description": "Config Editor of ExamCountdown",
   "type": "module",
   "scripts": {
     "dev": "rsbuild dev",
@@ -31,10 +33,9 @@
     "unplugin-auto-import": "^19.1.2",
     "webpack-bundle-analyzer": "^4.10.2"
   },
+  "author": "Nyasers",
+  "license": "ISC",
   "version": "1.0.0",
-  "description": "This template should help get you started developing with Vue 3 in Vite.",
   "main": "build.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": []
 }

@@ -1,5 +1,5 @@
 {
-  "name": "examcountdown",
+  "name": "src-main",
   "private": true,
   "productName": "ExamCountdown",
   "description": "Website of ExamCountdown",
@@ -12,8 +12,6 @@
     "deploy": "node build.js deploy || npm test",
     "clean": "rmdir /s /q dist node_modules || echo."
   },
-  "author": "Nyasers",
-  "license": "ISC",
   "dependencies": {
     "gsap": "^3.12.7",
     "invert-color": "^2.0.0",
@@ -42,6 +40,8 @@
     "@rspack/binding-win32-ia32-msvc": "0.4.2",
     "@rspack/binding-win32-x64-msvc": "0.4.2"
   },
+  "author": "Nyasers",
+  "license": "ISC",
   "version": "1.0.0",
   "main": "build.js",
   "keywords": []
