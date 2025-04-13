@@ -4,7 +4,8 @@ import { properties } from './property/index.js'
 
 export const ec = {
     online: false,
-    origin: location.protocol == 'file:' ? 'https://ec.nyase.ru' : location.origin,
+    // origin: location.protocol == 'file:' ? 'https://ec.nyase.ru' : location.origin,
+    connecttest: 'https://cp.cloudflare.com/',
     properties: properties,
     background: {
         set: applyImageUrl.bind(),

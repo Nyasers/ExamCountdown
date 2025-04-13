@@ -5,12 +5,11 @@
   "description": "Website of ExamCountdown",
   "type": "module",
   "scripts": {
-    "test": "npx rspack",
+    "test": "rspack",
     "prebuild": "npm install",
-    "depend": "node depend.js",
     "build": "node build.js || npm test",
     "deploy": "node build.js deploy || npm test",
-    "clean": "rmdir /s /q dist node_modules || echo."
+    "clean": "rmdir /s /q dist || echo."
   },
   "dependencies": {
     "gsap": "^3.12.7",

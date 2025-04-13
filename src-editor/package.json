@@ -11,7 +11,7 @@
     "postbuild": "node build.js && npm run minify-html",
     "preview": "rsbuild preview",
     "minify-html": "html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --minify-css true --minify-js true .\\dist\\index.html -o .\\dist\\index.min.html && node minify.js",
-    "clean": "rmdir /s /q dist node_modules || echo."
+    "clean": "rmdir /s /q dist || echo."
   },
   "dependencies": {
     "@ant-design-vue/use": "^0.0.1-alpha.10",
