@@ -5,7 +5,7 @@ import { properties } from './property/index.js'
 export const ec = {
     online: false,
     // origin: location.protocol == 'file:' ? 'https://ec.nyase.ru' : location.origin,
-    connecttest: 'http://connectivitycheck.gstatic.com/generate_204',
+    connecttest: 'https://ec.nyase.ru/cp',
     properties: properties,
     background: {
         set: applyImageUrl.bind(),
