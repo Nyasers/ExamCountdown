@@ -8,9 +8,8 @@
     "dev": "rsbuild dev",
     "prebuild": "npm install",
     "build": "rsbuild build",
-    "postbuild": "node build.js && npm run minify-html",
+    "postbuild": "node build.js && node minify.js",
     "preview": "rsbuild preview",
-    "minify-html": "html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --minify-css true --minify-js true .\\dist\\index.html -o .\\dist\\index.min.html && node minify.js",
     "clean": "rmdir /s /q dist || echo."
   },
   "dependencies": {
@@ -28,7 +27,6 @@
     "@rspack/core": "^1.3.6",
     "babel-loader": "^10.0.0",
     "babel-plugin-import": "^1.13.8",
-    "html-minifier": "^4.0.0",
     "terser": "^5.39.0",
     "unplugin-auto-import": "^19.1.2",
     "webpack-bundle-analyzer": "^4.10.2"
