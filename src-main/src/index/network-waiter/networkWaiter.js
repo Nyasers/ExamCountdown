@@ -1,7 +1,7 @@
 import { ec } from '../ec.js'
 
 export default async function (onConnected, delay = 1000, retryDelay = 10000) {
-    globalThis.fetch = (!globalThis.isTauri ? fetch : (await import('@tauri-apps/plugin-http')).fetch)
+    if (TAURI || !!globalThis.isTauri) globalThis.fetch = (await import('@tauri-apps/plugin-http')).fetch
 
     function waiter() {
         fetch(ec.connecttest)

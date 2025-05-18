@@ -19,7 +19,7 @@ async function packHTML(jsfile, ...workers) {
         var result = await minify(js, terserConfig)
         output += `<script id="${worker.id}" type="app/worker">${result.code}</script>`
     })
-    var js = fs.readFileSync(jsfile, 'utf-8'); // fs.rmSync(jsfile)
+    var js = fs.readFileSync(jsfile, 'utf-8'); fs.rmSync(jsfile)
     var result = await minify(js, terserConfig)
     output += `<script>${result.code}</script>`
     output += "</ec>"
