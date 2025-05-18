@@ -88,7 +88,7 @@ export default [
       new CleanWebpackPlugin(),
       {
         apply: compiler => {
-          compiler.hooks.done.tap('MyRspackPlugin', function (stats) {
+          compiler.hooks.done.tap('GenerateWorkers', function (stats) {
             const entrypoints = stats.toJson().entrypoints
 
             console.log("Generating workers:", Object.keys(entrypoints))
@@ -148,7 +148,7 @@ export default [
       new CleanWebpackPlugin(),
       {
         apply: compiler => {
-          compiler.hooks.beforeRun.tap('MyRspackPlugin', function (_stats) {
+          compiler.hooks.beforeRun.tap('DefineWorkers', function (_stats) {
             new rspack.DefinePlugin({
               WORKERS: workerContent
             }).apply(compiler)
