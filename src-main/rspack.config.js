@@ -91,6 +91,8 @@ export default [
           compiler.hooks.done.tap('MyRspackPlugin', function (stats) {
             const entrypoints = stats.toJson().entrypoints
 
+            console.log("Generating workers:", Object.keys(entrypoints))
+
             Object.keys(entrypoints).forEach((entryName) => {
               const entryFiles = entrypoints[entryName].assets
               const entryFilename = entryFiles[0].name
@@ -150,7 +152,7 @@ export default [
             new rspack.DefinePlugin({
               WORKERS: workerContent
             }).apply(compiler)
-            console.log('Workers defined: ', Object.keys(workerContent))
+            console.log('Workers defined:', Object.keys(workerContent))
           })
         }
       },
