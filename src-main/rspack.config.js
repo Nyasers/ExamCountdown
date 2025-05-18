@@ -138,7 +138,7 @@ export default [
       ],
     },
     plugins: [
-      new rspack.DefinePlugin({ TAURI: true }),
+      new rspack.DefinePlugin({ TAURI: false }),
       new rspack.CopyRspackPlugin({
         patterns: [
           { from: '../src-tauri/icons/icon.ico', to: 'favicon.ico' },
