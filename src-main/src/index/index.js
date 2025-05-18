@@ -32,7 +32,7 @@ await main(globalThis, ec)
     })
 
 // wait for online
-networkWaiter((async function () {
+await networkWaiter((async function () {
     this.online = true
 
     initBW(this)
