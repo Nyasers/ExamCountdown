@@ -5,7 +5,7 @@
   "version": "25.5.19",
   "scripts": {
     "tauri": "tauri",
-    "update": "npm update && npm run update:rustup && npm run update:cargo",
+    "update": "npm run depend && npm update && npm run update:rustup && npm run update:cargo",
     "update:rustup": "rustup update",
     "update:cargo": "cd src-tauri && cargo update",
     "depend": "node depend.mjs && npm run depend:main && npm run depend:editor",
