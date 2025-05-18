@@ -8,7 +8,7 @@
     "test": "rspack",
     "prebuild": "npm install",
     "build": "node build.js || npm test",
-    "deploy": "node build.js deploy || ls -alF",
+    "deploy": "node build.js deploy || (ls -alF dist && exit 1)",
     "clean": "rmdir /s /q dist || echo."
   },
   "dependencies": {
