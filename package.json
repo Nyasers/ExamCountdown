@@ -2,7 +2,7 @@
   "name": "examcountdown",
   "private": true,
   "productName": "ExamCountdown",
-  "version": "25.5.19",
+  "version": "25.5.19-fix",
   "scripts": {
     "tauri": "tauri",
     "update": "npm run depend && npm update && npm run update:rustup && npm run update:cargo",

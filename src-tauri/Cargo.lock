@@ -4,7 +4,7 @@ version = 3
 
 [[package]]
 name = "ExamCountdown"
-version = "25.5.19"
+version = "25.5.19-fix"
 dependencies = [
  "log",
  "serde",
