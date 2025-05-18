@@ -16,7 +16,7 @@
     "build": "npm run build:main && npm run build:editor",
     "postbuild": "node src-tauri\\version.js",
     "build:main": "npm run build -w src-main && copy src-main\\dist\\index.html dist && copy src-main\\dist\\*.js dist",
-    "build:editor": "npm run build -w src-editor && copy src-editor\\dist\\index.min.html dist\\editor.html",
+    "build:editor": "npm run build -w src-editor && copy src-editor\\dist\\index.html dist\\editor.html",
     "clean": "npm run clean:main && npm run clean:editor && npm run clean:tauri",
     "clean:main": "npm run clean -w src-main",
     "clean:editor": "npm run clean -w src-editor",

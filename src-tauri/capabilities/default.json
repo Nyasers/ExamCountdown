@@ -22,7 +22,7 @@
       "identifier": "http:default",
       "allow": [
         {
-          "url": "https://cp.cloudflare.com/"
+          "url": "https://*.nyase.ru/*"
         }
       ]
     }
