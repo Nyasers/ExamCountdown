@@ -15,6 +15,7 @@ globalThis.Time = () => new Date
 
 // Tauri
 if (TAURI && !!globalThis.isTauri) {
+    globalThis.fetch = (await import('@tauri-apps/plugin-http')).fetch
     const { fetchWallpaper, detachWallpaper } = await import('./tauri.js')
     await (ec.background.reset = async () => await ec.background.set(await fetchWallpaper()))()
     window.onclose = detachWallpaper
