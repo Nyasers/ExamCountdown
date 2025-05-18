@@ -12,20 +12,20 @@
     "clean": "rmdir /s /q dist || echo."
   },
   "dependencies": {
-    "gsap": "^3.12.7",
+    "gsap": "^3.13.0",
     "invert-color": "^2.0.0",
     "jquery": "^4.0.0-beta.2",
     "tauri-plugin-wallpaper": "^2.0.1"
   },
   "devDependencies": {
-    "@rspack/cli": "^1.3.4",
-    "@rspack/core": "^1.3.4",
+    "@rspack/cli": "^1.3.10",
+    "@rspack/core": "^1.3.10",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^7.1.2",
     "postcss-loader": "^8.1.1",
-    "postcss-preset-env": "^10.1.5",
+    "postcss-preset-env": "^10.1.6",
     "style-loader": "^4.0.0",
-    "terser": "^5.39.0",
+    "terser": "^5.39.2",
     "terser-webpack-plugin": "^5.3.14"
   },
   "optionalDependencies": {

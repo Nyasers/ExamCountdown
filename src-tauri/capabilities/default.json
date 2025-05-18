@@ -17,6 +17,14 @@
     "core:window:allow-unminimize",
     "core:window:allow-set-focus",
     "process:allow-restart",
-    "store:default"
+    "store:default",
+    {
+      "identifier": "http:default",
+      "allow": [
+        {
+          "url": "https://cp.cloudflare.com/"
+        }
+      ]
+    }
   ]
 }
