@@ -11,6 +11,8 @@ module.exports = defineConfig({
     entry: {
       index: path.resolve(__dirname, 'src', 'main.js'),
     },
+  },
+  resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },

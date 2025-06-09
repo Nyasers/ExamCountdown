@@ -21,11 +21,41 @@ async function closeWindows() {
 }
 
 export async function checkUpdate() {
-    if (!installed) return
-    const update = await check()
-    if (update?.available) {
-        await update.downloadAndInstall()
-        await relaunch()
+    if (!installed) {
+        console.log('未安装，无法更新。');
+        return;
+    }
+    const update = await check();
+    if (update && update.version !== update.currentVersion) {
+        console.log(`发现新版本：${update.version}，开始下载...`);
+        await update.downloadAndInstall((progress) => {
+            let percent = 0;
+            if (progress.event === 'Started') {
+                console.log('更新下载开始');
+            }
+            if (progress.event === 'Progress') {
+                const contentLength = progress.data?.contentLength;
+                if (contentLength) {
+                    percent = (progress.data?.downloadedBytes / contentLength) * 100;
+                } else {
+                    percent = progress.data?.downloadedBytes || 0;
+                }
+                console.log(`下载进度: ${percent.toFixed(2)}%`);
+            }
+            if (progress.event === 'Finished') {
+                console.log('更新下载完成，准备安装并重启...');
+            }
+        }).then(() => {
+            relaunch().then(() => {
+                closeWindows();
+            }).catch((error) => {
+                console.error('重启应用失败:', error);
+            });
+        }).catch((error) => {
+            console.error('更新下载或安装失败:', error);
+        });
+    } else {
+        console.log('当前已是最新版本。');
     }
 }
 
@@ -38,7 +68,7 @@ export async function setConfig(config) {
     await store.save()
 }
 
-export async function craeteEditor() {
+export async function createEditor() {
     if (window.editor) return await window.editor.unminimize(), await window.editor.setFocus()
 
     window.editor = new WebviewWindow('editor', {
@@ -66,30 +96,53 @@ export async function detachWallpaper() {
 }
 
 export async function createTray() {
+    // 创建菜单，直接在菜单项中定义action
     const menu = await Menu.new({
         items: [
             {
+                id: 'checkUpdate',
+                text: '检查更新',
+                enabled: true, // installed,
+                action() {
+                    console.log(`菜单项 checkUpdate 被点击`);
+                    checkUpdate();
+                }
+            },
+            {
                 id: 'settings',
                 text: '设置',
-                action: craeteEditor,
+                action() {
+                    console.log(`菜单项 settings 被点击`);
+                    createEditor();
+                }
             },
             {
                 id: 'quit',
                 text: '退出',
-                action: closeWindows,
+                action() {
+                    console.log(`菜单项 quit 被点击`);
+                    closeWindows();
+                }
             },
         ],
-    })
+    });
 
     const options = {
         menu,
         menuOnLeftClick: true,
+        tooltip: "ExamCountdown",
         icon: await defaultWindowIcon(),
-    }
+    };
 
-    const tray = await TrayIcon.new(options)
+    const tray = await TrayIcon.new(options);
 
-    return (() => tray.close()).bind(tray)
+    const close = async function () {
+        await tray.close();
+    };
+
+    console.log('托盘图标已创建');
+
+    return close;
 }
 
 export async function fetchWallpaper() {

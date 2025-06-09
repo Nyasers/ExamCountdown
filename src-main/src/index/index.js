@@ -15,7 +15,7 @@ globalThis.Time = () => new Date
 
 // Tauri
 if (TAURI && !!globalThis.isTauri) {
-    globalThis.fetch = (await import('@tauri-apps/plugin-http')).fetch
+    globalThis.Tfetch = (await import('@tauri-apps/plugin-http')).fetch
     const { fetchWallpaper, detachWallpaper } = await import('./tauri.js')
     await (ec.background.reset = async () => await ec.background.set(await fetchWallpaper()))()
     window.onclose = detachWallpaper
@@ -27,13 +27,16 @@ await main(globalThis, ec)
         if (TAURI && !!globalThis.isTauri) {
             const { createTray, attachWallpaper, getConfig, checkUpdate } = await import('./tauri.js')
             await attachWallpaper()
+            // globalThis.createTray = createTray
             window.addEventListener("pagehide", await createTray());
-            (ec.applyConfig = async () => ec.properties.apply(await getConfig()))().then(checkUpdate)
+            (ec.applyConfig = async () => ec.properties.apply(await getConfig()))()
+            // .then(checkUpdate)
+            // remove auto update
         }
     })
 
 // wait for online
-await networkWaiter((async function () {
+setTimeout(() => networkWaiter((async function () {
     this.online = true
 
     initBW(this)
@@ -45,4 +48,4 @@ await networkWaiter((async function () {
 
     initHitokoto(this)
     // if (location.protocol == 'file:') setTimeout(time.bind(), 10000)
-}).bind(ec))
+}).bind(ec)))

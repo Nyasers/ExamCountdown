@@ -11,6 +11,7 @@
   "permissions": [
     "wallpaper:default",
     "autostart:default",
+    "process:default",
     "updater:default"
   ]
 }

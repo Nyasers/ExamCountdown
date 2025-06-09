@@ -2,7 +2,7 @@
   "name": "examcountdown",
   "private": true,
   "productName": "ExamCountdown",
-  "version": "25.5.19-fix",
+  "version": "25.6.10",
   "scripts": {
     "tauri": "tauri",
     "update": "npm run depend && npm update && npm run update:rustup && npm run update:cargo",
@@ -15,7 +15,7 @@
     "prebuild": "npm install && (mkdir dist || del /s /q dist) || echo.",
     "build": "npm run build:main && npm run build:editor",
     "postbuild": "node src-tauri\\version.js",
-    "build:main": "npm run build -w src-main && copy src-main\\dist\\index.html dist && copy src-main\\dist\\*.js dist",
+    "build:main": "npm run build -w src-main && copy src-main\\dist\\*.html dist && copy src-main\\dist\\*.js dist",
     "build:editor": "npm run build -w src-editor && copy src-editor\\dist\\index.html dist\\editor.html",
     "clean": "npm run clean:main && npm run clean:editor && npm run clean:tauri",
     "clean:main": "npm run clean -w src-main",
@@ -28,12 +28,12 @@
   "devDependencies": {
     "@actions/github": "^6.0.0",
     "@iarna/toml": "^2.2.5",
-    "@tauri-apps/cli": "^2.5.0"
+    "@tauri-apps/cli": "^2.4.1"
   },
   "dependencies": {
-    "@tauri-apps/api": "^2.5.0",
+    "@tauri-apps/api": "^2.4.1",
     "@tauri-apps/plugin-autostart": "^2.3.0",
-    "@tauri-apps/plugin-http": "^2.4.3",
+    "@tauri-apps/plugin-http": "^2.4.4",
     "@tauri-apps/plugin-process": "^2.2.1",
     "@tauri-apps/plugin-store": "^2.2.0",
     "@tauri-apps/plugin-updater": "^2.7.1",
