@@ -102,7 +102,7 @@ export async function createTray() {
             {
                 id: 'checkUpdate',
                 text: '检查更新',
-                enabled: true, // installed,
+                enabled: installed,
                 action() {
                     console.log(`菜单项 checkUpdate 被点击`);
                     checkUpdate();
