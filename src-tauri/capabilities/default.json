@@ -10,6 +10,8 @@
     "core:default",
     "core:app:default",
     "core:app:allow-default-window-icon",
+    "core:menu:default",
+    "core:tray:default",
     "core:webview:allow-create-webview-window",
     "core:window:default",
     "core:window:allow-close",
@@ -23,8 +25,20 @@
       "allow": [
         {
           "url": "https://*.nyase.ru/*"
+        },
+        {
+          "url": "http://ipc.localhost/*"
         }
       ]
-    }
+    },
+    {
+      "identifier": "store:default",
+      "allow": [
+        {
+          "url": "http://ipc.localhost/*"
+        }
+      ]
+    },
+    "process:default"
   ]
 }
